@@ -5,6 +5,7 @@ from learner import views as learner_views
 import quiz.urls as quiz_urls
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.permissions import IsAuthenticated
+from historical.views import historical_chat_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -20,5 +21,8 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # Quiz-related endpoints
-    path('quiz/', include(quiz_urls))
+    path('quiz/', include(quiz_urls)),
+    
+    # Historical chat related
+    path('api/historical/chat/', historical_chat_view, name='historical_chat_view'),
 ]

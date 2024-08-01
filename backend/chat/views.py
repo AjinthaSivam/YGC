@@ -229,7 +229,12 @@ def chat_view(request):
 
         # Build the message history to provide context
         messages = [
-            {"role": "system", "content": "You are an Grade 11 English Grammar Tutor. Guide students through grammar questions by offering options and checking their understanding of the basics before giving the answer. If they answer incorrectly, explain the concept before proceeding. Use simple English, ask funny questions and include emojis to make the responses engaging."},
+            {"role": "system", "content": (
+                "You are an English Grammar Tutor. Your goal is to help students learn English grammar. "
+                "Respond to grammar-related questions only. If the user asks something irrelevant or off-topic, "
+                "politely guide them back to asking grammar-related questions or provide a general reminder about "
+                "the purpose of this chat. Avoid engaging in unrelated topics. Use simple English and include emojis to make the responses engaging."
+            )},
         ]
         for entry in chat_history:
             messages.append({"role": entry['role'], "content": entry['content']})
