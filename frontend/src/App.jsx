@@ -7,13 +7,15 @@ import Signup from './pages/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import Quiz from './components/Quiz'
 import Chat from './components/Chat';
+import Historical from './components/Historical';
 
 function App() {
     return (
-        <Router>
+        
             <Routes>
                 <Route path='/quiz' element= {<Quiz />} />
                 <Route path='/chatbot' element= {<Chat />} />
+                <Route path="/historical" element={<Historical />} />
                 <Route path="/" element={<ProtectedRoute />}>
                     <Route path="/home" element={<Home />} />
                     {/* Add other protected routes here */}
@@ -21,7 +23,7 @@ function App() {
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
-        </Router>
+        
     );
 }
 

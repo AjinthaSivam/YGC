@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { HiMenuAlt3 } from 'react-icons/hi'
+import React, { useState } from 'react';
+import { HiMenuAlt3 } from 'react-icons/hi';
 import { GrResources } from "react-icons/gr";
 import { MdOutlineQuiz, MdOutlineChatBubbleOutline } from "react-icons/md";
+import { FaUserAstronaut } from "react-icons/fa";
 
 const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
     const [open, setOpen] = useState(false);
@@ -16,9 +17,11 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
             { name: 'Medium', key: 'medium' },
             { name: 'Hard', key: 'hard' },
         ]},
+        { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut },
     ];
 
     const handleMenuClick = (menu) => {
+        console.log(`Clicked menu: ${menu.key}`); // Debugging log
         if (menu.key === 'quiz') {
             setOpen(true);
             setSubmenuOpen(!submenuOpen);
@@ -27,13 +30,13 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
             setSelectedMenu(menu.key);  // Update selected menu
             setSubmenuOpen(false);
         }
-    }
+    };
 
     const handleSubmenuClick = (submenu) => {
         setSelectedQuizDifficulty(submenu.key);
         setSelectedComponent('quizIntro');
         setSelectedMenu('quiz'); // Set menu as selected when a submenu item is clicked
-    }
+    };
 
     return (
         <div className='bg-[#F5F5F5]'>
@@ -43,7 +46,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                 </div>
                 <div className='mt-4 flex flex-col gap-4 relative'>
                     {
-                        menus?.map((menu, i) => (
+                        menus.map((menu, i) => (
                             <div key={i}>
                                 <div
                                     onClick={() => handleMenuClick(menu)}
@@ -83,7 +86,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default SideBar;

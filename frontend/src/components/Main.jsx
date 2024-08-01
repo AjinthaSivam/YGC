@@ -1,9 +1,10 @@
-import React from 'react'
-import SideBar from './SideBar'
-import Chat from './Chat'
-import MCQGenerator from './Quiz'
-import QuizIntro from './QuizIntro'
-import PastPaper from './PastPaper'
+import React from 'react';
+import SideBar from './SideBar';
+import Chat from './Chat';
+import MCQGenerator from './Quiz';
+import QuizIntro from './QuizIntro';
+import PastPaper from './PastPaper';
+import Historical from './Historical'; // Import Historical component
 import { useChat } from './ChatContext';
 
 const Main = () => {
@@ -13,7 +14,7 @@ const Main = () => {
 
     const handleStartQuiz = () => {
         setSelectedComponent('quiz');
-    }
+    };
 
     React.useEffect(() => {
         if (selectedComponent === 'chatbot') {
@@ -24,17 +25,19 @@ const Main = () => {
     const renderComponent = () => {
         switch (selectedComponent) {
             case 'chatbot':
-                return <Chat />
+                return <Chat />;
             case 'quizIntro':
-                return <QuizIntro difficulty={selectedQuizDifficulty} onStartQuiz={handleStartQuiz} />
+                return <QuizIntro difficulty={selectedQuizDifficulty} onStartQuiz={handleStartQuiz} />;
             case 'quiz':
-                return <MCQGenerator difficulty={selectedQuizDifficulty} setSelectedComponent={setSelectedComponent} />
+                return <MCQGenerator difficulty={selectedQuizDifficulty} setSelectedComponent={setSelectedComponent} />;
             case 'pastpapers':
-                return <PastPaper />
+                return <PastPaper />;
+            case 'historicalCharacter':
+                return <Historical />;
             default:
-                return <Chat />
+                return <Chat />;
         }
-    }
+    };
 
     return (
         <div>
@@ -43,7 +46,7 @@ const Main = () => {
                 {renderComponent()}
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default Main
+export default Main;

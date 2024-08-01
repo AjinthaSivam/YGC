@@ -1,27 +1,23 @@
-import React, { useEffect, useRef } from 'react'
-import axios from 'axios'
-import { useChat } from './ChatContext';
+import React, { useEffect, useRef } from 'react';
+import axios from 'axios';
+import { useHistoricalChat } from './HistoricalChatContext'; // Import new context
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
-import { FaEraser } from "react-icons/fa";
-import { CgSearch } from "react-icons/cg";
-import '../styles/custom.css'
-import { marked } from 'marked'
-import BotLogo from '../images/bot.png'
+import Kalaam from '../images/kalaam.jpg'
+import '../styles/custom.css';
+import { marked } from 'marked';
 
 const formatBotResponse = (response) => {
-    return marked(response)
-}
+    return marked(response);
+};
 
-
-const Chat = () => {
-    const { messages, setMessages, chatId, setChatId } = useChat();
+const Historical = () => {
+    const { messages, setMessages, chatId, setChatId } = useHistoricalChat(); // Use new context
     const [input, setInput] = React.useState('');
     const [listening, setListening] = React.useState(false);
     const [recognition, setRecognition] = React.useState(null);
     const [showOptionalQuestions, setShowOptionalQuestions] = React.useState(false);
     const textareaRef = useRef(null); // Ref for the textarea
 
-    // Handle textarea resize
     const handleInputChange = (e) => {
         const { value } = e.target;
         setInput(value);
@@ -30,11 +26,12 @@ const Chat = () => {
         textarea.style.height = `${textarea.scrollHeight}px`; // Set new height
     };
 
-
     const optionalQuestions = [
-        "What is the difference between past simple and present perfect?",
-        "Can you explain the use of articles in English?",
-        "How do you form conditional sentences?",
+        "What is the key to success in life?",
+        "How can I stay motivated through challenges?",
+        "What are some ways to set and achieve goals?",
+        "How can I maintain a positive attitude?",
+        "What is the importance of perseverance?"
     ]
 
     const chatContainerRef = useRef(null);
@@ -47,15 +44,15 @@ const Chat = () => {
 
     useEffect(() => {
         const initialBotMessage = {
-            sender: 'bot', 
-            text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I'm here to help you with English grammar. Feel free to ask any grammar-related questions or request practice exercises. 📝 \n\n`,
+            sender: 'bot',
+            text:`Hello! I am Dr. A.P.J. Abdul Kalam, 🌟 I'm here to offer you guidance and inspiration. Whether you have questions about science, motivation, or life, I'm here to help you on your journey! 💡🚀`,
             time: new Date()
-        }
+        };
         if (messages.length === 0) {
-            setMessages([initialBotMessage])
+            setMessages([initialBotMessage]);
             setShowOptionalQuestions(true);
         }
-        
+
         if ('webkitSpeechRecognition' in window) {
             const recognition = new window.webkitSpeechRecognition();
             recognition.continuous = false;
@@ -89,32 +86,6 @@ const Chat = () => {
         }
     };
 
-    const getChatHistory = async () => {
-        try {
-            const response = await axios.get('http://127.0.0.1:8000/api/chat/history', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access')}`
-                }
-            });
-    
-            if (response && response.data) {
-                const previousMessages = response.data.flatMap(chat => chat.history.flatMap(entry => ([
-                    { sender: 'user', text: chat.message, time: new Date(entry.timestamp) },
-                    { sender: 'bot', text: chat.response, time: new Date(entry.timestamp) }
-                ])));
-                
-                setMessages(prevMessages => [
-                    prevMessages[0], // Keeping the initial bot message
-                    ...previousMessages
-                ]);
-            } else {
-                console.error('Invalid response format:', response);
-            }
-        } catch (error) {
-            console.error('Error fetching chat history:', error);
-        }
-    };
-
     const sendMessage = async (message) => {
         if (message.trim()) {
             const newMessage = { sender: 'user', text: message, time: new Date() };
@@ -122,7 +93,7 @@ const Chat = () => {
             setInput('');
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
+                const response = await axios.post('http://127.0.0.1:8000/api/historical/chat/', {
                     user_input: message,
                     new_chat: chatId === null,
                     chat_id: chatId
@@ -141,8 +112,9 @@ const Chat = () => {
                     if (chatId === null) {
                         setChatId(response.data.chat_id);
                     }
-                    // Hide optional questions after user interacts
-                    setShowOptionalQuestions(false);
+
+                     // Hide optional questions after user interacts
+                     setShowOptionalQuestions(false);
                 } else {
                     console.error('Invalid response format:', response);
                 }
@@ -153,34 +125,37 @@ const Chat = () => {
     };
 
     useEffect(() => {
-        scrollToBottom()
-    }, [messages])
+        scrollToBottom();
+    }, [messages]);
 
     const scrollToBottom = () => {
         if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
-    }
+    };
 
     const handleSend = () => {
-        sendMessage(input)
-        setShowOptionalQuestions(false)
-
+        sendMessage(input);
         // Reset textarea height
         const textarea = textareaRef.current;
         textarea.style.height = 'auto'; // Reset height to auto
-    }
+    };
 
-    
     return (
         <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto'>
-            <div className='flex justify-end'></div>
+            {/* Heading Section */}
+            <div className='text-center mt-3 mb-6'>
+                <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
+                <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+            </div>
+            
+            {/* Chat Container */}
             <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
-                    <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div key={index} className={`flex mt-6 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`relative max-w-3xl p-4 rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
-                                <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
+                                <img src={Kalaam} alt="kalaam" className="absolute w-10 h-10 rounded-full left-2 -top-5 h-8 w-8" />
                             )}
                             {message.sender === 'bot' ? (
                                 <div className='whitespace-pre-line' dangerouslySetInnerHTML={{ __html: message.text }} />
@@ -228,11 +203,11 @@ const Chat = () => {
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
 function formatTime(time) {
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-export default Chat
+export default Historical;
