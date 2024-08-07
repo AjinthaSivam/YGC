@@ -5,8 +5,8 @@
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/AjinthaSivam/EduTech_New.git
-cd EduTech_New
+git clone https://github.com/AjinthaSivam/YGC.git
+cd YGC
 code .
 ```
 ### Backend Setup
