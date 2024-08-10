@@ -5,9 +5,9 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 // import Quiz from './pages/QuizPage'
 import ProtectedRoute from './components/ProtectedRoute';
-import Quiz from './components/Quiz'
-import Chat from './components/Chat';
-import Historical from './components/Historical';
+import Quiz from './components/quiz/Quiz'
+import Chat from './components/chat/Chat';
+import Historical from './components/historical/Historical';
 
 function App() {
     return (

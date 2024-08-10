@@ -6,7 +6,7 @@ import { FaEraser } from "react-icons/fa";
 import { CgSearch } from "react-icons/cg";
 import '../styles/custom.css'
 import { marked } from 'marked'
-import BotLogo from '../images/bot.png'
+import BotLogo from './bot.png'
 
 const formatBotResponse = (response) => {
     return marked(response)

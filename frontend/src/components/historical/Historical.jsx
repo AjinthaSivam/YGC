@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useHistoricalChat } from './HistoricalChatContext'; // Import new context
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
-import Kalaam from '../images/kalaam.jpg'
+import Kalaam from './kalaam.jpg'
 import '../styles/custom.css';
 import { marked } from 'marked';
 
