@@ -3,7 +3,7 @@ import SideBar from './SideBar';
 import Chat from './chat/Chat';
 import MCQGenerator from './quiz/Quiz';
 import QuizIntro from './quiz/QuizIntro';
-import PastPaper from './pastpaper/PastPaper';
+import PastPaper from './PastPaper';
 import Historical from './historical/Historical'; // Import Historical component
 import { useChat } from './chat/ChatContext';
 
