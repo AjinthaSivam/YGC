@@ -48,7 +48,7 @@ const Chat = () => {
     useEffect(() => {
         const initialBotMessage = {
             sender: 'bot', 
-            text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I'm here to help you with English grammar. Feel free to ask any grammar-related questions or request practice exercises. 📝 \n\n`,
+            text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I can help with grammar, essays, letters, and articles. Ask me anything or request practice exercises. 📝 \n\n`,
             time: new Date()
         }
         if (messages.length === 0) {
