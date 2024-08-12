@@ -1,38 +1,77 @@
+/* Base styles */
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Home component styles */
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  padding: 40px; /* Increased padding for more spacious look */
-  margin: 0 auto; /* Center the section horizontally */
-  max-width: 1200px; /* Limit maximum width for consistency */
-  text-align: center; /* Center-align text */
-  background-color: #f8f9fa; /* Light background for better contrast */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  align-items: center;
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.5s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
 }
 
 body.dark-mode .home {
-  background-color: #292929; /* Dark background color */
-  color: #f8f9fa; /* Light text color for contrast */
+  background-color: #292929;
+  color: #f8f9fa;
+}
+
+/* Content wrapper for staggered animations */
+.content-wrapper > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+.content-wrapper > *:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.content-wrapper > *:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+/* Keyframes for fade-in-up effect */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for home section */
+.home:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive styles */
 @media (max-width: 1024px) {
   .home {
-    padding: 30px; /* Adjust padding for smaller screens */
+    padding: 30px;
   }
 }
 
 @media (max-width: 768px) {
   .home {
-    padding: 20px; /* Further adjust padding for smaller screens */
-    max-width: 100%; /* Allow full-width on very small screens */
+    padding: 20px;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .home {
-    padding: 15px; /* Minimal padding for very small screens */
-    font-size: 14px; /* Adjust font size for better readability */
+    padding: 15px;
+    font-size: 14px;
   }
 }
+
