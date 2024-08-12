@@ -1,0 +1,21 @@
+.carousel {
+  /*margin-bottom: 30px;*/
+  padding-top: 50px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px 12px 12px 12px; 
+  height: 0 auto;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px 12px 12px 12px; /* Rounded corners for images */
+}
+
+@media (max-width: 768px) {
+  .carousel img {
+    height: 200px; /* Fixed height for images on smaller screens */
+  }
+}

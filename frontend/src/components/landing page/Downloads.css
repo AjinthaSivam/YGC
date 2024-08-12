@@ -1,0 +1,151 @@
+/* General container styles */
+.downloads-container {
+  padding: 40px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  text-align: center;
+  border-bottom: 1px solid #999;
+}
+
+/* Title styles */
+.downloads-container h2 {
+  margin-top: 60px;
+  font-size: 2.5em;
+  color: #107067;
+  margin-bottom: 20px;
+}
+
+/* Paragraph styles */
+.downloads-container p {
+  font-size: 1.2em;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Filters styles */
+.filters {
+  margin: 20px 0;
+}
+
+.filters button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.filters button:hover {
+  background-color: #0a5a50;
+}
+
+/* Book cards styles */
+.book-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.book-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px; /* Fixed height for uniform alignment */
+}
+
+.book-image {
+  width: 100%;
+  height: 150px; /* Fixed height for images */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover; /* Ensure images are properly cropped */
+}
+
+.book-card h3 {
+  font-size: 1.5em;
+  color: #107067;
+  margin-bottom: 10px;
+  text-align: center;
+  flex-grow: 1; /* Allows the title to take up available space */
+}
+
+.book-card p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: center;
+  flex-grow: 1; /* Allows the category to take up available space */
+}
+
+.download-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.download-button:hover {
+  background-color: #0a5a50;
+}
+
+/* Dark theme styles */
+body.dark-mode .downloads-container {
+  background-color: #222;
+  color: #f8f9fa;
+}
+
+body.dark-mode .downloads-container h2 {
+  color: #4fc4be;
+}
+
+body.dark-mode .downloads-container p {
+  color: #ccc;
+}
+
+body.dark-mode .filters button {
+  background-color: #4fc4be;
+}
+
+body.dark-mode .filters button:hover {
+  background-color: #3aa99e;
+}
+
+body.dark-mode .book-card {
+  background-color: #333;
+}
+
+body.dark-mode .book-card h3 {
+  color: #4fc4be;
+}
+
+body.dark-mode .book-card p {
+  color: #ccc;
+}
+
+body.dark-mode .download-button {
+  background-color: #4fc4be;
+}
+
+body.dark-mode .download-button:hover {
+  background-color: #3aa99e;
+}

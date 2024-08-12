@@ -1,0 +1,38 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  padding: 40px; /* Increased padding for more spacious look */
+  margin: 0 auto; /* Center the section horizontally */
+  max-width: 1200px; /* Limit maximum width for consistency */
+  text-align: center; /* Center-align text */
+  background-color: #f8f9fa; /* Light background for better contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+body.dark-mode .home {
+  background-color: #292929; /* Dark background color */
+  color: #f8f9fa; /* Light text color for contrast */
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .home {
+    padding: 30px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 20px; /* Further adjust padding for smaller screens */
+    max-width: 100%; /* Allow full-width on very small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 15px; /* Minimal padding for very small screens */
+    font-size: 14px; /* Adjust font size for better readability */
+  }
+}

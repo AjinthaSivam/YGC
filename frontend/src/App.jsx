@@ -8,7 +8,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Quiz from './components/quiz/Quiz'
 import Chat from './components/chat/Chat';
 import Historical from './components/historical/Historical';
-import LandingPage from './pages/LandingPage';
+import LandHome from './components/landing page/Home'
+import Services from './components/landing page/Services';
+import Downloads from './components/landing page/Downloads';
+import About from './components/landing page/About';
+import ELibrary from './components/landing page/ELibrary';
 
 function App() {
     return (
@@ -23,7 +27,13 @@ function App() {
                 </Route>
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/land" element={<LandingPage />} />
+
+                {/* landing page */}
+                <Route path="/land" element={<LandHome />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/downloads" element={<Downloads />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/eLibrary" element={<ELibrary />} />
             </Routes>
         
     );
