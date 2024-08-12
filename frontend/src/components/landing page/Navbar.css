@@ -1,0 +1,130 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #ffffff; /* Light background color */
+    border-bottom: 1px solid #ccc; /* Light border for better contrast */
+    width: 100%; /* Ensure the navbar spans the full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    position: fixed; /* Fix navbar to the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure navbar is above other elements */
+  }
+  
+  .navbar-brand {
+    flex-grow: 1;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+  
+  .navbar-menu a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333; /* Light text color */
+    font-weight: bold;
+    /*transition: color 0.001s;/*, background-color 0s; /* Smooth transition for hover effects */
+    padding: 8px 15px; /* Add some padding for better click area */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  .navbar-menu a:hover,
+  .navbar-menu a.active {
+    background-color: #107067; /* Primary color for hover and active states */
+    color: #fff; /* White text for better contrast */
+  }
+  
+  .theme-toggle {
+    background-color: transparent; /* No background for the button */
+    border: none;
+    color: #333; /* Light color for the icon */
+    cursor: pointer;
+    font-size: 1.5em; /* Increase icon size */
+    transition: color 0s; /* Smooth transition for hover effects */
+    position: absolute; /* Position absolutely within the navbar */
+    right: 20px; /* Align to the right */
+  }
+  
+  .theme-toggle:hover {
+    color: #107067; /* Primary color on hover */
+  }
+  
+  .mobile-menu-toggle {
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.5em;
+    display: none; /* Hidden by default */
+    position: absolute; /* Position absolutely within the navbar */
+    right: 60px; /* Align to the right, adjusted for theme toggle button */
+  }
+  
+  /* Dark theme styles */
+  body.dark-mode .navbar {
+    background-color: #222; /* Dark background color */
+    border-bottom: 1px solid #333; /* Dark border for better contrast */
+  }
+  
+  body.dark-mode .navbar-menu a {
+    color: #f8f9fa; /* Light text color */
+  }
+  
+  body.dark-mode .navbar-menu a:hover,
+  body.dark-mode .navbar-menu a.active {
+    background-color: #4fc4be; /* Primary color for hover and active states in dark theme */
+    color: #222; /* Dark text for better contrast */
+  }
+  
+  body.dark-mode .theme-toggle {
+    color: #f8f9fa; /* Light color for the icon */
+  }
+  
+  body.dark-mode .theme-toggle:hover {
+    color: #4fc4be; /* Primary color on hover in dark theme */
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px; /* Adjust based on navbar height */
+      left: 0;
+      background-color: #ffffff; /* Light background color */
+      border-top: 1px solid #ccc;
+    }
+  
+    .navbar-menu.open {
+      display: flex;
+    }
+  
+    .navbar-menu a {
+      padding: 15px 20px;
+      margin: 0;
+      border-bottom: 1px solid #ccc;
+    }
+  
+    .mobile-menu-toggle {
+      display: block;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    body.dark-mode .navbar-menu {
+      background-color: #222; /* Dark background color */
+    }
+  
+    body.dark-mode .navbar-menu a {
+      border-bottom: 1px solid #333;
+    }
+  }
+  
