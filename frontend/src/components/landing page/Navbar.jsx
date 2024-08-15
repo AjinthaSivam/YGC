@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
 
 const Navbar = ({ toggleDarkMode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,6 +14,7 @@ const Navbar = ({ toggleDarkMode }) => {
       <div className="navbar-brand">
         <h1>EDUTECH</h1>
       </div>
+      
       <div className={`navbar-menu ${isMobileMenuOpen ? 'open' : ''}`}>
         <a href="/land">Home</a>
         <a href="/services">Services</a>
@@ -21,12 +22,14 @@ const Navbar = ({ toggleDarkMode }) => {
         <a href="/about">About Us</a>
         <a href="/elibrary">E-library</a>
       </div>
-      <button onClick={toggleDarkMode} className="theme-toggle-button">
-        {document.body.classList.contains('dark-mode') ? <FaSun /> : <FaMoon />}
-      </button>
-      <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-        {isMobileMenuOpen ? 'Close' : 'Menu'}
-      </button>
+      <div className="navbar-menu-container">
+        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+          <FaBars size={20} />
+        </button>
+        <button onClick={toggleDarkMode} className="theme-toggle-button">
+          {document.body.classList.contains('dark-mode') ? <FaSun size={20} /> : <FaMoon size={20} />}
+        </button>
+      </div>
     </nav>
   );
 };

@@ -3,6 +3,7 @@ import ImageCarousel from './Carousel';
 import Welcome from './Welcome';
 import './Home.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -20,9 +21,11 @@ const Home = () => {
     <div className={`home ${darkMode ? 'dark-mode' : ''}`}>
       <Navbar toggleDarkMode={toggleDarkMode} />
       <div className="content-wrapper">
+      <br/><br/>
         <ImageCarousel />
         <Welcome />
       </div>
+      <Footer/>
     </div>
 
   );

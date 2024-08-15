@@ -1,5 +1,3 @@
-// src/Welcome.js
-
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import './Welcome.css';
@@ -19,14 +17,11 @@ const Welcome = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
       .then((result) => {
-        console.log(result.text);
         alert('Message sent successfully');
-        setFormData({ name: '', email: '', message: '' }); // Clear the form
+        setFormData({ name: '', email: '', message: '' });
       }, (error) => {
-        console.log(error.text);
         alert('Failed to send message');
       });
   };
@@ -51,44 +46,46 @@ const Welcome = () => {
       </section>
       <section id="contact" className="welcome-section">
         <h2>Contact Us</h2>
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="input-group">
-            <FaUser className="input-icon" />
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="contact-input"
-            />
-          </div>
-          <div className="input-group">
-            <FaEnvelope className="input-icon" />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="contact-input"
-            />
-          </div>
-          <div className="input-group">
-            <FaPaperPlane className="input-icon textarea-icon" />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              className="contact-textarea"
-            />
-          </div>
-          <button type="submit" className="contact-button">Send</button>
-        </form>
+        <div className="contact-content">
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="input-group">
+              <FaUser />
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <FaEnvelope />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <FaPaperPlane />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="contact-btn">Send Message</button>
+          </form>
+          <div className="contact-image">
+            <img src="src\components\landing page\images\contact.jpg" alt="Contact Us" />
+       </div>
+        </div>
       </section>
     </div>
   );
