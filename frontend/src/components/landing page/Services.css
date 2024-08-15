@@ -1,76 +1,190 @@
-/* src/Services.css */
+/* General container styles */
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+body{
+    font-family: 'Exo', sans-serif;
+}
+
+.context {
+    width: 100%;
+    position: absolute;
+    top:10vh;
+}
+
+
+.area{
+  background: #c9cfcf;  
+  background: -webkit-linear-gradient(to left, #2b565f, #1dafdb);  width: 100%;
+  height:230vh;
+}
+
+.circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5){ left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.circles li:nth-child(6){ left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.circles li:nth-child(7){ left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.circles li:nth-child(8){ left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.circles li:nth-child(9){ left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.circles li:nth-child(10){ left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+@keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
 .services-container {
-  padding: 40px;
+  padding: 20px;
   margin: 20px auto;
-  background-color: #ffffff; /* Make service page background transparent */
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for better depth */
-  max-width: 1200px; /* Limit max width for larger screens */
-  text-align: center; /* Center-align text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  text-align: center;
   border-bottom: 1px solid #999;
 }
 
-/*Title styles*/
+/* Title styles */
 .services-container h2 {
   margin-top: 60px;
   font-size: 2.5em;
-  color: #107067; /* Primary color for headings */
+  color: #107067;
   margin-bottom: 20px;
 }
 
 /* Paragraph styles */
 .services-container p {
-  font-size: 1.2em; /* Slightly larger font size for readability */
-  color: #666; /* Slightly muted text color */
-  line-height: 1.6; /* Improved readability */
+  font-size: 1.2em;
+  color: #666;
+  line-height: 1.6;
 }
 
+/* Services content container */
+.services-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Space between service items */
+}
+
+/* Individual service item */
+.service-item {
+  display: grid;
+  margin-left: 60px;
+  margin-right: 60px;
+  grid-template-columns: 1fr 1fr; /* Two equal columns for image and content */
+  align-items: center;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #999;
+}
+
+/* Image container */
+.service-image-container {
+  text-align: center; /* Center the image horizontally */
+}
+
+/* Image styling */
+.service-image {
+  width: 100%; /* Make the image responsive */
+  max-width: 800px; /* Limit the maximum size */
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Text container inside service item */
+.service-text {
+  padding: 80px;
+  text-align: justify;
+  font-size: 1.3sem;
+}
+
+/* Description styles */
+.service-description {
+  font-size: 1em;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* Button styles */
+.login-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 15px;
+  background-color: #107067;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #093d3b;
+}
+
+
+/* Dark theme for service items */
+body.dark-mode .service-item {
+  background-color: #222;
+}
+
+/* Dark mode styles */
 body.dark-mode .services-container {
-  background-color: #222; /* Dark background color */
-  color: #f8f9fa; /* Light text color for contrast */
+  background-color: #222;
+  color: #f8f9fa;
 }
 
 body.dark-mode .services-container h2 {
-  color: #4fc4be; /* Primary color for headings in dark mode */
+  color: #4fc4be;
 }
 
-body.dark-mode .services-container p {
-  color: #ccc; /* Slightly muted text color for paragraphs */
-}
-.services-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around; /* Space between items */
+body.dark-mode .services-container p,
+body.dark-mode .service-description {
+  color: #ccc;
 }
 
-.service-item {
-  width: 30%;
-  padding: 20px;
-  margin: 15px 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #ffffff; /* Slightly off-white background for service items */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border: 1px solid #999;
-  text-align: left; /* Align text to the left */
-}
-
-.service-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-/* Dark theme styles */
-body.dark-mode .service-item {
-    background-color: #222; /* Dark background for service items */
-}
-
-/* Responsive design adjustments */
+/* Responsive styles */
 @media (max-width: 768px) {
   .service-item {
-    width: 100%;
+    grid-template-columns: 5fr; /* Stack image and text vertically on smaller screens */
+  }
+
+  .service-text {
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .service-image-container {
+    text-align: center;
   }
 }

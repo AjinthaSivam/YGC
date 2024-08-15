@@ -41,8 +41,31 @@ const Welcome = () => {
         <p>Access valuable resources and materials for your studies.</p>
       </section>
       <section id="about" className="welcome-section">
-        <h2>About Us</h2>
-        <p>Learn more about our mission, vision, and the team behind our educational programs.</p>
+        <h2>Our Team</h2>
+        <div className="team-section">
+          <div className="team-container">
+            <div className="team-member">
+              <img src="src/components/landing page/images/profile1.jpg" alt="Team Member 1" />
+              <h4>John Doe</h4>
+              <p>CEO & Founder</p>
+            </div>
+            <div className="team-member">
+              <img src="src/components/landing page/images/profile2.jpg" alt="Team Member 2" />
+              <h4>Jane Smith</h4>
+              <p>Head of Education</p>
+            </div>
+            <div className="team-member">
+              <img src="src/components/landing page/images/profile3.jpg" alt="Team Member 3" />
+              <h4>Mark Johnson</h4>
+              <p>Lead Developer</p>
+            </div>
+            <div className="team-member">
+              <img src="src/components/landing page/images/profile4.jpg" alt="Team Member 4" />
+              <h4>Emily Davis</h4>
+              <p>Marketing Director</p>
+            </div>
+          </div>
+        </div>
       </section>
       <section id="contact" className="welcome-section">
         <h2>Contact Us</h2>
@@ -83,8 +106,8 @@ const Welcome = () => {
             <button type="submit" className="contact-btn">Send Message</button>
           </form>
           <div className="contact-image">
-            <img src="src\components\landing page\images\contact.jpg" alt="Contact Us" />
-       </div>
+            <img src="src/components/landing page/images/contact.jpg" alt="Contact Us" />
+          </div>
         </div>
       </section>
     </div>
