@@ -59,11 +59,6 @@ const Welcome = () => {
               <h4>Mark Johnson</h4>
               <p>Lead Developer</p>
             </div>
-            <div className="team-member">
-              <img src="src/components/landing page/images/profile4.jpg" alt="Team Member 4" />
-              <h4>Emily Davis</h4>
-              <p>Marketing Director</p>
-            </div>
           </div>
         </div>
       </section>

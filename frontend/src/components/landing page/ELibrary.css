@@ -1,62 +1,56 @@
 /* General container styles */
-.eLibrary-container {
-  padding: 40px; /* Increased padding for a more spacious look */
-  margin: 20px auto; /* Center the container with auto margins */
-  background-color: #ffffff; /* Default light background color */
-  border-radius: 12px; /* Slightly rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-  max-width: 1200px; /* Limit maximum width */
-  text-align: center; /* Center-align text */
-  border-bottom: 1px solid #999;
+.library {
+  padding: 0px;
+  margin: 20px auto;
+  border-radius: 12px;
+  text-align: center;
 }
 
 /* Title styles */
-.eLibrary-container h2 {
+.library h2 {
+  margin-top: 0px;
+  font-size: 3.5em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.library p {
+  font-size: 1.2em;
+  color: #f8f9fa;
+  line-height: 1.6;
+}
+
+.library-container {
+  padding: 0px;
+  margin: 20px;
+  border-radius: 12px;
+  max-width: 1200px;
+  text-align: center;
+}
+
+/* Title styles */
+.library-container h2 {
   margin-top: 60px;
-  font-size: 2.5em; /* Larger font size for visibility */
-  color: #107067; /* Primary color for headings */
-  margin-bottom: 20px; /* Space below the heading */
+  font-size: 2.5em;
+  color: #107067;
+  margin-bottom: 20px;
 }
 
 /* Paragraph styles */
-.eLibrary-container p {
-  font-size: 1.2em; /* Slightly larger font size for readability */
-  color: #666; /* Slightly muted text color */
-  line-height: 1.6; /* Improved readability */
+.library-container p {
+  font-size: 1.2em;
+  color: #666;
+  line-height: 1.6;
 }
 
-/* Dark theme styles */
-body.dark-mode .eLibrary-container {
-  background-color: #222; /* Dark background color */
-  color: #f8f9fa; /* Light text color for contrast */
-}
-
-body.dark-mode .eLibrary-container h2 {
-  color: #4fc4be; /* Primary color for headings in dark mode */
-}
-
-body.dark-mode .eLibrary-container p {
-  color: #ccc; /* Slightly muted text color for paragraphs */
-}
-
-/* Search bar styles */
-.search-bar {
+/* Filters styles */
+.filters {
   margin: 20px 0;
-  display: flex;
-  justify-content: center; /* Center align the search bar */
-  align-items: center; /* Align items vertically */
 }
 
-.search-bar input {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 70%;
-  margin-right: 10px; /* Space between input and button */
-}
-
-.search-bar button {
+.filters button,
+.filters select {
   padding: 10px 20px;
   font-size: 1em;
   border: none;
@@ -64,106 +58,132 @@ body.dark-mode .eLibrary-container p {
   background-color: #107067;
   color: #fff;
   cursor: pointer;
+  margin: 10px 10px;
 }
 
-.search-bar button:hover {
+.filters button:hover,
+.filters select:hover {
   background-color: #0a5a50;
 }
 
-/* Categories styles */
-.categories {
-  margin: 20px 0;
+/* Book cards styles */
+.book-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
-.categories h3 {
-  font-size: 1.8em;
+.book-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+}
+
+.book-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.book-card h3 {
+  font-size: 1.5em;
   color: #107067;
+  margin-bottom: 10px;
+  text-align: center;
+  flex-grow: 1;
 }
 
-.categories ul {
-  list-style: none;
-  padding: 0;
-}
-
-.categories li {
-  display: inline-block;
-  margin: 10px 15px;
-  font-size: 1.2em;
+.book-card p {
+  font-size: 1.1em;
   color: #666;
+  margin-bottom: 15px;
+  text-align: center;
+  flex-grow: 1;
 }
 
-/* Resources styles */
-.resources {
-  margin: 20px 0;
+.book-card .author,
+.book-card .rating {
+  font-size: 1em;
+  color: #777;
 }
 
-.resources h3 {
-  font-size: 1.8em;
-  color: #107067;
+.rating {
+  display: flex;
+  justify-content: center;
 }
 
-.resources ul {
-  list-style: none;
-  padding: 0;
-}
-
-.resources li {
-  margin: 10px 0;
-  font-size: 1.2em;
-  color: #107067;
-}
-
-.resources a {
-  text-decoration: none;
-  color: inherit;
-  transition: color 0.3s;
-}
-
-.resources a:hover {
-  color: #0a5a50;
-}
-
-/* Link button styles */
-.link-button {
-  background: none;
+.view-button {
+  padding: 10px 20px;
+  font-size: 1em;
   border: none;
-  color: #107067;
-  cursor: pointer;
-  font-size: 1.2em;
-  text-decoration: underline;
-  padding: 0;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: 100%;
 }
 
-.link-button:hover {
-  color: #0a5a50;
+.view-button:hover {
+  background-color: #0a5a50;
 }
 
 /* Dark theme styles */
-body.dark-mode .eLibrary-container {
+body.dark-mode .library-container {
   background-color: #222;
   color: #f8f9fa;
 }
 
-body.dark-mode .eLibrary-container h2 {
+body.dark-mode .library-container h2 {
   color: #4fc4be;
 }
 
-body.dark-mode .eLibrary-container p,
-body.dark-mode .categories li,
-body.dark-mode .link-button {
+body.dark-mode .library-container p {
   color: #ccc;
 }
 
-body.dark-mode .search-bar input {
-  background-color: #333;
-  color: #ccc;
-  border: 1px solid #555;
-}
-
-body.dark-mode .search-bar button {
+body.dark-mode .filters button,
+body.dark-mode .filters select {
   background-color: #4fc4be;
 }
 
-body.dark-mode .search-bar button:hover {
+body.dark-mode .filters button:hover,
+body.dark-mode .filters select:hover {
+  background-color: #3aa99e;
+}
+
+body.dark-mode .book-card {
+  background-color: #333;
+}
+
+body.dark-mode .book-card h3 {
+  color: #4fc4be;
+}
+
+body.dark-mode .book-card p {
+  color: #ccc;
+}
+
+body.dark-mode .book-card .author,
+body.dark-mode .book-card .rating {
+  color: #ddd;
+}
+
+body.dark-mode .view-button {
+  background-color: #4fc4be;
+}
+
+body.dark-mode .view-button:hover {
   background-color: #3aa99e;
 }

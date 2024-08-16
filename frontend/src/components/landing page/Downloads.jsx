@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import './Downloads.css';
 
 const books = [
-  { id: 1, title: 'Introduction to Quantum Physics', category: 'Science', link: '#', image: 'path/to/quantum-physics.jpg' },
-  { id: 2, title: 'Advanced Algorithms and Data Structures', category: 'Technology', link: '#', image: 'path/to/algorithms.jpg' },
-  { id: 3, title: 'Modern Art History', category: 'Arts', link: '#', image: 'path/to/art-history.jpg' },
-  { id: 4, title: 'Shakespeare\'s Complete Works', category: 'Literature', link: '#', image: 'path/to/shakespeare.jpg' },
-  { id: 5, title: 'Artificial Intelligence: A Modern Approach', category: 'Technology', link: '#', image: 'path/to/ai.jpg' },
-  { id: 6, title: 'Calculus and Its Applications', category: 'Mathematics', link: '#', image: 'path/to/calculus.jpg' },
+  { id: 1, title: 'G.C.E O/L 2023 ', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png'},
+  { id: 2, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: 'src/components/landing page/images/Mathsp.png' },
+  { id: 3, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: 'src/components/landing page/images/Sciencep.png' },
+  { id: 4, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: 'src/components/landing page/images/ICTp.png' },
+  { id: 5, title: 'G.C.E O/L 2022', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
+  { id: 6, title: 'G.C.E O/L 2022', category: 'Mathematics', link: 'https://www.digitalarchives.online/2024/05/gce-ol-2023-english-language-past-paper.html', image: 'src/components/landing page/images/Mathsp.png' },
+  { id: 7, title: 'G.C.E O/L 2021', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
 ];
 
 const Downloads = () => {
@@ -18,30 +19,46 @@ const Downloads = () => {
     : books.filter(book => book.category === selectedCategory);
 
   return (
-    <div className="downloads-container">
-      <h2>Downloads</h2>
-      <p>Links to downloadable content.</p>
-      <div className="filters">
-        <button onClick={() => setSelectedCategory('All')}>All</button>
-        <button onClick={() => setSelectedCategory('Science')}>Science</button>
-        <button onClick={() => setSelectedCategory('Technology')}>Technology</button>
-        <button onClick={() => setSelectedCategory('Arts')}>Arts</button>
-        <button onClick={() => setSelectedCategory('Literature')}>Literature</button>
-        <button onClick={() => setSelectedCategory('Mathematics')}>Mathematics</button>
+    <section class="area">
+      <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+      </ul>
+    <div class="context">
+      <div className="downloads">
+        <h2>Downloads</h2>
+        <p>Links to downloadable content.</p>
       </div>
-      <div className="book-cards">
-        {filteredBooks.map(book => (
-          <div key={book.id} className="book-card">
-            <img src={book.image} alt={book.title} className="book-image" />
-            <h3>{book.title}</h3>
-            <p>{book.category}</p>
-            <a href={book.link} download className="download-button">Download</a>
-          </div>
-        ))}
+      <div className="downloads-container">
+        <div className="filters">
+          <button onClick={() => setSelectedCategory('All')}>All</button>
+          <button onClick={() => setSelectedCategory('Science')}>Science</button>
+          <button onClick={() => setSelectedCategory('ICT')}>ICT</button>
+          <button onClick={() => setSelectedCategory('English')}>English</button>
+          <button onClick={() => setSelectedCategory('Mathematics')}>Mathematics</button>
+        </div>
+        <div className="book-cards">
+          {filteredBooks.map(book => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} className="book-image" />
+              <h3>{book.title}</h3>
+              <p>{book.category}</p>
+              <a href={book.link} download className="download-button">Download</a>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
+  </section>
   );
 };
 
 export default Downloads;
-

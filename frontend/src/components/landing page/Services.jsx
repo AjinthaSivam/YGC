@@ -17,7 +17,7 @@ const Services = () => {
         <li></li>
     </ul>
     <div class="context">
-      <div className="services-container">
+      <div className="service">
         <h2>Our Services</h2>
         <p>Explore our educational services designed to enhance your learning experience.</p>
       </div>

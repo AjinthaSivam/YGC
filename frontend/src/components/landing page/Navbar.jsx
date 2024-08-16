@@ -27,7 +27,7 @@ const Navbar = ({ toggleDarkMode }) => {
           <FaBars size={20} />
         </button>
         <button onClick={toggleDarkMode} className="theme-toggle-button">
-          {document.body.classList.contains('dark-mode') ? <FaSun size={20} /> : <FaMoon size={20} />}
+          {document.body.classList.contains('dark-mode') ? <FaMoon size={20} /> : <FaSun size={20} />}
         </button>
       </div>
     </nav>

@@ -1,29 +1,109 @@
 /* src/About.css */
 
 /* General container styles */
-.about-container {
-  padding: 40px; /* Increased padding for a spacious look */
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+body{
+    font-family: 'Exo', sans-serif;
+}
+
+.context {
+    width: 100%;
+    position: absolute;
+    top:10vh;
+}
+
+
+.area{
+  background: #629999;  
+  background: -webkit-linear-gradient(to left, #2b565f, #1dafdb);  width: 100%;
+  height:100vh;
+}
+
+.circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5){ left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.circles li:nth-child(6){ left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.circles li:nth-child(7){ left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.circles li:nth-child(8){ left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.circles li:nth-child(9){ left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.circles li:nth-child(10){ left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+@keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+.about {
+  padding: 0px; /* Increased padding for a spacious look */
   margin: 20px auto; /* Center the container with auto margins */
-  background-color: #ffffff; /* Default light background color */
+  /*background-color: #ffffff;  Default light background color */
+  border-radius: 12px; /* Slightly rounded corners */
+  text-align: center; /* Center-align text */
+}
+.about-container {
+  padding: 0px; /* Increased padding for a spacious look */
+  margin: 20px auto; /* Center the container with auto margins */
+  /*background-color: #ffffff;  Default light background color */
   border-radius: 12px; /* Slightly rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
   max-width: 1200px; /* Limit maximum width */
   text-align: center; /* Center-align text */
-  border-bottom: 1px solid #999;
+ 
 }
 
-/* Title styles */
-.about-container h2 {
-  margin-top: 60px;
-  font-size: 2.5em; /* Larger font size for better visibility */
-  color: #107067; /* Primary color for headings */
+/* Title styles without background */
+.about h2{
+  margin-top: 0px;
+  font-size: 3.5em; /* Larger font size for better visibility */
+  color: #ffffff; /* Bright white color to contrast with the background */
   margin-bottom: 20px; /* Space below the heading */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+}
+
+.about-container h2 {
+  margin-top: 0px;
+  font-size: 3em; /* Larger font size for better visibility */
+  color: #ffffff; /* Bright white color to contrast with the background */
+  margin-bottom: 20px; /* Space below the heading */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
 }
 
 /* Paragraph styles */
+.about p,
 .about-container p {
   font-size: 1.2em; /* Slightly larger font size for readability */
-  color: #666; /* Slightly muted text color */
+  color: #f8f9fa; /* Slightly muted text color */
   line-height: 1.6; /* Improved readability */
 }
 
@@ -65,10 +145,10 @@
 }
 
 .team-member img {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: auto;
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
 }
 
 .team-member p {
@@ -91,8 +171,8 @@
 }
 
 .value img {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -105,12 +185,13 @@
 
 /* Dark theme styles */
 body.dark-mode .about-container {
-  background-color: #222; /* Dark background color */
+  /*background-color: #222;  Dark background color */
   color: #f8f9fa; /* Light text color for contrast */
 }
 
 body.dark-mode .about-container h2 {
-  color: #4fc4be; /* Primary color for headings in dark mode */
+  color: #4fc4be; /* Bright color to stand out in dark mode */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Stronger shadow in dark mode */
 }
 
 body.dark-mode .about-container p {
@@ -148,11 +229,12 @@ body.dark-mode .value p {
   }
 
   .about-card h3 {
-    font-size: 1.5em; /* Adjust font size for smaller screens */
+    font-size: 1.8em; /* Adjust font size for smaller screens */
   }
 
   .about-card p,
   .about-card li {
+    line-height: 1.8;
     font-size: 1em; /* Adjust font size for readability on smaller screens */
   }
 
