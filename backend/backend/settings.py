@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'chat',
     'learner',
     'historical',
+    'pastpaper',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt'
