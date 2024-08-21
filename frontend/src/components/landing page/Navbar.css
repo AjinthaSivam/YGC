@@ -4,11 +4,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  /*border-bottom: 1px solid #ccc;*/
   width: 100%;
   box-sizing: border-box;
   position: fixed;
+  margin-top: -65px;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -16,14 +17,14 @@
 
 .navbar-brand {
   flex: 1;
-  color: #333;
+  color: #111;
 }
 
 .navbar-brand h1 {
   text-align: left;
   margin-left: 40px;
   font-size: 1.5em;
-  color: #333;
+  color: #111;
 }
 
 .navbar-menu-container {
@@ -42,7 +43,7 @@
 .navbar-menu a {
   margin: 0 15px;
   text-decoration: none;
-  color: #333;
+  color: #111;
   font-weight: bold;
   padding: 8px 15px;
   border-radius: 5px;
@@ -57,7 +58,7 @@
 .theme-toggle-button {
   background-color: transparent;
   border: none;
-  color: #333;
+  color: 111;
   cursor: pointer;
   font-size: 1.5em;
   transition: color 0.3s ease;
@@ -65,14 +66,14 @@
 
 .mobile-menu-toggle:hover,
 .theme-toggle-button:hover {
-  color: #107067;
+  color: #ccc;
 }
 
 .mobile-menu-toggle {
   
   background-color: transparent;
   border: none;
-  color: #333;
+  color: #111;
   cursor: pointer;
   font-size: 1.5em;
   display: none;

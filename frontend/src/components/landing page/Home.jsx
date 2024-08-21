@@ -18,15 +18,22 @@ const Home = () => {
   };
 
   return (
-    <div className={`home ${darkMode ? 'dark-mode' : ''}`}>
-      <Navbar toggleDarkMode={toggleDarkMode} />
-      <div className="content-wrapper">
-      <br/><br/>
-        <ImageCarousel />
-        <Welcome />
+    <><section className="area">
+      <ul className="circles">
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+      </ul>
+      <div className="context">
+        <div className={`home ${darkMode ? 'dark-mode' : ''}`}>
+          <Navbar toggleDarkMode={toggleDarkMode} />
+          <div className="content-wrapper">
+            <br /><br />
+            <ImageCarousel />
+            <Welcome />
+          </div>
+        </div>
       </div>
-      <Footer/>
-    </div>
+    </section><Footer /></>
 
   );
 };

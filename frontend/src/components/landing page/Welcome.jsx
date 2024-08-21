@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import './Welcome.css';
 import { FaUser, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const Welcome = () => {
   const [formData, setFormData] = useState({
@@ -28,42 +30,119 @@ const Welcome = () => {
 
   return (
     <div className="welcome-container">
-      <section id="home" className="welcome-section">
-        <h1>Welcome to My Educational Institute</h1>
-        <p>Empowering students with knowledge and skills for a brighter future.</p>
+      <br/>
+      <br/>
+      <section id="home" className="welcome-section hero-section">
+        <div className="hero-content">
+          <h1><strong>Unlock Your Potential with Our Expert Education</strong></h1>
+          <p>Join a community dedicated to fostering excellence and innovation. Our educational programs are designed to equip students and professionals with the skills needed to excel in today's competitive world.</p>
+          <br/>
+          <div className="cta-buttons">
+            <a href="/students" className="cta-button student-btn">For Students</a>
+            <a href="/tutors" className="cta-button tutor-btn">For Tutors</a>
+          </div>
+        </div>
       </section>
-      <section id="services" className="welcome-section">
-        <h2>Our Services</h2>
-        <p>Explore the range of educational services we offer to enhance your learning experience.</p>
+
+      <section id="about-us" className="welcome-section">
+        <h2><strong>About Us</strong></h2>
+        <div className="about-us-content">
+          <div className="about-us-item">
+            <i className="fas fa-users about-us-icon"></i>
+            <h2><strong>1,200+</strong></h2>
+            <p>Number of Students</p>
+          </div>
+          <div className="about-us-item">
+            <i className="fas fa-chalkboard-teacher about-us-icon"></i>
+            <h2><strong>50+</strong></h2>
+            <p>Number of Tutors</p>
+          </div>
+          <div className="about-us-item">
+            <i className="fas fa-book about-us-icon"></i>
+            <h2><strong>20+</strong></h2>
+            <p>Available Courses</p>
+          </div>
+          <div className="about-us-item">
+            <i className="fas fa-archive about-us-icon"></i>
+            <h2><strong>150+</strong></h2>
+            <p>Materials Available</p>
+          </div>
+        </div>
       </section>
       <section id="downloads" className="welcome-section">
-        <h2>Downloads</h2>
-        <p>Access valuable resources and materials for your studies.</p>
+        <h2><strong>Downloads</strong></h2>
+        <p>Download the pastpapers and model papers for your best practice.</p>
+        <br/>
+        <div className="downloads-preview">
+          <div className="book-card">
+            <img src="src/components/landing page/images/Englishp.png" alt="G.C.E O/L 2023 English" className="book-image" />
+            <h3>G.C.E O/L 2023</h3>
+            <p>English</p>
+          </div>
+          <div className="book-card">
+            <img src="src/components/landing page/images/Mathsp.png" alt="G.C.E O/L 2023 Mathematics" className="book-image" />
+            <h3>G.C.E O/L 2023</h3>
+            <p>Mathematics</p>
+          </div>
+          <div className="book-card">
+            <img src="src/components/landing page/images/Sciencep.png" alt="G.C.E O/L 2023 Science" className="book-image" />
+            <h3>G.C.E O/L 2023</h3>
+            <p>Science</p>
+          </div>
+        </div>
+        <a href="/downloads" className="see-more-button">See More</a>
       </section>
-      <section id="about" className="welcome-section">
-        <h2>Our Team</h2>
-        <div className="team-section">
-          <div className="team-container">
-            <div className="team-member">
-              <img src="src/components/landing page/images/profile1.jpg" alt="Team Member 1" />
-              <h4>John Doe</h4>
-              <p>CEO & Founder</p>
-            </div>
-            <div className="team-member">
-              <img src="src/components/landing page/images/profile2.jpg" alt="Team Member 2" />
-              <h4>Jane Smith</h4>
-              <p>Head of Education</p>
-            </div>
-            <div className="team-member">
-              <img src="src/components/landing page/images/profile3.jpg" alt="Team Member 3" />
-              <h4>Mark Johnson</h4>
-              <p>Lead Developer</p>
-            </div>
+      <section id="elibrary" className="welcome-section">
+        <h2><strong>E-Library</strong></h2>
+        <p>Access valuable reference materials for your studies.</p>
+        <br/>
+        <div className="downloads-preview">
+          <div className="book-card">
+            <img src="src/components/landing page/images/Science.png" alt="Social Studies" className="book-image" />
+            <h3>Social Studies</h3>
+            <p>Science</p>
+            <p>Emily Brown</p>
+            <p>4.8 ★</p>                
+          </div>
+          <div className="book-card">
+            <img src="src/components/landing page/images/English.png" alt="Easy English" className="book-image" />
+            <h3>Easy English</h3>
+            <p>English</p>
+            <p>John Doe</p>
+            <p>4.5 ★</p>
+          </div>
+          <div className="book-card">
+            <img src="src/components/landing page/images/Maths.png" alt="Numerical Tricks" className="book-image" />
+            <h3>Numerical Tricks</h3>
+            <p>Mathematics</p>
+            <p>Jane Smith</p>
+            <p>4.2 ★</p>
+          </div>
+        </div>
+        <a href="/elibrary" className="see-more-button">See More</a>
+      </section>
+      <section id="success-stories" className="welcome-section">
+        <h2>Success Stories</h2>
+        <div className="stories-section">
+          <div className="story">
+            <img src="src/components/landing page/images/success1.png" alt="Success Story 1" />
+            <h4>Aman Sri</h4>
+            <p>"This institute transformed my life by providing quality education and guidance."</p>
+          </div>
+          <div className="story">
+            <img src="src/components/landing page/images/success2.png" alt="Success Story 2" />
+            <h4>Ravi Sarma</h4>
+            <p>"Thanks to the dedicated teachers, I was able to achieve my academic goals."</p>
+          </div>
+          <div className="story">
+            <img src="src/components/landing page/images/success3.png" alt="Success Story 3" />
+            <h4>Nimali Kumar</h4>
+            <p>"The resources and support here helped me excel in my exams."</p>
           </div>
         </div>
       </section>
       <section id="contact" className="welcome-section">
-        <h2>Contact Us</h2>
+        <h2><strong>Contact Us</strong></h2>
         <div className="contact-content">
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="input-group">

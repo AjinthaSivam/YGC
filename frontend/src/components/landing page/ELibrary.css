@@ -31,7 +31,7 @@
 
 /* Title styles */
 .library-container h2 {
-  margin-top: 60px;
+  margin-top: 40px;
   font-size: 2.5em;
   color: #107067;
   margin-bottom: 20px;
@@ -55,10 +55,11 @@
   font-size: 1em;
   border: none;
   border-radius: 5px;
-  background-color: #107067;
+  background-color: transparent;
   color: #fff;
   cursor: pointer;
   margin: 10px 10px;
+  border: black 1px solid;
 }
 
 .filters button:hover,
