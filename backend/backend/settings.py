@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'historical',
     'corsheaders',
     'rest_framework',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'hangman',
 ]
 
 MIDDLEWARE = [

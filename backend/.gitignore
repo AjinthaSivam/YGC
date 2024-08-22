@@ -1,3 +1,4 @@
 .env
 
-venv2
+venv
+*.pyc
