@@ -41,7 +41,7 @@ const Elibrary = () => {
       </ul>
       <div className="context">
         <div className="library">
-          <h2>E-library</h2>
+          <h2>E-Library</h2>
           <p>Access to online resources.</p>
         </div>
         <div className="library-container">

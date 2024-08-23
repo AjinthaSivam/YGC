@@ -18,7 +18,7 @@ const Home = () => {
   };
 
   return (
-    <><section className="area">
+    <section className="area">
       <ul className="circles">
         <li></li><li></li><li></li><li></li><li></li>
         <li></li><li></li><li></li><li></li><li></li>
@@ -27,14 +27,13 @@ const Home = () => {
         <div className={`home ${darkMode ? 'dark-mode' : ''}`}>
           <Navbar toggleDarkMode={toggleDarkMode} />
           <div className="content-wrapper">
-            <br /><br />
             <ImageCarousel />
             <Welcome />
           </div>
         </div>
       </div>
-    </section><Footer /></>
-
+      <Footer />
+    </section>
   );
 };
 

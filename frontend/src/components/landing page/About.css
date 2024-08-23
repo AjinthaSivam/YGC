@@ -1,40 +1,37 @@
-/* src/About.css */
-
 /* General container styles */
-
 .about {
-  padding: 0px; /* Increased padding for a spacious look */
+  padding: 0; /* Increased padding for a spacious look */
   margin: 20px auto; /* Center the container with auto margins */
-  /*background-color: #ffffff;  Default light background color */
   border-radius: 12px; /* Slightly rounded corners */
   text-align: center; /* Center-align text */
 }
+
 .about-container {
-  padding: 0px; /* Increased padding for a spacious look */
-  margin: 20px auto; /* Center the container with auto margins */
-  /*background-color: #ffffff;  Default light background color */
+  padding: 0; /* Increased padding for a spacious look */
+  margin: 40px; /* Center the container with auto margins */
   border-radius: 12px; /* Slightly rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-  max-width: 1200px; /* Limit maximum width */
+  max-width: 1400px; /* Limit maximum width */
   text-align: center; /* Center-align text */
- 
 }
 
-/* Title styles without background */
-.about h2{
+/* Title styles with icons */
+.about h2,
+.about-container h2 {
   margin-top: 40px;
   font-size: 3.5em; /* Larger font size for better visibility */
   color: #ffffff; /* Bright white color to contrast with the background */
   margin-bottom: 20px; /* Space below the heading */
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.about-container h2 {
-  margin-top: 0px;
-  font-size: 3em; /* Larger font size for better visibility */
-  color: #ffffff; /* Bright white color to contrast with the background */
-  margin-bottom: 20px; /* Space below the heading */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+.about h2::before,
+.about-container h2::before {
+  content: url('path/to/icon.svg'); /* Add the path to your icon */
+  margin-right: 10px; /* Space between icon and text */
 }
 
 /* Paragraph styles */
@@ -44,7 +41,6 @@
   color: #f8f9fa; /* Slightly muted text color */
   line-height: 1.6; /* Improved readability */
 }
-
 
 /* Card styles */
 .about-card {
@@ -56,11 +52,18 @@
   text-align: left; /* Left-align text inside cards */
 }
 
-/* Subtitle styles */
+/* Subtitle styles with icons */
 .about-card h3 {
   font-size: 2em; /* Slightly smaller than main heading */
   color: #107067; /* Consistent primary color */
   margin-bottom: 20px; /* Space below subtitles */
+  display: flex;
+  align-items: center;
+}
+
+.about-card h3::before {
+  content: url('path/to/icon.svg'); /* Add the path to your icon */
+  margin-right: 10px; /* Space between icon and text */
 }
 
 /* Paragraph styles inside cards */
@@ -71,114 +74,91 @@
 }
 
 /* Team section styles */
-.team-section .team-members {
+.team-section {
+  padding: 40px;
+  background-color: #ffffff; /* Light background for contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+  margin: 20px auto; /* Center-align with margin */
+}
+
+.team-section h3 {
+  font-size: 2.5em; /* Larger font size for headings */
+  color: #107067; /* Consistent primary color */
+  margin-bottom: 20px; /* Space below heading */
+  text-align: center; /* Center-align heading */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+}
+
+.team-members {
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Center-align team members */
   flex-wrap: wrap;
+  gap: 30px; /* Gap between team member cards */
 }
 
 .team-member {
   text-align: center;
-  margin: 20px;
+  background-color: #ffffff; /* White background for each card */
+  border-radius: 12px; /* Rounded corners for cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside each card */
+  max-width: 250px; /* Limit card width */
+  margin: 10px; /* Margin around each card */
+  border: 1px solid #777;
 }
 
+/* Center-align the image inside the team member card */
 .team-member img {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
-
-.team-member p {
-  margin-top: 10px;
-  font-size: 1.1em;
-  color: #666;
+  width: 150px; /* Fixed width for images */
+  height: 150px; /* Fixed height for images */
+  border-radius: 50%; /* Circular images */
+  object-fit: cover; /* Cover the image area */
+  border: 3px solid #4fc4be; /* Elegant border color */
+  margin: 0 auto 15px; /* Center-align image and space below */
 }
 
 /* Values section styles */
-.values-section .values {
+.values-section {
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+  margin: 20px auto; /* Center-align with margin */
+}
+
+.values-section h3 {
+  font-size: 2.5em; /* Larger font size for headings */
+  color: #107067; /* Consistent primary color */
+  margin-bottom: 20px; /* Space below heading */
+  text-align: center; /* Center-align heading */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for elegance */
+}
+
+.values {
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Center-align values */
   flex-wrap: wrap;
+  gap: 30px; /* Gap between values */
 }
 
 .value {
   text-align: center;
-  margin: 20px;
-  max-width: 250px;
+  background-color: #ffffff; /* Light background for each value card */
+  border-radius: 12px; /* Rounded corners for cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside each card */
+  max-width: 250px; /* Limit card width */
+  margin: 10px; /* Margin around each card */
+  border: 1px solid #777;
 }
 
 .value img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80px; /* Fixed width for icons */
+  height: 80px; /* Fixed height for icons */
+  margin-bottom: 10px; /* Space below the icon */
 }
 
 .value p {
-  margin-top: 10px;
-  font-size: 1.1em;
-  color: #666;
-}
-
-/* Dark theme styles */
-body.dark-mode .about-container {
-  /*background-color: #222;  Dark background color */
-  color: #f8f9fa; /* Light text color for contrast */
-}
-
-body.dark-mode .about-container h2 {
-  color: #4fc4be; /* Bright color to stand out in dark mode */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Stronger shadow in dark mode */
-}
-
-body.dark-mode .about-container p {
-  color: #ccc; /* Slightly muted text color for paragraphs */
-}
-
-body.dark-mode .about-card {
-  background-color: #333; /* Darker background for cards */
-  color: #f8f9fa; /* Light text color for contrast */
-}
-
-body.dark-mode .about-card h3 {
-  color: #4fc4be; /* Primary color for headings in dark mode */
-}
-
-body.dark-mode .about-card p,
-body.dark-mode .about-container li {
-  color: #ccc; /* Slightly muted text color for paragraphs and list items */
-}
-
-body.dark-mode .team-member p,
-body.dark-mode .value p {
-  color: #ccc; /* Slightly muted text color for team members and values */
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .about-container {
-    padding: 20px; /* Reduce padding for smaller screens */
-    margin: 10px auto; /* Adjust margin for smaller screens */
-  }
-
-  .about-container h2 {
-    font-size: 2em; /* Adjust font size for smaller screens */
-  }
-
-  .about-card h3 {
-    font-size: 1.8em; /* Adjust font size for smaller screens */
-  }
-
-  .about-card p,
-  .about-card li {
-    line-height: 1.8;
-    font-size: 1em; /* Adjust font size for readability on smaller screens */
-  }
-
-  .team-member img,
-  .value img {
-    width: 100px;
-    height: 100px; /* Adjust image size for smaller screens */
-  }
+  font-size: 1.2em; /* Slightly larger text for better readability */
+  color: #333; /* Dark text color */
 }

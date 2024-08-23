@@ -4,7 +4,6 @@ import './Welcome.css';
 import { FaUser, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-
 const Welcome = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -71,7 +70,7 @@ const Welcome = () => {
       </section>
       <section id="downloads" className="welcome-section">
         <h2><strong>Downloads</strong></h2>
-        <p>Download the pastpapers and model papers for your best practice.</p>
+        <p>Download the past papers and model papers for your best practice.</p>
         <br/>
         <div className="downloads-preview">
           <div className="book-card">

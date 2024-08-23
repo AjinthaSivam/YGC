@@ -20,7 +20,7 @@ const Navbar = ({ toggleDarkMode }) => {
         <a href="/services">Services</a>
         <a href="/downloads">Downloads</a>
         <a href="/about">About Us</a>
-        <a href="/elibrary">E-library</a>
+        <a href="/elibrary">E-Library</a>
       </div>
       <div className="navbar-menu-container">
         <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
