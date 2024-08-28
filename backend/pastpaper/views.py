@@ -127,6 +127,18 @@ def create_faiss_index(text):
         print("Error in create_faiss_index:", str(e))
         return [], None
 
+# from django.http import JsonResponse
+# from rest_framework.decorators import api_view, permission_classes
+# from rest_framework.permissions import IsAuthenticated
+# from django.views.decorators.csrf import csrf_exempt
+# import json
+# import os
+# import openai
+# from .models import PastPaperChat  # Ensure to import your model for saving chat history
+
+# Initialize conversation history dictionary
+conversation_history = {}
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
@@ -136,12 +148,17 @@ def chat_view(request):
         user_input = data.get('user_input', '')
         selected_year = data.get('selected_year', '')
         learner = request.user
-        
+
+        # Initialize conversation history for the learner if it doesn't exist
+        if learner.id not in conversation_history:
+            conversation_history[learner.id] = []
+
         if not selected_year:
             return JsonResponse({'response': "Error: No year selected."}, status=400)
 
         # Process the text files and create the FAISS index
         all_texts = ''
+        input_directory = 'pdfs'  # Replace with your directory path
         for file_name in os.listdir(input_directory):
             if file_name.endswith('.txt') and selected_year in file_name:
                 file_text = process_text_file(file_name)
@@ -158,33 +175,43 @@ def chat_view(request):
         if relevant_chunks:
             context_text = ' '.join(relevant_chunks[:5])
         else:
-            context_text = "No relevant information found for the year {selected_year}"
+            context_text = f"No relevant information found for the year {selected_year}"
 
         # Build the message history to provide context
         messages = [
-            {"role": "system", "content": "You are an English Teaching Assistant for Grade 11 students. Guide them step by step to reach the answer, without providing the answer immediately. Ask follow-up questions to help them think about the solution. Use emojis to make it engaging, but keep responses short."},
-            {"role": "system", "content": f"This is a past paper from the year {selected_year}, covering various topics in English. Guide the student on questions related to specific test of this paper."},
-            {"role": "user", "content": user_input},
-            {"role": "assistant", "content": f"Reference Material: {context_text}"}
+            {"role": "system", "content": "You are an English Teaching Assistant for Grade 11 students."},
+            {"role": "system", "content": f"This is a past paper from the year {selected_year}, covering various topics in English."},
+            {"role": "system", "content": "Guide them step by step to reach the answer"},
+            {"role": "system", "content": "Use emojis to make it engaging, but keep responses short."},
+            {"role": "system", "content": "Guide the student on questions related to a specific test of this paper."},
         ]
 
+        # Append previous chat history
+        for entry in conversation_history[learner.id]:
+            messages.append({"role": entry['role'], "content": entry['content']})
+        
+        # Add current user input to messages
+        messages.append({"role": "user", "content": user_input})
+        messages.append({"role": "assistant", "content": f"Reference Material: {context_text}"})
 
         # Use OpenAI API to get assistant's response
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
-            temperature=0,
+            temperature=0.5,
             max_tokens=200
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
-        
+
         # Add highlights and emojis to the response
         assistant_response = format_response(assistant_response)
 
         # Validate the assistant's response
         if "random" in assistant_response or not assistant_response:
             assistant_response = "I'm sorry, I didn't understand that. Can you please clarify or ask another question?"
+            
+        assistant_response = format_response(assistant_response)
 
         # Save the chat interaction to the database
         PastPaperChat.objects.create(
@@ -193,11 +220,16 @@ def chat_view(request):
             response=assistant_response
         )
 
+        # Update conversation history
+        conversation_history[learner.id].append({"role": "user", "content": user_input})
+        conversation_history[learner.id].append({"role": "assistant", "content": assistant_response})
+
         return JsonResponse({'response': assistant_response}, safe=False)
     
     except Exception as e:
         print("Error in chat_view:", str(e))
         return JsonResponse({'error': str(e)}, status=500)
+
     
 
 def format_response(response):

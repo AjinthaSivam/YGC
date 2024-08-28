@@ -13,6 +13,7 @@ const Main = () => {
     const { setChatId } = useChat();
     const [selectedComponent, setSelectedComponent] = React.useState('chatbot');
     const [selectedQuizDifficulty, setSelectedQuizDifficulty] = React.useState('');
+    const [selectedQuizCategory, setSelectedQuizCategory] = useState('')
     const [selectedPaper, setSelectedPaper] = React.useState(null);
     const [isChatOpen, setIsChatOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
@@ -27,8 +28,10 @@ const Main = () => {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    const handleStartQuiz = () => {
-        setSelectedComponent('quiz');
+    const handleStartQuiz = (difficulty, category) => {
+        setSelectedQuizDifficulty(difficulty)
+        setSelectedQuizCategory(category)
+        setSelectedComponent('quizes');
     };
 
     const handleSelectPaper = (paperUrl) => {
@@ -50,10 +53,10 @@ const Main = () => {
         switch (selectedComponent) {
             case 'chatbot':
                 return <Chat />;
-            case 'quizIntro':
-                return <QuizIntro difficulty={selectedQuizDifficulty} onStartQuiz={handleStartQuiz} />;
             case 'quiz':
-                return <MCQGenerator difficulty={selectedQuizDifficulty} setSelectedComponent={setSelectedComponent} />;
+                return <QuizIntro onStartQuiz={handleStartQuiz} difficulty={selectedQuizDifficulty} category={selectedQuizCategory} />;
+            case 'quizes':
+                return <MCQGenerator difficulty={selectedQuizDifficulty} category={selectedQuizCategory} setSelectedComponent={setSelectedComponent} />
             case 'pastpapers':
                 return <PastPaper onSelectPaper={handleSelectPaper} onSelectYear={handleSelectYear} selected_year={selectedyear} />;
             case 'paper':

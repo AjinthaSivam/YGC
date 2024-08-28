@@ -6,30 +6,20 @@ import { FaUserAstronaut } from "react-icons/fa";
 
 const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
     const [open, setOpen] = useState(false);
-    const [submenuOpen, setSubmenuOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
 
     const menus = [
         { name: "Chat Bot", key: 'chatbot', icon: MdOutlineChatBubbleOutline },
         { name: "Past Papers", key: 'pastpapers', icon: GrResources },
-        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz, submenu: [
-            { name: 'Easy', key: 'easy' },
-            { name: 'Medium', key: 'medium' },
-            { name: 'Hard', key: 'hard' },
-        ]},
+        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz},
         { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut },
     ];
 
     const handleMenuClick = (menu) => {
-        console.log(`Clicked menu: ${menu.key}`); // Debugging log
-        if (menu.key === 'quiz') {
-            setOpen(true);
-            setSubmenuOpen(!submenuOpen);
-        } else {
+        
             setSelectedComponent(menu.key);
             setSelectedMenu(menu.key);  // Update selected menu
-            setSubmenuOpen(false);
-        }
+        
     };
 
     const handleSubmenuClick = (submenu) => {
@@ -62,24 +52,6 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                                         {menu.name}
                                     </h2>
                                 </div>
-
-                                {
-                                    menu.submenu && submenuOpen && (
-                                        <div className={`pl-12 ${open ? 'block' : 'hidden'}`}>
-                                            {
-                                                menu.submenu.map((submenu, j) => (
-                                                    <div
-                                                        key={j}
-                                                        onClick={() => handleSubmenuClick(submenu)}
-                                                        className='flex items-center gap-3.5 font-medium p-2 hover:bg-[#b4f2ef] rounded-md cursor-pointer'
-                                                    >
-                                                        <h2 className='whitespace-pre'>{submenu.name}</h2>
-                                                    </div>
-                                                ))
-                                            }
-                                        </div>
-                                    )
-                                }
                             </div>
                         ))
                     }

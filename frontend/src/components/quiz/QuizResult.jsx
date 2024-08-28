@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TryAgainConformation from './TryAgainConformation'
 
 const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => {
+    const [showModal, setShowModal] = useState(false)
     const getFeedback = (score) => {
         if (score >= 0 && score <= 40) {
             return 'Keep practicing and you’ll get better. Try again! ✌️';
@@ -16,14 +18,24 @@ const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => 
     };
 
     const handleFinishReview = () => {
-        setSelectedComponent('chatbot');
+        setShowModal(true)
+    };
+
+    const handleTryAgain = () => {
+        setSelectedComponent('quiz'); // Navigate to QuizIntro
+        setShowModal(false);
+    };
+
+    const handleGoToChat = () => {
+        setSelectedComponent('chat'); // Navigate to Chat
+        setShowModal(false);
     };
 
     return (
         <div className='flex-col h-full p-4 w-full max-w-5xl mx-auto flex-grow mb-4'>
-            <div className='p-6 border-b'>
-                <p className='text-md font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
-                <p className='text-md font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>
+            <div className='p-6 rounded-lg shadow-md max-w-xl'>
+                <p className='text-lg font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
+                <p className='text-lg font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>
             </div>
             <div>
                 {questions.map((question, index) => (
@@ -47,6 +59,7 @@ const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => 
                     Finish Review
                 </button>
             </div>
+            <TryAgainConformation show={showModal} onConfirm={handleTryAgain} onCancel={handleGoToChat} />
         </div>
     );
 };
