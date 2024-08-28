@@ -122,24 +122,31 @@ const Welcome = () => {
       </section>
       <section id="success-stories" className="welcome-section">
         <h2>Success Stories</h2>
-        <div className="stories-section">
-          <div className="story">
+        <div className="stories-container">
+          <div className="story-card">
             <img src="src/components/landing page/images/success1.png" alt="Success Story 1" />
-            <h4>Aman Sri</h4>
-            <p>"This institute transformed my life by providing quality education and guidance."</p>
+            <div className="story-content">
+              <h3><strong>Aman Sri</strong></h3>
+              <p>"This institute transformed my life by providing quality education and guidance."</p>
+            </div>
           </div>
-          <div className="story">
+          <div className="story-card">
             <img src="src/components/landing page/images/success2.png" alt="Success Story 2" />
-            <h4>Ravi Sarma</h4>
-            <p>"Thanks to the dedicated teachers, I was able to achieve my academic goals."</p>
+            <div className="story-content">
+              <h3><strong>Ravi Sarma</strong></h3>
+              <p>"Thanks to the dedicated teachers, I was able to achieve my academic goals."</p>
+            </div>
           </div>
-          <div className="story">
+          <div className="story-card">
             <img src="src/components/landing page/images/success3.png" alt="Success Story 3" />
-            <h4>Nimali Kumar</h4>
-            <p>"The resources and support here helped me excel in my exams."</p>
+            <div className="story-content">
+              <h3><strong>Nimali Kumar</strong></h3>
+              <p>"The resources and support here helped me excel in my exams."</p>
+            </div>
           </div>
         </div>
       </section>
+
       <section id="contact" className="welcome-section">
         <h2><strong>Contact Us</strong></h2>
         <div className="contact-content">

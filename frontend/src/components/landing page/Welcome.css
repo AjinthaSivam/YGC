@@ -17,6 +17,8 @@
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  border: 1px solid #ccc;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -37,6 +39,7 @@
   margin-bottom: 20px;
   line-height: 1.6;
   color: #555;
+  
 }
 .dark-mode .welcome-section p{
   color: #ccc;
@@ -51,7 +54,6 @@
   .welcome-section h2 {
     font-size: 1.5rem;
   }
-
   .welcome-section p {
     font-size: 1rem; /* Adjusted font size for responsiveness */
   }
@@ -63,6 +65,8 @@
   background-color: transparent; /* or another color to fit your theme */
   color: #fff;
   position: relative;
+  
+  border: 1px solid #ccc;
 }
 
 .hero-section h1 {
@@ -73,10 +77,12 @@
 }
 
 .hero-section p {
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: #ddd;
   line-height: 2;
-  margin-bottom: 20px;
+  margin: 30px;
+  
+  margin-bottom: 10px;
 }
 
 /* CTA Buttons Styles */
@@ -88,35 +94,27 @@
 
 .cta-button {
   display: inline-block;
-  padding: 15px 30px;
+  padding: 15px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #037771; /* Adjust color for buttons */
+  background-color: #292929; /* Adjust color for buttons */
   border-radius: 8px;
-  text-decoration: none;
+  text-decoration: none;  
   transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #025e5b; /* Darker shade on hover */
+  color:#000;
+  
+  border: #999  0.1px solid;
+  background-color: transparent; /* Darker shade on hover */
 }
 
-.student-btn {
-  border: black 1px solid;
-  background-color: #03272c; /* Green color for Student button */
-}
-
-.student-btn:hover {
-  background-color: #334346; /* Darker green shade on hover */
-}
 
 .tutor-btn {
-  border: black 1px solid;
-  /* background-color: #2196f3; /* Blue color for Tutor button */
-}
-
-.tutor-btn:hover {
-  background-color: #1976d2; /* Darker blue shade on hover */
+  background-color: transparent; 
+  
+  border: #999  0.1px solid;
 }
 
 .about-us-content {
@@ -135,7 +133,7 @@
 
 .about-us-icon {
   font-size: 2.5rem;
-  color: #037771;
+  color: #02524d;
 }
 
 .downloads-preview, .stories-section {
@@ -163,7 +161,12 @@ body.dark-mode .book-card, body.dark-mode .story {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 10px;
+}
+.story img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 20px;
 }
 
 .see-more-button {
@@ -188,14 +191,14 @@ body.dark-mode .book-card, body.dark-mode .story {
 .contact-form {
   flex: 1;
   min-width: 280px;
-  margin-right: 40px;
-  margin-left: 40px;
 }
 
 .input-group {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  margin-left: 40px;
+  gap: 10px;
 }
 
 .input-group input,
@@ -219,16 +222,22 @@ body.dark-mode .book-card, body.dark-mode .story {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
 }
-
+.see-more-button:hover,
 .contact-btn:hover {
   background-color: #02524d;
 }
-
+#contact{
+  background-color: #fff;
+}
+.dark-mode #contact{
+  background-color: #292929;
+}
 .contact-image {
   flex: 1;
   min-width: 280px;
   margin-top: 20px;
   margin-right: 40px;
+  margin-left: 40px;
 }
 
 .contact-image img {
@@ -250,12 +259,21 @@ body.dark-mode .welcome-section {
   border: 1px solid #ccc;
 }
 
-body.dark-mode .cta-button {
+body.dark-mode .tutor-btn {
+  background-color: transparent;
+}
+
+body.dark-mode .see-more-button:hover,
+body.dark-mode .contact-btn:hover,
+body.dark-mode .cta-button:hover{
+  background-color: #037771;
+}
+body.dark-mode .student-btn {
   background-color: #02524d;
 }
 
 body.dark-mode .about-us-icon {
-  color: #4fc4be;
+  color: #ccc;
 }
 
 body.dark-mode .see-more-button,
@@ -291,14 +309,76 @@ body.dark-mode .contact-btn {
   .book-card, .story {
     width: 100%;
   }
-
   .contact-content {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .contact-form, .contact-image {
     margin-right: 0;
+    margin-left: 0;
     margin-top: 20px;
     width: 100%;
+  }
+  .input-group{
+    margin-left: 10px;
+  }
+}
+.dark-mode .contact-form{
+  background-color: #292929;
+  padding: 30px 20px 40px 10px;
+  border-radius: 20px;
+}
+
+.stories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.story-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dark-mode .story-card {
+  background-color: #292929;
+}
+
+.story-card img {
+  width: 100%;
+  padding: 20px;
+  height: auto;
+  border-bottom: 4px solid #4fc4be;
+}
+
+.story-content {
+  padding: 20px;
+  text-align: left;
+}
+
+.story-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.story-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .stories-container {
+    flex-direction: column;
+    align-items: center;
   }
 }

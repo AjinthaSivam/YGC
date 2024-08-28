@@ -38,6 +38,7 @@
   align-items: center;
   justify-content: center;
   flex: 2;
+  background-color: transparent;
 }
 .navbar-brand h1,
 .navbar-menu a {
@@ -51,7 +52,6 @@
 
 .navbar-menu a:hover,
 .navbar-menu a.active {
-  background-color: #107067;
   color: #fff;
 }
 
@@ -67,7 +67,7 @@
 
 .mobile-menu-toggle:hover,
 .theme-toggle-button:hover {
-  color: #ccc;
+  color: #f8f9fa;
 }
 
 .mobile-menu-toggle {
@@ -82,7 +82,6 @@
 
 /* Dark theme styles */
 body.dark-mode .navbar {
-  background-color: transparent;
   border-bottom: 1px solid #333;
 }
 body.dark-mode .mobile-menu-toggle,
@@ -92,8 +91,7 @@ body.dark-mode .navbar-menu a, body.dark-mode .navbar-brand h1 {
 
 body.dark-mode .navbar-menu a:hover,
 body.dark-mode .navbar-menu a.active {
-  background-color: #4fc4be;
-  color: #222;
+  color: #4fc4be;
 }
 
 body.dark-mode .theme-toggle-button {
@@ -119,18 +117,21 @@ body.dark-mode .theme-toggle-button:hover {
     position: absolute;
     top: 60px;
     left: 0;
-    background-color: #ffffff;
-    border-top: 1px solid #ccc;
+    background-color: #fff;
   }
-
+  
+  .navbar-menu a:hover,
+  .navbar-menu a.active {
+    color: #4fc4be;
+  }
   .navbar-menu.open {
     display: flex;
   }
 
   .navbar-menu a {
-    padding: 15px 20px;
+    padding: 10px 20px;
     margin: 0;
-    border-bottom: 1px solid #ccc;
+    color: #000;
   }
   .mobile-menu-toggle {
     display: block;
@@ -138,11 +139,7 @@ body.dark-mode .theme-toggle-button:hover {
   
   @media (max-width: 768px) {
     body.dark-mode .navbar-menu {
-      background-color: #222;
-    }
-    
-    body.dark-mode .navbar-menu a {
-      border-bottom: 1px solid #333;
+      background-color: #111;
     }
   }
 }

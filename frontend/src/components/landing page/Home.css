@@ -75,7 +75,7 @@ body.dark-mode .area {
     align-items: center;
     padding: 20px;
     margin: 0 auto;
-    max-width: 80%;
+    max-width: 100%;
     text-align: center;
     background-color: transparent;
     border-radius: 12px;
@@ -120,7 +120,7 @@ body.dark-mode .home {
 
 @media (max-width: 768px) {
     .home {
-        max-width: 95%;
+        max-width: 100%;
         padding: 20px;
     }
 }
