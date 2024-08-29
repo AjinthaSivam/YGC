@@ -11,7 +11,7 @@
   margin: 40px; /* Center the container with auto margins */
   border-radius: 12px; /* Slightly rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-  max-width: 1400px; /* Limit maximum width */
+  max-width: auto; /* Limit maximum width */
   text-align: center; /* Center-align text */
 }
 

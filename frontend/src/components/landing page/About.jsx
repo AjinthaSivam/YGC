@@ -1,9 +1,23 @@
 // src/About.js
 import React from 'react';
 import './About.css';
+import { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 
 const About = () => {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevDarkMode => !prevDarkMode);
+  };
   return (
+    <>
+    <Navbar toggleDarkMode={toggleDarkMode} />
     <section class="area">
     <ul class="circles">
         <li></li>
@@ -91,6 +105,7 @@ const About = () => {
       </div>
     </div>
     </section>
+    </>
   );
 };
 

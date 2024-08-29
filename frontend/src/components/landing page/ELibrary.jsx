@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ELibrary.css';
+import Navbar from './Navbar';
 
 const books = [
   { id: 1, title: 'General English', category: 'English', link: '#', image: 'src/components/landing page/images/English.png', author: 'John Doe', rating: 3.5 },
@@ -12,6 +13,17 @@ const books = [
 ];
 
 const Elibrary = () => {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevDarkMode => !prevDarkMode);
+  };
+
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedAuthor, setSelectedAuthor] = useState('All');
   const [minRating, setMinRating] = useState(0);
@@ -26,6 +38,8 @@ const Elibrary = () => {
   const authors = [...new Set(books.map(book => book.author))];
 
   return (
+    <>
+    <Navbar toggleDarkMode={toggleDarkMode} />
     <section className="area">
       <ul className="circles">
         <li></li>
@@ -84,6 +98,7 @@ const Elibrary = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

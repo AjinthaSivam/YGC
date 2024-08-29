@@ -2,12 +2,24 @@ import React from 'react';
 import './Services.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useState, useEffect } from 'react';
 
 const Services = () => {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevDarkMode => !prevDarkMode);
+  };
   return (
   <>
-  <section class="area">
-      <ul class="circles">
+  <Navbar toggleDarkMode={toggleDarkMode} />
+  <section className="area">
+      <ul className="circles">
         <li></li>
         <li></li>
         <li></li>
@@ -19,7 +31,7 @@ const Services = () => {
         <li></li>
         <li></li>
       </ul>
-      <div class="context">
+      <div className="context">
         <div className="service">
           <h2>Our Services</h2>
           <p>Explore our educational services designed to enhance your learning experience.</p>

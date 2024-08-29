@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Downloads.css';
+import Navbar from './Navbar';
 
 const books = [
   { id: 1, title: 'G.C.E O/L 2023 ', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png'},
@@ -12,6 +13,16 @@ const books = [
 ];
 
 const Downloads = () => {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
+  
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevDarkMode => !prevDarkMode);
+  };
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const filteredBooks = selectedCategory === 'All'
@@ -19,8 +30,10 @@ const Downloads = () => {
     : books.filter(book => book.category === selectedCategory);
 
   return (
-    <section class="area">
-      <ul class="circles">
+    <>
+    <Navbar toggleDarkMode={toggleDarkMode} />
+    <section className="area">
+      <ul className="circles">
           <li></li>
           <li></li>
           <li></li>
@@ -32,7 +45,7 @@ const Downloads = () => {
           <li></li>
           <li></li>
       </ul>
-    <div class="context">
+    <div className="context">
       <div className="downloads">
         <h2>Downloads</h2>
         <p>Links to downloadable content.</p>
@@ -58,6 +71,7 @@ const Downloads = () => {
       </div>
     </div>
   </section>
+  </>
   );
 };
 

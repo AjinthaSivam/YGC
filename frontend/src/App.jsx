@@ -13,6 +13,7 @@ import Services from './components/landing page/Services';
 import Downloads from './components/landing page/Downloads';
 import About from './components/landing page/About';
 import ELibrary from './components/landing page/ELibrary';
+import Navbar from './components/landing page/Navbar';
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/downloads" element={<Downloads />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/eLibrary" element={<ELibrary />} />
+                <Route path="/navbar" element={<Navbar />} />
             </Routes>
         
     );
