@@ -1,0 +1,384 @@
+/* Import Roboto Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* General Styles */
+.welcome-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+.welcome-section {
+  margin-bottom: 60px;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.welcome-section h1,
+.welcome-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #037771;
+}
+.dark-mode .welcome-section h1,
+.dark-mode .welcome-section h2{
+  color: #4fc4be;
+}
+
+.welcome-section p {
+  font-size: 1.1rem; /* Adjusted font size for better readability */
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #555;
+  
+}
+.dark-mode .welcome-section p{
+  color: #ccc;
+}
+@media (max-width: 768px) {
+  .welcome-section {
+    margin-bottom: 40px;
+    padding: 20px 15px;
+  }
+  
+  .welcome-section h1,
+  .welcome-section h2 {
+    font-size: 1.5rem;
+  }
+  .welcome-section p {
+    font-size: 1rem; /* Adjusted font size for responsiveness */
+  }
+}
+
+.hero-section {
+  text-align: center;
+  padding: 20px;
+  background-color: transparent; /* or another color to fit your theme */
+  color: #fff;
+  position: relative;
+  
+  border: 1px solid #ccc;
+}
+
+.hero-section h1 {
+  font-size: 2.5em;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+}
+
+.hero-section p {
+  font-size: 1.3em;
+  color: #ddd;
+  line-height: 2;
+  margin: 30px;
+  
+  margin-bottom: 10px;
+}
+
+/* CTA Buttons Styles */
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #292929; /* Adjust color for buttons */
+  border-radius: 8px;
+  text-decoration: none;  
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  color:#000;
+  
+  border: #999  0.1px solid;
+  background-color: transparent; /* Darker shade on hover */
+}
+
+
+.tutor-btn {
+  background-color: transparent; 
+  
+  border: #999  0.1px solid;
+}
+
+.about-us-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.about-us-item {
+  text-align: center;
+  margin: 20px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.about-us-icon {
+  font-size: 2.5rem;
+  color: #02524d;
+}
+
+.downloads-preview, .stories-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.book-card, .story {
+  width: 30%;
+  max-width: 300px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: bold;
+}
+body.dark-mode .book-card, body.dark-mode .story {
+  color:#ccc;
+  background-color: #292929;
+}
+.book-image, .story img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.story img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.see-more-button {
+  background-color: #037771;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.contact-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 280px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-left: 40px;
+  gap: 10px;
+}
+
+.input-group input,
+.input-group textarea {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  margin-left: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.contact-btn {
+  background-color: #037771;
+  color: white;
+  padding: 12px 50px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+.see-more-button:hover,
+.contact-btn:hover {
+  background-color: #02524d;
+}
+#contact{
+  background-color: #fff;
+}
+.dark-mode #contact{
+  background-color: #292929;
+}
+.contact-image {
+  flex: 1;
+  min-width: 280px;
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.contact-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #292929;
+  color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+}
+
+body.dark-mode .welcome-section {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #ccc;
+}
+
+body.dark-mode .tutor-btn {
+  background-color: transparent;
+}
+
+body.dark-mode .see-more-button:hover,
+body.dark-mode .contact-btn:hover,
+body.dark-mode .cta-button:hover{
+  background-color: #037771;
+}
+body.dark-mode .student-btn {
+  background-color: #02524d;
+}
+
+body.dark-mode .about-us-icon {
+  color: #ccc;
+}
+
+body.dark-mode .see-more-button,
+body.dark-mode .contact-btn {
+  background-color: #02524d;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 20px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-button {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .about-us-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .downloads-preview, .stories-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-card, .story {
+    width: 100%;
+  }
+  .contact-content {
+    flex-direction: row;
+  }
+
+  .contact-form, .contact-image {
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .input-group{
+    margin-left: 10px;
+  }
+}
+.dark-mode .contact-form{
+  background-color: #292929;
+  padding: 30px 20px 40px 10px;
+  border-radius: 20px;
+}
+
+.stories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.story-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dark-mode .story-card {
+  background-color: #292929;
+}
+
+.story-card img {
+  width: 100%;
+  padding: 20px;
+  height: auto;
+  border-bottom: 4px solid #4fc4be;
+}
+
+.story-content {
+  padding: 20px;
+  text-align: left;
+}
+
+.story-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.story-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .stories-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}

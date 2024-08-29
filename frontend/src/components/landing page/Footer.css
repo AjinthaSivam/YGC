@@ -1,0 +1,60 @@
+/* src/Footer.css */
+
+.footer {
+  padding: 15px 20px; /* Padding around the footer */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in total width */
+  text-align: center;
+  position: fixed; /* Fixed position */
+  bottom: 0;
+  left: 0;
+  background-color: #000; /* Black background color */
+  color: #f8f9fa; /* Light text color */
+  border-top: 1px solid #444; /* Matching border style */
+}
+
+.footer-content {
+  max-width: 1400px; /* Maximum width for better alignment */
+  margin: 0 auto; /* Center alignment */
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9em; /* Slightly smaller text */
+}
+
+.footer-links {
+  margin-top: 10px; /* Space above the links */
+}
+
+.footer-links a {
+  color: #f8f9fa; /* Light color for links */
+  text-decoration: none; /* Remove underline */
+  margin: 0 10px; /* Space between links */
+  font-weight: bold; /* Bold text */
+}
+
+.footer-links a:hover {
+  text-decoration: underline; /* Underline on hover for better visibility */
+}
+
+
+/* Light theme styles */
+body {
+  background-color: #f8f9fa; /* Light theme body background */
+  color: #343a40; /* Light theme text color */
+}
+
+body .footer {
+  background-color: #000; /* Black background color */
+}
+
+/* Dark theme styles */
+body.dark-mode {
+  background-color: #343a40; /* Dark theme body background */
+  color: #f8f9fa; /* Light theme text color */
+}
+
+body.dark-mode .footer {
+  background-color: #000; /* Black background color */
+}
