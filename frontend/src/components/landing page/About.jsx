@@ -3,6 +3,7 @@ import React from 'react';
 import './About.css';
 import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const About = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -105,6 +106,7 @@ const About = () => {
       </div>
     </div>
     </section>
+    <Footer/>
     </>
   );
 };

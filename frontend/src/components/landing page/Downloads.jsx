@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Downloads.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const books = [
   { id: 1, title: 'G.C.E O/L 2023 ', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png'},
@@ -68,6 +69,7 @@ const Downloads = () => {
             </div>
           ))}
         </div>
+        <Footer/>
       </div>
     </div>
   </section>

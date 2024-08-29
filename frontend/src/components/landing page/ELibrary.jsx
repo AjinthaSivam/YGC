@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ELibrary.css';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const books = [
   { id: 1, title: 'General English', category: 'English', link: '#', image: 'src/components/landing page/images/English.png', author: 'John Doe', rating: 3.5 },
@@ -95,6 +96,7 @@ const Elibrary = () => {
               </div>
             ))}
           </div>
+          <Footer/>
         </div>
       </div>
     </section>
