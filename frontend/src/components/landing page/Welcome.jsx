@@ -48,23 +48,23 @@ const Welcome = () => {
         <div className="about-us-content">
           <div className="about-us-item">
             <i className="fas fa-users about-us-icon"></i>
-            <h2><strong>1,200+</strong></h2>
+            <h1><strong>1,200+</strong></h1>
             <p>Number of Students</p>
           </div>
           <div className="about-us-item">
             <i className="fas fa-chalkboard-teacher about-us-icon"></i>
-            <h2><strong>50+</strong></h2>
+            <h1><strong>50+</strong></h1>
             <p>Number of Tutors</p>
           </div>
           <div className="about-us-item">
             <i className="fas fa-book about-us-icon"></i>
-            <h2><strong>20+</strong></h2>
+            <h1><strong>20+</strong></h1>
             <p>Available Courses</p>
           </div>
           <div className="about-us-item">
             <i className="fas fa-archive about-us-icon"></i>
-            <h2><strong>150+</strong></h2>
-            <p>Materials Available</p>
+            <h1><strong>150+</strong></h1>
+            <p>Available Materials</p>
           </div>
         </div>
       </section>

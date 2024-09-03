@@ -13,17 +13,17 @@ body {
 }
 
 .area {
-    background: #107067;
-    background: -webkit-linear-gradient(to left, #2b565f, #1dafdb);
+    background: #f8f9fa;
+    background: -webkit-linear-gradient(to right, #c3eaff);
     width: 100%;
     height: 80%;
-    min-height: 400vh;
-    transition: background 0.5s ease;
+    min-height: 200vh;
+    transition: background 1s ease;
 }
 
 body.dark-mode .area {
     background: #292929;
-    background: -webkit-linear-gradient(to left, #292929, #1dafdb);
+    background: -webkit-linear-gradient(to left, #f0efef50, #29292950);
 }
 
 .circles {
@@ -40,9 +40,13 @@ body.dark-mode .area {
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(233, 227, 227, 0.2);
+    background: #d0faeee1; /* Light mode circle color */
     animation: animate 25s linear infinite;
-    bottom: -150px;
+    bottom: -250px;
+}
+
+body.dark-mode .circles li {
+    background: #fcfcfc59; /* Dark mode circle color */
 }
 
 .circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
@@ -79,7 +83,6 @@ body.dark-mode .area {
     text-align: center;
     background-color: transparent;
     border-radius: 12px;
-    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
     transition: background-color 0.5s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(20px);

@@ -14,7 +14,7 @@
 }
 
 .footer-content {
-  max-width: 1400px; /* Maximum width for better alignment */
+  max-width: auto; /* Maximum width for better alignment */
   margin: 0 auto; /* Center alignment */
 }
 
@@ -39,22 +39,6 @@
 }
 
 
-/* Light theme styles */
-body {
-  background-color: #f8f9fa; /* Light theme body background */
-  color: #343a40; /* Light theme text color */
-}
-
 body .footer {
-  background-color: #000; /* Black background color */
-}
-
-/* Dark theme styles */
-body.dark-mode {
-  background-color: #343a40; /* Dark theme body background */
-  color: #f8f9fa; /* Light theme text color */
-}
-
-body.dark-mode .footer {
   background-color: #000; /* Black background color */
 }

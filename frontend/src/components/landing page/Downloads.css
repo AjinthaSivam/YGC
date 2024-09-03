@@ -10,12 +10,19 @@
 }
 
 /* Title styles without background */
-.downloads h2{
+.dark-mode .downloads h2{
   margin-top: 0px;
   font-size: 3.5em; /* Larger font size for better visibility */
-  color: #ffffff; /* Bright white color to contrast with the background */
+  color: #3aa99e; /* Bright white color to contrast with the background */
   margin-bottom: 20px; /* Space below the heading */
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+}
+.downloads h2{
+  margin-top: 60px;
+  font-size: 3.5em; /* Larger font size for better visibility */
+  color: #107067; /* Bright white color to contrast with the background */
+  margin-bottom: 20px; /* Space below the heading */
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7); /* Strong shadow for visibility */
 }
 
 .downloads p {
@@ -147,7 +154,7 @@ body.dark-mode .downloads-container p {
 }
 
 body.dark-mode .filters button {
-  background-color: #4fc4be;
+  background-color: #107067;
 }
 
 body.dark-mode .filters button:hover {
@@ -167,7 +174,7 @@ body.dark-mode .book-card p {
 }
 
 body.dark-mode .download-button {
-  background-color: #4fc4be;
+  background-color: #107067;
 }
 
 body.dark-mode .download-button:hover {

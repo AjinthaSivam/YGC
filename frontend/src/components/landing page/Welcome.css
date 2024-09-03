@@ -18,22 +18,32 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   transition: background-color 0.3s ease-in-out;
 }
 
-.welcome-section h1,
+.welcome-section h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #02524d;
+}
+
 .welcome-section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
   font-weight: 700;
-  color: #037771;
+  color: #292929;
+  text-shadow: 2px 2px 8px rgba(250, 245, 245, 0.76); /* Strong shadow for visibility */
 }
-.dark-mode .welcome-section h1,
-.dark-mode .welcome-section h2{
+.dark-mode .welcome-section h1{
   color: #4fc4be;
 }
+.dark-mode .welcome-section h2{
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
 
+}
 .welcome-section p {
   font-size: 1.1rem; /* Adjusted font size for better readability */
   margin-bottom: 20px;
@@ -63,7 +73,7 @@
   text-align: center;
   padding: 20px;
   background-color: transparent; /* or another color to fit your theme */
-  color: #fff;
+  color: #333;
   position: relative;
   
   border: 1px solid #ccc;
@@ -71,14 +81,17 @@
 
 .hero-section h1 {
   font-size: 2.5em;
-  color: #fff;
+  color: #292929;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+  text-shadow: 2px 2px 8px rgba(241, 240, 240, 0.7); /* Strong shadow for visibility */
+}
+.dark-mode .hero-section h1 {
+  text-shadow: 2px 2px 8px rgba(5, 5, 5, 0.863); /* Strong shadow for visibility */
 }
 
 .hero-section p {
   font-size: 1.3em;
-  color: #ddd;
+  color: #333;
   line-height: 2;
   margin: 30px;
   
@@ -103,32 +116,70 @@
   transition: background-color 0.3s ease;
 }
 
-.cta-button:hover {
-  color:#000;
-  
+.student-btn:hover {
   border: #999  0.1px solid;
-  background-color: transparent; /* Darker shade on hover */
+  background-color: #02524d; /* Darker shade on hover */
 }
 
 
 .tutor-btn {
   background-color: transparent; 
-  
+  color:#333;
   border: #999  0.1px solid;
 }
 
+.tutor-btn:hover {
+  border: #999  0.1px solid;
+  color: #ccc;
+  background-color: #02524d; /* Darker shade on hover */
+}
+
 .about-us-content {
-  display: flex;
-  flex-wrap: wrap;
+  display:flex;
+  flex-wrap:wrap;
   justify-content: space-around;
   margin-top: 30px;
+}
+#about-us{
+  background-color: #4e8682;
+}
+#downloads{
+  background-color: #70A9A4;
+  
+}
+#elibrary{
+  background-color: #9FC6C2;
+}
+#success-stories{
+  background-color: #CFE2E1;
+}
+.dark-mode #about-us{
+  background-color: #00a8a1;
+}
+.dark-mode #downloads{
+  background-color: #00896f;
+}
+.dark-mode #elibrary{
+  background-color: #1A6B74;
+}
+.dark-mode #success-stories{
+  background-color: #4b4453;
 }
 
 .about-us-item {
   text-align: center;
   margin: 20px;
+  padding-top: 20px;
   flex: 1;
   min-width: 150px;
+  background-color: white;
+  border-radius: 12px;
+}
+.about-us-item:hover,
+.book-card:hover,
+.about-us:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .about-us-icon {
@@ -142,8 +193,7 @@
   justify-content: center;
   gap: 20px;
 }
-
-.book-card, .story {
+.about-us-item, .book-card, .story {
   width: 30%;
   max-width: 300px;
   margin-bottom: 20px;
@@ -153,9 +203,10 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: bold;
 }
-body.dark-mode .book-card, body.dark-mode .story {
+body.dark-mode .book-card, body.dark-mode .story,
+.dark-mode .about-us-item, .dark-mode .story-card {
   color:#ccc;
-  background-color: #292929;
+  background-color: #333;
 }
 .book-image, .story img {
   width: 100%;
@@ -229,7 +280,9 @@ body.dark-mode .book-card, body.dark-mode .story {
 #contact{
   background-color: #fff;
 }
-.dark-mode #contact{
+.dark-mode #contact,
+.dark-mode .input-group input,
+.dark-mode .input-group textarea {
   background-color: #292929;
 }
 .contact-image {
@@ -250,15 +303,16 @@ body.dark-mode .book-card, body.dark-mode .story {
 body.dark-mode {
   background-color: #292929;
   color: #f9f9f9;
-  font-family: 'Roboto', sans-serif;
 }
 
 body.dark-mode .welcome-section {
   background-color: transparent;
   color: #ccc;
+  /*border: 1px solid #ccc;*/
+}
+ #contact{
   border: 1px solid #ccc;
 }
-
 body.dark-mode .tutor-btn {
   background-color: transparent;
 }
@@ -270,6 +324,9 @@ body.dark-mode .cta-button:hover{
 }
 body.dark-mode .student-btn {
   background-color: #02524d;
+}
+body.dark-mode .tutor-btn {
+  color: #f3f5f5;
 }
 
 body.dark-mode .about-us-icon {
@@ -343,10 +400,6 @@ body.dark-mode .contact-btn {
   overflow: hidden;
   width: 250px;
   transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.dark-mode .story-card {
-  background-color: #292929;
 }
 
 .story-card img {

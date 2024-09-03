@@ -96,10 +96,10 @@ const Elibrary = () => {
               </div>
             ))}
           </div>
-          <Footer/>
         </div>
       </div>
     </section>
+    <Footer/>
     </>
   );
 };

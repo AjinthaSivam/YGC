@@ -69,10 +69,10 @@ const Downloads = () => {
             </div>
           ))}
         </div>
-        <Footer/>
       </div>
     </div>
-  </section>
+  </section>  
+  <Footer/>
   </>
   );
 };

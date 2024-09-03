@@ -1,7 +1,8 @@
 /* Button styles */
 .login-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 25px;
+  max-width: auto;
   margin-top: 10px; /* Reduced margin-top for closer spacing */
   background-color: #222; /* Changed to a blue color */
   color: #fff;
@@ -12,6 +13,9 @@
   transition: background-color 0.3s ease, transform 0.2s ease; /* Added transition for scaling effect */
   border: black 1px solid;
 }
+.dark-mode .login-btn{
+  background-color: #107067;
+}
 
 .login-btn:hover {
   background-color: #666; /* Darker blue on hover */
@@ -20,33 +24,42 @@
 
 /* General container styles */
 .service {
-  padding: 20px; /* Added padding for a spacious look */
-  margin: 15px auto; /* Reduced margin for closer spacing */
+  padding: 0; /* Added padding for a spacious look */
+  margin: 20px auto; /* Reduced margin for closer spacing */
   border-radius: 12px; /* Slightly rounded corners */
   text-align: center; /* Center-align text */
 }
 
+.dark-mode .service h2{
+  margin-top: 0px;
+  font-size: 3.5em; /* Larger font size for better visibility */
+  color: #3aa99e; /* Bright white color to contrast with the background */
+  margin-bottom: 20px; /* Space below the heading */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+}
 /* Title styles */
 .service h2 {
   margin-top: 0;
   font-size: 3.5em; /* Larger font size for better visibility */
-  color: #ffffff; /* Bright white color to contrast with the background */
+  color: #107067; /* Bright white color to contrast with the background */
   margin-bottom: 20px; /* Space below the heading */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7); /* Strong shadow for visibility */
 }
 
 /* Paragraph styles */
 .service p {
-  font-size: 1.5em; /* Slightly larger font size for readability */
-  color: #f8f9fa; /* Slightly muted text color */
+  font-size: 1.2em; /* Slightly larger font size for readability */
+  color: #444; /* Slightly muted text color */
   line-height: 1.6; /* Improved readability */
 }
 
+
+
 /* Services container */
 .services-container {
-  padding: 20px;
-  margin: 15px auto; /* Reduced margin for closer spacing */
-  background-color: #ffffff;
+  padding: 0px;
+  margin: 20px;
+  background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: auto;
@@ -57,20 +70,21 @@
 /* Title styles in container */
 .services-container h2 {
   margin-top: 40px;
-  font-size: 1em;
+  font-size: 1.5em;
   color: #107067;
   margin-bottom: 20px;
 }
 
 /* Paragraph styles in container */
 .services-container p {
-  font-size: 2.5em;
-  color: #666;
+  font-size: 1.2em;
+  color: #333;
   line-height: 1.6;
 }
 
 /* Services content container */
 .services-content {
+  margin-top: -40px;
   display: flex;
   flex-direction: column;
   gap: 30px; /* Reduced gap between service items */
@@ -78,52 +92,57 @@
 
 /* Individual service item */
 .service-item {
-  display: grid;
+  display:grid;
   margin: 40px; /* Reduced margin for closer spacing */
-  grid-template-columns: 1fr 1fr; /* Two equal columns for image and content */
+  grid-template-columns: 1fr 2fr; /* Two equal columns for image and content */
   align-items: center;
   background-color: transparent;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid #999;
+  padding: 20px;
 }
 
 /* Image container */
 .service-image-container {
-  text-align: center; /* Center the image horizontally */
+  align-items: center;
 }
 
 /* Image styling */
 .service-image {
   width: 100%; /* Make the image responsive */
   max-width: 600px; /* Limit the maximum size */
-  height: auto;
+  max-height: 500px;
   border-radius: 8px;
+  align-items: center;
 }
 
 /* Text container inside service item */
 .service-text {
-  padding: 40px; /* Adjusted padding for better spacing */
+  padding: 20px; /* Adjusted padding for better spacing */
   text-align: justify;
-  font-size: 1.5em; /* Adjusted font size */
-  color: #eee;
+  color: #333;
 }
 
 /* Description styles */
 .service-description {
   font-size: 1em; /* Consistent with other text sizes */
-  line-height: 1.8;
-  color: #ccc;
+  line-height: 2.5;
+  color: #555;
+  padding-top: 20px;
 }
-
+.dark-mode .service p,
+.dark-mode .service-text{
+  color:#eee;
+}
 /* Dark theme for service items */
 body.dark-mode .service-item {
-  background-color: #222;
+  background-color: transparent;
 }
 
 /* Dark mode styles */
 body.dark-mode .services-container {
-  background-color: #222;
+  background-color: transparent;
   color: #f8f9fa;
 }
 
