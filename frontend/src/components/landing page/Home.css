@@ -3,6 +3,9 @@
 body {
     font-family: 'Roboto', sans-serif;
     transition: background-color 0.5s ease, color 0.5s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .context {
@@ -14,16 +17,17 @@ body {
 
 .area {
     background: #f8f9fa;
-    background: -webkit-linear-gradient(to right, #c3eaff);
+    background: -webkit-linear-gradient(to right, #c3eaff, #f8f9fa);
+    background: linear-gradient(to bottom, #c3eaff, #f8f9fa);
     width: 100%;
-    height: 80%;
-    min-height: 200vh;
+    min-height: 100vh; /* Ensure it covers the full viewport height */
     transition: background 1s ease;
 }
 
 body.dark-mode .area {
     background: #292929;
-    background: -webkit-linear-gradient(to left, #f0efef50, #29292950);
+    background: -webkit-linear-gradient(to left, #3e3e3e, #292929);
+    background: linear-gradient(to left, #107067, #292929);
 }
 
 .circles {
@@ -43,6 +47,7 @@ body.dark-mode .area {
     background: #d0faeee1; /* Light mode circle color */
     animation: animate 25s linear infinite;
     bottom: -250px;
+    border-radius: 50%; /* Ensure circles are round */
 }
 
 body.dark-mode .circles li {
@@ -114,6 +119,7 @@ body.dark-mode .home {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Responsive styles */
 @media (max-width: 1024px) {
     .home {
         max-width: 90%;
@@ -126,6 +132,17 @@ body.dark-mode .home {
         max-width: 100%;
         padding: 20px;
     }
+
+    .circles li {
+        width: 15px;
+        height: 15px;
+    }
+
+    .circles li:nth-child(1) { width: 60px; height: 60px; }
+    .circles li:nth-child(4) { width: 45px; height: 45px; }
+    .circles li:nth-child(6) { width: 80px; height: 80px; }
+    .circles li:nth-child(7) { width: 110px; height: 110px; }
+    .circles li:nth-child(10) { width: 100px; height: 100px; }
 }
 
 @media (max-width: 480px) {
@@ -133,4 +150,15 @@ body.dark-mode .home {
         padding: 15px;
         font-size: 14px;
     }
+
+    .circles li {
+        width: 10px;
+        height: 10px;
+    }
+
+    .circles li:nth-child(1) { width: 40px; height: 40px; }
+    .circles li:nth-child(4) { width: 30px; height: 30px; }
+    .circles li:nth-child(6) { width: 50px; height: 50px; }
+    .circles li:nth-child(7) { width: 80px; height: 80px; }
+    .circles li:nth-child(10) { width: 70px; height: 70px; }
 }
