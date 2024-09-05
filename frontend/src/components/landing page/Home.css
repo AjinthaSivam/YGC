@@ -18,16 +18,17 @@ body {
 .area {
     background: #f8f9fa;
     background: -webkit-linear-gradient(to right, #c3eaff, #f8f9fa);
-    background: linear-gradient(to bottom, #c3eaff, #f8f9fa);
+    background: linear-gradient(to bottom, #f8f9fa,#f8f9fa, #c3eaff, #fff);
     width: 100%;
-    min-height: 100vh; /* Ensure it covers the full viewport height */
+    height: 100%;
+    min-height: 250vh; /* Ensure it covers the full viewport height */
     transition: background 1s ease;
 }
 
 body.dark-mode .area {
     background: #292929;
     background: -webkit-linear-gradient(to left, #3e3e3e, #292929);
-    background: linear-gradient(to left, #107067, #292929);
+    background: linear-gradient(to bottom, #292929, #05413b,#292929);
 }
 
 .circles {

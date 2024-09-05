@@ -42,3 +42,6 @@
 body .footer {
   background-color: #000; /* Black background color */
 }
+.heart {
+  color: red;
+}

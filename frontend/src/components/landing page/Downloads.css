@@ -27,7 +27,7 @@
 
 .downloads p {
   font-size: 1.2em; /* Slightly larger font size for readability */
-  color: #f8f9fa; /* Slightly muted text color */
+  color: #333; /* Slightly muted text color */
   line-height: 1.6; /* Improved readability */
 }
 .downloads-container {

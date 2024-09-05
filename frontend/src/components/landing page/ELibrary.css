@@ -23,7 +23,7 @@
 
 .library p {
   font-size: 1.2em;
-  color: #f8f9fa;
+  color: #333;
   line-height: 1.6;
 }
 
@@ -148,7 +148,7 @@
 
 /* Dark theme styles */
 body.dark-mode .library-container {
-  background-color: #222;
+  background-color: transparent;
   color: #f8f9fa;
 }
 
