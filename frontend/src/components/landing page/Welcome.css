@@ -114,10 +114,12 @@
   border-radius: 8px;
   text-decoration: none;  
   transition: background-color 0.3s ease;
+  
+  border: #4fc4be80 1px solid;
 }
 
+
 .student-btn:hover {
-  border: #999  0.1px solid;
   background-color: #02524d; /* Darker shade on hover */
 }
 
@@ -125,11 +127,9 @@
 .tutor-btn {
   background-color: transparent; 
   color:#333;
-  border: #999  0.1px solid;
 }
 
 .tutor-btn:hover {
-  border: #999  0.1px solid;
   color: #ccc;
   background-color: #02524d; /* Darker shade on hover */
 }
@@ -230,6 +230,7 @@ body.dark-mode .book-card, body.dark-mode .story,
   margin-top: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+  border: #4fc4be 1px solid;
 }
 
 .contact-content {

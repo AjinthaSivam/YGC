@@ -141,7 +141,7 @@
 
 /* Dark theme styles */
 body.dark-mode .downloads-container {
-  background-color: #222;
+  background-color: transparent;
   color: #f8f9fa;
 }
 
