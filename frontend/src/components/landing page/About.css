@@ -18,7 +18,9 @@
 .about h2, .about-container h2 {
   margin-top: 60px;
   font-size: 3.5em;
+  color: #107067;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
 }
 
 .dark-mode .about h2, .dark-mode .about-container h2 {
@@ -75,7 +77,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin: 20px auto;
-}
+  }
 
 .dark-mode .team-section {
   color: #f8f9fa;
@@ -88,9 +90,12 @@
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 250px;
+  max-width: 350px;
   margin: 10px;
   border: 1px solid #777;
+  
+  display: flex;
+  flex-direction: row;
 }
 
 .dark-mode .team-member {

@@ -177,9 +177,17 @@
 }
 .about-us-item:hover,
 .book-card:hover,
-.about-us:hover {
+.about-us:hover,
+.story-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.dark-mode .about-us-item:hover,
+.dark-mode .book-card:hover,
+.dark-mode .about-us:hover,
+.dark-mode .story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(255, 253, 253, 0.932);
 }
 
 .about-us-icon {
@@ -321,7 +329,7 @@ body.dark-mode .tutor-btn {
 body.dark-mode .see-more-button:hover,
 body.dark-mode .contact-btn:hover,
 body.dark-mode .cta-button:hover{
-  background-color: #037771;
+  box-shadow: 0.05px 0.25px 12px 2px rgb(255, 255, 255);
 }
 body.dark-mode .student-btn {
   background-color: #02524d;
@@ -425,10 +433,6 @@ body.dark-mode .contact-btn {
   line-height: 1.5;
 }
 
-.story-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
 
 @media (max-width: 768px) {
   .stories-container {

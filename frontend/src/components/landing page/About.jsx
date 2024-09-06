@@ -34,7 +34,7 @@ const About = () => {
         <div className="context">
           <div className="about">
             <h2>About Us</h2>
-            <p>Information about the website or company.</p>
+            <p>Information about the website or company</p>
           </div>
           <div className="about-container">
             <section className="about-card">

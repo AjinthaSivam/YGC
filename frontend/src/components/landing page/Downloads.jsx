@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 const books = [
-  { id: 1, title: 'G.C.E O/L 2023 ', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png'},
+  { id: 1, title: 'G.C.E O/L 2023', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png'},
   { id: 2, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: 'src/components/landing page/images/Mathsp.png' },
   { id: 3, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: 'src/components/landing page/images/Sciencep.png' },
   { id: 4, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: 'src/components/landing page/images/ICTp.png' },
@@ -24,6 +24,7 @@ const Downloads = () => {
   const toggleDarkMode = () => {
     setDarkMode(prevDarkMode => !prevDarkMode);
   };
+
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const filteredBooks = selectedCategory === 'All'
@@ -32,48 +33,39 @@ const Downloads = () => {
 
   return (
     <>
-    <Navbar toggleDarkMode={toggleDarkMode} />
-    <section className="area">
-      <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-      </ul>
-    <div className="context">
-      <div className="downloads">
-        <h2>Downloads</h2>
-        <p>Links to downloadable content.</p>
-      </div>
-      <div className="downloads-container">
-        <div className="filters">
-          <button onClick={() => setSelectedCategory('All')}>All</button>
-          <button onClick={() => setSelectedCategory('Science')}>Science</button>
-          <button onClick={() => setSelectedCategory('ICT')}>ICT</button>
-          <button onClick={() => setSelectedCategory('English')}>English</button>
-          <button onClick={() => setSelectedCategory('Mathematics')}>Mathematics</button>
-        </div>
-        <div className="book-cards">
-          {filteredBooks.map(book => (
-            <div key={book.id} className="book-card">
-              <img src={book.image} alt={book.title} className="book-image" />
-              <h3>{book.title}</h3>
-              <p>{book.category}</p>
-              <a href={book.link} download className="download-button">Download</a>
+      <Navbar toggleDarkMode={toggleDarkMode} />
+      <section className="area">
+        <ul className="circles">
+          {Array(10).fill().map((_, i) => <li key={i}></li>)}
+        </ul>
+        <div className="context">
+          <div className="downloads">
+            <h2>Downloads</h2>
+            <p>Links to downloadable content</p>
+          </div>
+          <div className="downloads-container">
+            <div className="filters">
+              {['All', 'Science', 'ICT', 'English', 'Mathematics'].map(category => (
+                <button key={category} onClick={() => setSelectedCategory(category)}>
+                  {category}
+                </button>
+              ))}
             </div>
-          ))}
+            <div className="book-cards">
+              {filteredBooks.map(book => (
+                <div key={book.id} className="book-card">
+                  <img src={book.image} alt={book.title} className="book-image" />
+                  <h3>{book.title}</h3>
+                  <p>{book.category}</p>
+                  <a href={book.link} className="download-button">Download</a>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>  
-  <Footer/>
-  </>
+      </section>  
+      <Footer />
+    </>
   );
 };
 
