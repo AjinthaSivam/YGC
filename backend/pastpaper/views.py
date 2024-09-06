@@ -172,10 +172,7 @@ def chat_view(request):
 
         # Find relevant chunks from the dataset
         relevant_chunks = find_relevant_chunks(user_input, chunks_and_embeddings, index)
-        if relevant_chunks:
-            context_text = ' '.join(relevant_chunks[:5])
-        else:
-            context_text = f"No relevant information found for the year {selected_year}"
+        context_text = ' '.join(relevant_chunks[:5]) if relevant_chunks else f"No relevant information found for the year {selected_year}"
 
         # Build the message history to provide context
         messages = [
@@ -187,9 +184,8 @@ def chat_view(request):
         ]
 
         # Append previous chat history
-        for entry in conversation_history[learner.id]:
-            messages.append({"role": entry['role'], "content": entry['content']})
-        
+        messages.extend(conversation_history[learner.id])
+
         # Add current user input to messages
         messages.append({"role": "user", "content": user_input})
         messages.append({"role": "assistant", "content": f"Reference Material: {context_text}"})
@@ -229,6 +225,7 @@ def chat_view(request):
     except Exception as e:
         print("Error in chat_view:", str(e))
         return JsonResponse({'error': str(e)}, status=500)
+
 
     
 

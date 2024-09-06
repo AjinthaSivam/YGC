@@ -19,11 +19,11 @@ function App() {
     return (
         
             <Routes>
-                <Route path='/quiz' element= {<Quiz />} />
-                <Route path='/chatbot' element= {<Chat />} />
-                <Route path="/historical" element={<Historical />} />
-                <Route path="/" element={<ProtectedRoute />}>
-                    <Route path="/home" element={<Home />} />
+                <Route path='/home/quiz' element= {<Quiz />} />
+                <Route path='/home/chatbot' element= {<Chat />} />
+                <Route path="/home/historical" element={<Historical />} />
+                <Route path="/home" element={<ProtectedRoute />}>
+                    <Route index element={<Home />} />
                     {/* Add other protected routes here */}
                 </Route>
                 <Route path="/signin" element={<Signin />} />
