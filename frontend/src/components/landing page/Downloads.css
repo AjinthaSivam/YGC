@@ -100,35 +100,35 @@
 
 
 /* Dark theme styles */
-body.dark-mode .downloads-container {
+.dark-mode .downloads-container {
   background-color: transparent;
   color: #f8f9fa;
 }
 
-body.dark-mode .filters button {
+.dark-mode .filters button {
   background-color: #107067;
 }
 
-body.dark-mode .filters button:hover {
+.dark-mode .filters button:hover {
   background-color: #3aa99e;
 }
 
-body.dark-mode .book-card {
+.dark-mode .book-card {
   background-color: #333;
 }
 
-body.dark-mode .book-card h3 {
+.dark-mode .book-card h3 {
   color: #4fc4be;
 }
 
-body.dark-mode .book-card p {
+.dark-mode .book-card p {
   color: #ccc;
 }
 
-body.dark-mode .download-button {
+.dark-mode .download-button {
   background-color: transparent;
 }
 
-body.dark-mode .download-button:hover {
+.dark-mode .download-button:hover {
   background-color: #107067;
 }

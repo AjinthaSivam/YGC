@@ -110,17 +110,13 @@
   padding: 15px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #292929; /* Adjust color for buttons */
+  background-color: #103831; /* Adjust color for buttons */
   border-radius: 8px;
   text-decoration: none;  
   transition: background-color 0.3s ease;
-  
-  border: #4fc4be80 1px solid;
-}
-
-
-.student-btn:hover {
-  background-color: #02524d; /* Darker shade on hover */
+  font-weight: bold;
+  border: #50747280 1px solid;
+  letter-spacing: 1px;
 }
 
 
@@ -129,9 +125,10 @@
   color:#333;
 }
 
-.tutor-btn:hover {
-  color: #ccc;
-  background-color: #02524d; /* Darker shade on hover */
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for better effect */
+
 }
 
 .about-us-content {
@@ -187,7 +184,7 @@
 .dark-mode .about-us:hover,
 .dark-mode .story-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(255, 253, 253, 0.932);
+  box-shadow: 0.5px 2px 20px 2px rgb(255, 255, 255);
 }
 
 .about-us-icon {
@@ -211,7 +208,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: bold;
 }
-body.dark-mode .book-card, body.dark-mode .story,
+.dark-mode .book-card, .dark-mode .story,
 .dark-mode .about-us-item, .dark-mode .story-card {
   color:#ccc;
   background-color: #333;
@@ -309,12 +306,12 @@ body.dark-mode .book-card, body.dark-mode .story,
 }
 
 /* Dark Mode Styles */
-body.dark-mode {
+.dark-mode {
   background-color: #292929;
   color: #f9f9f9;
 }
 
-body.dark-mode .welcome-section {
+.dark-mode .welcome-section {
   background-color: transparent;
   color: #ccc;
   /*border: 1px solid #ccc;*/
@@ -322,28 +319,28 @@ body.dark-mode .welcome-section {
  #contact{
   border: 1px solid #ccc;
 }
-body.dark-mode .tutor-btn {
+.dark-mode .tutor-btn {
   background-color: transparent;
 }
 
-body.dark-mode .see-more-button:hover,
-body.dark-mode .contact-btn:hover,
-body.dark-mode .cta-button:hover{
-  box-shadow: 0.05px 0.25px 12px 2px rgb(255, 255, 255);
+.dark-mode .see-more-button:hover,
+.dark-mode .contact-btn:hover,
+.dark-mode .cta-button:hover{
+  box-shadow: 0.5px 0.5px 10px 5px rgb(255, 255, 255);
 }
-body.dark-mode .student-btn {
-  background-color: #02524d;
+.dark-mode .student-btn {
+  background-color: #052220;
 }
-body.dark-mode .tutor-btn {
+.dark-mode .tutor-btn {
   color: #f3f5f5;
 }
 
-body.dark-mode .about-us-icon {
+.dark-mode .about-us-icon {
   color: #ccc;
 }
 
-body.dark-mode .see-more-button,
-body.dark-mode .contact-btn {
+.dark-mode .see-more-button,
+.dark-mode .contact-btn {
   background-color: #02524d;
 }
 
