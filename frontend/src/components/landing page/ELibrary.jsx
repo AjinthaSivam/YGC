@@ -84,14 +84,14 @@ const Elibrary = () => {
                     ))}
                     {book.rating % 1 !== 0 && <span className="half-star"></span>}
                   </p>
-                  <a href={book.link} className="view-button">View</a>
+                  <a href={"http://localhost:5173/signin"} className="view-button">View</a>
                 </div>
               ))}
             </div>
           </div>
+          <Footer />
         </div>
       </section>
-      <Footer />
     </>
   );
 };

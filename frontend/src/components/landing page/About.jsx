@@ -103,9 +103,9 @@ const About = () => {
               <p>We'd love to hear from you! Reach out to us at contact@edutech.com or call us at (123) 456-7890.</p>
             </section>
           </div>
+          <Footer />
         </div>
       </section>
-      <Footer />
     </>
   );
 };

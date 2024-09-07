@@ -62,9 +62,9 @@ const Downloads = () => {
               ))}
             </div>
           </div>
+          <Footer />
         </div>
-      </section>  
-      <Footer />
+      </section> 
     </>
   );
 };

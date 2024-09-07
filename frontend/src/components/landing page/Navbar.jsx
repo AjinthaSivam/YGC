@@ -22,6 +22,12 @@ const Navbar = ({ toggleDarkMode }) => {
         <a href="/about">About Us</a>
         <a href="/elibrary">E-Library</a>
       </div>
+
+      {/* Register Now Button */}
+      <a href="http://localhost:5173/signup" className="register-button">
+        Sign Up
+      </a>
+
       <div className="navbar-menu-container">
         <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
           <FaBars size={20} />

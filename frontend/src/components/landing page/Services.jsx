@@ -62,9 +62,9 @@ const Services = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-    </section>
-    <Footer /></>
+    </section></>
   );
 };
 

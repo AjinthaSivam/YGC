@@ -33,10 +33,10 @@ const Home = () => {
             <Welcome />
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </section>
-    </>
+  </>
   );
 };
 

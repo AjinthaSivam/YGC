@@ -18,7 +18,7 @@ body {
 .area {
     background: #f8f9fa;
     background: -webkit-linear-gradient(to right, #c3eaff, #f8f9fa);
-    background: linear-gradient(to bottom, #fff,#f8f9fa,#f8f9fa,#f8f9fa,#f8f9fa, #c3eaff, #abdbf5, #fff);
+    background: linear-gradient(to bottom, #fff,#f8f9fa,#f8f9fa,#f8f9fa,#f8f9fa, #adeaf5, #c8f3f1, #fff);
     width: 100%;
     height: 100%;
     min-height: 200vh; /* Ensure it covers the full viewport height */
@@ -28,7 +28,7 @@ body {
 body.dark-mode .area {
     background: #292929;
     background: -webkit-linear-gradient(to left, #3e3e3e, #292929);
-    background: linear-gradient(to bottom, #292929, #05413b,#041220,#292929);
+    background: linear-gradient(to bottom, #292929,#292929, #05413b,#041220,#292929);
 }
 
 .circles {
