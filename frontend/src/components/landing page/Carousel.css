@@ -1,17 +1,17 @@
 .carousel {
   /*margin-bottom: 30px;*/
-  padding-top:-20px;
+  padding-top:15px;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  border-radius: 12px 12px 12px 12px; 
+  border-radius: 25px; 
   height: 350px 350px;
 }
 
 .carousel img {
-  width: 100%;
+  width: 60%;
   height: 550px;
-  border-radius: 19px 19px 19px 19px; /* Rounded corners for images */
+  border-radius: 25px; /* Rounded corners for images */
 }
 
 @media (max-width: 768px) {

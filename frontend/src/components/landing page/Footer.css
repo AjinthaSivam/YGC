@@ -15,9 +15,9 @@ html, body {
 .footer {
   padding: 20px 30px;
   width: 100%;
-  background: linear-gradient(to top, #000,#000,#141414,#292929,#292929);
+  background: linear-gradient(to top, #000, #141414, #292929);
   color: #f8f9fa;
-  border-top: 1px solid #444444be;
+  border-top: 1px solid #444444;
   box-sizing: border-box;
 }
 
@@ -102,14 +102,13 @@ html, body {
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  left: 0;
 }
 
 .footer-social-icons a {
   margin: 0 10px;
   color: #f8f9fa;
   font-size: 1.5em;
-  transition: color 0.3s ease, font-size 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .footer-social-icons a:hover {
@@ -126,6 +125,7 @@ html, body {
   .footer-left {
     text-align: center;
   }
+  
   .footer-right {
     flex-direction: row;
     align-items: center;
@@ -137,9 +137,9 @@ html, body {
 
   .footer-qr img {
     width: 60px;
+    padding-top: 20px;
   }
 
-  /* Adjust social media icons for smaller screens */
   .footer-social-icons a {
     font-size: 1.3em;
   }
@@ -158,7 +158,6 @@ html, body {
     width: 50px;
   }
 
-  /* Further adjust social media icons for small screens */
   .footer-social-icons a {
     font-size: 1.1em;
     margin: 0 5px;

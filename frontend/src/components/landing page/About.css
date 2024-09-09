@@ -28,11 +28,6 @@
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-.about h2, .about-container h2 {
-  color: #107067;
-  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
-}
-
 /* Paragraph styles */
 .about p, .about-container p {
   font-size: 1.2em;
@@ -56,7 +51,6 @@
 }
 
 .dark-mode .about-card {
-  background-color: transparent;
   border: 1px solid #555;
 }
 

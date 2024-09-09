@@ -25,7 +25,6 @@
   line-height: 1.6;
 }
 
-
 .dark-mode .downloads p {
   color: #ccc;
 }
@@ -49,14 +48,10 @@
   color: #fff;
   cursor: pointer;
   margin: 10px;
-  border: #789 0.1px solid;
+  border: 0.1px solid #789;
 }
 
-.filters button:hover{
-  background-color: #3aa99e;
-}
-
-.download-button:hover{
+.filters button:hover, .download-button:hover {
   background-color: #3aa99e;
 }
 
@@ -74,6 +69,7 @@
   padding: 20px;
   width: 250px;
   text-align: center;
+  border: 0.1px solid #8383832c;
 }
 
 .book-image {
@@ -88,16 +84,13 @@
   font-size: 1.5em;
   color: #107067;
   margin-bottom: 10px;
-  text-align: center;
 }
 
 .book-card p {
   font-size: 1.1em;
   color: #666;
-  text-align: center;
   line-height: 1.6;
 }
-
 
 /* Dark theme styles */
 .dark-mode .downloads-container {
@@ -114,7 +107,7 @@
 }
 
 .dark-mode .book-card {
-  background-color: #333;
+  background-color: #292929;
 }
 
 .dark-mode .book-card h3 {
@@ -131,4 +124,68 @@
 
 .dark-mode .download-button:hover {
   background-color: #107067;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pagination styles */
+.pagination {
+  margin: 20px 0;
+  text-align: right;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #3aa99e;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1em;
+  color: #333;
+  margin: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dark-mode .pagination button {
+  background-color: #3aa99e;
+}
+
+.dark-mode .pagination button:hover {
+  background-color: #107067;
+}
+
+.dark-mode .pagination button:disabled {
+  background-color: #666;
+}
+
+.dark-mode .pagination span {
+  color: #ccc;
 }

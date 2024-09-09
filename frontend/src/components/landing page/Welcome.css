@@ -207,11 +207,12 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-decoration: bold;
+  border:#8383832c 0.1px solid;
 }
 .dark-mode .book-card, .dark-mode .story,
 .dark-mode .about-us-item, .dark-mode .story-card {
   color:#ccc;
-  background-color: #333;
+  background-color: #292929;
 }
 .book-image, .story img {
   width: 100%;
@@ -330,7 +331,7 @@
   box-shadow: 0.5px 0.5px 10px 5px rgb(255, 255, 255);
 }
 .dark-mode .student-btn {
-  background-color: #052220;
+  background-color: #02524d;
 }
 .dark-mode .tutor-btn {
   color: #f3f5f5;
@@ -438,7 +439,3 @@
     align-items: center;
   }
 }
-
-
-
-

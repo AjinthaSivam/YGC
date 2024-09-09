@@ -92,7 +92,7 @@ body.dark-mode .circles li {
     transition: background-color 0.5s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 1s forwards;
+    animation: fadeInUp 0.001s forwards;
 }
 
 body.dark-mode .home {
