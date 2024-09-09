@@ -17,13 +17,13 @@ const books = [
   { id: 5, title: 'Easy English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 4.5 },
   { id: 6, title: 'Numerical Tricks', category: 'Mathematics', link: '#', image: mathsImage, author: 'Jane Smith', rating: 4.2 },
   { id: 7, title: 'Grammar', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 2.5 },
-  { id: 1, title: 'General English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 3.5 },
-  { id: 2, title: 'Easy Maths', category: 'Mathematics', link: '#', image: mathsImage, author: 'Jane Smith', rating: 5 },
-  { id: 3, title: 'Social Studies', category: 'Science', link: '#', image: scienceImage, author: 'Emily Brown', rating: 4.8 },
-  { id: 4, title: 'Introduction to ICT', category: 'ICT', link: '#', image: ictImage, author: 'Michael Johnson', rating: 3.0 },
-  { id: 5, title: 'Easy English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 4.5 },
-  { id: 6, title: 'Numerical Tricks', category: 'Mathematics', link: '#', image: mathsImage, author: 'Jane Smith', rating: 4.2 },
-  { id: 7, title: 'Grammar', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 2.5 },
+  { id: 8, title: 'General English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 3.5 },
+  { id: 9, title: 'Easy Maths', category: 'Mathematics', link: '#', image: mathsImage, author: 'Jane Smith', rating: 5 },
+  { id: 10, title: 'Social Studies', category: 'Science', link: '#', image: scienceImage, author: 'Emily Brown', rating: 4.8 },
+  { id: 11, title: 'Introduction to ICT', category: 'ICT', link: '#', image: ictImage, author: 'Michael Johnson', rating: 3.0 },
+  { id: 12, title: 'Easy English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 4.5 },
+  { id: 13, title: 'Numerical Tricks', category: 'Mathematics', link: '#', image: mathsImage, author: 'Jane Smith', rating: 4.2 },
+  { id: 14, title: 'Grammar', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 2.5 },
 ];
 
 const ITEMS_PER_PAGE = 7; // Number of items per page

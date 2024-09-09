@@ -9,9 +9,9 @@
 .downloads h2 {
   margin-top: 60px;
   font-size: 3.5em;
-  color: #107067;
+  color: #ffffff;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .dark-mode .downloads h2 {
