@@ -1,6 +1,6 @@
 services:
-  app:
-    container_name: fullstack_app
+  backend:
+    container_name: backend_container
     build:
       context: .
       dockerfile: Dockerfile
