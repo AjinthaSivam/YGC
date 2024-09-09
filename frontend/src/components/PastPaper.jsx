@@ -1,18 +1,20 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const pastPaperYears = [2023, 2022, 2021, 2020, 2019, 2018]
 
 const PastPapers = ({ onSelectPaper, onSelectYear }) => {
+    const navigate = useNavigate()
     const handleCardClick = (year) => {
         onSelectPaper(`/pastpapers/${year}.pdf`)
+        navigate(`/pastpaper/${year}`)
         onSelectYear(year.toString())
         console.log(year)
     }
 
     return (
-        <div className='flex mt-6 p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
-            <div className='w-full max-w-5xl'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4'>
+        <div className='flex p-4 h-full w-full max-w-5xl mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 overflow-auto'>
                     {pastPaperYears.map(year => (
                         <div
                             key={year}
@@ -33,7 +35,6 @@ const PastPapers = ({ onSelectPaper, onSelectYear }) => {
                         </div>
                     ))}
                 </div>
-            </div>
         </div>
     )
 }

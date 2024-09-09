@@ -63,7 +63,7 @@ def historical_chat_view(request):
 
         # Use OpenAI API to get assistant's response
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=messages
         )
 

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import TryAgainConformation from './TryAgainConformation'
+import { useNavigate } from 'react-router-dom';
+
 
 const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => {
     const [showModal, setShowModal] = useState(false)
+
+    const navigate = useNavigate()
+
     const getFeedback = (score) => {
         if (score >= 0 && score <= 40) {
             return 'Keep practicing and you’ll get better. Try again! ✌️';
@@ -22,13 +27,15 @@ const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => 
     };
 
     const handleTryAgain = () => {
-        setSelectedComponent('quiz'); // Navigate to QuizIntro
+        // setSelectedComponent('quiz'); // Navigate to QuizIntro
         setShowModal(false);
+        navigate('/quizstart')
     };
 
     const handleGoToChat = () => {
-        setSelectedComponent('chat'); // Navigate to Chat
+        // setSelectedComponent('chat'); // Navigate to Chat
         setShowModal(false);
+        navigate('/generalchat')
     };
 
     return (

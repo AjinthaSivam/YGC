@@ -6,7 +6,6 @@ import Signup from './pages/Signup';
 // import Quiz from './pages/QuizPage'
 import ProtectedRoute from './components/ProtectedRoute';
 import Quiz from './components/quiz/Quiz'
-import Chat from './components/chat/Chat';
 import Historical from './components/historical/Historical';
 import LandHome from './components/landing page/Home'
 import Services from './components/landing page/Services';
@@ -14,13 +13,24 @@ import Downloads from './components/landing page/Downloads';
 import About from './components/landing page/About';
 import ELibrary from './components/landing page/ELibrary';
 import Navbar from './components/landing page/Navbar';
+import GeneralChat from './pages/GeneralChat';
+import PastpaperCard from './pages/PastpaperCard';
+import PastpaperContent from './pages/PastpaperContent';
+import QuizStart from './pages/QuizStart';
+import QuizContent from './pages/QuizContent';
+import Legend from './pages/Legend';
 
 function App() {
     return (
         
             <Routes>
                 <Route path='/home/quiz' element= {<Quiz />} />
-                <Route path='/home/chatbot' element= {<Chat />} />
+                <Route path='/generalchat' element= {<GeneralChat />} />
+                <Route path='/pastpapercard' element= {<PastpaperCard />} />
+                <Route path="/pastpaper/:year" element={<PastpaperContent />} />
+                <Route path='/quizstart' element= {<QuizStart />} />
+                <Route path='/quiz' element= {<QuizContent />} />
+                <Route path='/legend' element= {<Legend />} />
                 <Route path="/home/historical" element={<Historical />} />
                 <Route path="/home" element={<ProtectedRoute />}>
                     <Route index element={<Home />} />

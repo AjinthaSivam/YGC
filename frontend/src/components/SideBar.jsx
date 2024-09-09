@@ -3,22 +3,25 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { GrResources } from "react-icons/gr";
 import { MdOutlineQuiz, MdOutlineChatBubbleOutline } from "react-icons/md";
 import { FaUserAstronaut } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
     const [open, setOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
 
+    const navigate = useNavigate()
+
     const menus = [
-        { name: "Chat Bot", key: 'chatbot', icon: MdOutlineChatBubbleOutline },
-        { name: "Past Papers", key: 'pastpapers', icon: GrResources },
-        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz},
-        { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut },
+        { name: "Chat Bot", key: 'chatbot', icon: MdOutlineChatBubbleOutline, path: '/generalchat' },
+        { name: "Past Papers", key: 'pastpapers', icon: GrResources, path: '/pastpapercard' },
+        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz, path: '/quizstart'},
+        { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut, path: '/legend' },
     ];
 
     const handleMenuClick = (menu) => {
-        
-            setSelectedComponent(menu.key);
-            setSelectedMenu(menu.key);  // Update selected menu
+            navigate(menu.path)
+            // setSelectedComponent(menu.key);
+            // setSelectedMenu(menu.key);  // Update selected menu
         
     };
 

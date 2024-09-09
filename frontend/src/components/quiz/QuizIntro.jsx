@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const QuizIntro = ({ onStartQuiz }) => {
   const [quizDifficulty, setQuizDifficulty] = useState('Difficulty');
@@ -7,6 +8,8 @@ const QuizIntro = ({ onStartQuiz }) => {
   const [isDiffDropdownOpen, setIsDiffDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate()
 
   const handleDiffDropdown = () => {
     setIsDiffDropdownOpen(!isDiffDropdownOpen);
@@ -44,6 +47,7 @@ const QuizIntro = ({ onStartQuiz }) => {
     } else {
       setErrorMessage(""); // Clear error message if selections are valid
       onStartQuiz(quizDifficulty, quizCategory);
+      navigate('/quiz', { state: { difficulty: quizDifficulty, category: quizCategory } });
     }
   };
 
@@ -68,7 +72,7 @@ const QuizIntro = ({ onStartQuiz }) => {
                 <FaAngleDown className="justify-end" />
               </button>
               {isDiffDropdownOpen && (
-                <div className="absolute left-0 mt-2 flex flex-col bg-[#04aaa2] text-white border rounded-lg pt-1 w-full z-10">
+                <div className="absolute left-0 mt-2 flex flex-col bg-white text-white border rounded-lg w-full z-10">
                   {difficulties.map((difficulty, index) => (
                     <p
                       className="bg-white text-[#04aaa2] py-3 w-full cursor-pointer border-t text-center"
@@ -92,7 +96,7 @@ const QuizIntro = ({ onStartQuiz }) => {
                 <FaAngleDown className="justify-end" />
               </button>
               {isCategoryDropdownOpen && (
-                <div className="absolute left-0 mt-2 max-h-48 overflow-y-scroll flex flex-col bg-[#04aaa2] text-white border rounded-lg pt-1 w-full z-10">
+                <div className="absolute left-0 mt-2 max-h-48 overflow-y-scroll flex flex-col bg-white text-white border rounded-lg w-full z-10">
                   {categories.map((category, index) => (
                     <p
                       className="bg-white text-[#04aaa2] py-3 w-full cursor-pointer border-t text-center"

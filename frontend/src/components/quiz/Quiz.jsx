@@ -101,10 +101,10 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
     };
 
     return (
-        <div className='flex mt-6 p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
+        <div className='flex p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
             <div className='flex-col flex-grow overflow-auto mb-4 overflow-y-scroll scrollbar-hidden'>
                 <div className='pb-2 border-b border-[#04aaa2] max-w-xl mb-8'>
-                    <h1 className='text-2xl text-[#393E46] font-bold mb-4'>
+                    <h1 className='text-2xl text-[#393E46] font-bold my-4'>
                         {category} - {difficulty} Level
                     </h1>
                 </div>

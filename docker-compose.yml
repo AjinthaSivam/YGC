@@ -1,0 +1,54 @@
+services:
+  app:
+    container_name: fullstack_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - backend/.env
+    command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app/backend  # Sync local backend code
+      - ./backend/static:/app/backend/static  # Sync local static files
+    depends_on:
+      - mysql_db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+    container_name: frontend_container
+    command: npm run dev
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - "5173:5173"
+
+  mysql_db:
+    container_name: mysql_con_2
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=edutech_newdb
+      - MYSQL_USER=ajintha
+      - MYSQL_PASSWORD=ajintha12345
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin_con_2
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql_db

@@ -178,9 +178,9 @@ def chat_view(request):
         messages = [
             {"role": "system", "content": "You are an English Teaching Assistant for Grade 11 students."},
             {"role": "system", "content": f"This is a past paper from the year {selected_year}, covering various topics in English."},
-            {"role": "system", "content": "Guide them step by step to reach the answer"},
+            {"role": "system", "content": "Guide them step by step to reach the answer."},
             {"role": "system", "content": "Use emojis to make it engaging, but keep responses short."},
-            {"role": "system", "content": "Guide the student on questions related to a specific test of this paper."},
+            {"role": "system", "content": "Guide the student on questions related to a specific test of this paper. Give the answers with explanation"},
         ]
 
         # Append previous chat history
@@ -192,7 +192,7 @@ def chat_view(request):
 
         # Use OpenAI API to get assistant's response
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=messages,
             temperature=0.5,
             max_tokens=200
