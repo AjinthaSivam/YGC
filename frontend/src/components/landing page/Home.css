@@ -6,7 +6,7 @@
 body {
     /*font-family: 'Roboto', sans-serif;*/
     font-family: 'Poppins', serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.001s ease, color 0.001s ease;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -26,13 +26,13 @@ body {
     width: 100%;
     height: 80%;
     min-height: 100vh; /* Ensure it covers the full viewport height */
-    transition: background 0.5s ease;
+    transition: background 0.001s ease;
 }
 
 body.dark-mode .area {
     background: #292929;
     background: -webkit-linear-gradient(to left, #3e3e3e, #292929);
-    background: linear-gradient(to bottom, #292929,#292929, #05413b,#041220,#292929);
+    background: linear-gradient(to bottom, #292929,#292929,#292929, #05413b,#05413b,#041220,#292929);
 }
 
 .circles {

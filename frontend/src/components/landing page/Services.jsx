@@ -42,7 +42,7 @@ const Services = () => {
             <p>Explore our educational services designed to enhance your learning experience</p>
           </div>
           <div className="services-content">
-            {/* Service Item 1 */}
+            {/* Service Item 1 = student*/}
             <div className="service-item" data-aos="fade-right">
               <div className="service-image-container">
                 <img src="src/components/landing page/images/student.png" alt="Learn" className="service-image" />
@@ -71,10 +71,12 @@ const Services = () => {
                   </div>
                 </div>
 
-                <button className="login-btn">Login</button>
+                <button className="login-btn">
+                  <a href='/signin'>Login</a>
+                </button>
               </div>
             </div>
-            {/* Service Item 2 */}
+            {/* Service Item 2 =Tutor*/}
             <div className="service-item" data-aos="fade-left">
               <div className="service-image-container">
                 <img src="src/components/landing page/images/teacher.png" alt="Tutor" className="service-image" />
@@ -102,7 +104,9 @@ const Services = () => {
                     </div>
                   </div>
                 </div>
-                <button className="login-btn">Login</button>
+                <button className="login-btn">
+                  <a href='/signin'>Login</a>
+                </button>
               </div>
             </div>
           </div>

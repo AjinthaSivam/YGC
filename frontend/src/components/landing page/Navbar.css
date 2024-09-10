@@ -51,7 +51,7 @@
 
 .navbar-menu a:hover,
 .navbar-menu a.active {
-  color: #5cfff7;
+  color: #292929;
 }
 
 /* Register Now button styles */
@@ -68,16 +68,15 @@
 }
 
 .register-button:hover {
-  background-color: #3d9e94;
+  background-color: #292929;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for better effect */
 }
 
 /* Dark mode for Register Now button */
 body.dark-mode .register-button:hover {
   
-  background-color: #084943;
   transform: translateZ(5px);
-  box-shadow: 0.5px 0.5px 12px 0.5px rgb(255, 254, 254);
+  box-shadow: 0.5px 0.5px 12px 0.5px rgb(76, 145, 150);
 }
 
 .theme-toggle-button {
@@ -91,7 +90,7 @@ body.dark-mode .register-button:hover {
 
 .mobile-menu-toggle:hover,
 .theme-toggle-button:hover {
-  color: #4fc4be;
+  color: #292929;
 }
 
 .mobile-menu-toggle {
