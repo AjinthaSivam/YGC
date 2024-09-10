@@ -30,11 +30,14 @@
 
 /* Paragraph styles */
 .about p, .about-container p {
-  font-size: 1.2em;
+  font-size: 1em;
   color: #333;
-  line-height: 1.6;
+  line-height: 2;
 }
-
+.about p{
+  font-size: 1.05em;
+  font-weight:500;
+}
 .dark-mode .about p, .dark-mode .about-container p {
   color: #ddd;
 }

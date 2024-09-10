@@ -52,7 +52,7 @@ const Welcome = () => {
 
       <section id="about-us" className="welcome-section" data-aos="zoom-in-up" data-aos-duration="2000">
         <h2><strong>About Us</strong></h2>
-        <p>Summay of the services we offer to support your educational journey</p>
+        <p>Summary of the services we offer to support your educational journey</p>
         <div className="about-us-content">
           <div className="about-us-item" data-aos="fade-down">
             <i className="fas fa-users about-us-icon"></i>

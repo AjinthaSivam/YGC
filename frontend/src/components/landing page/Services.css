@@ -50,7 +50,8 @@
 }
 
 .service p {
-  font-size: 1.2em;
+  font-size: 1.05em;
+  font-weight:500;
   color: #333;
   line-height: 1.6;
 }
@@ -111,7 +112,7 @@
 }
 .service-description {
   font-size: 1em;
-  line-height: 2.5;
+  line-height:2;
   color: #555;
   padding-top: 20px;
 }

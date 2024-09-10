@@ -20,7 +20,8 @@
 }
 
 .library p {
-  font-size: 1.2em;
+  font-size: 1.05em;
+  font-weight:500;
   color: #333;
   line-height: 1.6;
 }
@@ -83,15 +84,15 @@
 }
 
 .book-card h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: #107067;
   margin-bottom: 10px;
 }
 
 .book-card p {
-  font-size: 1.1em;
-  color: #666;
-  line-height: 2.5;
+  font-size: 1em;
+  color: #424141;
+  line-height: 2.4;
 }
 
 .book-card .author, .book-card .rating {
