@@ -1,70 +1,59 @@
 /* General container styles */
 .library {
-  padding: 0px;
   margin: 20px auto;
+  padding: 20px;
   border-radius: 12px;
   text-align: center;
 }
 
-/* Title styles */
 .library h2 {
-  margin-top: 0px;
+  margin-top: 60px;
   font-size: 3.5em;
   color: #ffffff;
   margin-bottom: 20px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
+.dark-mode .library h2 {
+  color: #3aa99e;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
 .library p {
-  font-size: 1.2em;
-  color: #f8f9fa;
+  font-size: 1.05em;
+  font-weight:500;
+  color: #333;
   line-height: 1.6;
+}
+
+.dark-mode .library p {
+  color: #ccc;
 }
 
 .library-container {
-  padding: 0px;
   margin: 20px;
   border-radius: 12px;
-  max-width: auto;
   text-align: center;
 }
 
-/* Title styles */
-.library-container h2 {
-  margin-top: 40px;
-  font-size: 2.5em;
-  color: #107067;
-  margin-bottom: 20px;
-}
-
-/* Paragraph styles */
-.library-container p {
-  font-size: 1.2em;
-  color: #666;
-  line-height: 1.6;
-}
-
-/* Filters styles */
 .filters {
   margin: 20px 0;
 }
 
-.filters button,
-.filters select {
-  padding: 10px 20px;
+.filters button, .filters select, .view-button {
+  padding: 10px 25px;
   font-size: 1em;
   border: none;
   border-radius: 5px;
-  background-color: transparent;
+  background-color: #107067;
   color: #fff;
   cursor: pointer;
-  margin: 10px 10px;
-  border: black 1px solid;
+  margin: 10px;
+  border: 0.1px solid #789;
 }
 
-.filters button:hover,
-.filters select:hover {
-  background-color: #0a5a50;
+.filters button:hover, .view-button:hover {
+  background-color: #3aa99e;
 }
 
 /* Book cards styles */
@@ -73,6 +62,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  animation: fadeIn 0.5s forwards;
 }
 
 .book-card {
@@ -81,11 +71,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 250px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
+  text-align: center;
+  border: #8383832c 0.1px solid;
 }
 
 .book-image {
@@ -97,23 +84,18 @@
 }
 
 .book-card h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: #107067;
   margin-bottom: 10px;
-  text-align: center;
-  flex-grow: 1;
 }
 
 .book-card p {
-  font-size: 1.1em;
-  color: #666;
-  margin-bottom: 15px;
-  text-align: center;
-  flex-grow: 1;
+  font-size: 1em;
+  color: #424141;
+  line-height: 2.4;
 }
 
-.book-card .author,
-.book-card .rating {
+.book-card .author, .book-card .rating {
   font-size: 1em;
   color: #777;
 }
@@ -123,68 +105,92 @@
   justify-content: center;
 }
 
-.view-button {
-  padding: 10px 20px;
+.star {
+  font-size: 1.2em;
+  color: #f8df00;
+}
+
+/* Dark theme styles */
+.dark-mode .library-container {
+  background-color: transparent;
+  color: #f8f9fa;
+}
+
+.dark-mode .library-container h2 {
+  color: #4fc4be;
+}
+
+.dark-mode .filters button, .dark-mode .filters select {
+  background-color: #107067;
+}
+
+.dark-mode .book-card {
+  background-color: #292929;
+}
+
+.dark-mode .book-card h3 {
+  color: #4fc4be;
+}
+
+.dark-mode .book-card p, .dark-mode .book-card .author {
+  color: #b5b5b5;
+}
+
+.dark-mode .view-button {
+  background-color: transparent;
+}
+
+.dark-mode .view-button:hover {
+  background-color: #107067;
+}
+/* Pagination styles */
+.pagination {
+  margin: 20px 0;
+  text-align: right;
+}
+
+.pagination button {
+  padding: 10px 15px;
   font-size: 1em;
   border: none;
   border-radius: 5px;
   background-color: #107067;
   color: #fff;
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  width: 100%;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.view-button:hover {
-  background-color: #0a5a50;
+.pagination button:hover {
+  background-color: #3aa99e;
+  transform: scale(1.05);
 }
 
-/* Dark theme styles */
-body.dark-mode .library-container {
-  background-color: #222;
-  color: #f8f9fa;
+.pagination button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
-body.dark-mode .library-container h2 {
-  color: #4fc4be;
+.pagination span {
+  font-size: 1em;
+  color: #333;
+  margin: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-body.dark-mode .library-container p {
-  color: #ccc;
-}
-
-body.dark-mode .filters button,
-body.dark-mode .filters select {
-  background-color: #4fc4be;
-}
-
-body.dark-mode .filters button:hover,
-body.dark-mode .filters select:hover {
+.dark-mode .pagination button {
   background-color: #3aa99e;
 }
 
-body.dark-mode .book-card {
-  background-color: #333;
+.dark-mode .pagination button:hover {
+  background-color: #107067;
 }
 
-body.dark-mode .book-card h3 {
-  color: #4fc4be;
+.dark-mode .pagination button:disabled {
+  background-color: #666;
 }
 
-body.dark-mode .book-card p {
+.dark-mode .pagination span {
   color: #ccc;
-}
-
-body.dark-mode .book-card .author,
-body.dark-mode .book-card .rating {
-  color: #ddd;
-}
-
-body.dark-mode .view-button {
-  background-color: #4fc4be;
-}
-
-body.dark-mode .view-button:hover {
-  background-color: #3aa99e;
 }

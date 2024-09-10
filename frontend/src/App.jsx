@@ -48,6 +48,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/eLibrary" element={<ELibrary />} />
                 <Route path="/navbar" element={<Navbar />} />
+
+                <Route path="/admin" element={<Admin />} />
             </Routes>
         
     );

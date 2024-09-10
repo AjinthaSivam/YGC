@@ -1,5 +1,3 @@
-// src/App.js
-
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -22,7 +20,7 @@ function App() {
   }, [darkMode]);
 
   const toggleDarkMode = () => {
-    setDarkMode(prevDarkMode => !prevDarkMode);
+    setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
   return (
@@ -35,7 +33,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/about" element={<About />} />
-            <Route path="/eLibrary" element={<ELibrary />} />
+            <Route path="/elibrary" element={<ELibrary />} />
           </Routes>
         </main>
         <Footer />

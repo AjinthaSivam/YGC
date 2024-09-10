@@ -1,60 +1,169 @@
-/* src/Footer.css */
+/* Ensure that the body takes up at least the full height of the viewport */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
+/* Make the main content take up the remaining space above the footer */
+.main-content {
+  flex: 1;
+}
+
+/* Footer Styles */
 .footer {
-  padding: 15px 20px; /* Padding around the footer */
-  width: 100%; /* Full width */
-  box-sizing: border-box; /* Include padding and border in total width */
-  text-align: center;
-  position: fixed; /* Fixed position */
-  bottom: 0;
-  left: 0;
-  background-color: #000; /* Black background color */
-  color: #f8f9fa; /* Light text color */
-  border-top: 1px solid #444; /* Matching border style */
+  padding: 20px 30px;
+  width: 100%;
+  background: linear-gradient(to top, #000, #141414, #292929);
+  color: #f8f9fa;
+  border-top: 1px solid #444444;
+  box-sizing: border-box;
 }
 
 .footer-content {
-  max-width: 1400px; /* Maximum width for better alignment */
-  margin: 0 auto; /* Center alignment */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-qr-link {
+  display: inline-block; /* Make the link an inline block */
+}
+
+.footer-qr {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-signin-text {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Space between text and QR code */
+  color: #f8f9fa; /* Text color */
+  font-size: 1em; /* Font size */
+}
+
+.blinking-hand {
+  animation: blink 1s step-start infinite; /* Blinking animation */
+  font-size: 1.2em; /* Adjust size as needed */
+  margin-left: 5px; /* Space between text and hand */
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.footer-qr img {
+  width: 80px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
 }
 
 .footer p {
-  margin: 0;
-  font-size: 0.9em; /* Slightly smaller text */
+  margin: 10px 0;
+  font-size: 1em;
 }
 
 .footer-links {
-  margin-top: 10px; /* Space above the links */
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .footer-links a {
-  color: #f8f9fa; /* Light color for links */
-  text-decoration: none; /* Remove underline */
-  margin: 0 10px; /* Space between links */
-  font-weight: bold; /* Bold text */
+  color: #f8f9fa;
+  text-decoration: none;
+  margin: 0 8px;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .footer-links a:hover {
-  text-decoration: underline; /* Underline on hover for better visibility */
+  text-decoration: underline;
+  color: #107067;
 }
 
-
-/* Light theme styles */
-body {
-  background-color: #f8f9fa; /* Light theme body background */
-  color: #343a40; /* Light theme text color */
+/* Social Media Icons */
+.footer-social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-body .footer {
-  background-color: #000; /* Black background color */
+.footer-social-icons a {
+  margin: 0 10px;
+  color: #f8f9fa;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
 }
 
-/* Dark theme styles */
-body.dark-mode {
-  background-color: #343a40; /* Dark theme body background */
-  color: #f8f9fa; /* Light theme text color */
+.footer-social-icons a:hover {
+  color: #aaa;
 }
 
-body.dark-mode .footer {
-  background-color: #000; /* Black background color */
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-left {
+    text-align: center;
+  }
+  
+  .footer-right {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .footer-signin-text {
+    margin-top: 10px; /* Space above text for smaller screens */
+  }
+
+  .footer-qr img {
+    width: 60px;
+    padding-top: 20px;
+  }
+
+  .footer-social-icons a {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer p {
+    font-size: 0.8em;
+  }
+
+  .footer-links a {
+    font-size: 0.9em;
+  }
+
+  .footer-qr img {
+    width: 50px;
+  }
+
+  .footer-social-icons a {
+    font-size: 1.1em;
+    margin: 0 5px;
+  }
+}
+
+.heart {
+  color: red;
 }

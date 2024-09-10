@@ -1,7 +1,4 @@
 .env
-
-venv2
-
 *.pyc
 
 staticfiles
