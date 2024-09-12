@@ -30,7 +30,7 @@ const Signin = () => {
                 password: formData.password
             });
             login(response.data, response.data.user.username);
-            navigate('/home');
+            navigate('/generalchat');
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Incorrect username or password');

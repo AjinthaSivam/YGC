@@ -13,7 +13,7 @@ urlpatterns = [
     
     # Chat-related endpoints
     path('api/chat/', chat_view, name='chat-view'),
-    path('api/chat/history', get_chat_history, name='get_chat_history'),
+    path('api/chat/history/', get_chat_history, name='get_chat_history'),
     path('api/end_conversation/', end_conversation, name='end_conversation'),
     
     # Learner-related endpoints

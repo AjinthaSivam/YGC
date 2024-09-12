@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useChat } from './ChatContext';
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
@@ -15,16 +15,28 @@ const formatBotResponse = (response) => {
 
 const Chat = () => {
     const { messages, setMessages, chatId, setChatId } = useChat();
+    const [chatHistory, setChatHistory] = useState([]);
     const [input, setInput] = React.useState('');
     const [listening, setListening] = React.useState(false);
     const [recognition, setRecognition] = React.useState(null);
     const [showOptionalQuestions, setShowOptionalQuestions] = React.useState(false);
     const textareaRef = useRef(null); // Ref for the textarea
 
+    const [error, setError] = useState('')
+
+    const max_input_length = 800
+
     // Handle textarea resize
     const handleInputChange = (e) => {
         const { value } = e.target;
         setInput(value);
+
+        // Check if the input length exceeds maximum limit
+        if (value.length > max_input_length) {
+             setError("Your message is too long. Please limit your message to 150 words.")
+         } else {
+             setError("")
+         }
         const textarea = textareaRef.current;
         textarea.style.height = 'auto'; // Reset height
         textarea.style.height = `${textarea.scrollHeight}px`; // Set new height
@@ -46,12 +58,59 @@ const Chat = () => {
     };
 
     useEffect(() => {
+        const storedChatId = localStorage.getItem('chat_id');
+
+        if (storedChatId) {
+            setChatId(storedChatId);  // Use the existing chat ID
+            getChatHistory(storedChatId);  // Fetch and load chat history
+        } else {
+            console.log('No chat ID found in localStorage');
+            // Optionally: Inform the user that they need to start a chat
+        }
+    }, []);
+
+    const getChatHistory = async (existing_chat_id) => {
+        try {
+            const response = await axios.get(`http://127.0.0.1:8000/api/chat/history/?chat_id=${existing_chat_id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            });
+    
+            if (response.data && Array.isArray(response.data.history)) {
+                const previousMessages = response.data.history.flatMap(entry => ([
+                    { sender: 'user', text: entry.message, time: new Date(entry.timestamp) },
+                    { sender: 'bot', text: entry.response, time: new Date(entry.timestamp) }
+                ]));
+
+                const currentMessagesText = messages.map(msg => msg.text);
+                const filteredMessages = previousMessages.filter(
+                    msg => !messages.some(m => m.text === msg.text && m.time.getTime() === msg.time.getTime())
+                );
+
+                if (filteredMessages.length > 0) {
+                    setMessages(prevMessages => [
+                        // ...prevMessages,
+                        ...filteredMessages
+                    ]);
+                }
+                setShowOptionalQuestions(false)
+            } else {
+                console.error('Unexpected response format:', response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching chat history:', error);
+        }
+    }
+    
+
+    useEffect(() => {
         const initialBotMessage = {
             sender: 'bot', 
             text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I can help with grammar, essays, letters, and articles. Ask me anything or request practice exercises. 📝 \n\n`,
             time: new Date()
         }
-        if (messages.length === 0) {
+        if (messages.length === 0 && chatHistory.length === 0) {
             setMessages([initialBotMessage])
             setShowOptionalQuestions(true);
         }
@@ -75,7 +134,8 @@ const Chat = () => {
         } else {
             console.warn('Webkit Speech Recognition is not supported in this browser.');
         }
-    }, [messages, setMessages]);
+        
+    }, [messages, chatHistory, setMessages]);
 
     const startVoiceRecognition = () => {
         if (recognition) {
@@ -89,31 +149,8 @@ const Chat = () => {
         }
     };
 
-    const getChatHistory = async () => {
-        try {
-            const response = await axios.get('http://127.0.0.1:8000/api/chat/history', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access')}`
-                }
-            });
     
-            if (response && response.data) {
-                const previousMessages = response.data.flatMap(chat => chat.history.flatMap(entry => ([
-                    { sender: 'user', text: chat.message, time: new Date(entry.timestamp) },
-                    { sender: 'bot', text: chat.response, time: new Date(entry.timestamp) }
-                ])));
-                
-                setMessages(prevMessages => [
-                    prevMessages[0], // Keeping the initial bot message
-                    ...previousMessages
-                ]);
-            } else {
-                console.error('Invalid response format:', response);
-            }
-        } catch (error) {
-            console.error('Error fetching chat history:', error);
-        }
-    };
+    
 
     const sendMessage = async (message) => {
         if (message.trim()) {
@@ -132,7 +169,10 @@ const Chat = () => {
                     }
                 });
 
-                if (response && response.data && response.data.response) {
+                if (response.data.error) {
+                    setError(response.data.error)
+                }
+                else {
                     const botResponse = response.data.response;
 
                     const botMessage = { sender: 'bot', text: botResponse, time: new Date() };
@@ -141,11 +181,11 @@ const Chat = () => {
                     if (chatId === null) {
                         setChatId(response.data.chat_id);
                     }
+                    setError('')
                     // Hide optional questions after user interacts
                     setShowOptionalQuestions(false);
-                } else {
-                    console.error('Invalid response format:', response);
                 }
+                localStorage.setItem('chat_id', response.data.chat_id) 
             } catch (error) {
                 console.error('Error sending message:', error);
             }
@@ -163,6 +203,9 @@ const Chat = () => {
     }
 
     const handleSend = () => {
+        // if (input.length > max_input_length) {
+        //     setError(`Your message is too long. Please limit your message to ${max_input_length} characters.`)
+        // }
         sendMessage(input)
         setShowOptionalQuestions(false)
 
@@ -178,7 +221,7 @@ const Chat = () => {
             <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 text-sm rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
                                 <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
                             )}
@@ -196,7 +239,7 @@ const Chat = () => {
                                 <button 
                                     key={index} 
                                     onClick={() => handleQuestionClick(question)} 
-                                    className='p-2 bg-white text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
+                                    className='p-2 bg-white text-left text-sm text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
                                 >
                                     {question}
                                 </button>
@@ -205,6 +248,20 @@ const Chat = () => {
                     </div>
                 )}
             </div>
+            {error && (
+                <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-50'>
+                    <div className='relative max-w-md p-4 bg-red-200 text-sm text-red-800 rounded-lg shadow-lg'>
+                        <button 
+                            onClick={() => setError('')} 
+                            className='absolute top-2 right-2 text-md text-red-800 hover:text-red-600 focus:outline-none'
+                        >
+                            &times;
+                        </button>
+                        {error}
+                    </div>
+                </div>
+            )}
+
             <div className='flex px-3 items-end'>
                 <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'>
                     {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
@@ -219,7 +276,7 @@ const Chat = () => {
                             handleSend();
                         }
                     }}
-                    className={`flex-grow p-2 pl-4 border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
+                    className={`flex-grow p-2 pl-4 text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
                     placeholder='Type your message...'
                     rows={1}
                 />

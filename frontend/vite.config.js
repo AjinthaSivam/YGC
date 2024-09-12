@@ -7,6 +7,7 @@ export default defineConfig({
   build: {
     outDir: 'dist' // Specify the build output directory
   },
+  assetsInclude: ['**/*.wasm'], // Ensures WASM files are served as static assets
   server: {
     proxy: {
       '/api': 'http://localhost:8000'

@@ -6,3 +6,5 @@ class PastPaperChat(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     user_input = models.TextField()
     response = models.TextField()
+    input_tokens = models.IntegerField(default=0)
+    output_tokens = models.IntegerField(default=0)

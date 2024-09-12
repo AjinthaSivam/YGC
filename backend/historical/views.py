@@ -8,9 +8,40 @@ from .models import HistoricalChat, HistoricalChatHistory
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import re
+import tiktoken
 
 # Set your OpenAI API key
 openai.api_key = settings.OPENAI_API_KEY
+
+max_input_length = 200
+
+def limit_input_length(user_input, max_length=max_input_length):
+    if len(user_input) > max_length:
+        user_input = user_input[:max_length] + "..."
+        print(f"Input was too long. Truncated to {max_length} characters.")
+    return user_input
+
+# count tokens for a text
+def count_tokens(text, model='gpt-4o-mini'):
+    enc = tiktoken.encoding_for_model(model)
+    return len(enc.encode(text))
+
+# Function to truncate conversation history based on token count
+def truncate_conversation(history, max_tokens=3000):
+    total_tokens = 0
+    truncated_history = []
+
+    # Iterate from the most recent to the oldest message
+    for entry in reversed(history):
+        message_tokens = count_tokens(entry['content'])
+        if total_tokens + message_tokens > max_tokens:
+            break  # Stop adding messages if the limit is exceeded
+        total_tokens += message_tokens
+        truncated_history.insert(0, entry)  # Insert in reverse order to preserve history
+
+    return truncated_history
+
+
 
 # Use a cache or database for conversation history instead of a global variable
 from django.core.cache import cache
@@ -21,6 +52,15 @@ def historical_chat_view(request):
     try:
         data = json.loads(request.body)
         user_input = data.get('user_input', '')
+        
+        number_of_input_tokens = count_tokens(user_input)
+        
+        if number_of_input_tokens > max_input_length:
+            return JsonResponse({
+                'error': f"Input too long. Please limit your input to {max_input_length} characters."
+            }, status=400)
+        
+        user_input = limit_input_length(user_input)
         new_chat = data.get('new_chat', False)
         chat_id = data.get('chat_id')
         learner = request.user
@@ -28,6 +68,9 @@ def historical_chat_view(request):
         if new_chat or chat_id is None:
             # Start a new chat session
             cache.set(f'conversation_history_{learner.id}', [])
+
+            # Initialize chat history
+            chat_history = []
 
             # Create a new chat session in the HistoricalChat table
             new_chat = HistoricalChat.objects.create(
@@ -37,25 +80,22 @@ def historical_chat_view(request):
             )
 
             chat_id = new_chat.chat_id
+        else:
+            # Continue existing chat session
+            chat_history = cache.get(f'conversation_history_{learner.id}', [])
 
-        # Continue existing chat session
-        chat_history = cache.get(f'conversation_history_{learner.id}', [])
+            # Truncate conversation history to fit within token limits
+            chat_history = truncate_conversation(chat_history, max_tokens=3000)
 
         # Build the message history to provide context
         messages = [
             {
                 "role": "system",
                 "content": (
-                    "You are conversing with Dr. A.P.J. Abdul Kalam, known for his motivational style. "
-                    "Provide responses that are clear, direct, and inspiring. 🌟 "
-                    "Incorporate emojis to enhance engagement and use bullet points if needed. 📝💡 "
-                    "Encourage students to believe in their potential and strive for excellence. "
-                    "Keep responses concise to avoid lengthy replies. If the user asks off-topic questions, "
-                    "politely guide them back to relevant topics. 🌟"
+                    "You are Dr. A.P.J. Abdul Kalam. Provide clear, motivational responses with emojis and bullet points. Keep replies concise, inspire excellence, and guide users back to relevant topics if needed."
                 )
             }
         ]
-
 
         for entry in chat_history:
             messages.append({"role": entry['role'], "content": entry['content']})
@@ -64,10 +104,14 @@ def historical_chat_view(request):
         # Use OpenAI API to get assistant's response
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-            messages=messages
+            messages=messages,
+            max_tokens = 100
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
+        usage = response['usage']
+        input_tokens = usage['prompt_tokens']
+        output_tokens = usage['completion_tokens']
 
         # Add motivational touch to the response
         assistant_response = format_response(assistant_response)
@@ -81,11 +125,13 @@ def historical_chat_view(request):
         chat_history.append({"role": "assistant", "content": assistant_response})
         cache.set(f'conversation_history_{learner.id}', chat_history)
 
-        # Save chat history to database
+        # Save chat history to the database
         HistoricalChatHistory.objects.create(
             chat=HistoricalChat.objects.get(chat_id=chat_id),
             message=user_input,
-            response=assistant_response
+            response=assistant_response,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens
         )
 
         return JsonResponse({'response': assistant_response, 'chat_id': chat_id}, safe=False)

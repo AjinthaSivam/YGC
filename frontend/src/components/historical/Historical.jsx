@@ -153,7 +153,7 @@ const Historical = () => {
             <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-6 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 text-sm rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
                                 <img src={Kalaam} alt="kalaam" className="absolute w-10 h-10 rounded-full left-2 -top-5 h-8 w-8" />
                             )}
@@ -171,7 +171,7 @@ const Historical = () => {
                                 <button 
                                     key={index} 
                                     onClick={() => handleQuestionClick(question)} 
-                                    className='p-2 bg-white text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
+                                    className='p-2 bg-white text-sm text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
                                 >
                                     {question}
                                 </button>
@@ -194,7 +194,7 @@ const Historical = () => {
                             handleSend();
                         }
                     }}
-                    className={`flex-grow p-2 pl-4 border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
+                    className={`flex-grow p-2 pl-4 text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
                     placeholder='Type your message...'
                     rows={1}
                 />

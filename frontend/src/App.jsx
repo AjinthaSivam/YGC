@@ -21,27 +21,32 @@ import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
 import PastpaperChat from './pages/PastpaperChat';
 
+const isAuthenticated = () => {
+    return !!localStorage.getItem('access')
+}
+
 function App() {
     return (
         
             <Routes>
-                <Route path='/home/quiz' element= {<Quiz />} />
-                <Route path='/generalchat' element= {<GeneralChat />} />
-                <Route path='/pastpapercard' element= {<PastpaperCard />} />
-                <Route path="/pastpaper/:year" element={<PastpaperContent />} />
-                <Route path='/togglebot' element= {<PastpaperChat />} />
-                <Route path='/quizstart' element= {<QuizStart />} />
-                <Route path='/quiz' element= {<QuizContent />} />
-                <Route path='/legend' element= {<Legend />} />
-                <Route path="/home/historical" element={<Historical />} />
-                <Route path="/home" element={<ProtectedRoute />}>
-                    <Route index element={<Home />} />
-                    {/* Add other protected routes here */}
+                
+                <Route path="/" element={<ProtectedRoute />}>
+                    <Route index element={<GeneralChat />} />
+                    {/* <Route path='/home/quiz' element= {<Quiz />} /> */}
+                    <Route path='/generalchat' element= {<GeneralChat />} />
+                    <Route path='/pastpapercard' element= {<PastpaperCard />} />
+                    <Route path="/pastpaper/:year" element={<PastpaperContent />} />
+                    <Route path='/togglebot' element= {<PastpaperChat />} />
+                    <Route path='/quizstart' element= {<QuizStart />} />
+                    <Route path='/quiz' element= {<QuizContent />} />
+                    <Route path='/legend' element= {<Legend />} />
+                    <Route path="/home/historical" element={<Historical />} />
                 </Route>
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
 
                 {/* landing page */}
+                
                 <Route path="/land" element={<LandHome />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/downloads" element={<Downloads />} />
@@ -49,7 +54,7 @@ function App() {
                 <Route path="/eLibrary" element={<ELibrary />} />
                 <Route path="/navbar" element={<Navbar />} />
 
-                <Route path="/admin" element={<Admin />} />
+                {/* <Route path="/admin" element={<Admin />} /> */}
             </Routes>
         
     );
