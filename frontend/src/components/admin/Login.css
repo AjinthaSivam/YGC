@@ -1,0 +1,115 @@
+/* Login.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center-align items vertically */
+    padding: 20px;
+    height: 100vh;
+    background: linear-gradient(to bottom, #e0f7fa, #4fc3f7); /* Soft gradient background */
+  }
+  
+  .login-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding is included in width */
+  }
+  
+  h2 {
+    color: #107067; /* Dark teal color */
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .subtitle {
+    color: #4aaaa2; /* Light teal color */
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+  
+  
+  .input-group {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #04aaa2;
+    padding: 10px;
+    width: 100%; /* Full width for input groups */
+    max-width: 350px; /* Adjust maximum width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+  
+  .input-group:focus-within {
+    border-color: #4fc3f7; /* Accent color on focus */
+  }
+  
+  .input-group input {
+    border: none;
+    outline: none;
+    width: 100%; /* Full width of the input group */
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .icon {
+    color: #107067; /* Dark teal color */
+    font-size: 1.5rem;
+    margin-right: 10px; /* Adjust spacing between icon and input */
+  }
+  
+  .error-message {
+    color: #ff4d4d; /* Red color for error messages */
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #107067; /* Dark teal color */
+    color: #ffffff; /* White text color */
+    border: none; /* Remove default border */
+    border-radius: 8px;
+    font-size: 1.2rem; /* Larger font size */
+    cursor: pointer;
+    display: inline-flex; /* Ensures centering */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0.05px  0.5px 0.08px 1px rgba(114, 117, 117, 0.692);
+    font-weight: 500; /* Slightly bolder text */
+    width: 100%; /* Full width button */
+    max-width: 350px; /* Adjust maximum width */
+    height: 40px; /* Fixed height */
+  }
+  
+  button:hover {
+    background-color: #0c4b41; /* Darker teal for hover effect */
+    color: #f9f9f9;
+    transform: translateY(-2px); /* Slight lift on hover */
+  }
+  
+  .button-icon {
+    font-size: 1.2rem;
+    margin-right: 10px; /* Spacing between icon and text */
+  }
+  
+  .forgot-password {
+    display: block;
+    color: #4aaaa2; /* Light teal color */
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .forgot-password:hover {
+    color: #107067; /* Dark teal color on hover */
+    text-decoration: underline;
+  }
+  

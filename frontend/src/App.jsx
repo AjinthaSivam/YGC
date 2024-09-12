@@ -14,7 +14,15 @@ import Downloads from './components/landing page/Downloads';
 import About from './components/landing page/About';
 import ELibrary from './components/landing page/ELibrary';
 import Navbar from './components/landing page/Navbar';
-import Admin from './components/admin/Admin';
+import Dashboard from './components/admin/Dashboard';
+import Teachers from './components/admin/Teachers';
+import Courses from './components/admin/Courses';
+import Students from './components/admin/Students';
+import Profile from './components/admin/Profile';
+import Settings from './components/admin/Settings';
+import Books from './components/admin/Books';
+import Login from './components/admin/Login';
+import AdminPanel from './components/admin/AdminPanel';
 
 function App() {
     return (
@@ -38,7 +46,15 @@ function App() {
                 <Route path="/eLibrary" element={<ELibrary />} />
                 <Route path="/navbar" element={<Navbar />} />
 
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin" element={<AdminPanel/>}/> 
+                <Route path="/admin/login" element={<Login />} />
+                <Route path="/admin/dashboard" element={<Dashboard/>}/>
+                <Route path="/admin/courses" element={<Courses/>}/>
+                <Route path="/admin/teachers" element={<Teachers/>}/>
+                <Route path="/admin/students" element={<Students/>}/>
+                <Route path="/admin/settings" element={<Settings/>}/>
+                <Route path="/admin/profile" element={<Profile/>}/>
+                <Route path="/admin/books" element={<Books/>}/>
             </Routes>
         
     );

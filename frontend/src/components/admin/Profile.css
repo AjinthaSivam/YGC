@@ -1,0 +1,13 @@
+ .container {
+    padding: 20px;
+    background-Color: #f9f9f9;
+    border-Radius: 8px;
+    box-Shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .heading {
+    font-Size: 24px;
+    margin-Bottom: 15px;
+  }
+  .text {
+    font-Size: 16px;
+  }
