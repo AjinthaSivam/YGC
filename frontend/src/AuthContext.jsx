@@ -17,6 +17,7 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('refresh');
         localStorage.removeItem('username');
         localStorage.removeItem('chat_id')
+        localStorage.removeItem('historical_chat_id')
         setIsAuthenticated(false);
       }
   return (

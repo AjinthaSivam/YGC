@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import BotLogo from './chat/bot.png';
 import { MdArrowUpward, MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-icons/md';
 import axios from 'axios';
+import { IoCloseOutline } from "react-icons/io5";
 
-const ToggleBot = ({ selected_year }) => {
+const ToggleBot = ({ selected_year, handleClose }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [listening, setListening] = useState(false);
@@ -11,6 +12,47 @@ const ToggleBot = ({ selected_year }) => {
     const textareaRef = useRef(null);
 
     const handleInputChange = (e) => setInput(e.target.value);
+
+    useEffect(() => {
+        getChatHistory()
+    }, [])
+
+    const getChatHistory = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/pastpaper/history/", {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            })
+
+            // console.log(response.data[0])
+
+            if (response.data && Array.isArray(response.data)) {
+
+                const previousMessages = response.data.map(entry => ([
+                    { sender: 'user', text: entry.message, time: new Date(entry.timestamp) },
+                    { sender: 'bot', text: entry.response, time: new Date(entry.timestamp) }
+                ])).flat();
+    
+                const filteredMessages = previousMessages.filter(
+                    msg => !messages.some(m => m.text === msg.text && m.time.getTime() === msg.time.getTime())
+                );
+    
+                if (filteredMessages.length > 0) {
+                    setMessages(prevMessages => [
+                        ...filteredMessages
+                    ]);
+                }
+            } else {
+                console.error('Unexpected response format:', response.data)
+            }
+        
+        }
+        catch (error) {
+            console.error('Error fetching chat history:', error)
+
+        }
+    }
 
     useEffect(() => {
         scrollToBottom()
@@ -74,7 +116,10 @@ const ToggleBot = ({ selected_year }) => {
 
     return (
         <div className='flex flex-col h-full px-4 pb-3 w-full bg-white rounded-b-md'>
-            <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
+            <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+            <IoCloseOutline size={24} />
+            </button>
+            <div className='flex-grow overflow-auto mt-12 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`relative max-w-3xl p-4 rounded-lg text-sm ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>

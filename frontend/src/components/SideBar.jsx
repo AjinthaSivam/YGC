@@ -37,7 +37,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                 <div className='py-5 flex justify-end'>
                     <HiMenuAlt3 size={26} className='cursor-pointer' onClick={() => setOpen(!open)} />
                 </div>
-                <div className='mt-4 flex flex-col gap-4 relative'>
+                <div className='mt-4 flex flex-col gap-4 relative z-1000'>
                     {
                         menus.map((menu, i) => (
                             <div key={i}>

@@ -303,3 +303,28 @@ def format_response(response):
     response = re.sub(r'(\s+</ol>)', r'</ol>', response)
     
     return response
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def get_chat_history (request):
+    learner = request.user
+    
+    try:
+        chats = PastPaperChat.objects.filter(learner=learner).order_by('timestamp')
+        
+        chat_history = []
+        
+        for chat in chats:
+            chat_history.append({
+                'chat_id': chat.id,
+                'learner': chat.learner_id,
+                'message': chat.user_input,
+                'response': chat.response,
+                'timestamp': chat.timestamp
+            })
+        
+        return JsonResponse(chat_history, safe=False)
+    except PastPaperChat.DoesNotExist:
+        return JsonResponse({'error': 'Chat not found.'}, status=404)
+    

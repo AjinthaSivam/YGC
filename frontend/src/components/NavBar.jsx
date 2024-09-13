@@ -34,7 +34,7 @@ const NavBar = () => {
   const initials = username.substring(0, 2).toUpperCase();
 
   return (
-    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-[#04aaa2] py-4 px-6 justify-between items-center z-50'>
+    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-[#04aaa2] py-4 px-6 justify-between items-center'>
       <div className='flex-1 flex justify-center'>
         <h1 className='text-xl text-[#ffffff] font-bold'>E D U T E C H</h1>
       </div>

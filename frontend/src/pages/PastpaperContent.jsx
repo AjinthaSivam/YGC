@@ -8,18 +8,20 @@ const PastpaperContent = () => {
   const { year } = useParams();  // Get the year parameter from the URL
   const [pdfUrl, setPdfUrl] = useState(null);  // State for the past paper URL
   const [isChatOpen, setIsChatOpen] = useState(false);  // State for chatbot visibility
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);  // Detect if the device is mobile
   const navigate = useNavigate();
+
+  const handleClose = (e) => {
+    e.preventDefault()
+    setIsChatOpen(false)
+  }
 
   // Function to toggle the chatbot
   const toggleChat = () => {
-    if (isMobile) {
-      // Navigate to the chatbot page on mobile
-      navigate('/togglebot', { state: year });
-      setIsChatOpen(false);
+    if (window.innerWidth <= 768) {  // Small screen (mobile)
+      setIsChatOpen(false)
+      navigate('/togglebot', { state: year });  // Navigate to the chatbot page on mobile
     } else {
-      // Toggle chatbot visibility on larger screens
-      setIsChatOpen(!isChatOpen);
+        setIsChatOpen(!isChatOpen);  // Toggle chatbot visibility on larger screens
     }
   };
 
@@ -32,25 +34,6 @@ const PastpaperContent = () => {
 
     fetchPdfUrl();
   }, [year]);
-
-  // Handle screen resizing to detect mobile view dynamically
-  useEffect(() => {
-    const handleResize = () => {
-      const isCurrentlyMobile = window.innerWidth <= 768;
-      if (isMobile !== isCurrentlyMobile) {
-        setIsMobile(isCurrentlyMobile);  // Update `isMobile` state when screen size changes
-        if (isCurrentlyMobile && isChatOpen) {
-          setIsChatOpen(false);  // Close the chatbot if switching to mobile and chat is open
-        }
-      }
-    };
-
-    // Attach the event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup the event listener when the component unmounts
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMobile, isChatOpen]);
 
   // Ensure PDF URL is set before rendering the Paper component
   if (!pdfUrl) {
@@ -69,7 +52,7 @@ const PastpaperContent = () => {
             isChatOpen={isChatOpen}
             toggleChat={toggleChat}
             selected_year={year}
-            isMobile={isMobile}
+            handleClose={handleClose}
           />
         </div>
       </div>

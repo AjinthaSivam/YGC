@@ -22,6 +22,10 @@ const Chat = () => {
     const [showOptionalQuestions, setShowOptionalQuestions] = React.useState(false);
     const textareaRef = useRef(null); // Ref for the textarea
 
+    useEffect(() => {
+        // window.location.reload()
+    }, [])
+
     const [error, setError] = useState('')
 
     const max_input_length = 800

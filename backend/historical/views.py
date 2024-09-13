@@ -105,7 +105,7 @@ def historical_chat_view(request):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=messages,
-            max_tokens = 100
+            max_tokens = 150
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
@@ -189,7 +189,7 @@ def format_response(response):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def end_conversation(request):
+def end_historical_conversation(request):
     try:
         learner = request.user
 
@@ -207,22 +207,32 @@ def end_conversation(request):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_chat_history(request):
+def get_historical_chat_history(request):
     learner = request.user
-    chats = HistoricalChat.objects.filter(learner=learner).order_by('-chat_started_at')
-    chat_data = []
+    chat_id = request.GET.get('chat_id')
+    
+    if chat_id:
+        try:
+            chat = HistoricalChat.objects.get(learner=learner, chat_id=chat_id)
+            chats = HistoricalChat.objects.filter(learner=learner).order_by('-chat_started_at')
+            chat_data = []
 
-    for chat in chats:
-        history = HistoricalChatHistory.objects.filter(chat=chat).order_by('timestamp')
-        chat_data.append({
-            'chat_id': chat.id,
-            'chat_title': chat.chat_title,
-            'chat_started_at': chat.chat_started_at,
-            'chat_ended_at': chat.chat_ended_at,
-            'history': [
-                {'message': entry.message, 'response': entry.response, 'timestamp': entry.timestamp}
-                for entry in history
-            ]
-        })
+            for chat in chats:
+                history = HistoricalChatHistory.objects.filter(chat=chat).order_by('timestamp')
+                chat_data.append({
+                    'chat_id': chat.chat_id,
+                    'chat_title': chat.chat_title,
+                    'chat_started_at': chat.chat_started_at,
+                    'chat_ended_at': chat.chat_ended_at,
+                    'history': [
+                        {'message': entry.message, 'response': entry.response, 'timestamp': entry.timestamp}
+                        for entry in history
+                    ]
+                })
+                return JsonResponse(chat_data, safe=False)
+        except HistoricalChat.DoesNotExist:
+            return JsonResponse({'error': 'Chat not found.'}, status=404)
 
-    return JsonResponse(chat_data, safe=False)
+    else:
+        # Handle the case when chat_id is not provided
+        return JsonResponse({'error': 'chat_id parameter is required.'}, status=400)

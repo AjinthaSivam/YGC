@@ -5,7 +5,7 @@ from learner import views as learner_views
 import quiz.urls as quiz_urls
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.permissions import IsAuthenticated
-from historical.views import historical_chat_view
+from historical.views import historical_chat_view, get_historical_chat_history
 import pastpaper.urls
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     
     # Historical chat related
     path('api/historical/chat/', historical_chat_view, name='historical_chat_view'),
+    path('api/historical_chat_history/', get_historical_chat_history, name='get_historical_chat_history'),
     
     # Pastpaper chat related
     path('pastpaper/', include(pastpaper.urls))
