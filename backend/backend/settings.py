@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'chat',
     'learner',
     'historical',
+    'pastpaper',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt'
@@ -99,10 +100,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER', 'root'),
+        'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),  # Set to 'localhost' if running locally
-        'PORT': os.getenv('DB_PORT', '3306'),  # Usually '3306'
+        'HOST': os.getenv('DB_HOST'),  # Set to 'localhost' if running locally
+        'PORT': os.getenv('DB_PORT'),  # Usually '3306'
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
@@ -145,8 +146,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365*100),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365*100),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -176,12 +177,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+# Base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -3,33 +3,26 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { GrResources } from "react-icons/gr";
 import { MdOutlineQuiz, MdOutlineChatBubbleOutline } from "react-icons/md";
 import { FaUserAstronaut } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
     const [open, setOpen] = useState(false);
-    const [submenuOpen, setSubmenuOpen] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState('');
 
+    const navigate = useNavigate()
+
     const menus = [
-        { name: "Chat Bot", key: 'chatbot', icon: MdOutlineChatBubbleOutline },
-        { name: "Past Papers", key: 'pastpapers', icon: GrResources },
-        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz, submenu: [
-            { name: 'Easy', key: 'easy' },
-            { name: 'Medium', key: 'medium' },
-            { name: 'Hard', key: 'hard' },
-        ]},
-        { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut },
+        { name: "Chat Bot", key: 'chatbot', icon: MdOutlineChatBubbleOutline, path: '/generalchat' },
+        { name: "Past Papers", key: 'pastpapers', icon: GrResources, path: '/pastpapercard' },
+        { name: "Quiz", key: 'quiz', icon: MdOutlineQuiz, path: '/quizstart'},
+        { name: "Historical Character", key: 'historicalCharacter', icon: FaUserAstronaut, path: '/legend' },
     ];
 
     const handleMenuClick = (menu) => {
-        console.log(`Clicked menu: ${menu.key}`); // Debugging log
-        if (menu.key === 'quiz') {
-            setOpen(true);
-            setSubmenuOpen(!submenuOpen);
-        } else {
-            setSelectedComponent(menu.key);
-            setSelectedMenu(menu.key);  // Update selected menu
-            setSubmenuOpen(false);
-        }
+            navigate(menu.path)
+            // setSelectedComponent(menu.key);
+            // setSelectedMenu(menu.key);  // Update selected menu
+        
     };
 
     const handleSubmenuClick = (submenu) => {
@@ -44,7 +37,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                 <div className='py-5 flex justify-end'>
                     <HiMenuAlt3 size={26} className='cursor-pointer' onClick={() => setOpen(!open)} />
                 </div>
-                <div className='mt-4 flex flex-col gap-4 relative'>
+                <div className='mt-4 flex flex-col gap-4 relative z-1000'>
                     {
                         menus.map((menu, i) => (
                             <div key={i}>
@@ -62,24 +55,6 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                                         {menu.name}
                                     </h2>
                                 </div>
-
-                                {
-                                    menu.submenu && submenuOpen && (
-                                        <div className={`pl-12 ${open ? 'block' : 'hidden'}`}>
-                                            {
-                                                menu.submenu.map((submenu, j) => (
-                                                    <div
-                                                        key={j}
-                                                        onClick={() => handleSubmenuClick(submenu)}
-                                                        className='flex items-center gap-3.5 font-medium p-2 hover:bg-[#b4f2ef] rounded-md cursor-pointer'
-                                                    >
-                                                        <h2 className='whitespace-pre'>{submenu.name}</h2>
-                                                    </div>
-                                                ))
-                                            }
-                                        </div>
-                                    )
-                                }
                             </div>
                         ))
                     }

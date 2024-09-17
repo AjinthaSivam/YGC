@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import axios from 'axios'
+import { IoCloseOutline } from "react-icons/io5";
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -72,9 +73,17 @@ const Signup = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleClose = (e) => {
+    e.preventDefault()
+    navigate('/land')
+  }
+
   return (
     <div className='min-h-screen flex items-center justify-center'>
-        <div className='rounded-2xl shadow-lg max-w-3xl p-5 px-16 py-6'>
+        <div className='relative rounded-2xl shadow-lg max-w-3xl p-5 px-16 py-6'>
+          <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+            <IoCloseOutline size={24} />
+          </button>
           <div className='mb-4 p-3 text-center'>
             <p className='text-md text-[#04aaa2] text-'>Sign up today to master your subjects <br/> with EduBot's AI-powered learning! 🚀🤖</p>
           </div>

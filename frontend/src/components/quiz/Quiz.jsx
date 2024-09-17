@@ -3,7 +3,7 @@ import axios from 'axios';
 import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
 
-const MCQGenerator = ({ difficulty, setSelectedComponent }) => {
+const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
     const [questions, setQuestions] = useState([]);
     const [userAnswers, setUserAnswers] = useState({});
     const [score, setScore] = useState(null);
@@ -11,7 +11,6 @@ const MCQGenerator = ({ difficulty, setSelectedComponent }) => {
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false); // Loading state for fetching quiz
 
-    const category = 'parts_of_speech and tenses';
 
     useEffect(() => {
         const storedQuestions = localStorage.getItem('questions');
@@ -39,6 +38,12 @@ const MCQGenerator = ({ difficulty, setSelectedComponent }) => {
 
     const getQuiz = async () => {
         setLoading(true); // Set loading state while fetching quiz
+        // data_load = {
+        //     difficulty: difficulty,
+        //     category: category
+        // }
+
+        // console.log(data_load)
         try {
             const response = await axios.post('http://127.0.0.1:8000/quiz/generate_questions/', {
                 category,
@@ -96,8 +101,14 @@ const MCQGenerator = ({ difficulty, setSelectedComponent }) => {
     };
 
     return (
-        <div className='flex mt-6 p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
+        <div className='flex p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
             <div className='flex-col flex-grow overflow-auto mb-4 overflow-y-scroll scrollbar-hidden'>
+                <div className='pb-2 border-b border-[#04aaa2] max-w-xl mb-8'>
+                    <h1 className='text-2xl text-[#393E46] font-bold my-4'>
+                        {category} - {difficulty} Level
+                    </h1>
+                </div>
+                
                 {loading && <p>Loading quiz...</p>}
                 {showResults ? (
                     <QuizResult questions={questions} userAnswers={userAnswers} score={score} setSelectedComponent={setSelectedComponent} />
