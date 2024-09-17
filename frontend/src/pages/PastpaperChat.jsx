@@ -27,7 +27,7 @@ const PastpaperChat = () => {
 
     const getChatHistory = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/pastpaper/history/", {
+            const response = await axios.get("http://127.0.0.1:8001/pastpaper/history/", {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }

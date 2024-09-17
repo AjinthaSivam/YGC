@@ -5,10 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8001:8001"
     env_file:
       - backend/.env
-    command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
     volumes:
       - ./backend:/app/backend  # Sync local backend code
       - ./backend/static:/app/backend/static  # Sync local static files

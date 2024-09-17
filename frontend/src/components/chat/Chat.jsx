@@ -75,7 +75,7 @@ const Chat = () => {
 
     const getChatHistory = async (existing_chat_id) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/chat/history/?chat_id=${existing_chat_id}`, {
+            const response = await axios.get(`http://127.0.0.1:8001/api/chat/history/?chat_id=${existing_chat_id}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -163,7 +163,7 @@ const Chat = () => {
             setInput('');
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
+                const response = await axios.post('http://127.0.0.1:8001/api/chat/', {
                     user_input: message,
                     new_chat: chatId === null,
                     chat_id: chatId

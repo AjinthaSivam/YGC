@@ -42,7 +42,7 @@ const Signup = () => {
 
     try {
       console.log('Form Data:', formData);
-      const response = await axios.post('http://127.0.0.1:8000/api/register/', formData)
+      const response = await axios.post('http://127.0.0.1:8001/api/register/', formData)
       console.log('Response:', response.data);
       localStorage.setItem('access', response.data.access)
       // localStorage.setItem('user', JSON.stringify(response.data.user))

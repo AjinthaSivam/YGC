@@ -14,7 +14,7 @@ function QuizPage() {
   const fetchQuestions = async (category = '', difficulty = '') => {
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/quiz/generate_questions/',
+        'http://127.0.0.1:8001/quiz/generate_questions/',
         {
           category: category,
           difficulty: difficulty

@@ -53,9 +53,9 @@ COPY --from=frontend /frontend/dist /app/backend/static/
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
 # Expose ports for Django and react
-EXPOSE 8000
+EXPOSE 8001
 
 # Run migrations, collectstatic for django, and start the django server
-CMD bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+CMD bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
 
 
