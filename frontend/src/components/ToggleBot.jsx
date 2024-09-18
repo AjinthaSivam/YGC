@@ -19,7 +19,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
 
     const getChatHistory = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/pastpaper/history/", {
+            const response = await axios.get("http://127.0.0.1:8001/pastpaper/history/", {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -78,7 +78,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
             console.log(data_to_send)
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/pastpaper/api/', {
+                const response = await axios.post('http://127.0.0.1:8001/pastpaper/api/', {
                     user_input: message,
                     selected_year: selected_year
                 }, {

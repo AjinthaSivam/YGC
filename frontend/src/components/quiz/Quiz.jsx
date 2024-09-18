@@ -45,7 +45,7 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
 
         // console.log(data_load)
         try {
-            const response = await axios.post('http://127.0.0.1:8000/quiz/generate_questions/', {
+            const response = await axios.post('http://127.0.0.1:8001/quiz/generate_questions/', {
                 category,
                 difficulty
             });
