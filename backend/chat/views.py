@@ -132,8 +132,6 @@ def chat_view(request):
 
         return JsonResponse({'response': assistant_response, 'chat_id': chat_id}, safe=False)
 
-    except TokenLimitExceededError:  # Custom exception for token limit issues
-        return JsonResponse({'error': 'Token limit exceeded, please shorten your message.'}, status=400)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
