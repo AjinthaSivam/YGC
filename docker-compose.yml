@@ -9,6 +9,8 @@ servces:
     build:
       context: .
       dockerfile: Dockerfile
+    expose:
+      - "8001"
     env_file:
       - backend/.env
     networks:
@@ -24,6 +26,8 @@ servces:
     build:
       context: frontend
       dockerfile: Dockerfile
+    expose:
+      - "80"
     container_name: frontend_container
 
   mysql_db:
