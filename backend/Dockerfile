@@ -4,7 +4,7 @@ FROM python:3.12
 WORKDIR /app
 
 # Copy the backend files from the backend stage
-COPY ./backend /app/backend
+COPY . /app/backend
 
 # Create static directory if not exists
 RUN mkdir -p /app/backend/static
