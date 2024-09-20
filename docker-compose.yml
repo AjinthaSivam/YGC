@@ -1,13 +1,18 @@
-services:
+networks:
+  app:
+
+volumes:
+  mysql_data:
+servces:
   backend:
     container_name: backend_container
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8001:8001"
     env_file:
       - backend/.env
+    networks:
+      - app
     command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
     volumes:
       - ./backend:/app/backend  # Sync local backend code
@@ -17,36 +22,30 @@ services:
 
   frontend:
     build:
-      context: .
+      context: frontend
       dockerfile: Dockerfile
-      target: frontend
     container_name: frontend_container
-    command: npm run dev
-    volumes:
-      - ./frontend:/app/frontend
-    ports:
-      - "5173:5173"
 
   mysql_db:
     container_name: mysql_con_2
     image: mysql
     restart: always
-    ports:
-      - "3306:3306"
+    networks:
+      - app
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=edutech_newdb
       - MYSQL_USER=ajintha
       - MYSQL_PASSWORD=ajintha12345
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin_con_2
     image: phpmyadmin
     restart: always
-    ports:
-      - "8080:80"
+    networks:
+      - app
     environment:
       PMA_HOST: mysql_db
       MYSQL_ROOT_PASSWORD: root

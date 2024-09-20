@@ -6,6 +6,7 @@ import QuizResult from './QuizResult';
 const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
     const [questions, setQuestions] = useState([]);
     const [userAnswers, setUserAnswers] = useState({});
+    const [quizId, setQuizId] = useState(null)
     const [score, setScore] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showResults, setShowResults] = useState(false);
@@ -13,28 +14,9 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
 
 
     useEffect(() => {
-        const storedQuestions = localStorage.getItem('questions');
-        const storedUserAnswers = localStorage.getItem('userAnswers');
-        const storedScore = localStorage.getItem('score');
+        getQuiz()
+    }, [difficulty, category]);
 
-        if (storedQuestions) {
-            setQuestions(JSON.parse(storedQuestions));
-        } else {
-            getQuiz();
-        }
-
-        if (storedUserAnswers) {
-            setUserAnswers(JSON.parse(storedUserAnswers));
-        }
-
-        if (storedScore) {
-            setScore(JSON.parse(storedScore));
-        }
-    }, [difficulty]);
-
-    useEffect(() => {
-        localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
-    }, [userAnswers]);
 
     const getQuiz = async () => {
         setLoading(true); // Set loading state while fetching quiz
@@ -48,12 +30,19 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
             const response = await axios.post('http://127.0.0.1:8001/quiz/generate_questions/', {
                 category,
                 difficulty
-            });
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            }
+        );
             setQuestions(response.data.questions);
+            setQuizId(response.data.quiz.id)
             setScore(null);  // Reset score on new fetch
             setShowResults(false);  // Reset showResults on new fetch
-            localStorage.setItem('questions', JSON.stringify(response.data.questions));
-            localStorage.removeItem('userAnswers');  // Clear previous user answers
+            // localStorage.setItem('questions', JSON.stringify(response.data.questions));
+            // localStorage.removeItem('userAnswers');  // Clear previous user answers
         } catch (error) {
             console.error('Error getting quiz:', error);
             // Handle error state or retry logic if necessary
@@ -62,10 +51,10 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
         }
     };
 
-    const handleAnswerChange = (questionIndex, answer) => {
+    const handleAnswerChange = (questionId, answer) => {
         setUserAnswers({
             ...userAnswers,
-            [questionIndex]: answer
+            [questionId]: answer
         });
     };
 
@@ -79,21 +68,38 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
         });
         const calculatedScore = ((correctAnswers / questions.length) * 100);
         setScore(calculatedScore);
-
-        localStorage.setItem('score', JSON.stringify(calculatedScore));
     };
 
     const handleFinishQuiz = () => {
-        calculateScore();
         setShowModal(true);
     };
 
-    const handleConfirmFinish = () => {
-        setShowModal(false);
-        setShowResults(true);
-        localStorage.removeItem('questions');
-        localStorage.removeItem('userAnswers');
-        localStorage.removeItem('score');
+    const handleConfirmFinish = async () => {
+        const answers = Object.keys(userAnswers).map((questionId) => ({
+            question_id: questionId,
+            user_answer: userAnswers[questionId]
+        }))
+
+        try {
+            const response = await axios.post(`http://127.0.0.1:8001/quiz/submit_quiz/${quizId}/`,
+                {
+                    answers: answers
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access')}`
+                    }
+                }
+            )
+            console.log(response.data.score)
+            setScore(response.data.score)
+            setShowModal(false);
+            setShowResults(true);
+        }
+        catch {
+            console.error("Error submitting quiz")
+        }
+        
     };
 
     const handleCancelFinish = () => {
