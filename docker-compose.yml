@@ -11,8 +11,11 @@ services:
       dockerfile: Dockerfile
     expose:
       - "8001"
-    env_file:
-      - backend/.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=edutech_newdb
+      - MYSQL_USER=ajintha
+      - MYSQL_PASSWORD=ajintha12345
     networks:
       - app
     command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
