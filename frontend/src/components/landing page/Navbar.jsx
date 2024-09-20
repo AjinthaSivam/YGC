@@ -24,7 +24,7 @@ const Navbar = ({ toggleDarkMode }) => {
       </div>
 
       {/* Register Now Button */}
-      <a href="http://localhost:5173/signup" className="register-button">
+      <a href="/signup" className="register-button">
         Sign Up
       </a>
 
