@@ -5,9 +5,8 @@ volumes:
   mysql_data:
 services:
   backend:
-    container_name: backend_container
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
     expose:
       - "8001"
@@ -18,10 +17,6 @@ services:
       - MYSQL_PASSWORD=ajintha12345
     networks:
       - app
-    command: bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
-    volumes:
-      - ./backend:/app/backend  # Sync local backend code
-      - ./backend/static:/app/backend/static  # Sync local static files
     depends_on:
       - mysql_db
 
