@@ -30,7 +30,6 @@ services:
     container_name: frontend_container
 
   mysql_db:
-    container_name: mysql_con_2
     image: mysql
     restart: always
     networks:
