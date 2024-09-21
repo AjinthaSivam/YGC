@@ -39,12 +39,20 @@
   background-color: transparent;
 }
 
-.navbar-brand h1,
-.navbar-menu a {
+.navbar-brand h1 {
   margin: 0 15px;
   text-decoration: none;
   color: #fff;
   font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.navbar-menu a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
   padding: 8px 15px;
   border-radius: 5px;
 }
@@ -63,7 +71,7 @@
   border: 0.5px solid #ccc;
   border-radius: 5px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   transition: background-color 0.3s ease;
 }
 

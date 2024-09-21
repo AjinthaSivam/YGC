@@ -22,12 +22,13 @@
 .welcome-section h1 {
   font-size: 2rem;
   margin-bottom: 10px;
-  font-weight: 550;
+  font-weight: 400;
   color: #02524d;
 }
 
 .welcome-section h2 {
   font-size: 1.8rem;
+  letter-spacing: 0.5px;
   margin-bottom: 10px;
   font-weight: 500;
   color: #292929;
@@ -76,9 +77,10 @@
 }
 
 .hero-section h1 {
-  font-size: 2.5em;
+  font-size: 2rem;
   color: #292929;
   margin-bottom: 10px;
+  letter-spacing: 0.5px;
   text-shadow: 2px 2px 8px rgba(241, 240, 240, 0.7); /* Strong shadow for visibility */
 }
 .dark-mode .hero-section h1 {
@@ -110,9 +112,9 @@
   border-radius: 8px;
   text-decoration: none;  
   transition: background-color 0.3s ease;
-  font-weight: bold;
+  font-weight: 600;
   border: #50747280 1px solid;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 
@@ -134,29 +136,29 @@
   margin-top: 30px;
 }
 #about-us{
-  background-color: #7fd1ae;
+  background-color: #9af0cb;
 }
 #downloads{
-  background-color: #a2d7bf;
+  background-color: #c3ffbd;
   
 }
 #elibrary{
-  background-color: #a3d0be;
+  background-color: #bbf5e8;
 }
 #success-stories{
-  background-color: #d2e7d2;
+  background-color: #E6F7F6;
 }
 .dark-mode #about-us{
-  background-color: #185459;
+  background-color: #02524d;
 }
 .dark-mode #downloads{
-  background-color: #006c71;
+  background-color: #006575;
 }
 .dark-mode #elibrary{
-  background-color: #647c76;
+  background-color: #2a749a;
 }
 .dark-mode #success-stories{
-  background-color: #4f617a;
+  background-color: #6a80b6;
 }
 
 .about-us-item {
@@ -169,17 +171,15 @@
   border-radius: 12px;
 }
 .about-us-item:hover,
-.book-card:hover,
-.about-us:hover,
-.story-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.bookcard:hover,
+.story-card:hover {  
+  transform: translateY(-2px);
+  box-shadow: 0.5px 2px 20px 2px rgba(0, 0, 0, 0.3); /* Adjusted shadow for better effect */
 }
 .dark-mode .about-us-item:hover,
-.dark-mode .book-card:hover,
-.dark-mode .about-us:hover,
+.dark-mode .bookcard:hover,
 .dark-mode .story-card:hover {
-  transform: translateY(-5px);
+  transform:translateY(-2px);
   box-shadow: 0.5px 2px 20px 2px rgb(255, 255, 255);
 }
 
@@ -194,7 +194,7 @@
   justify-content: center;
   gap: 20px;
 }
-.about-us-item, .book-card, .story {
+.about-us-item, .bookcard, .story {
   width: 30%;
   max-width: 300px;
   margin-bottom: 20px;
@@ -202,28 +202,22 @@
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-decoration: bold;
+  text-decoration:bold;
   border:#8383832c 0.1px solid;
 }
-.dark-mode .book-card, .dark-mode .story,
+.dark-mode .bookcard, .dark-mode .story,
 .dark-mode .about-us-item, .dark-mode .story-card {
   color:#ddd;
   background-color: #292929;
 }
-.book-image, .story img {
+.book-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
-}
-.story img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  padding: 20px;
 }
 
 .see-more-button {
-  background-color: #037771;
+  background-color: #02524d;
   color: white;
   padding: 12px 25px;
   border-radius: 25px;
@@ -231,7 +225,7 @@
   display: inline-block;
   margin-top: 20px;
   font-weight: 500;
-  border: #4fc4be 1px solid;
+  border: #cccccc50 1px solid;
 }
 
 .contact-content {
@@ -254,6 +248,35 @@
   gap: 10px;
 }
 
+.bookcard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  border: #8383832c 0.1px solid;
+}
+
+.book-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.bookcard h3 {
+  font-size: 1.3em;
+  color: #107067;
+  margin-bottom: 10px;
+}
+
+.bookcard p {
+  font-size: 1em;
+  color: #424141;
+  line-height: 1.6;
+}
 .input-group input,
 .input-group textarea {
   flex: 1;
@@ -264,7 +287,7 @@
 }
 
 .contact-btn {
-  background-color: #037771;
+  background-color: #02524d;
   color: white;
   padding: 12px 50px;
   border-radius: 25px;
@@ -276,7 +299,10 @@
 }
 .see-more-button:hover,
 .contact-btn:hover {
-  background-color: #02524d;
+  
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for better effect */
+
 }
 #contact{
   background-color: #fff;
@@ -364,7 +390,7 @@
     align-items: center;
   }
 
-  .book-card, .story {
+  .bookcard, .story {
     width: 100%;
   }
   .contact-content {
@@ -407,8 +433,11 @@
   width: 100%;
   padding: 20px;
   height: auto;
-  border-bottom: 4px solid #4fc4be;
+  border-bottom: 4px solid #4aaaa2;
+
 }
+
+
 
 .story-content {
   padding: 20px;

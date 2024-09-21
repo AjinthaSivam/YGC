@@ -1,31 +1,34 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import Courses from "./Courses";  // Adjusted the path
-import Books from "./Books";      // Adjusted the path
-import Teachers from "./Teachers"; // Adjusted the path
-import Students from "./Students"; // Adjusted the path
-import Settings from "./Settings"; // Adjusted the path
-import Profile from "./Profile";   // Adjusted the path
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import Courses from "./Courses";
+import Books from "./Books";
+import Teachers from "./Teachers";
+import Students from "./Students";
+import Settings from "./Settings";
+import Profile from "./Profile";
 import Dashboard from "./Dashboard";
-import './AdminPanel.css'; // External CSS file
+import './AdminPanel.css';
 
 const AdminPanel = () => {
+  const location = useLocation();
+
   return (
     <div className="admin-panel">
       <nav className="sidebar">
+        <h1 className="sidebar-header">Admin Panel</h1>
         <ul className="sidebar-list">
-          <li><Link to="dashboard" className="link">Dashboard</Link></li>
-          <li><Link to="courses" className="link">Courses</Link></li>
-          <li><Link to="books" className="link">Books</Link></li>
-          <li><Link to="teachers" className="link">Teachers</Link></li>
-          <li><Link to="students" className="link">Students</Link></li>
-          <li><Link to="settings" className="link">Settings</Link></li>
-          <li><Link to="profile" className="link">Profile</Link></li>
+          <li><a href="/admin/dashboard">Dashboard</a></li>
+          <li><a href="/admin/books">Books</a></li>
+          <li><a href="/admin/courses">Courses</a></li>  
+          <li><a href="/admin/students">Students</a></li>
+          <li><a href="/admin/teachers">Teachers</a></li>
+          <li><a href="/admin/settings">Settings</a></li>
+          <li><a href="/admin/profile">Profile</a></li>
         </ul>
       </nav>
       <div className="content">
         <Routes>
-          <Route path="dashboard" element={<Dashboard />} /> 
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="courses" element={<Courses />} />
           <Route path="books" element={<Books />} />
           <Route path="teachers" element={<Teachers />} />

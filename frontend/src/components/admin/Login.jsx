@@ -35,7 +35,7 @@ const Login = () => {
         <div className="login-form">
           <div className="input-group">
             <FaUser className="icon" />
-            <input
+            <input className="admin.input"
               type="text"
               placeholder="Username"
               value={username}
@@ -45,7 +45,7 @@ const Login = () => {
           </div>
           <div className="input-group">
             <FaLock className="icon" />
-            <input
+            <input className="admin.input"
               type="password"
               placeholder="Password"
               value={password}
@@ -54,7 +54,7 @@ const Login = () => {
             />
           </div>
           {error && <p className="error-message">{error}</p>}
-          <button onClick={handleLogin}>
+          <button className="admin.button" onClick={handleLogin}>
             <FaSignInAlt className="button-icon" />
             Login
           </button>

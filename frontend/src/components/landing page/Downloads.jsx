@@ -4,22 +4,26 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
+import englishImage from './images/Englishp.png';
+import mathsImage from './images/Mathsp.png';
+import scienceImage from './images/Sciencep.png';
+import ictImage from './images/ICTp.png';
 
 const books = [
-  { id: 1, title: 'G.C.E O/L 2023', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
-  { id: 2, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: 'src/components/landing page/images/Mathsp.png' },
-  { id: 3, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: 'src/components/landing page/images/Sciencep.png' },
-  { id: 4, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: 'src/components/landing page/images/ICTp.png' },
-  { id: 5, title: 'G.C.E O/L 2022', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
-  { id: 6, title: 'G.C.E O/L 2022', category: 'Mathematics', link: 'https://www.digitalarchives.online/2024/05/gce-ol-2023-english-language-past-paper.html', image: 'src/components/landing page/images/Mathsp.png' },
-  { id: 7, title: 'G.C.E O/L 2021', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
-  { id: 8, title: 'G.C.E O/L 2023', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
-  { id: 9, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: 'src/components/landing page/images/Mathsp.png' },
-  { id: 10, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: 'src/components/landing page/images/Sciencep.png' },
-  { id: 11, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: 'src/components/landing page/images/ICTp.png' },
-  { id: 12, title: 'G.C.E O/L 2022', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
-  { id: 13, title: 'G.C.E O/L 2022', category: 'Mathematics', link: 'https://www.digitalarchives.online/2024/05/gce-ol-2023-english-language-past-paper.html', image: 'src/components/landing page/images/Mathsp.png' },
-  { id: 14, title: 'G.C.E O/L 2021', category: 'English', link: '#', image: 'src/components/landing page/images/Englishp.png' },
+  { id: 1, title: 'G.C.E O/L 2023', category: 'English', link: '#', image: englishImage },
+  { id: 2, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: mathsImage },
+  { id: 3, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: scienceImage },
+  { id: 4, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: ictImage },
+  { id: 5, title: 'G.C.E O/L 2022', category: 'English', link: '#', image: englishImage },
+  { id: 6, title: 'G.C.E O/L 2022', category: 'Mathematics', link: 'https://www.digitalarchives.online/2024/05/gce-ol-2023-english-language-past-paper.html', image: mathsImage },
+  { id: 7, title: 'G.C.E O/L 2021', category: 'English', link: '#', image: englishImage },
+  { id: 8, title: 'G.C.E O/L 2023', category: 'English', link: '#', image: englishImage },
+  { id: 9, title: 'G.C.E O/L 2023', category: 'Mathematics', link: '#', image: mathsImage },
+  { id: 10, title: 'G.C.E O/L 2023', category: 'Science', link: '#', image: scienceImage},
+  { id: 11, title: 'G.C.E O/L 2023', category: 'ICT', link: '#', image: ictImage },
+  { id: 12, title: 'G.C.E O/L 2022', category: 'English', link: '#', image: englishImage },
+  { id: 13, title: 'G.C.E O/L 2022', category: 'Mathematics', link: 'https://www.digitalarchives.online/2024/05/gce-ol-2023-english-language-past-paper.html', image: mathsImage},
+  { id: 14, title: 'G.C.E O/L 2021', category: 'English', link: '#', image: englishImage },
 ];
 
 const ITEMS_PER_PAGE = 7; // Number of items per page

@@ -1,32 +1,80 @@
 .admin-panel {
-    display: flex;
-  }
-  
+  display: flex;
+  height: auto;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 220px; /* Adjust as needed */
+  background-color: #2c3e50;
+  color: white;
+  height: 100%;
+  position: fixed; /* Fixed positioning */
+  top: 0;
+  left: 0;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Optional: for a slight shadow effect */
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.sidebar-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-list li {
+  padding: 10px 0;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px; /* Optional: rounded corners */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.link:hover {
+  background-color: #107067; /* Hover effect */
+}
+
+.link.active {
+  background-color: #107067; /* Active link color */
+}
+
+.content {
+  margin-left: 220px; /* Offset by the width of the sidebar */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
   .sidebar {
-    width: 200px;
-    background-color: #2c3e50;
-    color: white;
-    height: 100vh;
-    padding: 10px;
+    width: 100%;
+    height: auto;
+    position: relative; /* Make it relative for small screens */
+    display: none; /* Hidden by default */
   }
-  
-  .sidebar-list {
-    list-style-type: none;
-    padding: 0;
+
+  .sidebar.show {
+    display: block; /* Show on toggle */
   }
-  
-  .sidebar-list li {
-    padding: 10px 0;
-    text-align: center;
-  }
-  
-  .link {
-    color: white;
-    text-decoration: none;
-  }
-  
+
   .content {
-    flex-grow: 1;
-    padding: 20px;
+    margin-left: 0; /* Remove margin when sidebar is hidden */
   }
-  
+}
+
+.sidebar-toggle {
+  display: none; /* Implement toggle button for mobile view */
+}

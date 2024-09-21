@@ -81,17 +81,17 @@ const Welcome = () => {
         <p>Download the past papers and model papers for your best practice</p>
         <br/>
         <div className="downloads-preview">
-          <div className="book-card"  data-aos="fade-down-right">
+          <div className="bookcard"  data-aos="fade-down-right">
             <img src="src/components/landing page/images/Englishp.png" alt="G.C.E O/L 2023 English" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>English</p>
           </div>
-          <div className="book-card"  data-aos="fade-down">
+          <div className="bookcard"  data-aos="fade-down">
             <img src="src/components/landing page/images/Mathsp.png" alt="G.C.E O/L 2023 Mathematics" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>Mathematics</p>
           </div>
-          <div className="book-card"  data-aos="fade-down-left">
+          <div className="bookcard"  data-aos="fade-down-left">
             <img src="src/components/landing page/images/Sciencep.png" alt="G.C.E O/L 2023 Science" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>Science</p>
@@ -104,21 +104,21 @@ const Welcome = () => {
         <p>Access valuable reference materials for your studies</p>
         <br/>
         <div className="downloads-preview">
-          <div className="book-card"  data-aos="fade-down-right">
+          <div className="bookcard"  data-aos="fade-down-right">
             <img src="src/components/landing page/images/Science.png" alt="Social Studies" className="book-image" />
             <h3>Social Studies</h3>
             <p>Science</p>
             <p>Emily Brown</p>
             <p>4.8 ★</p>                
           </div>
-          <div className="book-card" data-aos="fade-down">
+          <div className="bookcard" data-aos="fade-down">
             <img src="src/components/landing page/images/English.png" alt="Easy English" className="book-image" />
             <h3>Easy English</h3>
             <p>English</p>
             <p>John Doe</p>
             <p>4.5 ★</p>
           </div>
-          <div className="book-card"  data-aos="fade-down-left">
+          <div className="bookcard"  data-aos="fade-down-left">
             <img src="src/components/landing page/images/Maths.png" alt="Numerical Tricks" className="book-image" />
             <h3>Numerical Tricks</h3>
             <p>Mathematics</p>

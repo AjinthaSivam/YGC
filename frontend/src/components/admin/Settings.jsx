@@ -9,6 +9,8 @@ const Settings = () => {
   };
 
   return (
+    
+    <><AdminPanel/>
     <div className="settings-container">
       <h2 className="heading">Settings</h2>
       <label className="label">
@@ -18,7 +20,7 @@ const Settings = () => {
           <option value="dark">Dark</option>
         </select>
       </label>
-    </div>
+    </div></>
   );
 };
 
