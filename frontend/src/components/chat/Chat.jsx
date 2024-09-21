@@ -12,6 +12,8 @@ const formatBotResponse = (response) => {
     return marked(response)
 }
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 
 const Chat = () => {
     const { messages, setMessages, chatId, setChatId } = useChat();
@@ -75,7 +77,7 @@ const Chat = () => {
 
     const getChatHistory = async (existing_chat_id) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8001/api/chat/history/?chat_id=${existing_chat_id}`, {
+            const response = await axios.get(`${apiBaseUrl}/api/chat/history/?chat_id=${existing_chat_id}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -163,7 +165,7 @@ const Chat = () => {
             setInput('');
 
             try {
-                const response = await axios.post('http://127.0.0.1:8001/api/chat/', {
+                const response = await axios.post(`${apiBaseUrl}/api/chat/`, {
                     user_input: message,
                     new_chat: chatId === null,
                     chat_id: chatId

@@ -4,6 +4,8 @@ import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import axios from 'axios'
 import { IoCloseOutline } from "react-icons/io5";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 const Signup = () => {
   const navigate = useNavigate()
 
@@ -42,7 +44,7 @@ const Signup = () => {
 
     try {
       console.log('Form Data:', formData);
-      const response = await axios.post('http://127.0.0.1:8001/api/register/', formData)
+      const response = await axios.post(`${apiBaseUrl}/api/register/`, formData)
       console.log('Response:', response.data);
       localStorage.setItem('access', response.data.access)
       // localStorage.setItem('user', JSON.stringify(response.data.user))

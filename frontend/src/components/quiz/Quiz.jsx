@@ -3,6 +3,8 @@ import axios from 'axios';
 import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
     const [questions, setQuestions] = useState([]);
     const [userAnswers, setUserAnswers] = useState({});
@@ -27,7 +29,7 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
 
         // console.log(data_load)
         try {
-            const response = await axios.post('http://127.0.0.1:8001/quiz/generate_questions/', {
+            const response = await axios.post(`${apiBaseUrl}/quiz/generate_questions/`, {
                 category,
                 difficulty
             },
@@ -81,7 +83,7 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
         }))
 
         try {
-            const response = await axios.post(`http://127.0.0.1:8001/quiz/submit_quiz/${quizId}/`,
+            const response = await axios.post(`${apiBaseUrl}/quiz/submit_quiz/${quizId}/`,
                 {
                     answers: answers
                 },

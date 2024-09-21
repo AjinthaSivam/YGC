@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import { IoCloseOutline } from "react-icons/io5";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 const Signin = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -26,7 +28,7 @@ const Signin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8001/api/login/', {
+            const response = await axios.post(`${apiBaseUrl}/api/login/`, {
                 username_or_email: formData.username,
                 password: formData.password
             });
