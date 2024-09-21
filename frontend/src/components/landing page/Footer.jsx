@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import { FaFacebook, FaYoutube, FaLinkedinIn } from 'react-icons/fa'; // Importing social media icons
+import qrcode from '../../assets/images/qrcode.png'
 
 const Footer = () => {
   return (
@@ -40,7 +41,7 @@ const Footer = () => {
           </div>
           <a href="/signin" className="footer-qr-link">
             <div className="footer-qr">
-              <img src="src/components/landing page/images/qrcode.png" alt="QR Code" />
+              <img src={qrcode} alt="QR Code" />
             </div>
           </a>
         </div>

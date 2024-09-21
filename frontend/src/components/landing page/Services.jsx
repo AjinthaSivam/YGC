@@ -6,6 +6,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaRobot, FaFileAlt, FaGamepad, FaUpload, FaEye, FaMoneyBillWave } from 'react-icons/fa';
 import { MdOutlineAutoAwesome } from 'react-icons/md'; // For a cool sparkle effect
+import student from '../../assets/images/student.png'
+import teacher from '../../assets/images/teacher.png'
 
 const Services = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -45,7 +47,7 @@ const Services = () => {
             {/* Service Item 1 */}
             <div className="service-item" data-aos="fade-right">
               <div className="service-image-container">
-                <img src="src/components/landing page/images/student.png" alt="Learn" className="service-image" />
+                <img src={student} alt="Learn" className="service-image" />
               </div>
               <div className="service-text">
                 <h3><b>1. Learning with Bot</b></h3>
@@ -77,7 +79,7 @@ const Services = () => {
             {/* Service Item 2 */}
             <div className="service-item" data-aos="fade-left">
               <div className="service-image-container">
-                <img src="src/components/landing page/images/teacher.png" alt="Tutor" className="service-image" />
+                <img src={teacher} alt="Tutor" className="service-image" />
               </div>
               <div className="service-text">
                 <h3><b>2. Tutoring with Bot</b></h3>

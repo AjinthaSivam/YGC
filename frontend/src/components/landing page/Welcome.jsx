@@ -5,6 +5,16 @@ import emailjs from 'emailjs-com';
 import './Welcome.css';
 import { FaUser, FaEnvelope, FaPaperPlane } from 'react-icons/fa';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import contact from '../../assets/images/contact.png'
+import Englishp from '../../assets/images/Englishp.png'
+import Sciencep from '../../assets/images/Sciencep.png'
+import Mathsp from '../../assets/images/Mathsp.png'
+import English from '../../assets/images/English.png'
+import Science from '../../assets/images/Science.png'
+import Maths from '../../assets/images/Maths.png'
+import success1 from '../../assets/images/success1.png'
+import success2 from '../../assets/images/success2.png'
+import success3 from '../../assets/images/success3.png'
 
 const Welcome = () => {
 
@@ -82,17 +92,17 @@ const Welcome = () => {
         <br/>
         <div className="downloads-preview">
           <div className="book-card"  data-aos="fade-down-right">
-            <img src="src/components/landing page/images/Englishp.png" alt="G.C.E O/L 2023 English" className="book-image" />
+            <img src={Englishp} alt="G.C.E O/L 2023 English" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>English</p>
           </div>
           <div className="book-card"  data-aos="fade-down">
-            <img src="src/components/landing page/images/Mathsp.png" alt="G.C.E O/L 2023 Mathematics" className="book-image" />
+            <img src={Mathsp} alt="G.C.E O/L 2023 Mathematics" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>Mathematics</p>
           </div>
           <div className="book-card"  data-aos="fade-down-left">
-            <img src="src/components/landing page/images/Sciencep.png" alt="G.C.E O/L 2023 Science" className="book-image" />
+            <img src={Sciencep} alt="G.C.E O/L 2023 Science" className="book-image" />
             <h3>G.C.E O/L 2023</h3>
             <p>Science</p>
           </div>
@@ -105,21 +115,21 @@ const Welcome = () => {
         <br/>
         <div className="downloads-preview">
           <div className="book-card"  data-aos="fade-down-right">
-            <img src="src/components/landing page/images/Science.png" alt="Social Studies" className="book-image" />
+            <img src={Science} alt="Social Studies" className="book-image" />
             <h3>Social Studies</h3>
             <p>Science</p>
             <p>Emily Brown</p>
             <p>4.8 ★</p>                
           </div>
           <div className="book-card" data-aos="fade-down">
-            <img src="src/components/landing page/images/English.png" alt="Easy English" className="book-image" />
+            <img src={English} alt="Easy English" className="book-image" />
             <h3>Easy English</h3>
             <p>English</p>
             <p>John Doe</p>
             <p>4.5 ★</p>
           </div>
           <div className="book-card"  data-aos="fade-down-left">
-            <img src="src/components/landing page/images/Maths.png" alt="Numerical Tricks" className="book-image" />
+            <img src={Maths} alt="Numerical Tricks" className="book-image" />
             <h3>Numerical Tricks</h3>
             <p>Mathematics</p>
             <p>Jane Smith</p>
@@ -133,21 +143,21 @@ const Welcome = () => {
         <p>Discover how our platform has helped students achieve their goals and excel in their studies</p>
         <div className="stories-container">
           <div className="story-card" data-aos="fade-down-right">
-            <img src="src/components/landing page/images/success1.png" alt="Success Story 1" />
+            <img src={success1} alt="Success Story 1" />
             <div className="story-content">
               <h3><strong>Aman Sri</strong></h3>
               <p>"This institute transformed my life by providing quality education and guidance."</p>
             </div>
           </div>
           <div className="story-card"  data-aos="fade-down">
-            <img src="src/components/landing page/images/success2.png" alt="Success Story 2" />
+            <img src={success2} alt="Success Story 2" />
             <div className="story-content">
               <h3><strong>Ravi Sarma</strong></h3>
               <p>"Thanks to the dedicated teachers, I was able to achieve my academic goals."</p>
             </div>
           </div>
           <div className="story-card" data-aos="fade-down-left">
-            <img src="src/components/landing page/images/success3.png" alt="Success Story 3" />
+            <img src={success3} alt="Success Story 3" />
             <div className="story-content">
               <h3><strong>Nimali Kumar</strong></h3>
               <p>"The resources and support here helped me excel in my exams."</p>
@@ -196,7 +206,7 @@ const Welcome = () => {
             <button type="submit" className="contact-btn">Send Message</button>
           </form>
           <div className="contact-image">
-            <img src="src/components/landing page/images/contact.png" alt="Contact Us" />
+            <img src={contact} alt="Contact Us" />
           </div>
         </div>
       </section>
