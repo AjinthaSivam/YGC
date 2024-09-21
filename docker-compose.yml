@@ -35,7 +35,6 @@ services:
     networks:
       - app
     environment:
-      - DB_PASSWORD=root
       - DB_NAME=edutech_newdb
       - DB_USER=ajintha
       - DB_PASSWORD=ajintha12345
@@ -50,6 +49,5 @@ services:
       - app
     environment:
       PMA_HOST: mysql_db
-      MYSQL_ROOT_PASSWORD: root
     depends_on:
       - mysql_db
