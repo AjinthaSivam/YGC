@@ -16,6 +16,6 @@ RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 EXPOSE 8001
 
 # Run migrations, collectstatic for django, and start the django server
-CMD bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
+CMD bash -c "cd /app/backend && python manage.py collectstatic --noinput && python manage.py migrate && gunicorn backend.wsgi"
 
 

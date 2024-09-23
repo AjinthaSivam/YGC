@@ -1,5 +1,5 @@
 FROM node:22 AS build
-RUN apt-get update && apt-get install -y chromium
+# RUN apt-get update && apt-get install -y chromium
 
 WORKDIR /app
 
