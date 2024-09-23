@@ -3,7 +3,20 @@ networks:
 
 volumes:
   mysql_data:
+
 services:
+  mysql_db:
+    image: mysql
+    restart: always
+    networks:
+      - app
+    environment:
+      - DB_NAME=edutech_newdb
+      - DB_USER=ajintha
+      - DB_PASSWORD=ajintha12345
+    volumes:
+      - mysql_data:/var/lib/mysql
+
   backend:
     build:
       context: backend
@@ -28,18 +41,6 @@ services:
     expose:
       - "80"
     container_name: frontend_container
-
-  mysql_db:
-    image: mysql
-    restart: always
-    networks:
-      - app
-    environment:
-      - DB_NAME=edutech_newdb
-      - DB_USER=ajintha
-      - DB_PASSWORD=ajintha12345
-    volumes:
-      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin_con_2
