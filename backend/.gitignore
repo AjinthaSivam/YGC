@@ -7,3 +7,5 @@ venv2
 staticfiles
 
 static
+
+Dockerfile.dev

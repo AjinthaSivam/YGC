@@ -103,12 +103,18 @@ def generate_quiz(request):
 @permission_classes([IsAuthenticated])
 def submit_quiz(request, quiz_id):
     learner = request.user
+    
+    if learner.is_anonymous:
+        return Response({"error": "User must be authenticated"}, status=status.HTTP_400_BAD_REQUEST)
+    
     quiz = get_object_or_404(Quiz, id=quiz_id, learner=learner)
     
     # Get user answers from the request
     user_answers_data = request.data.get('answers', [])
     
     correct_answers = 0
+    
+    response_data = []
     
     for answer_data in user_answers_data:
         question_id = answer_data.get('question_id')
@@ -124,9 +130,17 @@ def submit_quiz(request, quiz_id):
         # Compare user answer with the correct answer
         if user_answer == question.correct_answer:
             correct_answers += 1
+            
+        response_data.append({
+            'question': question.question,
+            'user_answer': user_answer,
+            'correct_answer': question.correct_answer,
+            'explanation': question.explanation,
+            'options': question.options
+        })
         
     # Calculate the score
-    total_questions = quiz.quiz.count()
+    total_questions = quiz.questions.count()
     score = (correct_answers / total_questions) * 100
     
     # Update the score with the score
@@ -137,5 +151,6 @@ def submit_quiz(request, quiz_id):
     
     return Response({
         'quiz': quiz_serializer.data,
+        'questions': response_data,
         'message': 'Quiz submitted successfully'
     }, status=status.HTTP_200_OK)

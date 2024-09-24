@@ -47,7 +47,7 @@ const QuizIntro = ({ onStartQuiz }) => {
     } else {
       setErrorMessage(""); // Clear error message if selections are valid
       onStartQuiz(quizDifficulty, quizCategory);
-      navigate('/quiz', { state: { difficulty: quizDifficulty, category: quizCategory } });
+      // navigate('/quiz', { state: { difficulty: quizDifficulty, category: quizCategory } });
     }
   };
 

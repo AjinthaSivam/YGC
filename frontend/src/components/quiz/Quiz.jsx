@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
-const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
+const MCQGenerator = ({ difficulty, category }) => {
     const [questions, setQuestions] = useState([]);
     const [userAnswers, setUserAnswers] = useState({});
     const [quizId, setQuizId] = useState(null)
@@ -14,6 +14,8 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false); // Loading state for fetching quiz
 
+    const isQuizFetched = useRef(false)
+
 
     useEffect(() => {
         getQuiz()
@@ -21,13 +23,9 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
 
 
     const getQuiz = async () => {
-        setLoading(true); // Set loading state while fetching quiz
-        // data_load = {
-        //     difficulty: difficulty,
-        //     category: category
-        // }
-
-        // console.log(data_load)
+        if (isQuizFetched.current) return;
+        isQuizFetched.current = true
+        setLoading(true); 
         try {
             const response = await axios.post(`${apiBaseUrl}/quiz/generate_questions/`, {
                 category,
@@ -40,11 +38,11 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
             }
         );
             setQuestions(response.data.questions);
-            setQuizId(response.data.quiz.id)
+            const quiz_id = response.data.questions[0].quiz
+            setQuizId(quiz_id)
             setScore(null);  // Reset score on new fetch
             setShowResults(false);  // Reset showResults on new fetch
-            // localStorage.setItem('questions', JSON.stringify(response.data.questions));
-            // localStorage.removeItem('userAnswers');  // Clear previous user answers
+            console.log(quiz_id)
         } catch (error) {
             console.error('Error getting quiz:', error);
             // Handle error state or retry logic if necessary
@@ -60,18 +58,6 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
         });
     };
 
-    const calculateScore = () => {
-        let correctAnswers = 0;
-        questions.forEach((question, index) => {
-            const correctAnswer = question.answer.trim();
-            if (userAnswers[index] === correctAnswer) {
-                correctAnswers++;
-            }
-        });
-        const calculatedScore = ((correctAnswers / questions.length) * 100);
-        setScore(calculatedScore);
-    };
-
     const handleFinishQuiz = () => {
         setShowModal(true);
     };
@@ -82,8 +68,10 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
             user_answer: userAnswers[questionId]
         }))
 
+        console.log(answers)
+
         try {
-            const response = await axios.post(`${apiBaseUrl}/quiz/submit_quiz/${quizId}/`,
+            const response = await axios.post(`${apiBaseUrl}/quiz/submit_questions/${quizId}/`,
                 {
                     answers: answers
                 },
@@ -93,13 +81,18 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
                     }
                 }
             )
-            console.log(response.data.score)
-            setScore(response.data.score)
+            const score = response.data.quiz.score
+            setScore(score)
             setShowModal(false);
             setShowResults(true);
+
+            console.log(questions)
+            console.log(userAnswers)
+            console.log(score)
+
         }
-        catch {
-            console.error("Error submitting quiz")
+        catch(error) {
+            console.error("Error submitting quiz", error.response?.data)
         }
         
     };
@@ -119,7 +112,7 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
                 
                 {loading && <p>Loading quiz...</p>}
                 {showResults ? (
-                    <QuizResult questions={questions} userAnswers={userAnswers} score={score} setSelectedComponent={setSelectedComponent} />
+                    <QuizResult questions={questions} userAnswers={userAnswers} score={score} />
                 ) : (
                     <>
                         {questions.length > 0 && (
@@ -134,7 +127,7 @@ const MCQGenerator = ({ difficulty, category, setSelectedComponent }) => {
                                                         type='radio'
                                                         name={`question-${index}`}
                                                         value={question.options[key]}
-                                                        onChange={() => handleAnswerChange(index, question.options[key])}
+                                                        onChange={() => handleAnswerChange(question.id, question.options[key])}
                                                         className='mr-3'
                                                     />
                                                     {question.options[key]}
