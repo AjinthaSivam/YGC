@@ -143,7 +143,7 @@ body.dark-mode .theme-toggle-button:hover {
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .navbar-menu {
     display: none;
     flex-direction: column;
@@ -181,7 +181,7 @@ body.dark-mode .theme-toggle-button:hover {
     display: block;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     body.dark-mode .navbar-menu {
       background-color: #11111190;
       border-bottom: #888 0.5px solid;

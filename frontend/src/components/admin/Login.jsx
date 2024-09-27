@@ -28,14 +28,14 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Welcome Back</h2>
-        <p className="subtitle">Please log in to your admin account</p>
-        <div className="login-form">
-          <div className="input-group">
+    <div className="admin-login-container">
+      <div className="admin-login-box">
+        <h2 >Welcome Back</h2>
+        <p className="admin-subtitle">Please log in to your admin account</p>
+        <div className="admin-login-form">
+          <div className="admin-input-group">
             <FaUser className="icon" />
-            <input className="admin.input"
+            <input className="admin-input"
               type="text"
               placeholder="Username"
               value={username}
@@ -43,9 +43,9 @@ const Login = () => {
               onKeyDown={handleKeyDown}
             />
           </div>
-          <div className="input-group">
-            <FaLock className="icon" />
-            <input className="admin.input"
+          <div className="admin-input-group">
+            <FaLock className="admin-icon" />
+            <input className="admin-input"
               type="password"
               placeholder="Password"
               value={password}
@@ -53,12 +53,12 @@ const Login = () => {
               onKeyDown={handleKeyDown}
             />
           </div>
-          {error && <p className="error-message">{error}</p>}
-          <button className="admin.button" onClick={handleLogin}>
-            <FaSignInAlt className="button-icon" />
+          {error && <p className="admin-error-message">{error}</p>}
+          <button className="admin-button" onClick={handleLogin}>
+            <FaSignInAlt className="admin-button-icon" />
             Login
           </button>
-          <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+          <a href="/forgot-password" className="admin-forgot-password">Forgot Password?</a>
         </div>
       </div>
     </div>

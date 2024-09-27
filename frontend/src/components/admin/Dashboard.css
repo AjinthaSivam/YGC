@@ -1,4 +1,112 @@
-.content{
+.dashboard-container {
     display: flex;
     flex-direction: row;
+    padding: 20px;
+    background-color: #f0f4f8; /* Light gray background */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scrolling */
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    margin-left: 20px; /* Space from the sidebar */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-title {
+    font-size: 2.5em;
+    color: #004d40; /* Dark green */
+}
+
+.intro-text {
+    margin-bottom: 20px;
+    color: #333; /* Darker gray */
+}
+
+.metrics-section {
+    margin-top: 20px;
+}
+
+.metrics-title {
+    font-size: 1.8em;
+    color: #00796b; /* Teal */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.metric.card {
+    background: rgba(255, 255, 255, 0.3); /* Slightly more opaque */
+    backdrop-filter: blur(15px); /* Glassmorphism effect */
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.7); /* Lighter border for contrast */
+}
+
+.metric.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.metric-icon {
+    margin-bottom: 15px;
+    color: #00796b; /* Teal for icons */
+}
+
+.metric h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #004d40; /* Dark green for headings */
+}
+
+.metric-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #1a1a1a; /* Darker gray for values */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 2em;
+    }
+
+    .metrics-title {
+        font-size: 1.5em;
+    }
+
+    .metric-value {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-title {
+        font-size: 1.8em;
+    }
+
+    .metrics-title {
+        font-size: 1.3em;
+    }
+
+    .metric-value {
+        font-size: 1.2em;
+    }
+
+    .metric.card {
+        padding: 15px;
+    }
 }

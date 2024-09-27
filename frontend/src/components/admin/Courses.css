@@ -1,27 +1,210 @@
+/* Message Styles */
+.message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+.message.error {
+  background-color: #f8d7da; /* Light red background for error */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Red border */
+}
+.message.success {
+  background-color: #d4edda; /* Light green background for success */
+  color: #155724; /* Dark green text */
+  border: 1px solid #c3e6cb; /* Green border */
+}
+
+
+
+.message .icon {
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.message.error .icon{
+  color:#721c24;
+}
+
+.message.success .icon{
+  color: #155724;
+}
+
+/* Other styles */
+.courses {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
 .courses-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .heading {
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-  
-  .list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .list-item {
-    padding: 10px;
-    background-color: white;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+  margin: 0;
+  width:100%;
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input-container {
+  display: flex;
+  align-items:center;
+  gap:20px
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-course {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-column {
+  width: 48%;
+}
+
+.input-field-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-icon {
+  margin-right: 10px;
+}
+
+.input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.image-input {
+  width: 100%;
+}
+
+.update-btn,
+.add-btn {
+  background-color: #107067;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  align-items: center;
+}
+
+.update-btn:hover,
+.add-btn:hover, .edit-btn:hover,.delete-btn:hover {
+  transform: scale(1.05);
+}
+
+.course-table-container {
+  overflow-x: auto;
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.course-table th,
+.course-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.course-image {
+  width: 50px;
+  height: auto;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.edit-btn,
+.delete-btn {
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  align-items: center;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #292929;
+}
+
+.edit-btn {
+  background: #ffc21c;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* Page container */
+.page {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+/* Page button styles */
+.page-button {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #333; /* Dark text color */
+  border: 1px solid #ddd; /* Border for buttons */
+  padding: 8px 16px; /* Padding for button */
+  border-radius: 5px; /* Slightly rounded buttons */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page-button:hover {
+  background-color: #107067; /* Change to green on hover */
+  color: white; /* White text on hover */
+}
+
+/* Active page button */
+.page-button.active {
+  background-color: #107067; /* Active page background */
+  color: white; /* Active page text color */
+  border: none; /* Remove border for active button */
+}
+
+/* Adjust spacing between page numbers */
+.page span {
+  padding: 0 15px;
+}
+.print-button{
+  gap:5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

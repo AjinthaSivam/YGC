@@ -15,7 +15,7 @@ body {
 .context {
     width: 100%;
     position: absolute;
-    top: 10vh;
+    top: 12vh;
     height: auto;
 }
 
@@ -125,12 +125,6 @@ body.dark-mode .home {
 }
 
 /* Responsive styles */
-@media (max-width: 1024px) {
-    .home {
-        max-width: 90%;
-        padding: 30px;
-    }
-}
 
 @media (max-width: 768px) {
     .home {
