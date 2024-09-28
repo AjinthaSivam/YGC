@@ -45,6 +45,7 @@ class Learner(AbstractBaseUser):
     address = models.CharField(max_length=255, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_premium = models.BooleanField(default=False)
 
     objects = LearnerManager()
 
@@ -53,3 +54,13 @@ class Learner(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+class LearnerQuota(models.Model):
+    learner = models.OneToOneField(Learner, on_delete=models.CASCADE)
+    general_bot_calls = models.IntegerField(default=0)
+    pastpaper_bot_calls = models.IntegerField(default=0)
+    historical_bot_calls = models.IntegerField(default=0)
+    last_reset_date = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.learner.username} Quotas"

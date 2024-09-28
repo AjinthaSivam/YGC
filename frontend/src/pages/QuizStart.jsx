@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
 import QuizIntro from '../components/quiz/QuizIntro'
 import { useNavigate } from 'react-router-dom'
+import { PremiumProvider } from '../components/contexts/PremiumContext'
 
 const QuizStart = () => {
     const [difficulty, setDifficulty] = useState('')
@@ -16,6 +17,7 @@ const QuizStart = () => {
         navigate('/quiz', { state: { difficulty, category } })
     }
   return (
+    <PremiumProvider>
     <div className='bg-white'>
         <NavBar />
         <div className='h-screen flex pt-16'>
@@ -23,6 +25,7 @@ const QuizStart = () => {
             <QuizIntro onStartQuiz={handleStartQuiz} difficulty={difficulty} category={category} />
         </div>
     </div>
+    </PremiumProvider>
   )
 }
 

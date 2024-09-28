@@ -6,6 +6,7 @@ import BotLogo from '../components/chat/bot.png'
 import { MdArrowUpward, MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-icons/md';
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import axios from 'axios'
+import { PremiumProvider } from '../components/contexts/PremiumContext'
 
 const PastpaperChat = () => {
   const location = useLocation()
@@ -128,6 +129,7 @@ const PastpaperChat = () => {
     const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
+    <PremiumProvider>
     <div className='bg-white'>
         <NavBar />
         <div className='h-screen flex pt-16'>
@@ -180,6 +182,7 @@ const PastpaperChat = () => {
             </div>
           </div>
     </div>
+    </PremiumProvider>
   )
 }
 

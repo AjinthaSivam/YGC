@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.permissions import IsAuthenticated
 from historical.views import historical_chat_view, get_historical_chat_history
 import pastpaper.urls
+import learner.urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -20,6 +21,7 @@ urlpatterns = [
     path('api/register/', learner_views.register_view, name='register'),
     path('api/login/', learner_views.login_view, name='login'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/learner/', include(learner.urls)),
 
     # Quiz-related endpoints
     path('quiz/', include(quiz_urls)),

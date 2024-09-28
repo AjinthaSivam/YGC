@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import Paper from '../components/Paper';
 import { useNavigate, useParams } from 'react-router-dom';
+import { PremiumProvider } from '../components/contexts/PremiumContext'
 
 const PastpaperContent = () => {
   const { year } = useParams();  // Get the year parameter from the URL
@@ -41,6 +42,7 @@ const PastpaperContent = () => {
   }
 
   return (
+    <PremiumProvider>
     <div className='bg-white'>
       <NavBar />
       <div className='h-screen flex pt-16'>
@@ -57,6 +59,7 @@ const PastpaperContent = () => {
         </div>
       </div>
     </div>
+    </PremiumProvider>
   );
 };
 

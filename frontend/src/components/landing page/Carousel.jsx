@@ -2,9 +2,9 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './Carousel.css';
-import slide1 from '../../assets/images/slide1.png'
-import slide2 from '../../assets/images/slide2.png'
-import slide3 from '../../assets/images/slide3.png'
+import slide1 from '../../assets/images/slide1.jpeg'
+import slide2 from '../../assets/images/slide2.jpeg'
+import slide3 from '../../assets/images/slide3.jpeg'
 
 const ImageCarousel = () => {
   return (

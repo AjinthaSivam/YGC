@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import PastPaper from '../components/PastPaper';
 import { useNavigate } from 'react-router-dom';
+import { PremiumProvider } from '../components/contexts/PremiumContext'
 
 const PastpaperCard = () => {
   const [selectedPaper, setSelectedPaper] = useState(null);
@@ -36,6 +37,7 @@ const PastpaperCard = () => {
   }, []);
 
   return (
+    <PremiumProvider>
     <div className='bg-white'>
       <NavBar />
       <div className='h-screen flex pt-16'>
@@ -51,6 +53,7 @@ const PastpaperCard = () => {
         )}
       </div>
     </div>
+    </PremiumProvider>
   );
 };
 

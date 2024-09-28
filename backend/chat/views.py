@@ -13,6 +13,9 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import re
 import tiktoken
+from learner.utils import check_and_update_quota
+from learner.models import LearnerQuota
+
 
 # Set your OpenAI API key
 openai.api_key = settings.OPENAI_API_KEY
@@ -55,6 +58,7 @@ def chat_view(request):
     try:
         data = json.loads(request.body)
         user_input = data.get('user_input', '')
+        bot_type = 'general_bot'
         
         numberof_input_tokens = count_tokens(user_input)
         
@@ -67,6 +71,11 @@ def chat_view(request):
         new_chat = data.get('new_chat', False)
         chat_id = data.get('chat_id')
         learner = request.user
+        
+        # Handle free and premium users
+        can_chat, error_message, remaining_quota = check_and_update_quota(learner=learner, bot_type=bot_type)
+        if not can_chat:
+            return JsonResponse({'error': error_message, 'remaining_quota': remaining_quota}, status=403)
 
         if new_chat or chat_id is None:
             # Start a new chat session
@@ -129,8 +138,12 @@ def chat_view(request):
             input_tokens = input_tokens,
             output_tokens = output_tokens
         )
-
-        return JsonResponse({'response': assistant_response, 'chat_id': chat_id}, safe=False)
+        
+        return JsonResponse({
+            'response': assistant_response, 
+            'chat_id': chat_id, 
+            'remaining_quota': remaining_quota
+        }, safe=False)
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)

@@ -2,20 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useChat } from './ChatContext';
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
-import { FaEraser } from "react-icons/fa";
-import { CgSearch } from "react-icons/cg";
 import '../styles/custom.css'
 import { marked } from 'marked'
 import BotLogo from './bot.png'
-
-const formatBotResponse = (response) => {
-    return marked(response)
-}
+import { usePremium } from '../contexts/PremiumContext';
+import { FaBolt } from 'react-icons/fa6';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 
 const Chat = () => {
+    const { isPremium, setIsPremium } = usePremium();
+
     const { messages, setMessages, chatId, setChatId } = useChat();
     const [chatHistory, setChatHistory] = useState([]);
     const [input, setInput] = React.useState('');
@@ -23,6 +21,60 @@ const Chat = () => {
     const [recognition, setRecognition] = React.useState(null);
     const [showOptionalQuestions, setShowOptionalQuestions] = React.useState(false);
     const textareaRef = useRef(null); // Ref for the textarea
+
+    const [remainingQuota, setRemainingQuota] = useState(null);
+    const [showUpgradeButton, setShowUpgradeButton] = useState(false);
+
+    const max_quota = 5
+
+    useEffect(() => {
+        const fetchRemainingQuota = async () => {
+            try {
+                const response = await axios.get(`${apiBaseUrl}/api/learner/get_learner_quota`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access')}`
+                    }
+                });
+                const usedQuota = response.data.general_bot_calls;
+                const maxQuota = 5; // Assuming the max quota is 3, adjust as needed
+                setRemainingQuota(Math.max(0, maxQuota - usedQuota));
+            } catch (error) {
+                console.error('Error fetching remaining quota:', error);
+                setRemainingQuota(0); // Set to 0 if there's an error
+            }
+        };
+
+        if (!isPremium) {
+            fetchRemainingQuota();
+        }
+    }, [isPremium]);
+
+    const checkPremiumStatus = async () => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/learner/check_premium`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            });
+            console.log('Premium status:', response.data.is_premium)
+            setIsPremium(response.data.is_premium)
+            return response.data.is_premium
+        } catch (error) {
+            console.error('Error checking premium status:', error)
+        }
+    }
+
+    useEffect(() => {
+        const initializeChat = async () => {
+            const isPremiumLearner = await checkPremiumStatus()
+            setIsPremium(isPremiumLearner)
+            if (!isPremiumLearner) {
+                await getLearnerQuota()
+            }
+        }
+
+        initializeChat()
+    }, [])
 
     useEffect(() => {
         // window.location.reload()
@@ -111,13 +163,13 @@ const Chat = () => {
     
 
     useEffect(() => {
-        const initialBotMessage = {
-            sender: 'bot', 
-            text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I can help with grammar, essays, letters, and articles. Ask me anything or request practice exercises. 📝 \n\n`,
-            time: new Date()
-        }
+        // const initialBotMessage = {
+        //     sender: 'bot', 
+        //     text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I can help with grammar, essays, letters, and articles. Ask me anything or request practice exercises. 📝 \n\n`,
+        //     time: new Date()
+        // }
         if (messages.length === 0 && chatHistory.length === 0) {
-            setMessages([initialBotMessage])
+            // setMessages([initialBotMessage])
             setShowOptionalQuestions(true);
         }
         
@@ -176,24 +228,28 @@ const Chat = () => {
                 });
 
                 if (response.data.error) {
-                    setError(response.data.error)
-                }
-                else {
+                    setError(response.data.error);
+                    if (response.data.remaining_quota === 0) {
+                        setShowUpgradeButton(true);
+                    }
+                } else {
                     const botResponse = response.data.response;
-
                     const botMessage = { sender: 'bot', text: botResponse, time: new Date() };
                     setMessages(prevMessages => [...prevMessages, botMessage]);
 
                     if (chatId === null) {
                         setChatId(response.data.chat_id);
                     }
-                    setError('')
-                    // Hide optional questions after user interacts
+                    setError('');
                     setShowOptionalQuestions(false);
+                    
+                    // Update remaining quota
+                    setRemainingQuota(response.data.remaining_quota);
                 }
-                localStorage.setItem('chat_id', response.data.chat_id) 
+                localStorage.setItem('chat_id', response.data.chat_id);
             } catch (error) {
                 console.error('Error sending message:', error);
+                setError("An error occurred while sending your message. Please try again.");
             }
         }
     };
@@ -220,10 +276,82 @@ const Chat = () => {
         textarea.style.height = 'auto'; // Reset height to auto
     }
 
+    const handleUpgrade = () => {
+        // Implement your upgrade logic here
+        console.log("Upgrade to EduTech Plus")
+    }
+
+    const getLearnerQuota = async () => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/learner/get_learner_quota`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            });
+            const last_reset_date = new Date(response.data.last_reset_date).toDateString()
+            const today = new Date().toDateString()
+            if (last_reset_date !== today) {
+                await resetQuota()
+            }
+            else {
+                const used_quota = response.data.general_bot_calls
+                const remaining = max_quota - used_quota
+                setRemainingQuota(remaining);
+            }
+        } catch (error) {
+            console.error('Error fetching learner quota:', error);
+        }
+    }
+
+    const resetQuota = async () => {
+        try {
+            const access = localStorage.getItem('access')
+            console.log(access)
+            const response = await axios.post(`${apiBaseUrl}/api/learner/reset_quota/`, {
+                headers: {
+                    'Authorization': `Bearer ${access}`
+                }
+            });
+            console.log('Quota reset response:', response.data)
+
+            if (response.data && response.status === 200) {
+                setRemainingQuota(max_quota)
+                console.log('Quota reset successfully')
+            } else {
+                console.error('Failed to reset quota:', response.data)
+            }
+        } catch (error) {
+            console.error('Error resetting quota:', error)
+        }
+    }
+    
+
     
     return (
-        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto'>
-            <div className='flex justify-end'></div>
+        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative'>
+            <div className='flex justify-between items-center mb-4'>
+                <div className='absolute top-4 right-4'>
+                    {!isPremium && (
+                        <div className='flex items-center'>
+                            {remainingQuota === 0 ? (
+                                <button className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block'>
+
+                                <span className="font-bold mr-2">Upgrade to Unlock Unlimited Access!</span>
+
+                            </button>
+                        
+                        ) : (
+                            <div className='flex items-center text-[#2d3137] bg-[#e6fbfa] shadow-lg py-2 px-4 rounded-lg inline-block'>
+                            
+                            <span className="font-bold">{remainingQuota}</span>
+                            <span className="ml-1">Turbo Chats Left!</span>
+                        </div>
+                        )}
+                        </div>
+                    )}
+                </div>
+            </div>
+            
             <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -264,12 +392,37 @@ const Chat = () => {
                             &times;
                         </button>
                         {error}
+                        {showUpgradeButton && (
+                            <button
+                                onClick={handleUpgrade}
+                                className='mt-4 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600'
+                            >
+                                Get EduTech Plus
+                            </button>
+                        )}
                     </div>
                 </div>
             )}
 
+            {
+                !isPremium && remainingQuota === 0 && (
+                    <div className='mb-4 flex justify-center'>
+                        <button className='flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg py-2 px-4 rounded-full inline-block animate-bounce'>
+                            <FaBolt className='mr-2 text-yellow-300' />
+                            <span className='font-bold mr-2'>Upgrade to continue</span>
+
+                        </button>
+
+                    </div>
+                )
+            }
+
             <div className='flex px-3 items-end'>
-                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'>
+                <button 
+                    onClick={listening ? stopVoiceRecognition : startVoiceRecognition} 
+                    className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'
+                    disabled={remainingQuota === 0}
+                >
                     {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
                 </button>
                 <textarea
@@ -283,10 +436,15 @@ const Chat = () => {
                         }
                     }}
                     className={`flex-grow p-2 pl-4 text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
-                    placeholder='Type your message...'
+                    placeholder={!isPremium && remainingQuota === 0 ? 'Daily limit reached' : 'Type your message...'}
                     rows={1}
+                    disabled={!isPremium && remainingQuota === 0}
                 />
-                <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-10 h-10 flex-shrink-0'>
+                <button 
+                    onClick={handleSend} 
+                    className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-10 h-10 flex-shrink-0'
+                    disabled={!isPremium && remainingQuota === 0}
+                >
                     <MdArrowUpward size={25} />
                 </button>
             </div>
