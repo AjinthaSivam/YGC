@@ -4,10 +4,10 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
-import englishImage from './images/English.png';
-import mathsImage from './images/Maths.png';
-import scienceImage from './images/Science.png';
-import ictImage from './images/ICT.png';
+import englishImage from '../../assets/images/English.png';
+import mathsImage from '../../assets/images/Maths.png';
+import scienceImage from '../../assets/images/Science.png';
+import ictImage from '../../assets/images/ICT.png';
 
 const books = [
   { id: 1, title: 'General English', category: 'English', link: '#', image: englishImage, author: 'John Doe', rating: 3.5 },

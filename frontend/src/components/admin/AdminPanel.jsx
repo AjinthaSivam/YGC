@@ -24,6 +24,7 @@ const AdminPanel = () => {
           <li><a href="/admin/teachers">Teachers</a></li>
           <li><a href="/admin/settings">Settings</a></li>
           <li><a href="/admin/profile">Profile</a></li>
+          <li><a href="#">Logout</a></li>
         </ul>
       </nav>
       <div className="content">

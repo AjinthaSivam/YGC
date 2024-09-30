@@ -65,7 +65,7 @@
   margin-right: 10px; /* Adjust spacing between icon and input */
 }
 
-.admin error-message {
+.admin-error-message {
   color: #ff4d4d; /* Red color for error messages */
   font-size: 0.9rem;
   margin-bottom: 20px;

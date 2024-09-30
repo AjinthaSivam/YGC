@@ -151,9 +151,9 @@ body.dark-mode .theme-toggle-button:hover {
     position: inherit;
     top: 60px;
     right: 20px;
-    background-color: #10706790;
+    background-color: #02524d95;
     color: #fff;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .navbar-menu a:hover,
@@ -183,8 +183,8 @@ body.dark-mode .theme-toggle-button:hover {
 
   @media (max-width: 1000px) {
     body.dark-mode .navbar-menu {
-      background-color: #11111190;
-      border-bottom: #888 0.5px solid;
+      background-color: #02524d70;
+      border-bottom: #2e2d2d7e 0.1px solid;
       color: #ffffff;
     }
   }

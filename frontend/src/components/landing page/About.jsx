@@ -4,6 +4,13 @@ import 'aos/dist/aos.css'; // Import AOS styles
 import './About.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import integrity from '../../assets/images/integrity.svg'
+import innovation from '../../assets/images/innovation.svg'
+import excellence from '../../assets/images/excellence.svg'
+import profile1 from '../../assets/images/profile1.jpg'
+import profile2 from '../../assets/images/profile2.jpg'
+import profile3 from '../../assets/images/profile3.jpg'
+import profile4 from '../../assets/images/profile4.jpg'
 
 const About = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -67,19 +74,19 @@ const About = () => {
               <p>Meet the people who make it all happen:</p>
               <div className="team-members">
                 <div className="team-member" data-aos="fade-right">
-                  <img src="src/components/landing page/images/profile1.jpg" alt="Jane Doe" />
+                  <img src={profile1} alt="Jane Doe" />
                   <p><strong>Jane Doe</strong> - CEO & Founder</p>
                 </div>
                 <div className="team-member" data-aos="fade-left">
-                  <img src="src/components/landing page/images/profile2.jpg" alt="John Smith" />
+                  <img src={profile2} alt="John Smith" />
                   <p><strong>John Smith</strong> - Chief Technology Officer</p>
                 </div>
                 <div className="team-member" data-aos="fade-right">
-                  <img src="src/components/landing page/images/profile3.jpg" alt="Emily Johnson" />
+                  <img src={profile3} alt="Emily Johnson" />
                   <p><strong>Emily Johnson</strong> - Head of Curriculum Development</p>
                 </div>
                 <div className="team-member" data-aos="fade-left">
-                  <img src="src/components/landing page/images/profile4.jpg" alt="Emily Davis" />
+                  <img src={profile4} alt="Emily Davis" />
                   <p><strong>Emily Davis</strong> - Marketing Director</p>
                 </div>
               </div>
@@ -90,15 +97,15 @@ const About = () => {
               <p>We believe in:</p>
               <div className="values">
                 <div className="value" data-aos="fade-right">
-                  <img src="src/components/landing page/images/integrity.svg" alt="Integrity" />
+                  <img src={integrity} alt="Integrity" />
                   <p><strong>Integrity</strong> - We uphold the highest standards of integrity in all of our actions.</p>
                 </div>
                 <div className="value" data-aos="fade-left">
-                  <img src="src/components/landing page/images/innovation.svg" alt="Innovation" />
+                  <img src={innovation} alt="Innovation" />
                   <p><strong>Innovation</strong> - We constantly seek innovative solutions to improve the learning experience.</p>
                 </div>
                 <div className="value" data-aos="fade-right">
-                  <img src="src/components/landing page/images/excellence.svg" alt="Excellence" />
+                  <img src={excellence} alt="Excellence" />
                   <p><strong>Excellence</strong> - We strive for excellence in everything we do.</p>
                 </div>
               </div>
