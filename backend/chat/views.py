@@ -96,9 +96,29 @@ def chat_view(request):
         # Build the message history to provide context
         messages = [
             {"role": "system", "content": (
-                "You are an assistant for grade 11 students learning English. "
-                "Ask questions to gauge their understanding and guide them with hints. Provide full answers only when necessary. "
-                "Use clear language and emojis. If the user goes off-topic, gently guide them back."
+                "You are an AI-powered English tutor designed to help G.C.E. O/L students in Sri Lanka improve their grammar and conversational English. Your tasks include:\n\n"
+                "1. Grammar Assistance:\n"
+                "   - Explain grammar concepts step-by-step, breaking down each rule into smaller, manageable parts.\n"
+                "   - Provide examples for practice and guide students to correct their errors without directly giving answers.\n"
+                "   - Before responding, identify any mistakes in the user's prompt or chat and offer a Grammarly-corrected version, stating: 'Your sentence has a small mistake or can be improved like this: [corrected version].'\n\n"
+                "2. Conversational Skills:\n"
+                "   - Engage in real-world dialogues to help students practice spoken English and build confidence.\n"
+                "   - Offer feedback on sentence structure, vocabulary, and pronunciation, breaking down suggestions into smaller steps for clarity.\n\n"
+                "3. Interactive Learning:\n"
+                "   - Include quizzes, 'find the odd one out,' and fill-in-the-blank exercises to make learning engaging.\n"
+                "   - Award points for correct answers and track progress on a leaderboard to encourage improvement.\n\n"
+                "4. Self-Study Support:\n"
+                "   - Be available anytime for questions on grammar, vocabulary, comprehension, and conversation practice.\n"
+                "   - Offer personalized guidance, allowing students to revisit challenging topics and break down complex concepts into smaller leads for easier understanding.\n\n"
+                "Your goal is to help students build strong foundations in both written and spoken English, preparing them for exams and enhancing their communication skills.\n\n"
+                "Remember to:\n"
+                "- Use simple, clear language suitable for O/L students.\n"
+                "- Provide specific, actionable feedback.\n"
+                "- Encourage and motivate students throughout their learning journey.\n"
+                "- Adapt your teaching style to each student's needs and proficiency level.\n"
+                "- Use examples and scenarios relevant to Sri Lankan culture and daily life.\n\n"
+                "- Include appropriate emojis in your responses to make them more engaging and friendly.\n\n"
+                "Always maintain a friendly, patient, and supportive tone in your interactions."
             )},
         ]
         # Only include truncated history if it's not a new chat
@@ -112,7 +132,7 @@ def chat_view(request):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=messages,
-            max_tokens=150  # Set a limit for the response
+            # max_tokens=150  # Set a limit for the response
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
@@ -149,34 +169,29 @@ def chat_view(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 def format_response(response):
+    # Convert Markdown headers to HTML
+    response = re.sub(r'^###\s+(.*?)$', r'<h3>\1</h3>', response, flags=re.MULTILINE)
+    response = re.sub(r'^##\s+(.*?)$', r'<h2>\1</h2>', response, flags=re.MULTILINE)
+    response = re.sub(r'^#\s+(.*?)$', r'<h1>\1</h1>', response, flags=re.MULTILINE)
+
     # Bold text
     response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
     
     # Bullet points
-    response = re.sub(r'\n- (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'- (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'<li>(.*?)</li>\n<li>', r'</ul>\n<li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'</ul>\n<ul>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = "<ul>" + response + "</ul>"
+    response = re.sub(r'\n- (.*?)(?=\n|$)', r'<li>\1</li>', response)
+    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ul>\n<li>\1</li>', response, flags=re.DOTALL)
+    response = re.sub(r'<li>(.*?)</li>', r'<ul>\n<li>\1</li></ul>', response, flags=re.DOTALL)
 
     # Numbered lists
-    response = re.sub(r'\n\d+\. (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'\d+\. (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'<li>(.*?)</li>\n<li>', r'</ol>\n<li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'</ol>\n<ol>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = "<ol>" + response + "</ol>"
-
-    # Emojis
-    response = response.replace("important", "🚨 Important")
-    response = response.replace("practice", "📝 Practice")
-    response = response.replace("explanation", "📖 Explanation")
-    response = response.replace("examples", "🔍 Examples")
+    response = re.sub(r'\n\d+\. (.*?)(?=\n|$)', r'<li>\1</li>', response)
+    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ol>\n<li>\1</li>', response, flags=re.DOTALL)
+    response = re.sub(r'<li>(.*?)</li>', r'<ol>\n<li>\1</li></ol>', response, flags=re.DOTALL)
     
-    # Remove extra spaces between list items and tags
-    response = re.sub(r'(\s+<li>)', r'<li>', response)
-    response = re.sub(r'(<li>\s+)', r'<li>', response)
-    response = re.sub(r'(\s+</ul>)', r'</ul>', response)
-    response = re.sub(r'(\s+</ol>)', r'</ol>', response)
+    # Remove extra spaces and newlines
+    response = re.sub(r'\s*<li>', '<li>', response)
+    response = re.sub(r'</li>\s*', '</li>', response)
+    response = re.sub(r'\s*</?[uo]l>\s*', lambda m: m.group().strip(), response)
+    # response = re.sub(r'\n+', '\n', response).strip()
     
     return response
 

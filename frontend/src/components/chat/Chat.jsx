@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useChat } from './ChatContext';
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
 import '../styles/custom.css'
-import { marked } from 'marked'
 import BotLogo from './bot.png'
 import { usePremium } from '../contexts/PremiumContext';
 import { FaBolt } from 'react-icons/fa6';
@@ -13,6 +12,8 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 const Chat = () => {
     const { isPremium, setIsPremium } = usePremium();
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const { messages, setMessages, chatId, setChatId } = useChat();
     const [chatHistory, setChatHistory] = useState([]);
@@ -24,30 +25,6 @@ const Chat = () => {
 
     const [remainingQuota, setRemainingQuota] = useState(null);
     const [showUpgradeButton, setShowUpgradeButton] = useState(false);
-
-    const max_quota = 5
-
-    useEffect(() => {
-        const fetchRemainingQuota = async () => {
-            try {
-                const response = await axios.get(`${apiBaseUrl}/api/learner/get_learner_quota`, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('access')}`
-                    }
-                });
-                const usedQuota = response.data.general_bot_calls;
-                const maxQuota = 5; // Assuming the max quota is 3, adjust as needed
-                setRemainingQuota(Math.max(0, maxQuota - usedQuota));
-            } catch (error) {
-                console.error('Error fetching remaining quota:', error);
-                setRemainingQuota(0); // Set to 0 if there's an error
-            }
-        };
-
-        if (!isPremium) {
-            fetchRemainingQuota();
-        }
-    }, [isPremium]);
 
     const checkPremiumStatus = async () => {
         try {
@@ -66,18 +43,36 @@ const Chat = () => {
 
     useEffect(() => {
         const initializeChat = async () => {
-            const isPremiumLearner = await checkPremiumStatus()
-            setIsPremium(isPremiumLearner)
-            if (!isPremiumLearner) {
-                await getLearnerQuota()
+
+            setIsLoading(true)
+
+            try{
+                const isPremiumLearner = await checkPremiumStatus()
+                setIsPremium(isPremiumLearner)
+                if (!isPremiumLearner) {
+                    await getLearnerQuota()
+                }
+
+                const storedChatId = localStorage.getItem('chat_id');
+
+                if (storedChatId) {
+                    setChatId(storedChatId);  // Use the existing chat ID
+                    await getChatHistory(storedChatId);  // Fetch and load chat history
+                    setShowOptionalQuestions(false)
+                } else {
+                    setMessages([])
+                    setShowOptionalQuestions(true)
+                }
+                setIsLoading(false)
+            } catch (error) {
+                console.error('Error initializing chat:', error)
+            }
+            finally {
+                setIsLoading(false)
             }
         }
-
+            
         initializeChat()
-    }, [])
-
-    useEffect(() => {
-        // window.location.reload()
     }, [])
 
     const [error, setError] = useState('')
@@ -115,18 +110,6 @@ const Chat = () => {
         
     };
 
-    useEffect(() => {
-        const storedChatId = localStorage.getItem('chat_id');
-
-        if (storedChatId) {
-            setChatId(storedChatId);  // Use the existing chat ID
-            getChatHistory(storedChatId);  // Fetch and load chat history
-        } else {
-            console.log('No chat ID found in localStorage');
-            // Optionally: Inform the user that they need to start a chat
-        }
-    }, []);
-
     const getChatHistory = async (existing_chat_id) => {
         try {
             const response = await axios.get(`${apiBaseUrl}/api/chat/history/?chat_id=${existing_chat_id}`, {
@@ -163,15 +146,6 @@ const Chat = () => {
     
 
     useEffect(() => {
-        // const initialBotMessage = {
-        //     sender: 'bot', 
-        //     text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 Welcome! I can help with grammar, essays, letters, and articles. Ask me anything or request practice exercises. 📝 \n\n`,
-        //     time: new Date()
-        // }
-        if (messages.length === 0 && chatHistory.length === 0) {
-            // setMessages([initialBotMessage])
-            setShowOptionalQuestions(true);
-        }
         
         if ('webkitSpeechRecognition' in window) {
             const recognition = new window.webkitSpeechRecognition();
@@ -193,7 +167,7 @@ const Chat = () => {
             console.warn('Webkit Speech Recognition is not supported in this browser.');
         }
         
-    }, [messages, chatHistory, setMessages]);
+    }, [isLoading, messages, chatHistory, setMessages]);
 
     const startVoiceRecognition = () => {
         if (recognition) {
@@ -283,21 +257,14 @@ const Chat = () => {
 
     const getLearnerQuota = async () => {
         try {
+            await resetQuota()
             const response = await axios.get(`${apiBaseUrl}/api/learner/get_learner_quota`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
             });
-            const last_reset_date = new Date(response.data.last_reset_date).toDateString()
-            const today = new Date().toDateString()
-            if (last_reset_date !== today) {
-                await resetQuota()
-            }
-            else {
-                const used_quota = response.data.general_bot_calls
-                const remaining = max_quota - used_quota
-                setRemainingQuota(remaining);
-            }
+            const remaining = response.data.general_bot_quota
+            setRemainingQuota(remaining);
         } catch (error) {
             console.error('Error fetching learner quota:', error);
         }
@@ -306,20 +273,12 @@ const Chat = () => {
     const resetQuota = async () => {
         try {
             const access = localStorage.getItem('access')
-            console.log(access)
-            const response = await axios.post(`${apiBaseUrl}/api/learner/reset_quota/`, {
+            const response = await axios.post(`${apiBaseUrl}/api/learner/reset_quota/`, {}, {
                 headers: {
                     'Authorization': `Bearer ${access}`
                 }
             });
             console.log('Quota reset response:', response.data)
-
-            if (response.data && response.status === 200) {
-                setRemainingQuota(max_quota)
-                console.log('Quota reset successfully')
-            } else {
-                console.error('Failed to reset quota:', response.data)
-            }
         } catch (error) {
             console.error('Error resetting quota:', error)
         }
@@ -329,24 +288,31 @@ const Chat = () => {
     
     return (
         <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative'>
+            {
+                isLoading && (
+                    <div className='flex justify-center items-center h-full'>
+                        <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#04aaa2]'></div>
+                    </div>
+                )
+            }
             <div className='flex justify-between items-center mb-4'>
                 <div className='absolute top-4 right-4'>
                     {!isPremium && (
                         <div className='flex items-center'>
-                            {remainingQuota === 0 ? (
-                                <button className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block'>
-
-                                <span className="font-bold mr-2">Upgrade to Unlock Unlimited Access!</span>
-
-                            </button>
-                        
-                        ) : (
-                            <div className='flex items-center text-[#2d3137] bg-[#e6fbfa] shadow-lg py-2 px-4 rounded-lg inline-block'>
-                            
-                            <span className="font-bold">{remainingQuota}</span>
-                            <span className="ml-1">Turbo Chats Left!</span>
-                        </div>
-                        )}
+                            {!isPremium && remainingQuota !== null && (
+                                <div className='flex items-center'>
+                                    {remainingQuota === 0 ? (
+                                        <p className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block'>
+                                            <span className="font-semibold mr-2">Daily limit reached. Try again tomorrow!</span>
+                                        </p>
+                                    ) : (
+                                        <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 font-semibold inline-block'>
+                                            <span className="font-semibold">{remainingQuota}</span>
+                                            <span className="ml-1">Turbo Chats Left!</span>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
@@ -360,7 +326,7 @@ const Chat = () => {
                                 <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
                             )}
                             {message.sender === 'bot' ? (
-                                <div className='whitespace-pre-line' dangerouslySetInnerHTML={{ __html: message.text }} />
+                                <div className='whitespace-pre-line space-y-4' dangerouslySetInnerHTML={{ __html: message.text }} />
                             ) : (message.text)}
                             <p className={`absolute bottom-1 right-2 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>{formatTime(message.time)}</p>
                         </div>

@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import { IoCloseOutline } from "react-icons/io5";
+import { useChat } from '../components/chat/ChatContext';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 const Signin = () => {
+    const { setMessages, setChatId } = useChat();
     const navigate = useNavigate();
     const { login } = useAuth();
 
@@ -33,6 +35,8 @@ const Signin = () => {
                 password: formData.password
             });
             login(response.data, response.data.user.username);
+            setMessages([]);
+            setChatId(null);
             navigate('/generalchat');
             window.location.reload()
         } catch (error) {
