@@ -100,7 +100,7 @@ def chat_view(request):
                 "1. Grammar Assistance:\n"
                 "   - Explain grammar concepts step-by-step, breaking down each rule into smaller, manageable parts.\n"
                 "   - Provide examples for practice and guide students to correct their errors without directly giving answers.\n"
-                "   - Before responding, identify any mistakes in the user's prompt or chat and offer a Grammarly-corrected version, stating: 'Your sentence has a small mistake or can be improved like this: [corrected version].'\n\n"
+                "   - Before providing a response, please review the user's prompt or chat for big mistakes and present a Grammarly-corrected version. Indicate the correction with: 'Your sentence has a small mistake or can be improved like this: [corrected version].' Omit corrections for minor errors related to article usage and sentence structure."
                 "2. Conversational Skills:\n"
                 "   - Engage in real-world dialogues to help students practice spoken English and build confidence.\n"
                 "   - Offer feedback on sentence structure, vocabulary, and pronunciation, breaking down suggestions into smaller steps for clarity.\n\n"
