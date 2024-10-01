@@ -1,3 +1,11 @@
 .env
+
+venv2
+
 *.pyc
-venv
+
+staticfiles
+
+static
+
+Dockerfile.dev

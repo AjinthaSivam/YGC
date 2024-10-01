@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Bot from './chat/bot.png';
 import ToggleBot from './ToggleBot';
 
-const Paper = ({ pdfUrl, isChatOpen, toggleChat, selected_year }) => {
+const Paper = ({ pdfUrl, isChatOpen, toggleChat, selected_year, handleClose }) => {
     // const [isChatOpen, setIsChatOpen] = useState(false);
 
     // const toggleChatOpen = () => {
@@ -11,6 +11,11 @@ const Paper = ({ pdfUrl, isChatOpen, toggleChat, selected_year }) => {
     useEffect(() => {
         console.log(selected_year)
     }, [selected_year])
+
+    // const handleClose = (e) => {
+    //     e.preventDefault()
+    //     isChatOpen(false)
+    // }
 
     if (!pdfUrl) return null;
 
@@ -30,7 +35,7 @@ const Paper = ({ pdfUrl, isChatOpen, toggleChat, selected_year }) => {
                         isChatOpen ? 'visible' : 'invisible'
                     } w-full h-full md:w-custom-lg md:h-custom-lg md:bottom-4 md:right-12`}
                 >
-                    <ToggleBot selected_year={selected_year} />
+                    <ToggleBot selected_year={selected_year} handleClose={handleClose} />
                 </div>
 
                 {/* Toggle Button */}

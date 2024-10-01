@@ -1,11 +1,10 @@
 .carousel {
   /*margin-bottom: 30px;*/
   padding-top:0px;
+  width: 100%;
   max-width: 1200px;
   overflow: hidden;
-  width:100%;
   border-radius: 12px; 
   height: auto;
-  /*border:#666 1px solid;*/
+  /* border: #ccc 1px solid; */
 }
-

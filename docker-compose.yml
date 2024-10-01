@@ -1,0 +1,54 @@
+networks:
+  app:
+
+volumes:
+  mysql_data:
+
+services:
+  mysql_db:
+    image: mysql
+    restart: always
+    networks:
+      - app
+    environment:
+      - DB_NAME=edutech_newdb
+      - DB_USER=ajintha
+      - DB_PASSWORD=ajintha12345
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    expose:
+      - "8001"
+    environment:
+      - DB_NAME=edutech_newdb
+      - DB_USER=ajintha
+      - DB_PASSWORD=ajintha12345
+      - DB_HOST=mysql_db
+      - DB_PORT=3306
+    networks:
+      - app
+    depends_on:
+      - mysql_db
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    container_name: frontend_container
+
+  phpmyadmin:
+    container_name: phpmyadmin_con_2
+    image: phpmyadmin
+    restart: always
+    networks:
+      - app
+    environment:
+      PMA_HOST: mysql_db
+    depends_on:
+      - mysql_db

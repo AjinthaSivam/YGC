@@ -12,9 +12,38 @@ from .models import PastPaperChat
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import re
+import tiktoken
 
 # Set your OpenAI API key
 openai.api_key = settings.OPENAI_API_KEY
+
+max_input_length = 200
+
+def limit_input_length(user_input, max_length=max_input_length):
+    if len(user_input) > max_length:
+        user_input = user_input[:max_length] + "..."
+        print(f"Input was too long. Truncated to {max_length} characters.")
+    return user_input
+
+# count tokens for a text
+def count_tokens(text, model='gpt-4o-mini'):
+    enc = tiktoken.encoding_for_model(model)
+    return len(enc.encode(text))
+
+# Function to truncate conversation history based on token count
+def truncate_conversation(history, max_tokens=3000):
+    total_tokens = 0
+    truncated_history = []
+
+    # Iterate from the most recent to the oldest message
+    for entry in reversed(history):
+        message_tokens = count_tokens(entry['content'])
+        if total_tokens + message_tokens > max_tokens:
+            break  # Stop adding messages if the limit is exceeded
+        total_tokens += message_tokens
+        truncated_history.insert(0, entry)  # Insert in reverse order to preserve history
+
+    return truncated_history
 
 # Directory paths
 input_directory = 'pdfs'  # Directory where your PDFs are stored
@@ -146,6 +175,15 @@ def chat_view(request):
     try:
         data = json.loads(request.body)
         user_input = data.get('user_input', '')
+        
+        numberof_input_tokens = count_tokens(user_input)
+        
+        if numberof_input_tokens > max_input_length :
+            return JsonResponse({
+                'error': f"Input too long. Please limit your input to {max_input_length} characters."
+            }, status=400)
+        
+        user_input = limit_input_length(user_input)
         selected_year = data.get('selected_year', '')
         learner = request.user
 
@@ -172,37 +210,36 @@ def chat_view(request):
 
         # Find relevant chunks from the dataset
         relevant_chunks = find_relevant_chunks(user_input, chunks_and_embeddings, index)
-        if relevant_chunks:
-            context_text = ' '.join(relevant_chunks[:5])
-        else:
-            context_text = f"No relevant information found for the year {selected_year}"
+        context_text = ' '.join(relevant_chunks[:5]) if relevant_chunks else f"No relevant information found for the year {selected_year}"
 
         # Build the message history to provide context
         messages = [
             {"role": "system", "content": "You are an English Teaching Assistant for Grade 11 students."},
             {"role": "system", "content": f"This is a past paper from the year {selected_year}, covering various topics in English."},
-            {"role": "system", "content": "Guide them step by step to reach the answer"},
+            {"role": "system", "content": "Guide them step by step to reach the answer."},
             {"role": "system", "content": "Use emojis to make it engaging, but keep responses short."},
-            {"role": "system", "content": "Guide the student on questions related to a specific test of this paper."},
+            {"role": "system", "content": "Guide the student on questions related to a specific test of this paper. Give the answers with explanation"},
         ]
 
         # Append previous chat history
-        for entry in conversation_history[learner.id]:
-            messages.append({"role": entry['role'], "content": entry['content']})
-        
+        messages.extend(conversation_history[learner.id])
+
         # Add current user input to messages
         messages.append({"role": "user", "content": user_input})
         messages.append({"role": "assistant", "content": f"Reference Material: {context_text}"})
 
         # Use OpenAI API to get assistant's response
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=messages,
-            temperature=0.5,
+            temperature=0,
             max_tokens=200
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
+        usage = response['usage']
+        input_tokens = usage['prompt_tokens']
+        output_tokens = usage['completion_tokens']
 
         # Add highlights and emojis to the response
         assistant_response = format_response(assistant_response)
@@ -217,7 +254,9 @@ def chat_view(request):
         PastPaperChat.objects.create(
             learner=learner,
             user_input=user_input,
-            response=assistant_response
+            response=assistant_response,
+            input_tokens = input_tokens,
+            output_tokens = output_tokens
         )
 
         # Update conversation history
@@ -229,6 +268,7 @@ def chat_view(request):
     except Exception as e:
         print("Error in chat_view:", str(e))
         return JsonResponse({'error': str(e)}, status=500)
+
 
     
 
@@ -263,3 +303,28 @@ def format_response(response):
     response = re.sub(r'(\s+</ol>)', r'</ol>', response)
     
     return response
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def get_chat_history (request):
+    learner = request.user
+    
+    try:
+        chats = PastPaperChat.objects.filter(learner=learner).order_by('timestamp')
+        
+        chat_history = []
+        
+        for chat in chats:
+            chat_history.append({
+                'chat_id': chat.id,
+                'learner': chat.learner_id,
+                'message': chat.user_input,
+                'response': chat.response,
+                'timestamp': chat.timestamp
+            })
+        
+        return JsonResponse(chat_history, safe=False)
+    except PastPaperChat.DoesNotExist:
+        return JsonResponse({'error': 'Chat not found.'}, status=404)
+    

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import TryAgainConformation from './TryAgainConformation'
+import { useNavigate } from 'react-router-dom';
 
-const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => {
+
+const QuizResult = ({ questions, userAnswers, score }) => {
     const [showModal, setShowModal] = useState(false)
+
+    const navigate = useNavigate()
+
     const getFeedback = (score) => {
         if (score >= 0 && score <= 40) {
             return 'Keep practicing and you’ll get better. Try again! ✌️';
@@ -22,13 +27,13 @@ const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => 
     };
 
     const handleTryAgain = () => {
-        setSelectedComponent('quiz'); // Navigate to QuizIntro
         setShowModal(false);
+        navigate('/quizstart')
     };
 
     const handleGoToChat = () => {
-        setSelectedComponent('chat'); // Navigate to Chat
         setShowModal(false);
+        navigate('/generalchat')
     };
 
     return (
@@ -43,11 +48,13 @@ const QuizResult = ({ questions, userAnswers, score, setSelectedComponent }) => 
                         <p>{index + 1}. {question.question}</p>
                         <div className='ml-4 mt-2'>
                             {Object.keys(question.options).map((key, idx) => (
-                                <p key={idx} className={`block mb-3 ml-5 ${question.options[key] === question.answer ? 'text-green-500' : ''}`}>
-                                    {question.options[key]} {userAnswers[index] === question.options[key] && userAnswers[index] !== question.answer && <span className='text-red-500'>(Your Answer)</span>}
+                                <p key={idx} className={`block mb-3 ml-5 ${question.options[key] === question.correct_answer ? 'text-green-500' : ''}`}>
+                                    {question.options[key]} 
+                                    {userAnswers[question.id] === question.options[key] && userAnswers[question.id] !== question.correct_answer && <span className='text-red-500'>(Your Answer)</span>}
                                 </p>
                             ))}
                         </div>
+                        <p className='ml-4 mt-2 text-[#2F85ED] italic'>{question.explanation}</p>
                     </div>
                 ))}
             </div>
