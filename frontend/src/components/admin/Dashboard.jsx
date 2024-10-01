@@ -1,7 +1,7 @@
 import React from "react";
 import AdminPanel from "./AdminPanel";
 import { FaUsers, FaBookOpen, FaChalkboardTeacher, FaChartLine, FaClipboardList, FaTasks } from 'react-icons/fa';
-import './Dashboard.css'; // External CSS file for styling
+import './Dashboard.css';
 
 const Dashboard = () => {
   return (
@@ -18,38 +18,48 @@ const Dashboard = () => {
           <div className="metrics">
             <div className="metric card">
               <div className="metric-icon"><FaUsers size={50} /></div>
-              <h3>Total Students</h3>
-              <p className="metric-value">1,200</p>
+              <div className="metric-details">
+                <h3>Total Students</h3>
+                <p className="metric-value">1,200</p>
+              </div>
             </div>
             <div className="metric card">
               <div className="metric-icon"><FaBookOpen size={50} /></div>
-              <h3>Total Courses</h3>
-              <p className="metric-value">45</p>
+              <div className="metric-details">
+                <h3>Total Courses</h3>
+                <p className="metric-value">45</p>
+              </div>
             </div>
             <div className="metric card">
               <div className="metric-icon"><FaChalkboardTeacher size={50} /></div>
-              <h3>Active Teachers</h3>
-              <p className="metric-value">30</p>
+              <div className="metric-details">
+                <h3>Active Teachers</h3>
+                <p className="metric-value">30</p>
+              </div>
             </div>
             <div className="metric card">
               <div className="metric-icon"><FaChartLine size={50} /></div>
-              <h3>New Enrollments</h3>
-              <p className="metric-value">150</p>
+              <div className="metric-details">
+                <h3>Enrollments</h3>
+                <p className="metric-value">150</p>
+              </div>
             </div>
             <div className="metric card">
               <div className="metric-icon"><FaClipboardList size={50} /></div>
-              <h3>Average Grades</h3>
-              <p className="metric-value">85%</p>
+              <div className="metric-details">
+                <h3>Average Grades</h3>
+                <p className="metric-value">85%</p>
+              </div>
             </div>
             <div className="metric card">
               <div className="metric-icon"><FaTasks size={50} /></div>
-              <h3>Completion Rate</h3>
-              <p className="metric-value">92%</p>
+              <div className="metric-details">
+                <h3>Completion</h3>
+                <p className="metric-value">92%</p>
+              </div>
             </div>
           </div>
         </section>
-
-        {/* Other Sections (e.g., Recent Activities, Notifications) can be added here */}
       </div>
     </div>
   );

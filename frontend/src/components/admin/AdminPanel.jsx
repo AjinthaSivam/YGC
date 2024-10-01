@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Courses from "./Courses";
 import Books from "./Books";
@@ -7,26 +7,69 @@ import Students from "./Students";
 import Settings from "./Settings";
 import Profile from "./Profile";
 import Dashboard from "./Dashboard";
+import { FaBars, FaUsers, FaBook, FaChalkboardTeacher, FaCog, FaUser, FaSignOutAlt } from "react-icons/fa";
 import './AdminPanel.css';
 
 const AdminPanel = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
   const location = useLocation();
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar
+  };
 
   return (
     <div className="admin-panel">
-      <nav className="sidebar">
-        <h1 className="sidebar-header">Admin Panel</h1>
+      <button className="sidebar-toggle" onClick={toggleSidebar}>
+        <FaBars />
+      </button>
+
+      <nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+        <h1 className="sidebar-header">Admin</h1>
         <ul className="sidebar-list">
-          <li><a href="/admin/dashboard">Dashboard</a></li>
-          <li><a href="/admin/books">Books</a></li>
-          <li><a href="/admin/courses">Courses</a></li>  
-          <li><a href="/admin/students">Students</a></li>
-          <li><a href="/admin/teachers">Teachers</a></li>
-          <li><a href="/admin/settings">Settings</a></li>
-          <li><a href="/admin/profile">Profile</a></li>
-          <li><a href="#">Logout</a></li>
+          <li>
+            <Link to="/admin/dashboard" className="link">
+              <FaUsers /> {isSidebarOpen && 'Dashboard'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/books" className="link">
+              <FaBook /> {isSidebarOpen && 'Books'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/courses" className="link">
+              <FaChalkboardTeacher /> {isSidebarOpen && 'Courses'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/students" className="link">
+              <FaUsers /> {isSidebarOpen && 'Students'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/teachers" className="link">
+              <FaChalkboardTeacher /> {isSidebarOpen && 'Teachers'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/settings" className="link">
+              <FaCog /> {isSidebarOpen && 'Settings'}
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/profile" className="link">
+              <FaUser /> {isSidebarOpen && 'Profile'}
+            </Link>
+          </li>
+          <li>
+            <Link to="#" className="link">
+              <FaSignOutAlt /> {isSidebarOpen && 'Logout'}
+            </Link>
+          </li>
         </ul>
       </nav>
+
       <div className="content">
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
