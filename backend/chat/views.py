@@ -179,13 +179,13 @@ def format_response(response):
     
     # Bullet points
     response = re.sub(r'\n- (.*?)(?=\n|$)', r'<li>\1</li>', response)
-    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ul>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'<ul>\n<li>\1</li></ul>', response, flags=re.DOTALL)
+    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ul>\n<li>\1</li>', response)
+    response = re.sub(r'<li>(.*?)</li>', r'<ul>\n<li>\1</li></ul>', response)
 
     # Numbered lists
-    response = re.sub(r'\n\d+\. (.*?)(?=\n|$)', r'<li>\1</li>', response)
-    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ol>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'<ol>\n<li>\1</li></ol>', response, flags=re.DOTALL)
+    # response = re.sub(r'\n\d+\. (.*?)(?=\n|$)', r'<li>\1</li>', response)
+    # response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ol>\n<li>\1</li>', response, flags=re.DOTALL)
+    # response = re.sub(r'<li>(.*?)</li>', r'<ol>\n<li>\1</li></ol>', response, flags=re.DOTALL)
     
     # Remove extra spaces and newlines
     response = re.sub(r'\s*<li>', '<li>', response)

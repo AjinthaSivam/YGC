@@ -68,9 +68,6 @@ const NavBar = () => {
                 <FaCrown className="mr-2 text-white" />
                 Elite Member
               </span>
-              <span className="absolute top-0 right-0 -mt-1 -mr-1 px-2 py-1 bg-red-500 text-white text-xs rounded-full animate-pulse">
-                PRO
-              </span>
             </div>
           ) : (
             <div className="relative inline-block">

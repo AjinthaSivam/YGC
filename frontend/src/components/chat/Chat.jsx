@@ -291,7 +291,7 @@ const Chat = () => {
             {
                 isLoading && (
                     <div className='flex justify-center items-center h-full'>
-                        <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#04aaa2]'></div>
+                        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-[#04aaa2]'></div>
                     </div>
                 )
             }
@@ -302,11 +302,11 @@ const Chat = () => {
                             {!isPremium && remainingQuota !== null && (
                                 <div className='flex items-center'>
                                     {remainingQuota === 0 ? (
-                                        <p className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block'>
+                                        <p className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] inline-block'>
                                             <span className="font-semibold mr-2">Daily limit reached. Try again tomorrow!</span>
                                         </p>
                                     ) : (
-                                        <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 font-semibold inline-block'>
+                                        <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] font-semibold inline-block'>
                                             <span className="font-semibold">{remainingQuota}</span>
                                             <span className="ml-1">Turbo Chats Left!</span>
                                         </div>
@@ -373,7 +373,7 @@ const Chat = () => {
             {
                 !isPremium && remainingQuota === 0 && (
                     <div className='mb-4 flex justify-center'>
-                        <button className='flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg py-2 px-4 rounded-full inline-block animate-bounce'>
+                        <button className='flex items-center justify-center bg-gradient-to-r from-[#00568D] to-[#04aaa2] text-white shadow-lg py-2 px-4 rounded-full inline-block animate-bounce'>
                             <FaBolt className='mr-2 text-yellow-300' />
                             <span className='font-bold mr-2'>Upgrade to continue</span>
 
