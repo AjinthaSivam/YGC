@@ -287,7 +287,7 @@ const Chat = () => {
 
     
     return (
-        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative'>
+        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative z-0'>
             {
                 isLoading && (
                     <div className='flex justify-center items-center h-full'>

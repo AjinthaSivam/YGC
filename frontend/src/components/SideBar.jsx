@@ -33,7 +33,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
 
     return (
         <div className='bg-[#F5F5F5]'>
-            <div className={`bg-[#e6fbfa] h-full ${open ? "w-72" : "w-16"} duration-500 text-[#2d3137] px-4`}>
+            <div className={`bg-[#e6fbfa] h-full ${open ? "w-72" : "w-16"} duration-500 text-[#2d3137] px-4 z-50`}>
                 <div className='py-5 flex justify-end'>
                     <HiMenuAlt3 size={26} className='cursor-pointer' onClick={() => setOpen(!open)} />
                 </div>
@@ -50,7 +50,7 @@ const SideBar = ({ setSelectedComponent, setSelectedQuizDifficulty }) => {
                                     </div>
                                     <h2 className={`whitespace-pre ${!open && 'opacity-0 overflow-hidden'}`}>{menu.name}</h2>
                                     <h2
-                                        className={`${open && 'hidden'} absolute whitespace-pre left-48 bg-[#F5F5F5] text-sm font-semibold text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit`}
+                                        className={`${open && 'hidden'} absolute whitespace-pre left-48 bg-[#F5F5F5] text-sm font-semibold text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit z-50`}
                                     >
                                         {menu.name}
                                     </h2>
