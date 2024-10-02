@@ -1,9 +1,5 @@
 from django.http import JsonResponse
-import os
-import PyPDF2
 import openai
-import numpy as np
-import faiss
 import json
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -14,8 +10,9 @@ from django.views.decorators.csrf import csrf_exempt
 import re
 import tiktoken
 from learner.utils import check_and_update_quota
-from learner.models import LearnerQuota
+import logging
 
+logger = logging.getLogger(__name__)
 
 # Set your OpenAI API key
 openai.api_key = settings.OPENAI_API_KEY
@@ -72,26 +69,41 @@ def chat_view(request):
         chat_id = data.get('chat_id')
         learner = request.user
         
+        print(f"Received data: learner= {learner}, user_input= {user_input}, new_chat= {new_chat}, chat_id= {chat_id}")
+        
         # Handle free and premium users
         can_chat, error_message, remaining_quota = check_and_update_quota(learner=learner, bot_type=bot_type)
         if not can_chat:
             return JsonResponse({'error': error_message, 'remaining_quota': remaining_quota}, status=403)
 
         if new_chat or chat_id is None:
-            # Start a new chat session
-            conversation_history[learner.id] = []  # New chat, no history passed
+            # Create a new chat
             new_chat = Chat.objects.create(
                 learner=learner,
-                chat_title="New Chat",
+                chat_title=user_input[:30] + "..." if len(user_input) > 35 else user_input,
                 chat_started_at=timezone.now()
             )
             chat_id = new_chat.chat_id
+            conversation_history[learner.id] = []
         else:
-            # Retrieve existing chat session
-            chat_history = conversation_history.get(learner.id, [])
+            try:
+                # Retrieve existing chat session
+                chat = Chat.objects.get(chat_id=chat_id, learner=learner)
+                print(f"Retrieved chat: {chat}")
+                chat_history = ChatHistory.objects.filter(chat=chat).order_by('timestamp')
+                
+                print(f"Retrieved chat history: {len(chat_history)}")
+                conversation_history[learner.id] = []
+                for entry in chat_history:
+                    logger.debug(f"Processing chat history entry: message={entry.message}, response={entry.response}")
+                    conversation_history[learner.id].append({"role": "user", "content": entry.message})
+                    conversation_history[learner.id].append({"role": "assistant", "content": entry.response})
+            except Chat.DoesNotExist:
+                return JsonResponse({'error': 'Chat not found.'}, status=404)
 
-            # Truncate conversation history to fit within token limits
-            chat_history = truncate_conversation(chat_history, max_tokens=3000)
+
+        # Truncate conversation history to fit within token limits
+        conversation_history[learner.id] = truncate_conversation(conversation_history[learner.id], max_tokens=3000)
 
         # Build the message history to provide context
         messages = [
@@ -124,7 +136,11 @@ def chat_view(request):
         # Only include truncated history if it's not a new chat
         if not new_chat:
             for entry in chat_history:
-                messages.append({"role": entry['role'], "content": entry['content']})
+                messages.append({"role": "user", "content": entry.message})
+                messages.append({"role": "assistant", "content": entry.response})
+                
+        # Include truncated history
+        messages.extend(conversation_history[learner.id])
 
         # Add current user input to the messages
         messages.append({"role": "user", "content": user_input})
@@ -243,3 +259,33 @@ def get_chat_history(request):
     else:
         # Handle the case when chat_id is not provided
         return JsonResponse({'error': 'chat_id parameter is required.'}, status=400)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_chat_sessions(request):
+    learner = request.user
+    
+    chats = Chat.objects.filter(learner=learner).order_by('-last_message_at')[:10]
+    
+    chat_sessions = []
+    for chat in chats:
+        chat_history = ChatHistory.objects.filter(chat=chat).order_by('timestamp')
+        
+        conversation = [
+            {
+                'message': entry.message,
+                'response': entry.response,
+                'timestamp': entry.timestamp.isoformat()
+            }
+            for entry in chat_history
+        ]
+        
+        chat_sessions.append({
+            'chat_id': chat.chat_id,
+            'chat_title': chat.chat_title,
+            'chat_started_at': chat.chat_started_at.isoformat(),
+            'chat_ended_at': chat.chat_ended_at.isoformat() if chat.chat_ended_at else None,
+            'conversation': conversation
+        })
+        
+    return JsonResponse(chat_sessions, safe=False)

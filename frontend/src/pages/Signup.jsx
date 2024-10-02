@@ -127,7 +127,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
               {errors.email && <span className='text-xs text-red-500'>{errors.email}</span>}
-              {/* <div className='grid grid-cols-2 items-center gap-4'>
+              {/* <div className='grid grid-cols-2 items-center gap-4'> */}
               <input
                 type='text'
                 name='grade'
@@ -136,6 +136,7 @@ const Signup = () => {
                 value={formData.grade}
                 onChange={handleChange}
               />
+              {/*
               <input
                 type='text'
                 name='mobile_no'

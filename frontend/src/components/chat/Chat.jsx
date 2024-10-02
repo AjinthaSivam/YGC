@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useChat } from './ChatContext';
-import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
+import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward, MdAdd } from "react-icons/md";
+import { HiMiniPencilSquare } from "react-icons/hi2";
 import '../styles/custom.css'
 import BotLogo from './bot.png'
 import { usePremium } from '../contexts/PremiumContext';
 import { FaBolt } from 'react-icons/fa6';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -15,7 +18,11 @@ const Chat = () => {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const { messages, setMessages, chatId, setChatId } = useChat();
+    const { chatId: urlChatId } = useParams();
+
+    const [isThinking, setIsThinking] = useState(false)
+
+    const { messages, setMessages, chatId, setChatId, updateChatSessions } = useChat();
     const [chatHistory, setChatHistory] = useState([]);
     const [input, setInput] = React.useState('');
     const [listening, setListening] = React.useState(false);
@@ -25,6 +32,8 @@ const Chat = () => {
 
     const [remainingQuota, setRemainingQuota] = useState(null);
     const [showUpgradeButton, setShowUpgradeButton] = useState(false);
+
+    const navigate = useNavigate();
 
     const checkPremiumStatus = async () => {
         try {
@@ -43,37 +52,37 @@ const Chat = () => {
 
     useEffect(() => {
         const initializeChat = async () => {
-
             setIsLoading(true)
-
-            try{
+            try {
                 const isPremiumLearner = await checkPremiumStatus()
                 setIsPremium(isPremiumLearner)
                 if (!isPremiumLearner) {
                     await getLearnerQuota()
                 }
 
-                const storedChatId = localStorage.getItem('chat_id');
-
-                if (storedChatId) {
-                    setChatId(storedChatId);  // Use the existing chat ID
-                    await getChatHistory(storedChatId);  // Fetch and load chat history
+                if (urlChatId) {
+                    setChatId(urlChatId);
+                    await getChatHistory(urlChatId);
                     setShowOptionalQuestions(false)
                 } else {
-                    setMessages([])
-                    setShowOptionalQuestions(true)
+                    const storedChatId = localStorage.getItem('chat_id');
+                    if (storedChatId) {
+                        setChatId(storedChatId);
+                        await getChatHistory(storedChatId);
+                        setShowOptionalQuestions(false)
+                    } else {
+                        setMessages([])
+                        setShowOptionalQuestions(true)
+                    }
                 }
-                setIsLoading(false)
             } catch (error) {
                 console.error('Error initializing chat:', error)
-            }
-            finally {
+            } finally {
                 setIsLoading(false)
             }
         }
-            
         initializeChat()
-    }, [])
+    }, [urlChatId])
 
     const [error, setError] = useState('')
 
@@ -190,6 +199,13 @@ const Chat = () => {
             setMessages(prevMessages => [...prevMessages, newMessage]);
             setInput('');
 
+            // Add thinking message
+            setIsThinking(true);
+            const thinkingMessage = { sender: 'bot', text: 'Thinking.....', time: new Date(), isThinking: true };
+            setMessages(prevMessages => [...prevMessages, thinkingMessage]);
+
+            console.log(message, chatId)
+
             try {
                 const response = await axios.post(`${apiBaseUrl}/api/chat/`, {
                     user_input: message,
@@ -208,11 +224,13 @@ const Chat = () => {
                     }
                 } else {
                     const botResponse = response.data.response;
+                    setMessages(prevMessages => prevMessages.filter(msg => !msg.isThinking));
                     const botMessage = { sender: 'bot', text: botResponse, time: new Date() };
                     setMessages(prevMessages => [...prevMessages, botMessage]);
 
                     if (chatId === null) {
                         setChatId(response.data.chat_id);
+                        updateChatSessions()
                     }
                     setError('');
                     setShowOptionalQuestions(false);
@@ -224,6 +242,8 @@ const Chat = () => {
             } catch (error) {
                 console.error('Error sending message:', error);
                 setError("An error occurred while sending your message. Please try again.");
+            }finally{
+                setIsThinking(false);
             }
         }
     };
@@ -284,10 +304,25 @@ const Chat = () => {
         }
     }
     
-
+    const handleNewChat = (e) => {
+        e.preventDefault()
+        setChatId(null)
+        setMessages([])
+        setShowOptionalQuestions(true)
+        localStorage.removeItem('chat_id')
+        navigate(`/generalchat`)
+    }
     
     return (
         <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative z-0'>
+            <div className='relative group'>
+                <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>
+                    <HiMiniPencilSquare size={25} />
+                </button>
+                <span className="absolute left-0 top-full mt-2 w-max bg-gray-800 text-[#e6fbfa] text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    New Chat
+                </span>
+            </div>           
             {
                 isLoading && (
                     <div className='flex justify-center items-center h-full'>
@@ -296,6 +331,7 @@ const Chat = () => {
                 )
             }
             <div className='flex justify-between items-center mb-4'>
+                
                 <div className='absolute top-4 right-4'>
                     {!isPremium && (
                         <div className='flex items-center'>
@@ -308,7 +344,7 @@ const Chat = () => {
                                     ) : (
                                         <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] font-semibold inline-block'>
                                             <span className="font-semibold">{remainingQuota}</span>
-                                            <span className="ml-1">Turbo Chats Left!</span>
+                                            <span className="ml-1">Chats Left!</span>
                                         </div>
                                     )}
                                 </div>
@@ -328,7 +364,11 @@ const Chat = () => {
                             {message.sender === 'bot' ? (
                                 <div className='whitespace-pre-line space-y-4' dangerouslySetInnerHTML={{ __html: message.text }} />
                             ) : (message.text)}
-                            <p className={`absolute bottom-1 right-2 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>{formatTime(message.time)}</p>
+                            {
+                                !message.isThinking && (
+                                    <p className={`absolute bottom-1 right-2 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>{formatTime(message.time)}</p>
+                                )
+                            }
                         </div>
                     </div>
                 ))}
