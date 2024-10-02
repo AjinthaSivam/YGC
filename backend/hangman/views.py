@@ -1,11 +1,15 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
 import openai
 import re
 import random
 
 # Ensure you have your OpenAI API key set up in your environment or settings
 openai.api_key = 'YOUR_OPENAI_API_KEY'
+def get_csrf_token(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 def choose_category(request):
     categories = ["animals", "fruits", "countries", "colors", "sports", "vegetables", "clothing", "parts of the body", "jobs", "weather", "transportations", "flowers"]
@@ -62,6 +66,7 @@ def play_hangman(request):
             else:
                 attempts -= 1
                 message = f"Sorry, {guess} is not in the word."
+            
             if set(word) == guessed_letters:
                 return JsonResponse({"message": f"Congratulations! You've guessed the word: {word}"})
             if attempts <= 0:

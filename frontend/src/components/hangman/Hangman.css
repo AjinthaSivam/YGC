@@ -1,0 +1,57 @@
+.hangman-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.category-selection button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-selection button:hover {
+    background-color: #45a049;
+}
+
+.game-play {
+    margin-top: 20px;
+}
+
+.hangman-stage {
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.word-display {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.attempts, .guessed-letters, .message {
+    margin: 10px 0;
+}
+
+input[type="text"] {
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

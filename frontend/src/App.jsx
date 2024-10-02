@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Quiz from './components/quiz/Quiz'
 import Chat from './components/chat/Chat';
 import Historical from './components/historical/Historical';
+import Hangman from './components/hangman/Hangman';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 </Route>
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path='/hangman' element={<Hangman />} /> 
             </Routes>
         
     );
