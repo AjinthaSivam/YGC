@@ -18,14 +18,19 @@ const QuizStart = () => {
     }
   return (
     <PremiumProvider>
-    <div className='bg-white'>
-        <NavBar />
-        <div className='h-screen flex pt-16'>
-            <SideBar />
-            <QuizIntro onStartQuiz={handleStartQuiz} difficulty={difficulty} category={category} />
+      <div className='bg-white h-screen flex flex-col'>
+        <div className='z-50'> {/* Added z-50 for Navbar */}
+          <NavBar />
         </div>
-    </div>
+        <div className='flex-1 flex overflow-hidden'>
+          <SideBar />
+          <div className='flex-1 overflow-auto z-30'>
+            <QuizIntro onStartQuiz={handleStartQuiz} difficulty={difficulty} category={category} />
+          </div>
+        </div>
+      </div>
     </PremiumProvider>
+    
   )
 }
 

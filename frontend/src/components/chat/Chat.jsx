@@ -314,50 +314,34 @@ const Chat = () => {
     }
     
     return (
-        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto relative z-0'>
-            <div className='relative group'>
-                <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>
-                    <HiMiniPencilSquare size={25} />
-                </button>
-                <span className="absolute left-0 top-full mt-2 w-max bg-gray-800 text-[#e6fbfa] text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    New Chat
-                </span>
-            </div>           
-            {
-                isLoading && (
-                    <div className='flex justify-center items-center h-full'>
-                        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-[#04aaa2]'></div>
-                    </div>
-                )
-            }
-            <div className='flex justify-between items-center mb-4'>
-                
-                <div className='absolute top-4 right-4'>
-                    {!isPremium && (
-                        <div className='flex items-center'>
-                            {!isPremium && remainingQuota !== null && (
-                                <div className='flex items-center'>
-                                    {remainingQuota === 0 ? (
-                                        <p className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] inline-block'>
-                                            <span className="font-semibold mr-2">Daily limit reached. Try again tomorrow!</span>
-                                        </p>
-                                    ) : (
-                                        <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] font-semibold inline-block'>
-                                            <span className="font-semibold">{remainingQuota}</span>
-                                            <span className="ml-1">Chats Left!</span>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    )}
+        <div className='flex flex-col h-screen ml-16 p-2 max-w-5xl sm:mx-auto'>
+            <div className='flex justify-between mt-16 sm:mt-16 pt-2 items-center mb-4'>
+                <div className='relative group'>
+                    <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>
+                        <HiMiniPencilSquare size={25} />
+                    </button>
+                    <span className="absolute left-0 top-full mt-2 w-max bg-gray-800 text-[#e6fbfa] text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        New Chat
+                    </span>
                 </div>
+                {!isPremium && remainingQuota !== null && (
+                    <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] font-semibold'>
+                        {remainingQuota === 0 ? (
+                            <span className="font-semibold">Daily limit reached. Try again tomorrow!</span>
+                        ) : (
+                            <>
+                                <span className="font-semibold">{remainingQuota}</span>
+                                <span className="ml-1">Chats Left!</span>
+                            </>
+                        )}
+                    </div>
+                )}
             </div>
             
-            <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
+            <div className='flex-grow overflow-auto mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 text-sm rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
                                 <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
                             )}
@@ -422,37 +406,38 @@ const Chat = () => {
                     </div>
                 )
             }
-
-            <div className='flex px-3 items-end'>
-                <button 
-                    onClick={listening ? stopVoiceRecognition : startVoiceRecognition} 
-                    className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'
-                    disabled={remainingQuota === 0}
-                >
-                    {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
-                </button>
-                <textarea
-                    ref={textareaRef}
-                    value={input}
-                    onChange={handleInputChange}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
-                            handleSend();
-                        }
-                    }}
-                    className={`flex-grow p-2 pl-4 text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
-                    placeholder={!isPremium && remainingQuota === 0 ? 'Daily limit reached' : 'Type your message...'}
-                    rows={1}
-                    disabled={!isPremium && remainingQuota === 0}
-                />
-                <button 
-                    onClick={handleSend} 
-                    className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-10 h-10 flex-shrink-0'
-                    disabled={!isPremium && remainingQuota === 0}
-                >
-                    <MdArrowUpward size={25} />
-                </button>
+            <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
+                <div className='flex w-full mb-2'>
+                    <button 
+                        onClick={listening ? stopVoiceRecognition : startVoiceRecognition} 
+                        className='flex items-center justify-center px-0 sm:p-2 text-[#04aaa2] rounded-full sm:mr-2 hover:bg-[#e6fbfa] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'
+                        disabled={remainingQuota === 0}
+                    >
+                        {listening ? <MdKeyboardVoice size={20} className='sm:w-6 sm:h-6' /> : <MdOutlineKeyboardVoice size={20} className='sm:w-6 sm:h-6' />}
+                    </button>
+                    <textarea
+                        ref={textareaRef}
+                        value={input}
+                        onChange={handleInputChange}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault();
+                                handleSend();
+                            }
+                        }}
+                        className={`flex-grow p-2 pl-3 sm:pl-4 text-xs sm:text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
+                        placeholder={!isPremium && remainingQuota === 0 ? 'Daily limit reached' : 'Type your message...'}
+                        rows={1}
+                        disabled={!isPremium && remainingQuota === 0}
+                    />
+                    <button 
+                        onClick={handleSend} 
+                        className='flex items-center justify-center px-0 sm:p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'
+                        disabled={!isPremium && remainingQuota === 0}
+                    >
+                        <MdArrowUpward size={20} className='sm:w-6 sm:h-6' />
+                    </button>
+                </div>
             </div>
         </div>
     )

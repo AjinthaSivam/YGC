@@ -39,12 +39,12 @@ const QuizResult = ({ questions, userAnswers, score }) => {
     return (
         <div className='flex-col h-full p-4 w-full max-w-5xl mx-auto flex-grow mb-4'>
             <div className='p-6 rounded-lg shadow-md max-w-xl'>
-                <p className='text-lg font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
-                <p className='text-lg font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>
+                <p className='sm:text-lg text-sm font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
+                <p className='sm:text-lg text-sm font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>
             </div>
             <div>
                 {questions.map((question, index) => (
-                    <div key={index} className='mb-6 mt-6'>
+                    <div key={index} className='mb-6 mt-6 text-xs sm:text-sm'>
                         <p>{index + 1}. {question.question}</p>
                         <div className='ml-4 mt-2'>
                             {Object.keys(question.options).map((key, idx) => (

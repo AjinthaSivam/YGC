@@ -200,18 +200,20 @@ const Historical = () => {
     };
 
     return (
-        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto'>
+        <div className='flex flex-col ml-16 h-screen p-2 max-w-5xl sm:mx-auto'>
             {/* Heading Section */}
-            <div className='text-center mt-3 mb-6'>
-                <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
-                <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+            <div className='hidden sm:block'>
+                <div className='text-center mt-3 sm:mt-16 mb-6'>
+                    <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
+                    <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+                </div>
             </div>
             
             {/* Chat Container */}
-            <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
+            <div className='flex-grow overflow-auto mb-4 px-3 sm:mt-0 pt-2 sm:pt-0 mt-16' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-6 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 text-sm rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
                                 <img src={Kalaam} alt="kalaam" className="absolute w-10 h-10 rounded-full left-2 -top-5 h-8 w-8" />
                             )}
@@ -252,8 +254,9 @@ const Historical = () => {
                     </div>
                 </div>
             )}
-            <div className='flex px-3 items-end'>
-                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'>
+            <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
+            <div className='flex w-full mb-2'>
+                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='flex items-center justify-center px-0 sm:p-2 text-[#04aaa2] rounded-full sm:mr-2 hover:bg-[#e6fbfa] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
                     {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
                 </button>
                 <textarea
@@ -266,13 +269,14 @@ const Historical = () => {
                             handleSend();
                         }
                     }}
-                    className={`flex-grow p-2 pl-4 text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
+                    className={`flex-grow p-2 pl-3 sm:pl-4 text-xs sm:text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
                     placeholder='Type your message...'
                     rows={1}
                 />
-                <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-10 h-10 flex-shrink-0'>
+                <button onClick={handleSend} className='flex items-center justify-center px-0 sm:p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
                     <MdArrowUpward size={25} />
                 </button>
+            </div>
             </div>
         </div>
     );

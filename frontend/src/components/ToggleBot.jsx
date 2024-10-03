@@ -117,7 +117,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
     const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     return (
-        <div className='flex flex-col h-full px-4 pb-3 w-full bg-white rounded-b-md'>
+        <div className='flex flex-col h-full w-full px-4 pb-3 w-full bg-white rounded-b-md'>
             <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
             <IoCloseOutline size={24} />
             </button>

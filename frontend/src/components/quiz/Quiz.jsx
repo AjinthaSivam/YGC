@@ -102,8 +102,8 @@ const MCQGenerator = ({ difficulty, category }) => {
     };
 
     return (
-        <div className='flex p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
-            <div className='flex-col flex-grow overflow-auto mb-4 overflow-y-scroll scrollbar-hidden'>
+        <div className='flex p-4 h-full ml-16 w-full max-w-5xl sm:mx-auto flex-grow overflow-auto'>
+            <div className='flex-col flex-grow overflow-auto mt-16 mb-4 overflow-y-scroll scrollbar-hidden'>
                 <div className='pb-2 border-b border-[#04aaa2] max-w-xl mb-8'>
                     <h1 className='text-2xl text-[#393E46] font-bold my-4'>
                         {category} - {difficulty} Level
@@ -118,7 +118,7 @@ const MCQGenerator = ({ difficulty, category }) => {
                         {questions.length > 0 && (
                             <div>
                                 {questions.map((question, index) => (
-                                    <div key={index} className='mb-6 mt-6'>
+                                    <div key={index} className='mb-6 mt-6 text-xs sm:text-sm'>
                                         <p>{index + 1}. {question.question}</p>
                                         <div className='ml-4 mt-2'>
                                             {Object.keys(question.options).map((key, idx) => (

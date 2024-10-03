@@ -21,15 +21,15 @@ const Paper = ({ pdfUrl, isChatOpen, toggleChat, selected_year, handleClose }) =
 
     return (
         <>
-            <div className='relative w-full h-full max-w-4xl flex justify-center items-center p-4 mx-auto'>
-                <iframe src={pdfUrl} title='Past Paper' className='w-full h-full' />
+            <div className='relative h-screen max-w-4xl flex justify-center items-center p-4 sm:mx-auto'>
+                <iframe src={pdfUrl} title='Past Paper' className='w-full h-full mt-16' />
             </div>
 
             {/* Chat Button */}
             <div className='flex-shrink-0'>
                 {/* Chatbot Container - Always rendered */}
                 <div
-                    className={`absolute bottom-4 right-12 mb-10 mr-4 bg-[#04aaa2] rounded-md shadow-lg pt-2 transition-all duration-300 transform ${
+                    className={`absolute bottom-4 right-12 ml-16 sm:ml-0 mb-10 mr-4 bg-[#04aaa2] rounded-md shadow-lg pt-2 transition-all duration-300 transform ${
                         isChatOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                     } ${
                         isChatOpen ? 'visible' : 'invisible'

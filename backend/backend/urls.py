@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from historical.views import historical_chat_view, get_historical_chat_history
 import pastpaper.urls
 import learner.urls
+import chat.urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('api/chat/history/', get_chat_history, name='get_chat_history'),
     path('api/end_conversation/', end_conversation, name='end_conversation'),
     path('api/get_general_chat_sessions', get_chat_sessions, name='get_chat_sessions'),
+    path('api/chat/', include(chat.urls)),
     
     # Learner-related endpoints
     path('api/register/', learner_views.register_view, name='register'),

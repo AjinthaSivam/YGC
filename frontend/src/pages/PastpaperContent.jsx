@@ -43,10 +43,13 @@ const PastpaperContent = () => {
 
   return (
     <PremiumProvider>
-    <div className='bg-white'>
+    <div className='bg-white h-screen flex flex-col'>
+      <div className='z-50'>
       <NavBar />
-      <div className='h-screen flex pt-16'>
+      </div>
+      <div className='flex-1 flex overflow-hidden'>
         <SideBar />
+        <div className='flex-1 overflow-auto z-30 ml-16 md:ml-0'>
         <div className='w-full p-4'>
           {/* Render the Paper component only when pdfUrl is available */}
           <Paper
@@ -56,6 +59,7 @@ const PastpaperContent = () => {
             selected_year={year}
             handleClose={handleClose}
           />
+        </div>
         </div>
       </div>
     </div>

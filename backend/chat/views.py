@@ -11,6 +11,7 @@ import re
 import tiktoken
 from learner.utils import check_and_update_quota
 import logging
+from django.shortcuts import get_object_or_404
 
 logger = logging.getLogger(__name__)
 
@@ -265,7 +266,7 @@ def get_chat_history(request):
 def get_chat_sessions(request):
     learner = request.user
     
-    chats = Chat.objects.filter(learner=learner).order_by('-last_message_at')[:10]
+    chats = Chat.objects.filter(learner=learner, is_deleted=False).order_by('-last_message_at')[:10]
     
     chat_sessions = []
     for chat in chats:
@@ -289,3 +290,43 @@ def get_chat_sessions(request):
         })
         
     return JsonResponse(chat_sessions, safe=False)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def rename_chat_session(request, chat_id):
+    try:
+        chat = get_object_or_404(Chat, chat_id=chat_id, learner=request.user)
+        new_title = request.data.get('new_title')
+        
+        if not new_title:
+            return JsonResponse({'error': 'New title is required.'}, status=400)
+        
+        chat.chat_title = new_title
+        chat.save()
+        
+        return JsonResponse({'success': 'Chat session renamed successfully.'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_chat_session(request, chat_id):
+    try:
+        chat = get_object_or_404(Chat, chat_id=chat_id, learner=request.user)
+        chat.delete()
+        
+        return JsonResponse({'success': 'Chat session deleted successfully.'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def soft_delete_chat_session(request, chat_id):
+    try:
+        chat = get_object_or_404(Chat, chat_id=chat_id, learner=request.user)
+        chat.is_deleted = True
+        chat.save()
+        
+        return JsonResponse({'success': 'Chat session marked as deleted successfully.'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

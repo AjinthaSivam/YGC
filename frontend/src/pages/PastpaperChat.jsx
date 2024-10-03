@@ -130,14 +130,16 @@ const PastpaperChat = () => {
 
   return (
     <PremiumProvider>
-    <div className='bg-white'>
+    <div className='bg-white h-screen flex flex-col'>
+        <div className='z-50'>
         <NavBar />
-        <div className='h-screen flex pt-16'>
+        </div>
+        
+        <div className='flex-1 flex overflow-hidden'>
             <SideBar />
-            <div className='relative flex flex-col h-full p-6 w-full max-w-5xl mx-auto'>
-              <button onClick={handleBack} className='absolute top-4 left-4 text-gray-500 hover:rounded-full hover:bg-[#e6fbfa] duration-300 p-3'>
-                <MdOutlineArrowBackIos size={20} />
-              </button>
+            <div className='flex-1 overflow-auto z-30'>
+            <div className='flex flex-col h-screen ml-16 p-2 max-w-5xl sm:mx-auto relative'>
+              
               <div className='flex-grow overflow-auto mt-16 mb-4 px-3' ref={chatContainerRef}>
                   {messages.map((message, index) => (
                       <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -157,10 +159,9 @@ const PastpaperChat = () => {
                       </div>
                   ))}
               </div>
-              <div className='flex px-3 items-end'>
-                  <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-1 hover:bg-[#e6fbfa] w-9 h-9 flex-shrink-0'>
-                      {listening ? <MdKeyboardVoice size={20} /> : <MdOutlineKeyboardVoice size={20} />}
-                  </button>
+              <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
+              <div className='flex w-full mb-2'>
+                  
                   <textarea
                       ref={textareaRef}
                       value={input}
@@ -178,9 +179,12 @@ const PastpaperChat = () => {
                   <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-9 h-9 flex-shrink-0'>
                       <MdArrowUpward size={20} />
                   </button>
+                </div>
               </div>
             </div>
+            
           </div>
+        </div>
     </div>
     </PremiumProvider>
   )

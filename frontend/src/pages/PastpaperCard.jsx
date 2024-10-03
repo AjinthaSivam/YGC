@@ -38,11 +38,14 @@ const PastpaperCard = () => {
 
   return (
     <PremiumProvider>
-    <div className='bg-white'>
-      <NavBar />
-      <div className='h-screen flex pt-16'>
+    <div className='bg-white h-screen flex flex-col'>
+      <div className='z-50'>
+      <NavBar />  
+      </div>
+      <div className='flex-1 flex overflow-hidden'>
         <SideBar />
         {/* Pass the handleSelectPaper and handleSelectYear functions to the PastPaper component */}
+        <div className='flex-1 overflow-auto z-30'>
         <PastPaper onSelectPaper={handleSelectPaper} onSelectYear={handleSelectYear} />
         {/* Show selected paper on large screens */}
         {!isMobile && selectedPaper && (
@@ -51,6 +54,7 @@ const PastpaperCard = () => {
             <iframe src={selectedPaper} className='w-full h-full' title='Past Paper' />
           </div>
         )}
+        </div>
       </div>
     </div>
     </PremiumProvider>

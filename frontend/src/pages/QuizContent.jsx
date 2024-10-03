@@ -12,15 +12,17 @@ const QuizContent = () => {
     const { difficulty, category } = location.state || { difficulty: '', category: '' }
     return (
       <PremiumProvider>
-        <div className='bg-white'>
-          <NavBar />
-        <div className='h-screen flex pt-16'>
+        <div className='bg-white h-screen flex flex-col'>
+          <div className='z-50'>
+            <NavBar />
+          </div>
+          <div className='flex-1 flex overflow-hidden'>
             <SideBar />
             <MCQGenerator difficulty={difficulty} category={category} />
+          </div>
         </div>
-    </div>
-    </PremiumProvider>
-  )
+      </PremiumProvider>
+    )
 }
 
 export default QuizContent
