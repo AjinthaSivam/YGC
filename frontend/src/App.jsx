@@ -22,6 +22,13 @@ import Settings from './components/admin/Settings';
 import Books from './components/admin/Books';
 import Login from './components/admin/Login';
 import AdminPanel from './components/admin/AdminPanel';
+import GeneralChat from './pages/GeneralChat';
+import PastpaperChat from './pages/PastpaperChat';
+import QuizStart from './pages/QuizStart';
+import QuizContent from './pages/QuizContent';
+import Legend from './pages/Legend';
+import PastpaperCard from './pages/PastpaperCard';
+import PastpaperContent from './pages/PastpaperContent';
 
 function App() {
     return (
