@@ -8,6 +8,8 @@ import { MdOutlineArrowBackIos } from "react-icons/md";
 import axios from 'axios'
 import { PremiumProvider } from '../components/contexts/PremiumContext'
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 const PastpaperChat = () => {
   const location = useLocation()
 
@@ -28,7 +30,7 @@ const PastpaperChat = () => {
 
     const getChatHistory = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8001/pastpaper/history/", {
+            const response = await axios.get(`${apiBaseUrl}/pastpaper/history/`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access')}`
                 }
@@ -87,7 +89,7 @@ const PastpaperChat = () => {
             console.log(data_to_send)
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/pastpaper/api/', {
+                const response = await axios.post(`${apiBaseUrl}/pastpaper/api/`, {
                     user_input: message,
                     selected_year: selected_year
                 }, {
@@ -139,8 +141,10 @@ const PastpaperChat = () => {
             <SideBar />
             <div className='flex-1 overflow-auto z-30'>
             <div className='flex flex-col h-screen ml-16 p-2 max-w-5xl sm:mx-auto relative'>
-              
-              <div className='flex-grow overflow-auto mt-16 mb-4 px-3' ref={chatContainerRef}>
+            <button onClick={handleBack} className='mt-16 sm:mt-0 top-4 left-4 text-gray-500 hover:rounded-full hover:bg-[#e6fbfa] duration-300 p-3'>
+                <MdOutlineArrowBackIos size={20} />
+            </button>
+              <div className='flex-grow overflow-auto mb-4 px-3' ref={chatContainerRef}>
                   {messages.map((message, index) => (
                       <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                           <div className={`relative max-w-3xl p-4 rounded-lg text-sm ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>

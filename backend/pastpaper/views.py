@@ -156,16 +156,6 @@ def create_faiss_index(text):
         print("Error in create_faiss_index:", str(e))
         return [], None
 
-# from django.http import JsonResponse
-# from rest_framework.decorators import api_view, permission_classes
-# from rest_framework.permissions import IsAuthenticated
-# from django.views.decorators.csrf import csrf_exempt
-# import json
-# import os
-# import openai
-# from .models import PastPaperChat  # Ensure to import your model for saving chat history
-
-# Initialize conversation history dictionary
 conversation_history = {}
 
 @api_view(['POST'])
@@ -233,7 +223,6 @@ def chat_view(request):
             model="gpt-4o-mini",
             messages=messages,
             temperature=0,
-            max_tokens=200
         )
 
         assistant_response = response['choices'][0]['message']['content'].strip()
@@ -267,40 +256,32 @@ def chat_view(request):
     
     except Exception as e:
         print("Error in chat_view:", str(e))
-        return JsonResponse({'error': str(e)}, status=500)
-
-
-    
+        return JsonResponse({'error': str(e)}, status=500)   
 
 def format_response(response):
+    # Convert Markdown headers to HTML
+    response = re.sub(r'^###\s+(.*?)$', r'<h3>\1</h3>', response, flags=re.MULTILINE)
+    response = re.sub(r'^##\s+(.*?)$', r'<h2>\1</h2>', response, flags=re.MULTILINE)
+    response = re.sub(r'^#\s+(.*?)$', r'<h1>\1</h1>', response, flags=re.MULTILINE)
+
     # Bold text
     response = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response)
     
     # Bullet points
-    response = re.sub(r'\n- (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'- (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'<li>(.*?)</li>\n<li>', r'</ul>\n<li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'</ul>\n<ul>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = "<ul>" + response + "</ul>"
+    response = re.sub(r'\n- (.*?)(?=\n|$)', r'<li>\1</li>', response)
+    response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ul>\n<li>\1</li>', response)
+    response = re.sub(r'<li>(.*?)</li>', r'<ul>\n<li>\1</li></ul>', response)
 
     # Numbered lists
-    response = re.sub(r'\n\d+\. (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'\d+\. (.*?)\n', r'<li>\1</li>\n', response)
-    response = re.sub(r'<li>(.*?)</li>\n<li>', r'</ol>\n<li>', response, flags=re.DOTALL)
-    response = re.sub(r'<li>(.*?)</li>', r'</ol>\n<ol>\n<li>\1</li>', response, flags=re.DOTALL)
-    response = "<ol>" + response + "</ol>"
-
-    # Emojis
-    response = response.replace("important", "🚨 Important")
-    response = response.replace("practice", "📝 Practice")
-    response = response.replace("explanation", "📖 Explanation")
-    response = response.replace("examples", "🔍 Examples")
+    # response = re.sub(r'\n\d+\. (.*?)(?=\n|$)', r'<li>\1</li>', response)
+    # response = re.sub(r'<li>(.*?)</li>(?=<li>)', r'</ol>\n<li>\1</li>', response, flags=re.DOTALL)
+    # response = re.sub(r'<li>(.*?)</li>', r'<ol>\n<li>\1</li></ol>', response, flags=re.DOTALL)
     
-    # Remove extra spaces between list items and tags
-    response = re.sub(r'(\s+<li>)', r'<li>', response)
-    response = re.sub(r'(<li>\s+)', r'<li>', response)
-    response = re.sub(r'(\s+</ul>)', r'</ul>', response)
-    response = re.sub(r'(\s+</ol>)', r'</ol>', response)
+    # Remove extra spaces and newlines
+    response = re.sub(r'\s*<li>', '<li>', response)
+    response = re.sub(r'</li>\s*', '</li>', response)
+    response = re.sub(r'\s*</?[uo]l>\s*', lambda m: m.group().strip(), response)
+    # response = re.sub(r'\n+', '\n', response).strip()
     
     return response
 

@@ -9,9 +9,8 @@ const PastPapers = () => {
     }
 
     return (
-        <div className='flex mt-6 p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
-            <div className='w-full max-w-5xl'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4'>
+        <div className='flex p-4 ml-16 h-screen max-w-4xl sm:mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 mt-16 overflow-auto'>
                     {pastPaperYears.map(year => (
                         <div
                             key={year}

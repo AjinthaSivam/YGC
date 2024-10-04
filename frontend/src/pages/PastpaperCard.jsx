@@ -45,7 +45,7 @@ const PastpaperCard = () => {
       <div className='flex-1 flex overflow-hidden'>
         <SideBar />
         {/* Pass the handleSelectPaper and handleSelectYear functions to the PastPaper component */}
-        <div className='flex-1 overflow-auto z-30'>
+        {/* <div className='flex-1 overflow-auto z-30'> */}
         <PastPaper onSelectPaper={handleSelectPaper} onSelectYear={handleSelectYear} />
         {/* Show selected paper on large screens */}
         {!isMobile && selectedPaper && (
@@ -55,7 +55,7 @@ const PastpaperCard = () => {
           </div>
         )}
         </div>
-      </div>
+      {/* </div> */}
     </div>
     </PremiumProvider>
   );
