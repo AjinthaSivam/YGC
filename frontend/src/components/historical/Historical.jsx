@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useHistoricalChat } from './HistoricalChatContext'; // Import new context
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-icons/md";
@@ -10,17 +10,74 @@ const formatBotResponse = (response) => {
     return marked(response);
 };
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 const Historical = () => {
     const { messages, setMessages, chatId, setChatId } = useHistoricalChat(); // Use new context
     const [input, setInput] = React.useState('');
     const [listening, setListening] = React.useState(false);
     const [recognition, setRecognition] = React.useState(null);
     const [showOptionalQuestions, setShowOptionalQuestions] = React.useState(false);
+    const [error, setError] = useState("")
     const textareaRef = useRef(null); // Ref for the textarea
+
+    const max_input_length = 800
+
+    useEffect(() => {
+        const storedChatId = localStorage.getItem('historical_chat_id');
+
+        if (storedChatId) {
+            setChatId(storedChatId);  // Use the existing chat ID
+            getChatHistory(storedChatId);  // Fetch and load chat history
+        } else {
+            console.log('No chat ID found in localStorage');
+            // Optionally: Inform the user that they need to start a chat
+        }
+    }, []);
+
+    const getChatHistory = async (existing_chat_id) => {
+        try {
+            const response = await axios.get(`${apiBaseUrl}/api/historical_chat_history/?chat_id=${existing_chat_id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access')}`
+                }
+            });
+    
+            if (response.data && response.data.length > 0) {
+                const chatHistory = response.data[0].history;  // Access the history array from the first object in the response
+    
+                const previousMessages = chatHistory.flatMap(entry => ([
+                    { sender: 'user', text: entry.message, time: new Date(entry.timestamp) },
+                    { sender: 'bot', text: entry.response, time: new Date(entry.timestamp) }
+                ]));
+    
+                const filteredMessages = previousMessages.filter(
+                    msg => !messages.some(m => m.text === msg.text && m.time.getTime() === msg.time.getTime())
+                );
+    
+                if (filteredMessages.length > 0) {
+                    setMessages(prevMessages => [
+                        ...filteredMessages
+                    ]);
+                }
+                setShowOptionalQuestions(false);
+            } else {
+                console.error('Unexpected response format:', response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching chat history:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { value } = e.target;
         setInput(value);
+        // Check if the input length exceeds maximum limit
+        if (value.length > max_input_length) {
+            setError("Your message is too long. Please limit your message to 150 words.")
+        } else {
+            setError("")
+        }
         const textarea = textareaRef.current;
         textarea.style.height = 'auto'; // Reset height
         textarea.style.height = `${textarea.scrollHeight}px`; // Set new height
@@ -93,7 +150,7 @@ const Historical = () => {
             setInput('');
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/historical/chat/', {
+                const response = await axios.post(`${apiBaseUrl}/api/historical/chat/`, {
                     user_input: message,
                     new_chat: chatId === null,
                     chat_id: chatId
@@ -115,6 +172,7 @@ const Historical = () => {
 
                      // Hide optional questions after user interacts
                      setShowOptionalQuestions(false);
+                     localStorage.setItem('historical_chat_id', response.data.chat_id)
                 } else {
                     console.error('Invalid response format:', response);
                 }
@@ -142,18 +200,20 @@ const Historical = () => {
     };
 
     return (
-        <div className='flex flex-col h-full p-6 w-full max-w-5xl mx-auto'>
+        <div className='flex flex-col ml-16 h-screen p-2 max-w-5xl sm:mx-auto'>
             {/* Heading Section */}
-            <div className='text-center mt-3 mb-6'>
-                <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
-                <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+            <div className='hidden sm:block'>
+                <div className='text-center mt-3 sm:mt-16 mb-6'>
+                    <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
+                    <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+                </div>
             </div>
             
             {/* Chat Container */}
-            <div className='flex-grow overflow-auto mt-8 mb-4 px-3' ref={chatContainerRef}>
+            <div className='flex-grow overflow-auto mb-4 px-3 sm:mt-0 pt-2 sm:pt-0 mt-16' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-6 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
                             {message.sender === 'bot' && (
                                 <img src={Kalaam} alt="kalaam" className="absolute w-10 h-10 rounded-full left-2 -top-5 h-8 w-8" />
                             )}
@@ -171,7 +231,7 @@ const Historical = () => {
                                 <button 
                                     key={index} 
                                     onClick={() => handleQuestionClick(question)} 
-                                    className='p-2 bg-white text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
+                                    className='p-2 bg-white text-sm text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
                                 >
                                     {question}
                                 </button>
@@ -180,8 +240,23 @@ const Historical = () => {
                     </div>
                 )}
             </div>
-            <div className='flex px-3 items-end'>
-                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-2 hover:bg-[#e6fbfa] w-10 h-10 flex-shrink-0'>
+
+            {error && (
+                <div className='fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-50'>
+                    <div className='relative max-w-md p-4 bg-red-200 text-sm text-red-800 rounded-lg shadow-lg'>
+                        <button 
+                            onClick={() => setError('')} 
+                            className='absolute top-2 right-2 text-md text-red-800 hover:text-red-600 focus:outline-none'
+                        >
+                            &times;
+                        </button>
+                        {error}
+                    </div>
+                </div>
+            )}
+            <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
+            <div className='flex w-full mb-2'>
+                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='flex items-center justify-center px-0 sm:p-2 text-[#04aaa2] rounded-full sm:mr-2 hover:bg-[#e6fbfa] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
                     {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
                 </button>
                 <textarea
@@ -194,13 +269,14 @@ const Historical = () => {
                             handleSend();
                         }
                     }}
-                    className={`flex-grow p-2 pl-4 border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
+                    className={`flex-grow p-2 pl-3 sm:pl-4 text-xs sm:text-sm border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
                     placeholder='Type your message...'
                     rows={1}
                 />
-                <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-10 h-10 flex-shrink-0'>
+                <button onClick={handleSend} className='flex items-center justify-center px-0 sm:p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
                     <MdArrowUpward size={25} />
                 </button>
+            </div>
             </div>
         </div>
     );

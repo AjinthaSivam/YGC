@@ -22,6 +22,8 @@ class HistoricalChatHistory(models.Model):
     message = models.TextField()
     response = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    input_tokens = models.IntegerField(default=0)
+    output_tokens = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Chat {self.chat.chat_id} History {self.id}"

@@ -4,8 +4,13 @@ import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
+import { IoCloseOutline } from "react-icons/io5";
+import { useChat } from '../components/chat/ChatContext';
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
 const Signin = () => {
+    const { setMessages, setChatId } = useChat();
     const navigate = useNavigate();
     const { login } = useAuth();
 
@@ -25,12 +30,15 @@ const Signin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+            const response = await axios.post(`${apiBaseUrl}/api/login/`, {
                 username_or_email: formData.username,
                 password: formData.password
             });
             login(response.data, response.data.user.username);
-            navigate('/home');
+            setMessages([]);
+            setChatId(null);
+            navigate('/generalchat');
+            window.location.reload()
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Incorrect username or password');
@@ -49,11 +57,21 @@ const Signin = () => {
         navigate('/signup');
     };
 
+    const handleClose = (e) => {
+        e.preventDefault()
+        navigate('/land')
+    }
+
     return (
         <div>
             <section className="min-h-screen flex items-center justify-center">
-                <div className="bg-white rounded-2xl shadow-lg max-w-3xl p-5 px-16">
-                    <p className="text-sm text-[#04aaa2] mt-4">If you're already a member, easily sign in</p>
+                <div className="relative bg-white rounded-2xl shadow-lg max-w-3xl p-5 px-16">
+                    <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+                        <IoCloseOutline size={24} />
+                    </button>
+                    
+                    <p className="text-sm text-[#04aaa2] mt-8">If you're already a member, easily sign in</p>
+                    
 
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         <input
@@ -87,20 +105,20 @@ const Signin = () => {
                         </button>
                     </form>
 
-                    <div className="mt-10 grid grid-cols-3 items-center text-gray-400">
+                    {/* <div className="mt-10 grid grid-cols-3 items-center text-gray-400">
                         <hr className="border-gray-400" />
                         <p className="text-center">OR</p>
                         <hr className="border-gray-400" />
-                    </div>
+                    </div> */}
 
-                    <button className="bg-white text-sm text-[#04bdb4] border border-[#04aaa2] py-2 w-full rounded-xl mt-5 flex gap-3 items-center justify-center hover:bg-[#b4ebe9] duration-300">
+                    {/* <button className="bg-white text-sm text-[#04bdb4] border border-[#04aaa2] py-2 w-full rounded-xl mt-5 flex gap-3 items-center justify-center hover:bg-[#b4ebe9] duration-300">
                         <FaGoogle className="text-[#04aaa2]" size={24} />
                         <p>Continue with Google</p>
-                    </button>
+                    </button> */}
 
-                    <p className="mt-5 text-[#04bdb4] text-xs border-b py-4">Forgot password?</p>
+                    {/* <p className="mt-5 text-[#04bdb4] text-xs border-b py-4">Forgot password?</p> */}
 
-                    <div className="mt-3 text-[#04bdb4] text-xs flex justify-between items-center">
+                    <div className="mt-6 text-[#04bdb4] text-xs flex justify-between items-center">
                         <p>Don't have an account?</p>
                         <button onClick={handleSignup} className="py-2 px-5 bg-white border border-[#04aaa2] rounded-xl hover:bg-[#b4ebe9] duration-300">
                             Sign Up

@@ -1,0 +1,7 @@
+node_modules
+
+mysql_data
+
+docker-compose.dev.yml
+
+venv
