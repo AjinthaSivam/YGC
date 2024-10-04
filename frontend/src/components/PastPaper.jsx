@@ -1,11 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const pastPaperYears = [2023, 2022, 2021, 2020, 2019, 2018];
+const pastPaperYears = [2023, 2022, 2021, 2020, 2019, 2018]
 
-const PastPapers = () => {
+const PastPapers = ({ onSelectPaper, onSelectYear }) => {
+    const navigate = useNavigate()
     const handleCardClick = (year) => {
-        const url = `/pastpapers/${year}.pdf`
-        window.open(url, '_blank')
+        onSelectPaper(`/pastpapers/${year}.pdf`)
+        navigate(`/pastpaper/${year}`)
+        onSelectYear(year.toString())
+        console.log(year)
     }
 
     return (
@@ -31,9 +35,8 @@ const PastPapers = () => {
                         </div>
                     ))}
                 </div>
-            </div>
         </div>
-    );
-};
+    )
+}
 
-export default PastPapers;
+export default PastPapers
