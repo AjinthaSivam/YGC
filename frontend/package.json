@@ -23,6 +23,7 @@
     "gpt-3-encoder": "^1.1.4",
     "html-react-parser": "^5.1.10",
     "marked": "^13.0.1",
+    "pdfjs-dist": "^4.6.82",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",

@@ -7,6 +7,9 @@ export default defineConfig({
   build: {
     outDir: 'dist' // Specify the build output directory
   },
+  optimizeDeps: {
+    include: ['pdfjs-dist']
+  },
   assetsInclude: ['**/*.wasm'], // Ensures WASM files are served as static assets
   server: {
     proxy: {
