@@ -37,7 +37,7 @@ const QuizResult = ({ questions, userAnswers, score }) => {
     };
 
     return (
-        <div className='flex-col h-full p-4 w-full max-w-5xl mx-auto flex-grow mb-4'>
+        <div className='flex-col h-full p-4 w-full max-w-4xl mx-auto flex-grow mb-4'>
             <div className='p-6 rounded-lg shadow-md max-w-xl'>
                 <p className='sm:text-lg text-sm font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
                 <p className='sm:text-lg text-sm font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>

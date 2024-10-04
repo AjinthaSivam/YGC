@@ -33,6 +33,12 @@ const Chat = () => {
     const [remainingQuota, setRemainingQuota] = useState(null);
     const [showUpgradeButton, setShowUpgradeButton] = useState(false);
 
+    const initialBotMessage = {
+        sender: 'bot', 
+        text: `Hey ${localStorage.getItem('username')}! 😊🌟\n\n👋 I'm here to help you with your questions and requests. How can I assist you today? 📝 \n\n`,
+        time: new Date()
+    }
+
     const navigate = useNavigate();
 
     const checkPremiumStatus = async () => {
@@ -71,7 +77,7 @@ const Chat = () => {
                         await getChatHistory(storedChatId);
                         setShowOptionalQuestions(false)
                     } else {
-                        setMessages([])
+                        setMessages([initialBotMessage])
                         setShowOptionalQuestions(true)
                     }
                 }
@@ -106,9 +112,9 @@ const Chat = () => {
 
 
     const optionalQuestions = [
-        "What is the difference between past simple and present perfect?",
-        "Can you explain the use of articles in English?",
-        "How do you form conditional sentences?",
+        "How do I write a good introduction for an essay?",
+        "What’s the best way to practice writing formal and informal letters?",
+        "How do I use linking words to make my writing flow better?",
     ]
 
     const chatContainerRef = useRef(null);
@@ -314,7 +320,7 @@ const Chat = () => {
     }
     
     return (
-        <div className='flex flex-col h-screen ml-16 p-2 max-w-5xl sm:mx-auto'>
+        <div className='flex flex-col h-screen ml-16 p-2 max-w-4xl sm:mx-auto'>
             <div className='flex justify-between mt-16 sm:mt-16 pt-2 items-center mb-4'>
                 <div className='relative group'>
                     <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>
