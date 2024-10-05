@@ -10,6 +10,7 @@ const PastpaperCard = () => {
   const [selectedYear, setSelectedYear] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detect if screen is mobile
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Function to handle selecting a paper
   const handleSelectPaper = (paperUrl) => {
@@ -43,9 +44,9 @@ const PastpaperCard = () => {
       <NavBar />  
       </div>
       <div className='flex-1 flex overflow-hidden'>
-        <SideBar />
+        <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
         {/* Pass the handleSelectPaper and handleSelectYear functions to the PastPaper component */}
-        {/* <div className='flex-1 overflow-auto z-30'> */}
+        <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
         <PastPaper onSelectPaper={handleSelectPaper} onSelectYear={handleSelectYear} />
         {/* Show selected paper on large screens */}
         {!isMobile && selectedPaper && (
@@ -55,7 +56,7 @@ const PastpaperCard = () => {
           </div>
         )}
         </div>
-      {/* </div> */}
+      </div>
     </div>
     </PremiumProvider>
   );

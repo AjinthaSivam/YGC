@@ -11,6 +11,8 @@ const PastpaperContent = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);  // State for chatbot visibility
   const navigate = useNavigate();
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const handleClose = (e) => {
     e.preventDefault()
     setIsChatOpen(false)
@@ -48,8 +50,8 @@ const PastpaperContent = () => {
       <NavBar />
       </div>
       <div className='flex-1 flex overflow-hidden'>
-        <SideBar />
-        <div className='flex-1 overflow-auto z-30 ml-16 md:ml-0'>
+        <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
+        <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
         <div className='w-full p-4'>
           {/* Render the Paper component only when pdfUrl is available */}
           <Paper

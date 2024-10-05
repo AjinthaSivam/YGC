@@ -8,6 +8,7 @@ import { PremiumProvider } from '../components/contexts/PremiumContext'
 const QuizStart = () => {
     const [difficulty, setDifficulty] = useState('')
     const [category, setCategory] = useState('')
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const navigate = useNavigate()
 
@@ -23,8 +24,8 @@ const QuizStart = () => {
           <NavBar />
         </div>
         <div className='flex-1 flex overflow-hidden'>
-          <SideBar />
-          <div className='flex-1 overflow-auto z-30'>
+          <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
+          <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
             <QuizIntro onStartQuiz={handleStartQuiz} difficulty={difficulty} category={category} />
           </div>
         </div>

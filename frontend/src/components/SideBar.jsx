@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomScrollbar from './scrollbars/CustomScrollbar';
 import { useChat } from './chat/ChatContext';
 
-const SideBar = () => {
-    const [open, setOpen] = useState(false);
+const SideBar = ({ open, setOpen }) => {
     const [selectedMenu, setSelectedMenu] = useState('');
     const [showChatSubmenu, setShowChatSubmenu] = useState(false);
     const [editChatSession, setEditChatSession] = useState(null);

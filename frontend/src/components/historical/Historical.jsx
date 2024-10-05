@@ -200,7 +200,7 @@ const Historical = () => {
     };
 
     return (
-        <div className='flex flex-col ml-16 h-screen p-2 max-w-4xl sm:mx-auto'>
+        <div className='flex flex-col h-screen p-2 max-w-4xl sm:mx-auto'>
             {/* Heading Section */}
             <div className='hidden sm:block'>
                 <div className='text-center mt-3 sm:mt-16 mb-6 p-4'>

@@ -52,8 +52,8 @@ const QuizIntro = ({ onStartQuiz }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between ml-16 justify-center mx-auto">
-      <div className="text-center mt-16 border-b border-[#04aaa2] p-4">
+    <div className="flex flex-col justify-between justify-center mx-auto">
+      <div className="text-center mt-16 p-6">
         <h2 className="text-2xl font-semibold mb-4">
           Welcome to the EduTech Quiz! 📘📝
         </h2>

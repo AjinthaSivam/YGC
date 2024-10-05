@@ -320,7 +320,7 @@ const Chat = () => {
     }
     
     return (
-        <div className='flex flex-col h-screen ml-16 p-2 max-w-4xl sm:mx-auto'>
+        <div className='flex flex-col h-screen p-2 max-w-4xl sm:mx-auto'>
             <div className='flex justify-between mt-16 sm:mt-16 pt-2 items-center mb-4'>
                 <div className='relative group'>
                     <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>

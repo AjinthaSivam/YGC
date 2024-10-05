@@ -15,6 +15,8 @@ const PastpaperChat = () => {
 
   const navigate = useNavigate()
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const selected_year = location.state || { year: '' }
   const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
@@ -138,9 +140,9 @@ const PastpaperChat = () => {
         </div>
         
         <div className='flex-1 flex overflow-hidden'>
-            <SideBar />
-            <div className='flex-1 overflow-auto z-30'>
-            <div className='flex flex-col h-screen ml-16 p-2 max-w-5xl sm:mx-auto relative'>
+            <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
+            <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
+            <div className='flex flex-col h-screen p-2 max-w-5xl sm:mx-auto relative'>
             <button onClick={handleBack} className='mt-16 sm:mt-0 top-4 left-4 text-gray-500 hover:rounded-full hover:bg-[#e6fbfa] duration-300 p-3'>
                 <MdOutlineArrowBackIos size={20} />
             </button>
