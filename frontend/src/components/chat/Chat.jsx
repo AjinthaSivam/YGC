@@ -450,7 +450,7 @@ const Chat = () => {
 }
 
 function formatTime(time) {
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
 }
 
 export default Chat

@@ -114,7 +114,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
     const startVoiceRecognition = () => setListening(true);
     const stopVoiceRecognition = () => setListening(false);
 
-    const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formatTime = (time) => time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
     return (
         <div className='flex flex-col h-full w-full px-4 pb-3 w-full bg-white rounded-b-md'>

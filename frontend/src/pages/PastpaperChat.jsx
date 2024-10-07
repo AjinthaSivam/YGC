@@ -130,7 +130,7 @@ const PastpaperChat = () => {
     const startVoiceRecognition = () => setListening(true);
     const stopVoiceRecognition = () => setListening(false);
 
-    const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formatTime = (time) => time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
   return (
     <PremiumProvider>
