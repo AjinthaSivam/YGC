@@ -66,11 +66,11 @@ const Signin = () => {
         <div>
             <section className="min-h-screen flex items-center justify-center">
                 <div className="relative bg-white rounded-2xl shadow-lg max-w-3xl p-5 px-16">
-                    <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+                    <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
                         <IoCloseOutline size={24} />
                     </button>
                     
-                    <p className="text-sm text-[#04aaa2] mt-8">If you're already a member, easily sign in</p>
+                    <p className="text-sm text-primary mt-8">If you're already a member, easily sign in</p>
                     
 
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -78,7 +78,7 @@ const Signin = () => {
                             type="text"
                             name="username"
                             placeholder="Username/Email"
-                            className="mt-8 p-2 rounded-xl w-full border"
+                            className="mt-8 p-2 rounded-full w-full border"
                             value={formData.username}
                             onChange={handleChange}
                         />
@@ -87,7 +87,7 @@ const Signin = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 placeholder="Password"
-                                className="p-2 rounded-xl w-full border"
+                                className="p-2 rounded-full w-full border"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
@@ -100,7 +100,7 @@ const Signin = () => {
                             </div>
                         </div>
                         {error && <span className="text-xs text-red-500">{error}</span>}
-                        <button type="submit" className="bg-[#04aaa2] rounded-xl text-white py-2 hover:scale-105 duration-300">
+                        <button type="submit" className="bg-primary rounded-full text-light_gray py-2 mt-4 mb-4 hover:scale-105 duration-300">
                             Sign In
                         </button>
                     </form>
@@ -118,9 +118,9 @@ const Signin = () => {
 
                     {/* <p className="mt-5 text-[#04bdb4] text-xs border-b py-4">Forgot password?</p> */}
 
-                    <div className="mt-6 text-[#04bdb4] text-xs flex justify-between items-center">
+                    <div className="mt-6 text-strong_cyan text-xs flex justify-between items-center">
                         <p>Don't have an account?</p>
-                        <button onClick={handleSignup} className="py-2 px-5 bg-white border border-[#04aaa2] rounded-xl hover:bg-[#b4ebe9] duration-300">
+                        <button onClick={handleSignup} className="py-2 px-5 bg-white border border-primary rounded-full hover:bg-soft_cyan duration-300">
                             Sign Up
                         </button>
                     </div>

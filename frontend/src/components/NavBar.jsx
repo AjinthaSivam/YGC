@@ -59,7 +59,7 @@ const NavBar = () => {
   const initials = username.substring(0, 2).toUpperCase();
 
   return (
-    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-[#04aaa2] py-4 px-6 items-center'>
+    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-primary py-4 px-6 items-center'>
       <div className='w-1/3'> {/* Left spacer */}
       <div className='hidden sm:block'>
         {!isLoading && (
@@ -94,7 +94,7 @@ const NavBar = () => {
       
       <div className='w-1/3 flex justify-end'> {/* Right-aligned user menu */}
         <div className='relative'>
-          <div onClick={toggleDropDown} className='w-10 h-10 rounded-full bg-[#ffffff] flex items-center justify-center text-[#04bdb4] font-bold cursor-pointer hover:bg-[#e6fbfa]'>
+          <div onClick={toggleDropDown} className='w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary font-bold cursor-pointer hover:bg-secondary'>
             {initials}
           </div>
           {isDropDown && (
@@ -104,7 +104,7 @@ const NavBar = () => {
                   key={item.name}
                   href='#'
                   onClick={item.action}
-                  className='flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-100'
+                  className='flex items-center px-4 py-2 text-base text-gray-700 hover:bg-gray-200'
                 >
                   <span className='mr-2'>{item.icon}</span>
                   {item.name}

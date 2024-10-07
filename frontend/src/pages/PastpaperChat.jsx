@@ -7,6 +7,7 @@ import { MdArrowUpward, MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-ic
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import axios from 'axios'
 import { PremiumProvider } from '../components/contexts/PremiumContext'
+import SendButton from '../components/buttons/SendButton';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -130,7 +131,7 @@ const PastpaperChat = () => {
     const startVoiceRecognition = () => setListening(true);
     const stopVoiceRecognition = () => setListening(false);
 
-    const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formatTime = (time) => time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
   return (
     <PremiumProvider>
@@ -143,13 +144,13 @@ const PastpaperChat = () => {
             <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
             <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
             <div className='flex flex-col h-screen p-2 max-w-5xl sm:mx-auto relative'>
-            <button onClick={handleBack} className='mt-16 sm:mt-0 top-4 left-4 text-gray-500 hover:rounded-full hover:bg-[#e6fbfa] duration-300 p-3'>
+            <button onClick={handleBack} className='mt-16 sm:mt-0 top-4 left-4 w-10 h-10 items-center text-gray-500 rounded-full hover:text-primary duration-300 p-3'>
                 <MdOutlineArrowBackIos size={20} />
             </button>
               <div className='flex-grow overflow-auto mb-4 px-3' ref={chatContainerRef}>
                   {messages.map((message, index) => (
                       <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                          <div className={`relative max-w-3xl p-4 rounded-lg text-sm ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                          <div className={`relative max-w-3xl p-4 rounded-lg text-sm ${message.sender === 'user' ? 'pt-2 bg-primary text-light_gray' : 'bg-secondary text-dark_gray'}`}>
                               {message.sender === 'bot' && (
                                   <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
                               )}
@@ -182,9 +183,7 @@ const PastpaperChat = () => {
                       placeholder='Type your message...'
                       rows={1}
                   />
-                  <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-9 h-9 flex-shrink-0'>
-                      <MdArrowUpward size={20} />
-                  </button>
+                  <SendButton onClick={handleSend} disabled={!input.trim()} />
                 </div>
               </div>
             </div>

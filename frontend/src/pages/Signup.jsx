@@ -83,11 +83,11 @@ const Signup = () => {
   return (
     <div className='min-h-screen flex items-center justify-center'>
         <div className='relative rounded-2xl shadow-lg max-w-3xl p-5 px-16 py-6'>
-          <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+          <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
             <IoCloseOutline size={24} />
           </button>
           <div className='mb-4 p-3 text-center'>
-            <p className='text-md text-[#04aaa2] text-'>Sign up today to master your subjects <br/> with EduBot's AI-powered learning! 🚀🤖</p>
+            <p className='text-md text-primary'>Sign up today to master your subjects <br/> with EduBot's AI-powered learning! 🚀🤖</p>
           </div>
             <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
               {/* <div className='grid grid-cols-2 items-center gap-4'>
@@ -122,7 +122,7 @@ const Signup = () => {
                 type='text'
                 name='email'
                 placeholder='Email'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -132,7 +132,7 @@ const Signup = () => {
                 type='text'
                 name='grade'
                 placeholder='Grade'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.grade}
                 onChange={handleChange}
               />
@@ -166,7 +166,7 @@ const Signup = () => {
                 type='text'
                 name='username'
                 placeholder='Username'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.username}
                 onChange={handleChange}
               />
@@ -176,7 +176,7 @@ const Signup = () => {
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   placeholder='Password'
-                  className='p-2 rounded-xl w-full border'
+                  className='p-2 rounded-full w-full border'
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -190,14 +190,14 @@ const Signup = () => {
                 </div>
               </div>
               {errors.password && <span className='text-xs text-red-500'>{errors.password}</span>}
-              <button type='submit' className='bg-[#04aaa2] rounded-xl text-white py-2 mt-4 mb-4 hover:scale-105 duration-300'>Sign Up</button>
+              <button type='submit' className='bg-primary rounded-full text-light_gray py-2 mt-4 mb-4 hover:scale-105 duration-300'>Sign Up</button>
 
               {errors.general && <span className='text-xs text-red-500'>{errors.general}</span>}
 
             </form>
             <div className='mt-3 text-[#04aaa2] text-xs flex justify-between border-t pt-2 items-center gap-2'>
               <p>Already have an account?</p>
-              <button onClick={handleSignin} className='py-2 px-3 bg-white border border-[#04aaa2] rounded-xl hover:bg-[#b4ebe9] duration-300'>Sign In</button>
+              <button onClick={handleSignin} className='py-2 px-3 bg-white border border-primary rounded-full hover:bg-secondary duration-300'>Sign In</button>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward } from "react-ic
 import Kalaam from './kalaam.jpg'
 import '../styles/custom.css';
 import { marked } from 'marked';
+import SendButton from '../buttons/SendButton';
 
 const formatBotResponse = (response) => {
     return marked(response);
@@ -204,8 +205,8 @@ const Historical = () => {
             {/* Heading Section */}
             <div className='hidden sm:block'>
                 <div className='text-center mt-3 sm:mt-16 mb-6 p-4'>
-                    <h1 className='text-2xl font-bold text-[#04aaa2]'>Inspire Your Mind with Dr. Kalam</h1>
-                    <p className='text-md text-gray-600 border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
+                    <h1 className='text-2xl font-bold text-primary'>Inspire Your Mind with Dr. Kalam</h1>
+                    <p className='text-md text-dark_gray border-b pb-3 mt-2'>Engage in an enlightening conversation and discover wisdom that motivates and inspires.</p>
                 </div>
             </div>
             
@@ -213,7 +214,7 @@ const Historical = () => {
             <div className='flex-grow overflow-auto mb-4 px-3 sm:mt-0 pt-2 sm:pt-0 mt-16' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-6 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-primary text-light_gray' : 'bg-secondary text-dark_gray'}`}>
                             {message.sender === 'bot' && (
                                 <img src={Kalaam} alt="kalaam" className="absolute w-10 h-10 rounded-full left-2 -top-5 h-8 w-8" />
                             )}
@@ -231,7 +232,7 @@ const Historical = () => {
                                 <button 
                                     key={index} 
                                     onClick={() => handleQuestionClick(question)} 
-                                    className='p-2 bg-white text-sm text-left text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
+                                    className='p-2 bg-white text-sm text-left text-primary border border-primary rounded-lg hover:bg-secondary'
                                 >
                                     {question}
                                 </button>
@@ -256,7 +257,7 @@ const Historical = () => {
             )}
             <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
             <div className='flex w-full mb-2'>
-                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='flex items-center justify-center px-0 sm:p-2 text-[#04aaa2] rounded-full sm:mr-2 hover:bg-[#e6fbfa] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
+                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='flex items-center justify-center px-0 sm:p-2 text-primary rounded-full sm:mr-2 hover:bg-secondary w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
                     {listening ? <MdKeyboardVoice size={25} /> : <MdOutlineKeyboardVoice size={25} />}
                 </button>
                 <textarea
@@ -273,9 +274,7 @@ const Historical = () => {
                     placeholder='Type your message...'
                     rows={1}
                 />
-                <button onClick={handleSend} className='flex items-center justify-center px-0 sm:p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'>
-                    <MdArrowUpward size={25} />
-                </button>
+                <SendButton onClick={handleSend} disabled={!input.trim()} />
             </div>
             </div>
         </div>
@@ -283,7 +282,7 @@ const Historical = () => {
 };
 
 function formatTime(time) {
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 }
 
 export default Historical;

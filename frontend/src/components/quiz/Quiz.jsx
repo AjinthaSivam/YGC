@@ -104,8 +104,8 @@ const MCQGenerator = ({ difficulty, category }) => {
     return (
         <div className='flex p-4 h-full w-full max-w-4xl sm:mx-auto flex-grow overflow-auto'>
             <div className='flex-col flex-grow overflow-auto mt-16 mb-4 overflow-y-scroll scrollbar-hidden'>
-                <div className='pb-2 border-b border-[#04aaa2] max-w-xl mb-8'>
-                    <h1 className='text-2xl text-[#393E46] font-bold my-4'>
+                <div className='pb-2 border-b border-primary max-w-xl mb-8'>
+                    <h1 className='text-2xl text-dark_gray font-bold my-4'>
                         {category} - {difficulty} Level
                     </h1>
                 </div>
@@ -139,7 +139,7 @@ const MCQGenerator = ({ difficulty, category }) => {
                                 <div className='flex justify-center'>
                                     <button
                                         onClick={handleFinishQuiz}
-                                        className='px-4 py-2 mb-6 bg-[#04aaa2] text-white rounded-full justify-center'
+                                        className='px-4 py-2 mb-6 bg-primary text-light_gray rounded-full justify-center'
                                     >
                                         Finish Quiz
                                     </button>

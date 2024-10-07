@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import BotLogo from './chat/bot.png';
-import { MdArrowUpward, MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-icons/md';
+import { MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-icons/md';
 import axios from 'axios';
 import { IoCloseOutline } from "react-icons/io5";
+import SendButton from './buttons/SendButton';
 
 const ToggleBot = ({ selected_year, handleClose }) => {
     const [messages, setMessages] = useState([]);
@@ -114,11 +115,11 @@ const ToggleBot = ({ selected_year, handleClose }) => {
     const startVoiceRecognition = () => setListening(true);
     const stopVoiceRecognition = () => setListening(false);
 
-    const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formatTime = (time) => time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
     return (
         <div className='flex flex-col h-full w-full px-4 pb-3 w-full bg-white rounded-b-md'>
-            <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+            <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 rounded-full hover:bg-soft_cyan hover:text-primary duration-300'>
             <IoCloseOutline size={24} />
             </button>
             <div className='flex-grow overflow-auto mt-12 mb-4 px-3' ref={chatContainerRef}>
@@ -158,9 +159,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
                     placeholder='Type your message...'
                     rows={1}
                 />
-                <button onClick={handleSend} className='p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-9 h-9 flex-shrink-0'>
-                    <MdArrowUpward size={20} />
-                </button>
+                <SendButton onClick={handleSend} disabled={!input.trim()} />
             </div>
         </div>
     );

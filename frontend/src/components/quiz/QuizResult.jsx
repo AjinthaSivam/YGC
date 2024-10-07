@@ -39,8 +39,8 @@ const QuizResult = ({ questions, userAnswers, score }) => {
     return (
         <div className='flex-col h-full p-4 w-full max-w-4xl mx-auto flex-grow mb-4'>
             <div className='p-6 rounded-lg shadow-md max-w-xl'>
-                <p className='sm:text-lg text-sm font-semibold text-[#04aaa2] mb-3'>Your Score is {score.toFixed(2)}%</p>
-                <p className='sm:text-lg text-sm font-semibold text-[#5f1e5c]'>{getFeedback(score)}</p>
+                <p className='sm:text-lg text-sm font-semibold text-primary mb-3'>Your Score is {score.toFixed(2)}%</p>
+                <p className='sm:text-lg text-sm font-semibold text-dark_gray'>{getFeedback(score)}</p>
             </div>
             <div>
                 {questions.map((question, index) => (
@@ -48,19 +48,19 @@ const QuizResult = ({ questions, userAnswers, score }) => {
                         <p>{index + 1}. {question.question}</p>
                         <div className='ml-4 mt-2'>
                             {Object.keys(question.options).map((key, idx) => (
-                                <p key={idx} className={`block mb-3 ml-5 ${question.options[key] === question.correct_answer ? 'text-green-500' : ''}`}>
+                                <p key={idx} className={`block mb-3 ml-5 ${question.options[key] === question.correct_answer ? 'text-primary' : ''}`}>
                                     {question.options[key]} 
                                     {userAnswers[question.id] === question.options[key] && userAnswers[question.id] !== question.correct_answer && <span className='text-red-500'>(Your Answer)</span>}
                                 </p>
                             ))}
                         </div>
-                        <p className='ml-4 mt-2 text-[#2F85ED] italic'>{question.explanation}</p>
+                        <p className='ml-4 mt-2 text-bright_blue italic'>{question.explanation}</p>
                     </div>
                 ))}
             </div>
             <div className='mt-4 flex justify-center'>
                 <button
-                    className='bg-[#04aaa2] text-white py-2 px-4 rounded-full'
+                    className='bg-primary text-light_gray py-2 px-4 rounded-full'
                     onClick={handleFinishReview}
                 >
                     Finish Review

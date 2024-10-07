@@ -7,8 +7,8 @@ const ConformationModal = ({ show, onConfirm, onCancel }) => {
         <div className='bg-white text-xs sm:text-sm p-6 rounded-lg shadow-lg'>
             <p>Do you want to try again?</p>
             <div className='flex justify-end mt-4'>
-                <button onClick={onCancel} className='px-4 py-2 mr-2 bg-gray-500 text-white rounded-lg'>No</button>
-                <button onClick={onConfirm} className='px-4 py-2 bg-[#04aaa2] text-white rounded-lg'>Yes</button>
+                <button onClick={onCancel} className='px-4 py-2 mr-2 bg-white border border-primary text-primary rounded-full'>No</button>
+                <button onClick={onConfirm} className='px-4 py-2 bg-primary text-light_gray rounded-full'>Yes</button>
             </div>
         </div>
 

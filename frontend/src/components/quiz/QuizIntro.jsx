@@ -66,7 +66,7 @@ const QuizIntro = ({ onStartQuiz }) => {
             <div className="relative">
               <button
                 onClick={handleDiffDropdown}
-                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-[#04aaa2] font-semibold border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa] transition duration-300"
+                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-lg hover:bg-secondary transition duration-300"
               >
                 {quizDifficulty}
                 <FaAngleDown className="justify-end" />
@@ -75,7 +75,7 @@ const QuizIntro = ({ onStartQuiz }) => {
                 <div className="absolute left-0 mt-2 flex flex-col bg-white text-white border rounded-lg w-full z-10">
                   {difficulties.map((difficulty, index) => (
                     <p
-                      className="bg-white text-[#04aaa2] py-3 w-full cursor-pointer border-t text-center"
+                      className="bg-white text-primary py-3 w-full cursor-pointer border-t text-center"
                       key={index}
                       onClick={() => handleSelectQuizDifficulty(difficulty)}
                     >
@@ -90,7 +90,7 @@ const QuizIntro = ({ onStartQuiz }) => {
             <div className="relative">
               <button
                 onClick={handleCategoryDropdown}
-                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-[#04aaa2] font-semibold border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa] transition duration-300"
+                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-lg hover:bg-secondary transition duration-300"
               >
                 {quizCategory}
                 <FaAngleDown className="justify-end" />
@@ -99,7 +99,7 @@ const QuizIntro = ({ onStartQuiz }) => {
                 <div className="absolute left-0 mt-2 max-h-48 overflow-y-scroll flex flex-col bg-white text-white border rounded-lg w-full z-10">
                   {categories.map((category, index) => (
                     <p
-                      className="bg-white text-[#04aaa2] py-3 w-full cursor-pointer border-t text-center"
+                      className="bg-white text-primary py-3 w-full cursor-pointer border-t text-center"
                       key={index}
                       onClick={() => handleSelectQuizCategory(category)}
                     >
@@ -122,7 +122,7 @@ const QuizIntro = ({ onStartQuiz }) => {
           <div className="flex justify-center">
             <button
               onClick={handleStartQuiz}
-              className="px-6 py-2 bg-[#04aaa2] h-12 text-white rounded-lg hover:bg-[#03a397] transition duration-300"
+              className="px-6 py-2 bg-primary h-12 text-light_gray rounded-lg hover:bg-strong_cyan transition duration-300"
             >
               Let's Start
             </button>

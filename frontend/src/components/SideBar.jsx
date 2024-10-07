@@ -73,8 +73,8 @@ const SideBar = ({ open, setOpen }) => {
     };
 
     return (
-        <div className='bg-[#F5F5F5] fixed h-full top-0 left-0 mt-16 z-40'>
-            <CustomScrollbar className={`bg-[#e6fbfa] h-full ${open ? "w-80" : "w-16"} duration-500 text-[#2d3137] px-4 absolute top-0 left-0 ${
+        <div className='fixed h-full top-0 left-0 mt-16 z-40'>
+            <CustomScrollbar className={`bg-secondary h-full ${open ? "w-80" : "w-16"} duration-500 text-dark_gray px-4 absolute top-0 left-0 ${
                     open ? 'shadow-lg' : ''
                 }`}>
                 <div className='py-5 flex justify-end'>
@@ -86,14 +86,14 @@ const SideBar = ({ open, setOpen }) => {
                             <div key={i}>
                                 <div
                                     onClick={() => handleMenuClick(menu)}
-                                    className={`group ${menu.margin && 'mt-5'} flex items-center gap-3.5 text-sm p-2 hover:bg-[#b4f2ef] rounded-md cursor-pointer ${selectedMenu === menu.key ? 'bg-[#b4f2ef]' : ''}`}
+                                    className={`group ${menu.margin && 'mt-5'} flex items-center gap-3.5 text-sm p-2 hover:bg-soft_cyan rounded-md cursor-pointer ${selectedMenu === menu.key ? 'bg-soft_cyan' : ''}`}
                                 >
                                     <div className='font-semibold'>
                                         {React.createElement(menu.icon, { size: '18' })}
                                     </div>
                                     <h2 className={`font-semibold whitespace-pre ${!open && 'opacity-0 overflow-hidden'}`}>{menu.name}</h2>
                                     <h2
-                                        className={`${open && 'hidden'} absolute whitespace-pre left-48 bg-gray-800 text-xs text-[#e6fbfa] rounded-md px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit z-50`}
+                                        className={`${open && 'hidden'} absolute whitespace-pre left-48 bg-gray-800 text-xs text-secondary rounded-md px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit z-60`}
                                     >
                                         {menu.name}
                                     </h2>
@@ -101,7 +101,7 @@ const SideBar = ({ open, setOpen }) => {
                                 {menu.key === 'chatbot' && showChatSubmenu && open && (
                                 <CustomScrollbar className="mt-3 max-h-80">
                                     {chatSession.map((session, index) => (
-                                        <div key={index} className="flex items-center justify-between text-sm p-2 hover:bg-[#b4f2ef] rounded-md cursor-pointer">
+                                        <div key={index} className="flex items-center justify-between text-sm p-2 hover:bg-soft_cyan rounded-md cursor-pointer">
                                             <div onClick={() => handleChatSessionClick(session.chat_id)}>
                                     {editChatSession === session.chat_id ? (
                                         <input

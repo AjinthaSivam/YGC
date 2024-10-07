@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useChat } from './ChatContext';
+import SendButton from '../buttons/SendButton';
 import { MdOutlineKeyboardVoice, MdKeyboardVoice, MdArrowUpward, MdAdd } from "react-icons/md";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import '../styles/custom.css'
@@ -323,15 +324,15 @@ const Chat = () => {
         <div className='flex flex-col h-screen p-2 max-w-4xl sm:mx-auto'>
             <div className='flex justify-between mt-16 sm:mt-16 pt-2 items-center mb-4'>
                 <div className='relative group'>
-                    <button onClick={handleNewChat} className='flex items-center text-[#04aaa2] hover:bg-[#e6fbfa] hover:rounded-full p-2 hover:text-[#04bdb4]' aria-label='New Chat'>
+                    <button onClick={handleNewChat} className='flex items-center text-primary hover:bg-secondary hover:rounded-full p-2 hover:text-strong_cyan' aria-label='New Chat'>
                         <HiMiniPencilSquare size={25} />
                     </button>
-                    <span className="absolute left-0 top-full mt-2 w-max bg-gray-800 text-[#e6fbfa] text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="absolute left-0 top-full mt-2 w-max bg-gray-800 text-secondary text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         New Chat
                     </span>
                 </div>
                 {!isPremium && remainingQuota !== null && (
-                    <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-[#00568D] to-[#04aaa2] font-semibold'>
+                    <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-strong_cyan to-primary font-semibold'>
                         {remainingQuota === 0 ? (
                             <span className="font-semibold">Daily limit reached. Try again tomorrow!</span>
                         ) : (
@@ -347,7 +348,7 @@ const Chat = () => {
             <div className='flex-grow overflow-auto mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
+                        <div className={`relative max-w-3xl p-4 sm:text-sm text-xs rounded-lg ${message.sender === 'user' ? 'pt-2 bg-primary text-light_gray' : 'bg-secondary text-dark_gray'}`}>
                             {message.sender === 'bot' && (
                                 <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
                             )}
@@ -369,7 +370,7 @@ const Chat = () => {
                                 <button 
                                     key={index} 
                                     onClick={() => handleQuestionClick(question)} 
-                                    className='p-2 bg-white text-left text-sm text-[#04aaa2] border border-[#04aaa2] rounded-lg hover:bg-[#e6fbfa]'
+                                    className='p-2 bg-white text-left text-sm text-primary border border-primary rounded-lg hover:bg-secondary'
                                 >
                                     {question}
                                 </button>
@@ -403,7 +404,7 @@ const Chat = () => {
             {
                 !isPremium && remainingQuota === 0 && (
                     <div className='mb-4 flex justify-center'>
-                        <button className='flex items-center justify-center bg-gradient-to-r from-[#00568D] to-[#04aaa2] text-white shadow-lg py-2 px-4 rounded-full inline-block animate-bounce'>
+                        <button className='flex items-center justify-center bg-gradient-to-r from-strong_cyan to-primary text-white shadow-lg py-2 px-4 rounded-full inline-block animate-bounce'>
                             <FaBolt className='mr-2 text-yellow-300' />
                             <span className='font-bold mr-2'>Upgrade to continue</span>
 
@@ -416,7 +417,7 @@ const Chat = () => {
                 <div className='flex w-full mb-2'>
                     <button 
                         onClick={listening ? stopVoiceRecognition : startVoiceRecognition} 
-                        className='flex items-center justify-center px-0 sm:p-2 text-[#04aaa2] rounded-full sm:mr-2 hover:bg-[#e6fbfa] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'
+                        className='flex items-center justify-center px-0 sm:p-2 text-primary rounded-full sm:mr-2 hover:bg-secondary w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'
                         disabled={remainingQuota === 0}
                     >
                         {listening ? <MdKeyboardVoice size={20} className='sm:w-6 sm:h-6' /> : <MdOutlineKeyboardVoice size={20} className='sm:w-6 sm:h-6' />}
@@ -436,13 +437,7 @@ const Chat = () => {
                         rows={1}
                         disabled={!isPremium && remainingQuota === 0}
                     />
-                    <button 
-                        onClick={handleSend} 
-                        className='flex items-center justify-center px-0 sm:p-2 bg-[#04aaa2] text-[#fbfafb] rounded-full ml-2 hover:bg-[#04bdb4] w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0'
-                        disabled={!isPremium && remainingQuota === 0}
-                    >
-                        <MdArrowUpward size={20} className='sm:w-6 sm:h-6' />
-                    </button>
+                    <SendButton onClick={handleSend} disabled={!isPremium && remainingQuota === 0} />
                 </div>
             </div>
         </div>
@@ -450,7 +445,7 @@ const Chat = () => {
 }
 
 function formatTime(time) {
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
 }
 
 export default Chat
