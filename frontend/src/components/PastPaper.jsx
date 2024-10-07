@@ -13,8 +13,8 @@ const PastPapers = ({ onSelectPaper, onSelectYear }) => {
     }
 
     return (
-        <div className='flex p-4 h-full w-full max-w-5xl mx-auto'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 overflow-auto'>
+        <div className='flex p-4 h-screen max-w-5xl sm:mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 mt-16 overflow-auto'>
                     {pastPaperYears.map(year => (
                         <div
                             key={year}

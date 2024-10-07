@@ -10,6 +10,7 @@ class Chat(models.Model):
     chat_started_at = models.DateTimeField(auto_now_add=True)
     last_message_at = models.DateTimeField(auto_now_add=True)
     chat_ended_at = models.DateTimeField(null=True, blank=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Chat {self.chat_id} - {self.learner}"

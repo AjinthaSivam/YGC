@@ -59,32 +59,35 @@ const NavBar = () => {
   const initials = username.substring(0, 2).toUpperCase();
 
   return (
-    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-[#04aaa2] py-4 px-6 items-center z-40'>
+    <nav className='fixed flex top-0 left-0 right-0 shadow-md bg-[#04aaa2] py-4 px-6 items-center'>
       <div className='w-1/3'> {/* Left spacer */}
+      <div className='hidden sm:block'>
         {!isLoading && (
-          isPremium ? (
-            <div className="relative inline-block">
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-full font-bold shadow-lg flex items-center">
-                <FaCrown className="mr-2 text-white" />
-                Elite Member
-              </span>
-              <span className="absolute top-0 right-0 -mt-1 -mr-1 px-2 py-1 bg-red-500 text-white text-xs rounded-full animate-pulse">
-                PRO
-              </span>
-            </div>
-          ) : (
-            <div className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#494949] to-[#353535] text-white px-4 py-2 rounded-full font-semibold shadow-lg flex items-center duration-300">
-                <FaShieldAlt className="mr-2 text-white" />
-                Standard Learner
-              </span>
-            </div>
-          )
+          
+            isPremium ? (
+              <div className="relative inline-block">
+                <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-full font-bold shadow-lg flex items-center">
+                  <FaCrown className="mr-2 text-white" />
+                  Elite Member
+                </span>
+              </div>
+            ) : (
+              <div className="relative inline-block">
+                <span className="bg-gradient-to-r from-[#494949] to-[#353535] text-white px-4 py-2 rounded-full font-semibold shadow-lg flex items-center duration-300">
+                  <FaShieldAlt className="mr-2 text-white" />
+                  Standard Learner
+                </span>
+              </div>
+              
+            )
+          
         )}
+        </div>
+        
       </div>
       
       <div className='w-1/3 flex justify-center'> {/* Center title */}
-        <p className='text-2xl font-bold text-white'>
+        <p className='text-md sm:text-2xl font-bold text-white'>
           E D U T E C H
         </p>
       </div>

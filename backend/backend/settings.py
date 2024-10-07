@@ -20,7 +20,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 BOT_QUOTAS = {
-    'general_bot': 5,
+    'general_bot': 15,
     'pastpaper_bot': 2,
     'historical_bot': 2
 }

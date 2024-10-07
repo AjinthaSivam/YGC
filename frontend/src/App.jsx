@@ -34,6 +34,7 @@ function App() {
                     <Route index element={<GeneralChat />} />
                     {/* <Route path='/home/quiz' element= {<Quiz />} /> */}
                     <Route path='/generalchat' element= {<GeneralChat />} />
+                    <Route path='/generalchat/:chatId' element= {<GeneralChat />} />
                     <Route path='/pastpapercard' element= {<PastpaperCard />} />
                     <Route path="/pastpaper/:year" element={<PastpaperContent />} />
                     <Route path='/togglebot' element= {<PastpaperChat />} />

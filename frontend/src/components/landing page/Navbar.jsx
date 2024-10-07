@@ -25,7 +25,7 @@ const Navbar = ({ toggleDarkMode }) => {
 
       {/* Register Now Button */}
       <a href="/signup" className="register-button">
-        Sign Up
+        SignUp
       </a>
 
       <div className="navbar-menu-container">

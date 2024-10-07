@@ -205,6 +205,8 @@ body.dark-mode .service-description {
 @media (max-width: 768px) {
   .service-item {
     grid-template-columns: 1fr;
+    margin: -5px;
+    padding: 0px;
   }
 
   .service-text {

@@ -104,7 +104,7 @@ def reset_quota(request):
     
     # Reset daily quota
     today = timezone.now().date()
-    if quota.last_reset_date != today:
+    if quota.last_reset_date is None or quota.last_reset_date != today:
         quota.general_bot_quota = settings.BOT_QUOTAS['general_bot']
         quota.pastpaper_bot_quota = settings.BOT_QUOTAS['pastpaper_bot']
         quota.historical_bot_quota = settings.BOT_QUOTAS['historical_bot']

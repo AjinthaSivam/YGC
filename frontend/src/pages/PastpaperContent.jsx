@@ -11,6 +11,8 @@ const PastpaperContent = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);  // State for chatbot visibility
   const navigate = useNavigate();
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const handleClose = (e) => {
     e.preventDefault()
     setIsChatOpen(false)
@@ -43,10 +45,13 @@ const PastpaperContent = () => {
 
   return (
     <PremiumProvider>
-    <div className='bg-white'>
+    <div className='bg-white h-screen flex flex-col'>
+      <div className='z-50'>
       <NavBar />
-      <div className='h-screen flex pt-16'>
-        <SideBar />
+      </div>
+      <div className='flex-1 flex overflow-hidden'>
+        <SideBar open={sidebarOpen} setOpen={setSidebarOpen} />
+        <div className={`flex-1 overflow-auto z-30 ${sidebarOpen ? 'sm:ml-80' : 'ml-16'} duration-300`}>
         <div className='w-full p-4'>
           {/* Render the Paper component only when pdfUrl is available */}
           <Paper
@@ -56,6 +61,7 @@ const PastpaperContent = () => {
             selected_year={year}
             handleClose={handleClose}
           />
+        </div>
         </div>
       </div>
     </div>

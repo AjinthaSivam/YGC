@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from chat.views import chat_view, get_chat_history, end_conversation
+from chat.views import chat_view, get_chat_history, end_conversation, get_chat_sessions
 from learner import views as learner_views
 import quiz.urls as quiz_urls
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from historical.views import historical_chat_view, get_historical_chat_history
 import pastpaper.urls
 import learner.urls
+import chat.urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -16,6 +17,8 @@ urlpatterns = [
     path('api/chat/', chat_view, name='chat-view'),
     path('api/chat/history/', get_chat_history, name='get_chat_history'),
     path('api/end_conversation/', end_conversation, name='end_conversation'),
+    path('api/get_general_chat_sessions', get_chat_sessions, name='get_chat_sessions'),
+    path('api/chat/', include(chat.urls)),
     
     # Learner-related endpoints
     path('api/register/', learner_views.register_view, name='register'),

@@ -54,7 +54,7 @@ const Welcome = () => {
           <p>Join a community dedicated to fostering excellence and innovation. Our educational programs are designed to equip students and professionals with the skills needed to excel in today's competitive world.</p>
           <br/>
           <div className="cta-buttons">
-            <a href="/students" className="cta-button student-btn">For Students</a>
+            <a href="/signup" className="cta-button student-btn">For Students</a>
             <a href="/tutors" className="cta-button tutor-btn">For Tutors</a>
           </div>
         </div>
