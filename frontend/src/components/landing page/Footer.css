@@ -13,7 +13,7 @@ html, body {
 
 /* Footer Styles */
 .footer {
-  padding: 20px 30px;
+  padding: 20px 5%;
   width: 100%;
   background: linear-gradient(to top, #000, #141414, #292929);
   color: #f8f9fa;
@@ -23,23 +23,24 @@ html, body {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
 }
 
 .footer-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .footer-right {
   display: flex;
+  flex-direction: row;
+  gap: 20px;
   align-items: center;
 }
 
 .footer-qr-link {
-  display: inline-block; /* Make the link an inline block */
+  display: inline-block;
 }
 
 .footer-qr {
@@ -50,46 +51,46 @@ html, body {
 .footer-signin-text {
   display: flex;
   align-items: center;
-  margin-right: 15px; /* Space between text and QR code */
-  color: #f8f9fa; /* Text color */
-  font-size: 1em; /* Font size */
+  justify-content: center;
+  margin-bottom: 15px;
+  color: #f8f9fa;
+  font-size: 0.9em;
 }
 
 .blinking-hand {
-  animation: blink 1s step-start infinite; /* Blinking animation */
-  font-size: 1.2em; /* Adjust size as needed */
-  margin-left: 5px; /* Space between text and hand */
+  animation: blink 1s step-start infinite;
+  font-size: 1.2em;
+  margin-left: 5px;
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  50% { opacity: 0; }
 }
 
 .footer-qr img {
-  width: 80px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  width: 80px;
+  height: auto;
+  cursor: pointer;
 }
 
 .footer p {
   margin: 10px 0;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .footer-links {
   margin: 15px 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-links a {
   color: #f8f9fa;
   text-decoration: none;
-  margin: 0 8px;
+  margin: 5px 8px;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .footer-links a:hover {
@@ -107,7 +108,7 @@ html, body {
 .footer-social-icons a {
   margin: 0 10px;
   color: #f8f9fa;
-  font-size: 1.5em;
+  font-size: 1.3em;
   transition: color 0.3s ease;
 }
 
@@ -116,46 +117,44 @@ html, body {
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .footer-content {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .footer-left {
-    text-align: center;
+    text-align: left;
+    margin-bottom: 0;
   }
-  
+
   .footer-right {
     flex-direction: row;
     align-items: center;
   }
 
   .footer-signin-text {
-    margin-top: 10px; /* Space above text for smaller screens */
+    margin-right: 15px;
+    margin-bottom: 0;
   }
 
-  .footer-qr img {
-    width: 60px;
-    padding-top: 20px;
+  .footer p, .footer-links a {
+    font-size: 1em;
   }
 
   .footer-social-icons a {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 }
 
 @media (max-width: 480px) {
-  .footer p {
-    font-size: 0.8em;
-  }
-
-  .footer-links a {
-    font-size: 0.9em;
+  .footer {
+    padding: 15px 3%;
   }
 
   .footer-qr img {
-    width: 50px;
+    width: 60px;
   }
 
   .footer-social-icons a {

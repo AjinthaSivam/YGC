@@ -328,7 +328,7 @@ const Chat = () => {
                             {message.sender === 'bot' ? (
                                 <div className='whitespace-pre-line space-y-4' dangerouslySetInnerHTML={{ __html: message.text }} />
                             ) : (message.text)}
-                            <p className={`absolute bottom-1 right-2 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>{formatTime(message.time)}</p>
+                            <p className={`absolute bottom-1 right-4 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>{formatTime(message.time)}</p>
                         </div>
                     </div>
                 ))}

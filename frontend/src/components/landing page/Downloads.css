@@ -56,6 +56,16 @@
   background-color: #3aa99e;
 }
 
+.filters button.active {
+  background-color: #02524d;
+  color: white;
+}
+
+.dark-mode .filters button.active {
+  background-color: #3aa99e;
+  color: #292929;
+}
+
 .book-cards {
   display: flex;
   flex-wrap: wrap;

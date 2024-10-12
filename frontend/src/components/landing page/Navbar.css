@@ -2,111 +2,94 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 1rem 5%;
   background-color: #107067;
   width: 100%;
   box-sizing: border-box;
   position: fixed;
-  margin-top: 0;
   top: 0;
   left: 0;
   z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .navbar-brand {
-  flex: 1;
-  color: #111;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-brand h1 {
-  text-align: left;
-  margin-left: 30px;
-  font-size: 1.5em;
-  color: #111;
+  margin: 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .navbar-menu-container {
   display: flex;
-  align-items: right;
-  gap: 15px; /* Space between menu button and theme toggle button */
+  align-items: center;
 }
 
 .navbar-menu {
   display: flex;
-  align-items: right;
-  justify-content: right;
-  flex: 2;
-  background-color: transparent;
+  align-items: center;
 }
 
-.navbar-brand h1 {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  padding: 8px 15px;
-  border-radius: 5px;
+.navbar-menu a,
+.register-button,
+.theme-toggle-button,
+.mobile-menu-toggle {
+  margin-left: 5px; /* Use margin instead of gap for better browser support */
 }
 
 .navbar-menu a {
-  margin: 0 15px;
+  color: #ffffff;
   text-decoration: none;
-  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.register-button {
+  background-color: #ffffff;
+  color: #107067;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-button,
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
 }
 
 .navbar-menu a:hover,
 .navbar-menu a.active {
-  color: #292929;
-}
-
-/* Register Now button styles */
-.register-button {
-  background-color: transparent;
-  color: #fff;
-  padding: 5px 10px;
-  margin: 0 20px;
-  border: 0.5px solid #ccc;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .register-button:hover {
-  background-color: #292929;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjusted shadow for better effect */
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
 }
 
-/* Dark mode for Register Now button */
-body.dark-mode .register-button:hover {
-  
-  transform: translateZ(5px);
-  box-shadow: 0.5px 0.5px 12px 0.5px rgb(76, 145, 150);
-}
-
-.theme-toggle-button {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.5em;
-  transition: color 0.3s ease;
-}
-
-.mobile-menu-toggle:hover,
-.theme-toggle-button:hover {
-  color: #292929;
+.theme-toggle-button:hover,
+.mobile-menu-toggle:hover {
+  opacity: 0.8;
 }
 
 .mobile-menu-toggle {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.5em;
   display: none;
 }
 
@@ -115,77 +98,100 @@ body.dark-mode .navbar {
   background-color: #292929;
 }
 
-body.dark-mode .mobile-menu-toggle,
-body.dark-mode .navbar-brand h1 {
-  color: #f8f9fa;
+body.dark-mode .register-button {
+  background-color: #4fc4be;
+  color: #1a1a1a;
 }
 
-body.dark-mode .navbar-menu a {
-  color: #f8f9fa;
-}
-
-body.dark-mode .navbar-menu a:hover,
-body.dark-mode .navbar-menu a.active {
-  color: #4fc4be;
-}
-
-body.dark-mode .theme-toggle-button {
-  color: #f8f9fa;
-}
-
-body.dark-mode .mobile-menu-toggle:hover,
-body.dark-mode .theme-toggle-button:hover {
-  color: #4fc4be;
-}
-
-.theme-toggle-button {
-  margin-right: 30px;
+body.dark-mode .register-button:hover {
+  background-color: transparent;
+  transform: translateZ(5px);
+  color: #ffffff;
+  box-shadow: 0.5px 0.5px 12px 0.5px rgb(255, 254, 254);
 }
 
 /* Responsive styles */
-@media (max-width: 1000px) {
-  .navbar-menu {
-    display: none;
-    flex-direction: column;
-    width: auto;
-    position: inherit;
-    top: 60px;
-    right: 20px;
-    background-color: #02524d95;
-    color: #fff;
-    border-radius: 8px;
-  }
-
-  .navbar-menu a:hover,
-  .navbar-menu a.active {
-    color: #292929;
-  }
-
-  .dark-mode.navbar-menu a:hover,
-  .dark-mode.navbar-menu a.active {
-    color: #4fc4be;
-  }
-
-  .navbar-menu.open {
-    display: flex;
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 3%;
   }
 
   .navbar-menu a {
-    padding: 10px 20px;
-    margin: 0;
-    color: #ffffff;
-    border-bottom: #888 0.5px solid;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    max-width: 300px;
+    height: 100%;
+    background-color: #107067;
+    padding: 1rem 0;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .navbar-menu.open {
+    right: 0;
+  }
+
+  .navbar-menu a,
+  .register-button {
+    margin-left: 0;
+    margin-bottom: 2px; /* Reduced gap for mobile view */
+    padding: 0.5rem 1.5rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .register-button {
+    margin: 2px 0;
+    width: calc(100% - 3rem);
   }
 
   .mobile-menu-toggle {
     display: block;
+    z-index: 1001;
   }
 
-  @media (max-width: 1000px) {
-    body.dark-mode .navbar-menu {
-      background-color: #02524d70;
-      border-bottom: #2e2d2d7e 0.1px solid;
-      color: #ffffff;
-    }
+  body.dark-mode .navbar-menu {
+    background-color: #292929;
+  }
+
+  /* Overlay for when sidebar is open */
+  .navbar::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .navbar.menu-open::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand h1 {
+    font-size: 1.2rem;
+  }
+
+  .theme-toggle-button,
+  .mobile-menu-toggle {
+    font-size: 1.2rem;
   }
 }

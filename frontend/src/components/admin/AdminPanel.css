@@ -1,143 +1,191 @@
-/* Sidebar with Icons Only or Icons + Labels */
+.admin-panel {
+  display: flex;
+}
+
 .sidebar {
-  width: 240px;
-  background-color: #004d40;
+  width: 220px;
+  background-color: #107067;
   color: #fff;
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  padding: 20px;
   transition: width 0.3s ease;
-  z-index: 1000;
+  overflow: hidden;
 }
 
-.sidebar.icons-only {
-  width: 80px; /* Smaller width for icons only */
+.sidebar.closed {
+  width: 60px;
 }
 
 .sidebar-header {
-  font-size: 24px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: bold;
-  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 60px; /* Fixed height for header */
 }
 
-/* Sidebar List and Links */
+.sidebar-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-toggle {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  height: 40px;
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+}
+
 .sidebar-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  height: calc(100vh - 60px); /* Subtract header height */
+  overflow-y: auto;
 }
 
 .sidebar-list li {
-  margin: 15px 0;
+  margin: 16px 10px;
 }
 
-.sidebar-list li .link {
+.sidebar-list .link,
+.sidebar-list .logout-button {
   display: flex;
   align-items: center;
   color: #fff;
   text-decoration: none;
   font-size: 16px;
-  padding: 10px 15px;
+  padding: 12px 12px;
   transition: background-color 0.3s ease;
-  border-radius: 8px;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  width: calc(100% - 0px);
+  text-align: center;
+  cursor: pointer;
+  border-radius: 30px 0 30px ;
+  margin:  10px 0px ;
 }
 
-.sidebar-list li .link:hover {
-  background-color: #00796b;
+.sidebar-list .link:hover,
+.sidebar-list .logout-button:hover,
+.sidebar-list .link.active {
+  background-color: #00b4ab8f;
 }
 
-.sidebar-list li .link svg {
-  margin-right: 15px;
-  font-size: 20px; /* Icon size */
+.sidebar-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0.5;
+  margin-right: 20px;
 }
 
-.sidebar-list li .link span {
+.sidebar-list .link span,
+.sidebar-list .logout-button span {
   transition: opacity 0.3s ease;
-  opacity: 1;
+  white-space:wrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 
-/* Hide labels in icon-only mode */
-.sidebar.icons-only .sidebar-list li .link span {
+.sidebar.closed .sidebar-list .link,
+.sidebar.closed .sidebar-list .logout-button {
+  justify-content: center;
+  padding: 12px;
+  width: 40px;
+  margin: 0;
+}
+
+.sidebar.closed .sidebar-list .link span,
+.sidebar.closed .sidebar-list .logout-button span,
+.sidebar.closed .sidebar-header h1 {
   opacity: 0;
-  pointer-events: none;
+  width: 0;
+  overflow: hidden;
 }
 
-.sidebar.icons-only .sidebar-list li .link svg {
-  margin-right: 0; /* Remove space between icon and label */
+.sidebar.closed .sidebar-icon {
+  margin-right: 0;
 }
 
-.sidebar.icons-only .sidebar-list li .link {
-  justify-content: center; /* Center icon */
-}
-
-/* Sidebar Toggle Button */
 .sidebar-toggle {
-  display: none;
-  position: fixed;
   top: 20px;
-  left: 20px;
-  background-color: #004d40;
+  left: 10px;
+  background-color: transparent;
   color: #fff;
   border: none;
-  padding: 10px;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 1001;
 }
 
 .sidebar-toggle svg {
-  font-size: 24px;
+  font-size: 20px;
 }
 
-.sidebar-toggle span {
-  display: none;
-}
-
-/* Show text when labels are visible */
-.sidebar.labels-visible .sidebar-toggle span {
-  display: inline-block;
-  margin-left: 8px;
-}
-
-/* Content Area */
 .content {
-  margin-left: 240px;
+  flex-grow: 1;
   padding: 20px;
-  width: calc(100% - 240px);
-  background-color: #f5f5f5;
+  margin-left: 190px;
   transition: margin-left 0.3s ease;
 }
 
-.sidebar.icons-only + .content {
-  margin-left: 80px; /* Adjust content when only icons are shown */
+.content.sidebar-closed {
+  margin-left: 20px;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .sidebar {
-    width: 80px;
+    width: 60px;
   }
 
-  .sidebar.icons-only {
-    width: 60px;
+  .sidebar.closed {
+    width: 0;
+    padding: 0;
   }
 
   .sidebar-header {
     display: none;
-  }
-
-  .sidebar-toggle {
-    display: block;
+    padding-bottom: 100px;
   }
 
   .content {
-    margin-left: 80px;
+    margin-left: 20px;
   }
 
-  .sidebar.icons-only + .content {
-    margin-left: 60px;
+  .content.sidebar-closed {
+    margin-left: 0;
+  }
+
+  .sidebar-list .link span,
+  .sidebar-list .logout-button span {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-list .link,
+  .sidebar-list .logout-button {
+    justify-content: center;
+    padding: 15px 0;
+  }
+
+  .sidebar-icon {
+    margin-right: 0;
   }
 }
+

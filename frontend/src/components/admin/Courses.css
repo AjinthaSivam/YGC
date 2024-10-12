@@ -1,106 +1,56 @@
-/* Message Styles */
-.message {
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-}
-.message.error {
-  background-color: #f8d7da; /* Light red background for error */
-  color: #721c24; /* Dark red text */
-  border: 1px solid #f5c6cb; /* Red border */
-}
-.message.success {
-  background-color: #d4edda; /* Light green background for success */
-  color: #155724; /* Dark green text */
-  border: 1px solid #c3e6cb; /* Green border */
-}
-
-
-
-.message .icon {
-  margin-right: 10px; /* Space between icon and text */
-}
-
-.message.error .icon{
-  color:#721c24;
-}
-
-.message.success .icon{
-  color: #155724;
-}
-
-/* Other styles */
 .courses {
-  padding: 20px;
   display: flex;
-  flex-direction: row;
 }
 
 .courses-container {
-  margin: 0;
-  width:100%;
+  flex: 1;
+  padding: 2rem;
 }
 
 .heading {
+  color: #107067;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 .search-container {
-  margin-bottom: 20px;
-}
-
-.search-input-container {
-  display: flex;
-  align-items:center;
-  gap:20px
-}
-
-.search-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.add-course {
-  margin-bottom: 20px;
-}
-
-.input-group {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.input-column {
-  width: 48%;
-}
-
-.input-field-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.input-icon {
+.input-search-container {
+  flex: 1;
   margin-right: 10px;
 }
 
-.input-field {
-  flex: 1;
+.search-input {
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.image-input {
-  width: 100%;
+.print-button {
+  background-color: #107067;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  transition: background-color 0.3s ease;
 }
 
-.update-btn,
-.add-btn {
+.print-button:hover {
+  transform: scale(1.03);
+  background-color: #04aaa2;
+}
+
+.add-course-button {
   background-color: #107067;
   color: white;
   border: none;
@@ -111,100 +61,480 @@
   flex-direction: row;
   gap:10px;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-.update-btn:hover,
-.add-btn:hover, .edit-btn:hover,.delete-btn:hover {
-  transform: scale(1.05);
+.add-course-button:hover {
+  transform: scale(1.03);
+  background-color: #04aaa2;
 }
 
-.course-table-container {
-  overflow-x: auto;
+.add-course-form,
+.edit-course-form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
-.course-table {
+.add-course-form h3,
+.edit-course-form h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #107067;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #02524d;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+
+}
+
+.add-course-form input,
+.edit-course-form input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-course-form input[type="file"],
+.edit-course-form input[type="file"] {
+  padding-left: 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cover-preview {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.cover-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.add-course-form button,
+.edit-course-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #107067;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.add-course-form button svg,
+.edit-course-form button svg {
+  margin-right: 5px;
+}
+
+.add-course-form button:hover,
+.edit-course-form button:hover {
+  transform: scale(1.03);
+  background-color: #04aaa2;
+}
+
+.add-course-form button:last-child,
+.edit-course-form button:last-child {
+  color: #000;
+  background-color: #f4fafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-course-form button:last-child:hover,
+.edit-course-form button:last-child:hover {
+  transform: scale(1.03);
+  background-color: #fff;
+}
+
+.courses-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-.course-table th,
-.course-table td {
-  padding: 10px;
-  border: 1px solid #ccc;
+.courses-table th,
+.courses-table td {
+  border: 1px solid #ddd;
+  padding: 12px 8px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
 }
 
-.course-image {
+.courses-table th {
+  color: #02524d;
+  background-color: transparent;
+}
+
+.courses-table tr:nth-child(even) {
+  background-color: #a4fdf73d;
+}
+
+.course-cover {
   width: 50px;
-  height: auto;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
-.btn-group {
+.course-cover-placeholder {
+  width: 50px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 4px;
   display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.edit-btn,
-.delete-btn {
-  display: flex;
-  flex-direction: row;
-  gap:5px;
   align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.edit-button,
+.remove-button {
+  background: none;
   border: none;
-  padding: 5px 10px;
-  border-radius: 12px;
   cursor: pointer;
-  color: #292929;
+  font-size: 16px;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.edit-btn {
-  background: #ffc21c;
+.edit-button {
+  color: #000;
+  background-color: #ffc21c;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.delete-btn {
-  background: #dc3545;
+.edit-button:hover {
+  transform: scale(1.03);
+  background-color: #ffcf2f;
+}
+
+.remove-button {
   color: #fff;
+  background-color: #dc3545;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-/* Page container */
+.remove-button:hover {
+  transform: scale(1.03);
+  background-color: #fa374a;
+}
+
+.no-courses {
+  text-align: center;
+  color: #666;
+}
+
+
+.message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.error {
+  background-color: #ffe9dc;
+  color: #e24252;
+  /* border: 1px solid #f5c6cb; */
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  /* border: 1px solid #c3e6cb; */
+}
+
+.message .icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.message.error .icon {
+  color: #e24252;
+}
+
+.message.success .icon {
+  color: #155724;
+}
+
+/* Pagination styles */
 .page {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 20px;
-  gap: 10px;
 }
 
-/* Page button styles */
-.page-button {
-  background-color: #f0f0f0; /* Light grey background */
-  color: #333; /* Dark text color */
-  border: 1px solid #ddd; /* Border for buttons */
-  padding: 8px 16px; /* Padding for button */
-  border-radius: 5px; /* Slightly rounded buttons */
+.page button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 14px;
+  margin: 0px 4px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
 }
 
-.page-button:hover {
-  background-color: #107067; /* Change to green on hover */
-  color: white; /* White text on hover */
+.page button:hover {
+  transform: scale(1.03);
+  background-color: #a7a7a7;
 }
 
-/* Active page button */
-.page-button.active {
-  background-color: #107067; /* Active page background */
-  color: white; /* Active page text color */
-  border: none; /* Remove border for active button */
+.page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
-/* Adjust spacing between page numbers */
-.page span {
-  padding: 0 15px;
+.page button.active {
+  background-color: #107067;
+  color: white;
+  font-weight: 600;
 }
-.print-button{
-  gap:5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+
+.page .page-info {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Styles for the chevron icons */
+.page button svg {
+  width: 12px;
+  height: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .courses-container {
+    padding: 1.5rem;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .input-search-container {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .print-button,
+  .add-course-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .courses-container {
+    padding: 1rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .add-course-form,
+  .edit-course-form {
+    padding: 15px;
+  }
+
+  .courses-table {
+    font-size: 12px;
+  }
+
+  .courses-table th,
+  .courses-table td {
+    padding: 8px 4px;
+  }
+
+  .course-cover,
+  .course-cover-placeholder {
+    width: 40px;
+    height: 56px;
+  }
+
+  .edit-button,
+  .remove-button {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .page button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .page {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page button {
+    margin: 5px;
+  }
+
+  .page .page-info {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .courses-container {
+    padding: 0.5rem;
+  }
+
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .add-course-form,
+  .edit-course-form {
+    padding: 10px;
+  }
+
+  .input-group {
+    margin-bottom: 10px;
+  }
+
+  .add-course-form input,
+  .edit-course-form input,
+  .input-group select {
+    font-size: 12px;
+  }
+
+  .add-course-form button,
+  .edit-course-form button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .courses-table {
+    font-size: 10px;
+  }
+
+  .courses-table th,
+  .courses-table td {
+    padding: 6px 2px;
+  }
+
+  .course-cover,
+  .course-cover-placeholder {
+    width: 30px;
+    height: 42px;
+  }
+
+  .edit-button,
+  .remove-button {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+
+  .page button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  .page .page-info {
+    font-size: 12px;
+  }
+}
+
+/* Responsive table */
+@media (max-width: 600px) {
+  .courses-table,
+  .courses-table thead,
+  .courses-table tbody,
+  .courses-table th,
+  .courses-table td,
+  .courses-table tr {
+    display: block;
+  }
+
+  .courses-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .courses-table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  .courses-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .courses-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+
+  .courses-table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* Add this new rule to create space between icon and text */
+.input-group select option {
+  padding-left: 10px;
 }

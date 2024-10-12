@@ -30,11 +30,11 @@ const Login = () => {
   return (
     <div className="admin-login-container">
       <div className="admin-login-box">
-        <h2 >Welcome Back</h2>
+        <h2 >Welcome Back 👋</h2>
         <p className="admin-subtitle">Please log in to your admin account</p>
         <div className="admin-login-form">
           <div className="admin-input-group">
-            <FaUser className="icon" />
+            <FaUser className="admin-icon" />
             <input className="admin-input"
               type="text"
               placeholder="Username"

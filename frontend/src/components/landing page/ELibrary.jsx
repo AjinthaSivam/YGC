@@ -81,7 +81,7 @@ const Elibrary = () => {
                 <button key={category} onClick={() => {
                   setSelectedCategory(category);
                   setCurrentPage(1); // Reset to first page on category change
-                }}>{category}</button>
+                }} className={selectedCategory === category ? 'active' : ''}>{category}</button>
               ))}
             </div>
             <div className="filters" data-aos="fade-up" data-aos-delay="400">

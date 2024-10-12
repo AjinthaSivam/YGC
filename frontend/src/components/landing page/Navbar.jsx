@@ -48,17 +48,18 @@ const Navbar = () => {
         <a href="/elibrary">E-Library</a>
       </div>
 
-      {/* Register Now Button */}
-      <a href="/signup" className="register-button">
-        Sign Up
-      </a>
+      
 
       <div className="navbar-menu-container">
-        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-          <FaBars size={20} />
-        </button>
+        {/* Register Now Button */}
+        <a href="/signup" className="register-button">
+          SignUp
+        </a>
         <button onClick={toggleDarkMode} className="theme-toggle-button">
           {isDarkMode ? <FaMoon size={20} /> : <FaSun size={20} />}
+        </button>        
+        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+          <FaBars size={20} />
         </button>
       </div>
     </nav>

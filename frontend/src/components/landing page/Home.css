@@ -4,12 +4,12 @@
 
 
 body {
-    /*font-family: 'Roboto', sans-serif;*/
-    font-family: 'Poppins', serif;
-    transition: background-color 0.001s ease, color 0.001s ease;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 .context {
@@ -20,55 +20,49 @@ body {
 }
 
 .area {
-    background: #f8f9fa;
-    background: -webkit-linear-gradient(to right, #c3eaff, #f8f9fa);
-    background: linear-gradient(to bottom,  #107067,#107067,#3a8383,#7ec5c5, #f8f9fa, #fff);
+    background: linear-gradient(to bottom, #107067, #107067, #3a8383, #7ec5c5, #f8f9fa, #fff);
     width: 100%;
-    height: 80%;
-    min-height: 100vh; /* Ensure it covers the full viewport height */
-    transition: background 0.001s ease;
+    min-height: 100vh;
+    transition: background 0.3s ease;
 }
 
 body.dark-mode .area {
-    background: #292929;
-    background: -webkit-linear-gradient(to left, #3e3e3e, #292929);
-    background: linear-gradient(to bottom, #292929,#292929,#292929, #05413b,#05413b,#131a22,#292929);
+    background: linear-gradient(to bottom, #292929, #292929, #292929, #05413b, #05413b, #131a22, #292929);
 }
 
 .circles {
-    position:relative;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .circles li {
     position: absolute;
     display: block;
     list-style: none;
-    width: 20px;
-    height: 20px;
-    background: #d0faeee1; /* Light mode circle color */
+    background: rgba(208, 250, 238, 0.8);
     animation: animate 15s linear infinite;
-    bottom: -350px;
-    border-radius: 50%; /* Ensure circles are round */
+    bottom: -150px;
+    border-radius: 50%;
 }
 
 body.dark-mode .circles li {
-    background: #fcfcfc59; /* Dark mode circle color */
+    background: rgba(252, 252, 252, 0.3);
 }
 
-.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 5ms; }
-.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 1s; animation-duration: 12s; }
-.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 3s; }
-.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 2ms; animation-duration: 18s; }
-.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 2s;  animation-duration: 21s;}
-.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 1ms;  animation-duration: 11s;}
-.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 8ms; animation-duration: 25s;}
-.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 3s; animation-duration: 45s; }
-.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 4s; animation-duration: 35s; }
-.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 2s; animation-duration: 11s; }
+.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
 
 @keyframes animate {
     0% {
@@ -87,20 +81,19 @@ body.dark-mode .circles li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 5%;
     margin: 0 auto;
-    max-width: 100%;
+    max-width: 1200px;
     text-align: center;
     background-color: transparent;
     border-radius: 12px;
     transition: background-color 0.5s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.001s forwards;
+    animation: fadeInUp 0.8s forwards;
 }
 
 body.dark-mode .home {
-    background-color: transparent;
     color: #f8f9fa;
 }
 
@@ -125,39 +118,59 @@ body.dark-mode .home {
 }
 
 /* Responsive styles */
-
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .home {
-        max-width: 100%;
-        padding: 20px;
+        max-width: 90%;
     }
-
-    .circles li {
-        width: 15px;
-        height: 15px;
-    }
-
-    .circles li:nth-child(1) { width: 60px; height: 60px; }
-    .circles li:nth-child(4) { width: 45px; height: 45px; }
-    .circles li:nth-child(6) { width: 80px; height: 80px; }
-    .circles li:nth-child(7) { width: 110px; height: 110px; }
-    .circles li:nth-child(10) { width: 100px; height: 100px; }
 }
 
-@media (max-width: 480px) {
-    .home {
-        padding: 15px;
+@media (max-width: 992px) {
+    body {
         font-size: 14px;
     }
 
     .circles li {
-        width: 10px;
-        height: 10px;
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .home {
+        padding: 4%;
     }
 
-    .circles li:nth-child(1) { width: 40px; height: 40px; }
-    .circles li:nth-child(4) { width: 30px; height: 30px; }
-    .circles li:nth-child(6) { width: 50px; height: 50px; }
-    .circles li:nth-child(7) { width: 80px; height: 80px; }
-    .circles li:nth-child(10) { width: 70px; height: 70px; }
+    .circles li {
+        transform: scale(0.6);
+    }
+
+    .circles li:nth-child(1), 
+    .circles li:nth-child(6), 
+    .circles li:nth-child(7), 
+    .circles li:nth-child(10) {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 12px;
+    }
+
+    .home {
+        padding: 3%;
+    }
+
+    .circles li {
+        transform: scale(0.5);
+    }
+}
+
+@media (max-width: 360px) {
+    .home {
+        padding: 2%;
+    }
+
+    .circles li {
+        transform: scale(0.4);
+    }
 }

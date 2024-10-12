@@ -17,8 +17,9 @@ const Home = () => {
 
   return (
     <>
-      <Navbar toggleDarkMode={toggleDarkMode} />
+      
       <section className="area">
+        <Navbar toggleDarkMode={toggleDarkMode} />
         <ul className="circles">
           <li></li><li></li><li></li><li></li><li></li>
           <li></li><li></li><li></li><li></li><li></li>

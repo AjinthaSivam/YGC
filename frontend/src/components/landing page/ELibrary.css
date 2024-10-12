@@ -63,6 +63,15 @@
 .filters button:hover, .view-button:hover {
   background-color: #3aa99e;
 }
+.filters button.active {
+  background-color: #02524d;
+  color: white;
+}
+
+.dark-mode .filters button.active {
+  background-color: #3aa99e;
+  color: #292929;
+}
 
 /* Book cards styles */
 .book-cards {
