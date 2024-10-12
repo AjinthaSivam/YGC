@@ -66,14 +66,14 @@ const NavBar = () => {
           
             isPremium ? (
               <div className="relative inline-block">
-                <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-full font-bold shadow-lg flex items-center">
-                  <FaCrown className="mr-2 text-white" />
+                <span className="bg-white text-dark_gray px-4 py-2 rounded-full font-semibold flex items-center">
+                  <FaCrown className="mr-2 text-dark_gray" />
                   Elite Member
                 </span>
               </div>
             ) : (
               <div className="relative inline-block">
-                <span className="bg-gradient-to-r from-[#494949] to-[#353535] text-white px-4 py-2 rounded-full font-semibold shadow-lg flex items-center duration-300">
+                <span className="bg-dark_gray text-white px-4 py-2 rounded-full font-semibold flex items-center">
                   <FaShieldAlt className="mr-2 text-white" />
                   Standard Learner
                 </span>

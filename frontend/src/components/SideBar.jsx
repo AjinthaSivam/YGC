@@ -4,14 +4,15 @@ import { GrResources } from "react-icons/gr";
 import { MdOutlineQuiz, MdOutlineChatBubbleOutline, MdEdit, MdDelete } from "react-icons/md";
 import { FaUserAstronaut } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import CustomScrollbar from './scrollbars/CustomScrollbar';
 import { useChat } from './chat/ChatContext';
+import ConfimationModal from './ConfimationModal';
 
 const SideBar = ({ open, setOpen }) => {
     const [selectedMenu, setSelectedMenu] = useState('');
     const [showChatSubmenu, setShowChatSubmenu] = useState(false);
     const [editChatSession, setEditChatSession] = useState(null);
-
+    const [isDeleteChatModalOpen, setIsDeleteChatModalOpen] = useState(false);
+    const [chatToDelete, setChatToDelete] = useState(null);
     const { chatSession, updateChatSessions, renameChatSession, softDeleteChatSession } = useChat();
 
     const navigate = useNavigate()
@@ -66,15 +67,32 @@ const SideBar = ({ open, setOpen }) => {
 
     const handleDeleteChatSession = async (e, chatId) => {
         e.stopPropagation();
-        if (window.confirm('Are you sure you want to delete this chat session?')) {
-            await softDeleteChatSession(chatId);
-            updateChatSessions();
+        setChatToDelete(chatId);
+        setIsDeleteChatModalOpen(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        try {
+            if (chatToDelete) {
+                await softDeleteChatSession(chatToDelete);
+                updateChatSessions();
+            }
+            setChatToDelete(null);
+            setIsDeleteChatModalOpen(false);
+        } catch (error) {
+            console.error('Error deleting chat:', error);
         }
     };
 
+    const handleDeleteCancel = () => {
+        setChatToDelete(null);
+        setIsDeleteChatModalOpen(false);
+    };
+    
+
     return (
         <div className='fixed h-full top-0 left-0 mt-16 z-40'>
-            <CustomScrollbar className={`bg-secondary h-full ${open ? "w-80" : "w-16"} duration-500 text-dark_gray px-4 absolute top-0 left-0 ${
+            <div className={`bg-secondary h-full ${open ? "w-80" : "w-16"} duration-500 text-dark_gray px-4 absolute top-0 left-0 ${
                     open ? 'shadow-lg' : ''
                 }`}>
                 <div className='py-5 flex justify-end'>
@@ -99,7 +117,7 @@ const SideBar = ({ open, setOpen }) => {
                                     </h2>
                                 </div>
                                 {menu.key === 'chatbot' && showChatSubmenu && open && (
-                                <CustomScrollbar className="mt-3 max-h-80">
+                                <div className='mt-3 max-h-80 overflow-y-auto'>
                                     {chatSession.map((session, index) => (
                                         <div key={index} className="flex items-center justify-between text-sm p-2 hover:bg-soft_cyan rounded-md cursor-pointer">
                                             <div onClick={() => handleChatSessionClick(session.chat_id)}>
@@ -132,15 +150,29 @@ const SideBar = ({ open, setOpen }) => {
                                         onClick={(e) => handleDeleteChatSession(e, session.chat_id)}
                                     />
                                 </div>
-                                        </div>
-                                    ))}
-                                </CustomScrollbar>
-                            )}
                             </div>
                         ))
                     }
                 </div>
-            </CustomScrollbar>
+                )}
+                {
+                    isDeleteChatModalOpen && (
+                    <ConfimationModal
+                        isOpen={isDeleteChatModalOpen}
+                        onClose = {() => setIsDeleteChatModalOpen(false)}
+                        onConfirm = {handleDeleteConfirm}
+                        message = "Are you sure you want to delete this chat session?"
+                        confirmText = "yes"
+                        cancelText = "No"
+                    />
+                    )
+                }
+                
+            </div>
+        ))
+        }
+        </div>
+            </div>
         </div>
     );
 };

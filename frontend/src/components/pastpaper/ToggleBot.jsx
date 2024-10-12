@@ -1,20 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react';
-import BotLogo from './chat/bot.png';
-import { MdOutlineKeyboardVoice, MdKeyboardVoice } from 'react-icons/md';
 import axios from 'axios';
 import { IoCloseOutline } from "react-icons/io5";
-import SendButton from './buttons/SendButton';
+import SendButton from '../buttons/SendButton';
+import VoiceButton from '../buttons/VoiceButton';
+import InputBox from '../InputBox';
+import BotMessage from '../messages/BotMessage';
+import UserMessage from '../messages/UserMessage';
+import ThinkingMessage from '../messages/thinkingMessage/ThinkingMessage';
 
 const ToggleBot = ({ selected_year, handleClose }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-    const [listening, setListening] = useState(false);
+    const [isThinking, setIsThinking] = useState(false);
     const chatContainerRef = useRef(null);
-    const textareaRef = useRef(null);
 
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
-    const handleInputChange = (e) => setInput(e.target.value);
+    const handleTranscript = (transcript) => {
+        setInput(transcript)
+        sendMessage(transcript)
+    }
 
     useEffect(() => {
         getChatHistory()
@@ -72,6 +77,7 @@ const ToggleBot = ({ selected_year, handleClose }) => {
             const newMessage = { sender: 'user', text: message, time: new Date() }
             setMessages(prevMessage => [...prevMessage, newMessage])
             setInput('')
+            setIsThinking(true)
 
             const data_to_send = {
                 user_input: message,
@@ -105,17 +111,15 @@ const ToggleBot = ({ selected_year, handleClose }) => {
             catch (error) {
                 console.error("Error sending message: ", error)
             }
+            finally {
+                setIsThinking(false)
+            }
         }
     }
 
     const handleSend = () => {
         sendMessage(input)
     };
-
-    const startVoiceRecognition = () => setListening(true);
-    const stopVoiceRecognition = () => setListening(false);
-
-    const formatTime = (time) => time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
     return (
         <div className='flex flex-col h-full w-full px-4 pb-3 w-full bg-white rounded-b-md'>
@@ -124,42 +128,24 @@ const ToggleBot = ({ selected_year, handleClose }) => {
             </button>
             <div className='flex-grow overflow-auto mt-12 mb-4 px-3' ref={chatContainerRef}>
                 {messages.map((message, index) => (
-                    <div key={index} className={`flex mt-4 mb-6 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`relative max-w-3xl p-4 rounded-lg text-sm ${message.sender === 'user' ? 'pt-2 bg-[#04aaa2] text-[#fbfafb]' : 'bg-[#e6fbfa] text-[#2d3137]'}`}>
-                            {message.sender === 'bot' && (
-                                <img src={BotLogo} alt="Bot Logo" className="absolute left-2 -top-5 h-8 w-8" />
-                            )}
-                            {message.sender === 'bot' ? (
-                                <div className='whitespace-pre-line' dangerouslySetInnerHTML={{ __html: message.text }} />
-                            ) : (<div className='whitespace-pre-line'>
-                                {message.text}
-                                </div>)}
-                            <p className={`absolute bottom-1 right-2 text-xs ${message.sender === 'user' ? 'text-gray-300' : 'text-gray-500'}`}>
-                                {formatTime(message.time)}
-                            </p>
-                        </div>
-                    </div>
+                    message.sender === 'bot' ? (
+                        <BotMessage key={index} text={message.text} time={message.time} />
+                    ) : (
+                        <UserMessage key={index} text={message.text} time={message.time} />
+                    )
                 ))}
+                {isThinking && <ThinkingMessage />}
             </div>
-            <div className='flex px-3 items-end'>
-                <button onClick={listening ? stopVoiceRecognition : startVoiceRecognition} className='p-2 text-[#04aaa2] rounded-full mr-1 hover:bg-[#e6fbfa] w-9 h-9 flex-shrink-0'>
-                    {listening ? <MdKeyboardVoice size={20} /> : <MdOutlineKeyboardVoice size={20} />}
-                </button>
-                <textarea
-                    ref={textareaRef}
-                    value={input}
-                    onChange={handleInputChange}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
-                            handleSend();
-                        }
-                    }}
-                    className={`flex-grow text-sm p-2 pl-4 border ${input ? 'rounded-lg' : 'rounded-full'} focus:outline-none resize-none`}
-                    placeholder='Type your message...'
-                    rows={1}
-                />
-                <SendButton onClick={handleSend} disabled={!input.trim()} />
+            <div className='flex flex-col sm:flex-row px-2 sm:px-3 items-end mt-auto'>
+                <div className='flex w-full mb-2'>
+                    <VoiceButton onTranscript={handleTranscript} />
+                    <InputBox 
+                        input={input}
+                        setInput={setInput}
+                        handleSend={handleSend}
+                    />
+                    <SendButton onClick={handleSend} disabled={!input.trim()} />
+                </div>
             </div>
         </div>
     );

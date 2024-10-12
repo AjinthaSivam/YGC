@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import ConfimationModal from '../ConfimationModal';
 
 const QuizIntro = ({ onStartQuiz }) => {
   const [quizDifficulty, setQuizDifficulty] = useState('Difficulty');
@@ -8,7 +9,7 @@ const QuizIntro = ({ onStartQuiz }) => {
   const [isDiffDropdownOpen, setIsDiffDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const navigate = useNavigate()
 
   const handleDiffDropdown = () => {
@@ -33,7 +34,7 @@ const QuizIntro = ({ onStartQuiz }) => {
   const categories = [
     "Tenses", "Prepositions", "Adjectives", "Adverbs", 
     "Pronouns", "Conjunctions", "Conditionals", 
-    "Passive Voice", "Reported Speech", "Question Tags", "Articles"
+    "Passive Voice", "Reported Speech", "Articles"
   ];
 
   const handleStartQuiz = () => {
@@ -46,9 +47,20 @@ const QuizIntro = ({ onStartQuiz }) => {
       setErrorMessage("Please select a category.");
     } else {
       setErrorMessage(""); // Clear error message if selections are valid
-      onStartQuiz(quizDifficulty, quizCategory);
+      // onStartQuiz(quizDifficulty, quizCategory);
+      setIsConfirmModalOpen(true);
       // navigate('/quiz', { state: { difficulty: quizDifficulty, category: quizCategory } });
-    }
+    } 
+  };
+
+  const handleConfirm = () => {
+    setIsConfirmModalOpen(false);
+    onStartQuiz(quizDifficulty, quizCategory);
+    navigate('/quiz', { state: { difficulty: quizDifficulty, category: quizCategory } });
+  };
+
+  const handleCancel = () => {
+    setIsConfirmModalOpen(false);
   };
 
   return (
@@ -129,7 +141,18 @@ const QuizIntro = ({ onStartQuiz }) => {
           </div>
         </div>
       </div>
+      {isConfirmModalOpen && (
+        <ConfimationModal
+          isOpen={isConfirmModalOpen}
+          onClose={handleCancel}
+          onConfirm={handleConfirm}
+          message="Are you sure want to start the quiz?"
+          confirmText="Yes"
+          cancelText="No"
+        />
+      )}
     </div>
+    
   );
 };
 

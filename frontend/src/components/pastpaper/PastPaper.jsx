@@ -23,7 +23,7 @@ const PastPapers = ({ onSelectPaper, onSelectYear }) => {
                         >
                             <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-lg'></div>
                             <img
-                                src={`/pastpapers/thumbnails/${year}.jpg`}
+                                src={`pastpapers/thumbnails/${year}.jpg`}
                                 alt={`Past paper ${year}`}
                                 className='w-full h-36 object-cover rounded-t-lg'
                             />

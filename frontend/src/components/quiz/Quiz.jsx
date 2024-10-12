@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
+import ThinkingMessage from '../messages/thinkingMessage/ThinkingMessage';
+import ConfimationModal from '../ConfimationModal';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -10,9 +12,9 @@ const MCQGenerator = ({ difficulty, category }) => {
     const [userAnswers, setUserAnswers] = useState({});
     const [quizId, setQuizId] = useState(null)
     const [score, setScore] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showResults, setShowResults] = useState(false);
-    const [loading, setLoading] = useState(false); // Loading state for fetching quiz
+    const [isLoading, setIsLoading] = useState(false); // Loading state for fetching quiz
 
     const isQuizFetched = useRef(false)
 
@@ -25,7 +27,7 @@ const MCQGenerator = ({ difficulty, category }) => {
     const getQuiz = async () => {
         if (isQuizFetched.current) return;
         isQuizFetched.current = true
-        setLoading(true); 
+        setIsLoading(true); 
         try {
             const response = await axios.post(`${apiBaseUrl}/quiz/generate_questions/`, {
                 category,
@@ -47,7 +49,7 @@ const MCQGenerator = ({ difficulty, category }) => {
             console.error('Error getting quiz:', error);
             // Handle error state or retry logic if necessary
         } finally {
-            setLoading(false); // Clear loading state after fetch completes
+            setIsLoading(false); // Clear loading state after fetch completes
         }
     };
 
@@ -59,7 +61,7 @@ const MCQGenerator = ({ difficulty, category }) => {
     };
 
     const handleFinishQuiz = () => {
-        setShowModal(true);
+        setShowConfirmModal(true);
     };
 
     const handleConfirmFinish = async () => {
@@ -83,7 +85,7 @@ const MCQGenerator = ({ difficulty, category }) => {
             )
             const score = response.data.quiz.score
             setScore(score)
-            setShowModal(false);
+            setShowConfirmModal(false);
             setShowResults(true);
 
             console.log(questions)
@@ -98,7 +100,7 @@ const MCQGenerator = ({ difficulty, category }) => {
     };
 
     const handleCancelFinish = () => {
-        setShowModal(false);
+        setShowConfirmModal(false);
     };
 
     return (
@@ -110,7 +112,11 @@ const MCQGenerator = ({ difficulty, category }) => {
                     </h1>
                 </div>
                 
-                {loading && <p>Loading quiz...</p>}
+                {isLoading && 
+                    <div className='ml-4'>
+                        <ThinkingMessage />
+                    </div>
+                }
                 {showResults ? (
                     <QuizResult questions={questions} userAnswers={userAnswers} score={score} />
                 ) : (
@@ -118,7 +124,7 @@ const MCQGenerator = ({ difficulty, category }) => {
                         {questions.length > 0 && (
                             <div>
                                 {questions.map((question, index) => (
-                                    <div key={index} className='mb-6 mt-6 text-xs sm:text-sm'>
+                                    <div key={index} className='mb-6 mt-6 text-xs sm:text-base'>
                                         <p>{index + 1}. {question.question}</p>
                                         <div className='ml-4 mt-2'>
                                             {Object.keys(question.options).map((key, idx) => (
@@ -148,7 +154,16 @@ const MCQGenerator = ({ difficulty, category }) => {
                         )}
                     </>
                 )}
-                <ConformationModal show={showModal} onConfirm={handleConfirmFinish} onCancel={handleCancelFinish} />
+                {showConfirmModal && (
+                    <ConfimationModal
+                        isOpen={showConfirmModal}
+                        onClose={handleCancelFinish}
+                        onConfirm={handleConfirmFinish}
+                        message="Are you sure you want to finish the quiz?"
+                        confirmText="Yes"
+                        cancelText="No"
+                    />
+                )}
             </div>
         </div>
     );

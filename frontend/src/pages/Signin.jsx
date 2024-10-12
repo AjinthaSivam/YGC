@@ -6,6 +6,9 @@ import axios from 'axios';
 import { useAuth } from '../AuthContext';
 import { IoCloseOutline } from "react-icons/io5";
 import { useChat } from '../components/chat/ChatContext';
+import ErrorMessage from '../components/messages/ErrorMessage';
+import SuccessMessage from '../components/messages/SuccessMessage';
+import SubmitButton from '../components/buttons/SubmitButton';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -22,13 +25,16 @@ const Signin = () => {
 
     const [error, setError] = useState('');
 
+    const [success, setSuccess] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setIsLoading(true);
         try {
             const response = await axios.post(`${apiBaseUrl}/api/login/`, {
                 username_or_email: formData.username,
@@ -37,14 +43,19 @@ const Signin = () => {
             login(response.data, response.data.user.username);
             setMessages([]);
             setChatId(null);
-            navigate('/generalchat');
-            window.location.reload()
+
+            setSuccess('Successfully signed in');
+            setTimeout(() => {
+                navigate('/generalchat');
+            }, 1500)
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Incorrect username or password');
             } else {
                 setError('Error signing in. Please try again later.');
             }
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -64,6 +75,10 @@ const Signin = () => {
 
     return (
         <div>
+            <div className='flex justify-center items-center mt-4'>
+                {error && <ErrorMessage message={error} isPersistent={false} />}
+                {success && <SuccessMessage message={success} />}
+            </div>
             <section className="min-h-screen flex items-center justify-center">
                 <div className="relative bg-white rounded-2xl shadow-lg max-w-3xl p-5 px-16">
                     <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
@@ -99,10 +114,7 @@ const Signin = () => {
                                 )}
                             </div>
                         </div>
-                        {error && <span className="text-xs text-red-500">{error}</span>}
-                        <button type="submit" className="bg-primary rounded-full text-light_gray py-2 mt-4 mb-4 hover:scale-105 duration-300">
-                            Sign In
-                        </button>
+                        <SubmitButton text={isLoading ? 'Signing In...' : 'Sign In'}  onClick={handleSubmit} />
                     </form>
 
                     {/* <div className="mt-10 grid grid-cols-3 items-center text-gray-400">
@@ -118,9 +130,9 @@ const Signin = () => {
 
                     {/* <p className="mt-5 text-[#04bdb4] text-xs border-b py-4">Forgot password?</p> */}
 
-                    <div className="mt-6 text-strong_cyan text-xs flex justify-between items-center">
+                    <div className="mt-6 text-primary text-xs flex justify-between items-center">
                         <p>Don't have an account?</p>
-                        <button onClick={handleSignup} className="py-2 px-5 bg-white border border-primary rounded-full hover:bg-soft_cyan duration-300">
+                        <button onClick={handleSignup} className="py-2 px-5 bg-white border border-primary rounded-full hover:bg-secondary duration-300">
                             Sign Up
                         </button>
                     </div>

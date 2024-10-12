@@ -1,9 +1,14 @@
 import React from 'react'
+import '../styles/custom.css'
 
-const CustomScrollbar = ({ children, className = "" }) => {
+
+const CustomScrollbar = ({ children, className = "", containerClassName = "", trackColor = "white" }) => {
   return (
-    <div className={`overflow-auto ${className}`}>
-      <div className="scrollbar-thin scrollbar-thumb-[#b4f2ef] scrollbar-track-[#e6fbfa] hover:scrollbar-thumb-[#7ee8e4]">
+    <div 
+      className={`custom-scrollbar ${className}`} 
+      style={{ '--scrollbar-track': trackColor, maxHeight: '100%', overflowY: 'auto' }}
+    >
+      <div className={containerClassName}>
         {children}
       </div>
     </div>

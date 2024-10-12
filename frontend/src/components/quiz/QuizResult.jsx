@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import TryAgainConformation from './TryAgainConformation'
 import { useNavigate } from 'react-router-dom';
+import ConfimationModal from '../ConfimationModal';
 
 
 const QuizResult = ({ questions, userAnswers, score }) => {
-    const [showModal, setShowModal] = useState(false)
+    const [showConfirmModal, setShowConfirmModal] = useState(false)
 
     const navigate = useNavigate()
 
@@ -23,16 +24,16 @@ const QuizResult = ({ questions, userAnswers, score }) => {
     };
 
     const handleFinishReview = () => {
-        setShowModal(true)
+        setShowConfirmModal(true)
     };
 
     const handleTryAgain = () => {
-        setShowModal(false);
+        setShowConfirmModal(false);
         navigate('/quizstart')
     };
 
     const handleGoToChat = () => {
-        setShowModal(false);
+        setShowConfirmModal(false);
         navigate('/generalchat')
     };
 
@@ -66,7 +67,16 @@ const QuizResult = ({ questions, userAnswers, score }) => {
                     Finish Review
                 </button>
             </div>
-            <TryAgainConformation show={showModal} onConfirm={handleTryAgain} onCancel={handleGoToChat} />
+            {showConfirmModal && (
+                <ConfimationModal
+                    isOpen={showConfirmModal}
+                    onClose={handleGoToChat}
+                    onConfirm={handleTryAgain}
+                    message="Do you want to try again?"
+                    confirmText="Yes"
+                    cancelText="No"
+                />
+            )}
         </div>
     );
 };

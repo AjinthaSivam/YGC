@@ -5,7 +5,7 @@ import { zoomPlugin } from '@react-pdf-viewer/zoom';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/toolbar/lib/styles/index.css';
 import '@react-pdf-viewer/zoom/lib/styles/index.css';
-import Bot from './chat/bot.png';
+import Bot from '../../assets/images/bot.png';
 import ToggleBot from './ToggleBot';
 import './PdfViewer.css';
 

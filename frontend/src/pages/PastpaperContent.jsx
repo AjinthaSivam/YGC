@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
-import Paper from '../components/Paper';
+import Paper from '../components/pastpaper/Paper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PremiumProvider } from '../components/contexts/PremiumContext'
 
