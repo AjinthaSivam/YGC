@@ -1,11 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import { Routes, Route } from 'react-router-dom';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-// import Quiz from './pages/QuizPage'
 import ProtectedRoute from './components/ProtectedRoute';
-import Quiz from './components/quiz/Quiz'
 import Historical from './components/historical/Historical';
 import LandHome from './components/landing page/Home'
 import Services from './components/landing page/Services';
@@ -21,10 +18,6 @@ import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
 import PastpaperChat from './pages/PastpaperChat';
 
-const isAuthenticated = () => {
-    return !!localStorage.getItem('access')
-}
-
 function App() {
     return (
         
@@ -32,7 +25,6 @@ function App() {
                 
                 <Route path="/" element={<ProtectedRoute />}>
                     <Route index element={<GeneralChat />} />
-                    {/* <Route path='/home/quiz' element= {<Quiz />} /> */}
                     <Route path='/generalchat' element= {<GeneralChat />} />
                     <Route path='/generalchat/:chatId' element= {<GeneralChat />} />
                     <Route path='/pastpapercard' element= {<PastpaperCard />} />
