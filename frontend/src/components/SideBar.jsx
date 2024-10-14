@@ -6,6 +6,8 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { useChat } from './chat/ChatContext';
 import ConfimationModal from './ConfimationModal';
+import DeleteButton from './buttons/DeleteButton';
+import RenameButton from './buttons/RenameButton';
 
 const SideBar = ({ open, setOpen }) => {
     const [selectedMenu, setSelectedMenu] = useState('');
@@ -138,17 +140,19 @@ const SideBar = ({ open, setOpen }) => {
                                         session.chat_title
                                     )}
                                 </div>
-                                <div className="flex items-center">
-                                    <MdEdit
+                                <div className="flex items-center justify-between gap-2">
+                                    {/* <MdEdit
                                         size={18}
                                         className="cursor-pointer text-gray-500 hover:text-gray-700 mr-2"
                                         onClick={(e) => handleRenameChatSession(e, session.chat_id)}
-                                    />
-                                    <MdDelete
+                                    /> */}
+                                    <RenameButton onClick={(e) => handleRenameChatSession(e, session.chat_id)} />
+                                    {/* <MdDelete
                                         size={18}
                                         className="cursor-pointer text-gray-500 hover:text-red-500"
                                         onClick={(e) => handleDeleteChatSession(e, session.chat_id)}
-                                    />
+                                    /> */}
+                                    <DeleteButton onClick={(e) => handleDeleteChatSession(e, session.chat_id)} />
                                 </div>
                             </div>
                         ))

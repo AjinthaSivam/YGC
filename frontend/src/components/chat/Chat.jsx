@@ -9,7 +9,7 @@ import { usePremium } from '../contexts/PremiumContext';
 import { FaBolt } from 'react-icons/fa6';
 import { useParams, useNavigate } from 'react-router-dom';
 import InputBox from '../InputBox'
-import NewChatButton from '../NewChatButton';
+import NewChatButton from '../buttons/NewChatButton';
 import CustomScrollbar from '../scrollbars/CustomScrollbar';
 import ErrorMessage from '../messages/ErrorMessage';
 import BotMessage from '../messages/BotMessage';
