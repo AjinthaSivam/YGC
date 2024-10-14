@@ -24,7 +24,8 @@ import PastpaperChat from './pages/PastpaperChat';
 import QuizStart from './pages/QuizStart';
 import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
-import PastpaperChat from './pages/PastpaperChat';
+import PastpaperCard from './pages/PastpaperCard';
+import PastpaperContent from './pages/PastpaperContent';
 
 function App() {
     return (
