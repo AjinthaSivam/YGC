@@ -1,11 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import { Routes, Route } from 'react-router-dom';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-// import Quiz from './pages/QuizPage'
 import ProtectedRoute from './components/ProtectedRoute';
-import Quiz from './components/quiz/Quiz'
 import Historical from './components/historical/Historical';
 import LandHome from './components/landing page/Home'
 import Services from './components/landing page/Services';
@@ -27,8 +24,7 @@ import PastpaperChat from './pages/PastpaperChat';
 import QuizStart from './pages/QuizStart';
 import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
-import PastpaperCard from './pages/PastpaperCard';
-import PastpaperContent from './pages/PastpaperContent';
+import PastpaperChat from './pages/PastpaperChat';
 
 function App() {
     return (
@@ -37,8 +33,8 @@ function App() {
                 
                 <Route path="/" element={<ProtectedRoute />}>
                     <Route index element={<GeneralChat />} />
-                    {/* <Route path='/home/quiz' element= {<Quiz />} /> */}
                     <Route path='/generalchat' element= {<GeneralChat />} />
+                    <Route path='/generalchat/:chatId' element= {<GeneralChat />} />
                     <Route path='/pastpapercard' element= {<PastpaperCard />} />
                     <Route path="/pastpaper/:year" element={<PastpaperContent />} />
                     <Route path='/togglebot' element= {<PastpaperChat />} />

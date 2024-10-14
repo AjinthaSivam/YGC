@@ -1,23 +1,23 @@
-/* custom.css */
-::-webkit-scrollbar {
-    width: 8px; /* Adjust the width as needed */
-    height: 8px; /* Adjust the height as needed */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3); /* Adjust the scrollbar thumb color */
-    border-radius: 4px; /* Rounded corners for the thumb */
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track, white);
 }
 
-::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.1); /* Adjust the scrollbar track color */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #b4f2ef; /* Use the actual color value instead of Tailwind theme */
+    border-radius: 4px;
 }
 
-.chat-scrollbar {
-    position: fixed; /* Fixed position to keep it at the right end of the screen */
-    top: 0;
-    right: 0;
-    height: 100vh; /* Adjust height as needed */
-    z-index: 50; /* Ensure it's above other content */
-    pointer-events: none; /* Prevents interaction interference */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #7ee8e4; /* Use a slightly darker shade for hover */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #b4f2ef var(--scrollbar-track, white);
 }

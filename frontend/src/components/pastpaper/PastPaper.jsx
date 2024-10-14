@@ -13,8 +13,8 @@ const PastPapers = ({ onSelectPaper, onSelectYear }) => {
     }
 
     return (
-        <div className='flex p-4 h-full w-full max-w-5xl mx-auto'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 overflow-auto'>
+        <div className='flex p-4 h-screen max-w-5xl sm:mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 p-4 mt-16 overflow-auto'>
                     {pastPaperYears.map(year => (
                         <div
                             key={year}
@@ -23,7 +23,7 @@ const PastPapers = ({ onSelectPaper, onSelectYear }) => {
                         >
                             <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-lg'></div>
                             <img
-                                src={`/pastpapers/thumbnails/${year}.jpg`}
+                                src={`pastpapers/thumbnails/${year}.jpg`}
                                 alt={`Past paper ${year}`}
                                 className='w-full h-36 object-cover rounded-t-lg'
                             />

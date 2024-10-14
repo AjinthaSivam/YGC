@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import axios from 'axios'
 import { IoCloseOutline } from "react-icons/io5";
+import ErrorMessage from '../components/messages/ErrorMessage';
+import SuccessMessage from '../components/messages/SuccessMessage';
+import SubmitButton from '../components/buttons/SubmitButton';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -29,6 +32,10 @@ const Signup = () => {
     general: '',
   })
 
+  const [success, setSuccess] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value})
   }
@@ -43,12 +50,16 @@ const Signup = () => {
     })
 
     try {
+      setIsLoading(true)
       console.log('Form Data:', formData);
       const response = await axios.post(`${apiBaseUrl}/api/register/`, formData)
       console.log('Response:', response.data);
       localStorage.setItem('access', response.data.access)
       // localStorage.setItem('user', JSON.stringify(response.data.user))
-      navigate('/signin')
+      setSuccess('User registered successfully')
+      setTimeout(() => {
+        navigate('/signin')
+      }, 1500)
     } catch (error) {
       console.error('There was an error registering the user!', error.response.data)
       const errorData = error.response.data
@@ -63,6 +74,9 @@ const Signup = () => {
       else {
         setErrors({ ...errors, general: 'There was an error registering the user!' })
       }
+    }
+    finally {
+      setIsLoading(false)
     }
   }
 
@@ -81,13 +95,19 @@ const Signup = () => {
   }
 
   return (
+    <div>
+      <div className='flex justify-center items-center mt-2'>
+        {errors.general && <ErrorMessage message={errors.general} isPersistent={false} />}
+        {success && <SuccessMessage message={success} />}
+      </div>
     <div className='min-h-screen flex items-center justify-center'>
+      
         <div className='relative rounded-2xl shadow-lg max-w-3xl p-5 px-16 py-6'>
-          <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-[#b4ebe9] duration-300'>
+          <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
             <IoCloseOutline size={24} />
           </button>
           <div className='mb-4 p-3 text-center'>
-            <p className='text-md text-[#04aaa2] text-'>Sign up today to master your subjects <br/> with EduBot's AI-powered learning! 🚀🤖</p>
+            <p className='text-md text-primary'>Sign up today to master your subjects <br/> with EduBot's AI-powered learning! 🚀🤖</p>
           </div>
             <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
               {/* <div className='grid grid-cols-2 items-center gap-4'>
@@ -122,20 +142,21 @@ const Signup = () => {
                 type='text'
                 name='email'
                 placeholder='Email'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.email}
                 onChange={handleChange}
               />
               {errors.email && <span className='text-xs text-red-500'>{errors.email}</span>}
-              {/* <div className='grid grid-cols-2 items-center gap-4'>
+              {/* <div className='grid grid-cols-2 items-center gap-4'> */}
               <input
                 type='text'
                 name='grade'
                 placeholder='Grade'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.grade}
                 onChange={handleChange}
               />
+              {/*
               <input
                 type='text'
                 name='mobile_no'
@@ -165,7 +186,7 @@ const Signup = () => {
                 type='text'
                 name='username'
                 placeholder='Username'
-                className='p-2 rounded-xl w-full border'
+                className='p-2 rounded-full w-full border'
                 value={formData.username}
                 onChange={handleChange}
               />
@@ -175,7 +196,7 @@ const Signup = () => {
                   type={showPassword ? 'text' : 'password'}
                   name='password'
                   placeholder='Password'
-                  className='p-2 rounded-xl w-full border'
+                  className='p-2 rounded-full w-full border'
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -189,16 +210,15 @@ const Signup = () => {
                 </div>
               </div>
               {errors.password && <span className='text-xs text-red-500'>{errors.password}</span>}
-              <button type='submit' className='bg-[#04aaa2] rounded-xl text-white py-2 mt-4 mb-4 hover:scale-105 duration-300'>Sign Up</button>
-
-              {errors.general && <span className='text-xs text-red-500'>{errors.general}</span>}
-
+              {/* <button type='submit' className='bg-primary rounded-full text-light_gray py-2 mt-4 mb-4 hover:scale-105 duration-300'>Sign Up</button> */}
+              <SubmitButton text={isLoading ? 'Signing Up...' : 'Sign Up'} onClick={handleSubmit} />
             </form>
             <div className='mt-3 text-[#04aaa2] text-xs flex justify-between border-t pt-2 items-center gap-2'>
               <p>Already have an account?</p>
-              <button onClick={handleSignin} className='py-2 px-3 bg-white border border-[#04aaa2] rounded-xl hover:bg-[#b4ebe9] duration-300'>Sign In</button>
+              <button onClick={handleSignin} className='py-2 px-3 bg-white border border-primary rounded-full hover:bg-secondary duration-300'>Sign In</button>
             </div>
         </div>
+    </div>
     </div>
   )
 }

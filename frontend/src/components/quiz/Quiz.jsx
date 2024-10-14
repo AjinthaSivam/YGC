@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
+import ThinkingMessage from '../messages/thinkingMessage/ThinkingMessage';
+import ConfimationModal from '../ConfimationModal';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -10,9 +12,9 @@ const MCQGenerator = ({ difficulty, category }) => {
     const [userAnswers, setUserAnswers] = useState({});
     const [quizId, setQuizId] = useState(null)
     const [score, setScore] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showResults, setShowResults] = useState(false);
-    const [loading, setLoading] = useState(false); // Loading state for fetching quiz
+    const [isLoading, setIsLoading] = useState(false); // Loading state for fetching quiz
 
     const isQuizFetched = useRef(false)
 
@@ -25,7 +27,7 @@ const MCQGenerator = ({ difficulty, category }) => {
     const getQuiz = async () => {
         if (isQuizFetched.current) return;
         isQuizFetched.current = true
-        setLoading(true); 
+        setIsLoading(true); 
         try {
             const response = await axios.post(`${apiBaseUrl}/quiz/generate_questions/`, {
                 category,
@@ -47,7 +49,7 @@ const MCQGenerator = ({ difficulty, category }) => {
             console.error('Error getting quiz:', error);
             // Handle error state or retry logic if necessary
         } finally {
-            setLoading(false); // Clear loading state after fetch completes
+            setIsLoading(false); // Clear loading state after fetch completes
         }
     };
 
@@ -59,7 +61,7 @@ const MCQGenerator = ({ difficulty, category }) => {
     };
 
     const handleFinishQuiz = () => {
-        setShowModal(true);
+        setShowConfirmModal(true);
     };
 
     const handleConfirmFinish = async () => {
@@ -83,7 +85,7 @@ const MCQGenerator = ({ difficulty, category }) => {
             )
             const score = response.data.quiz.score
             setScore(score)
-            setShowModal(false);
+            setShowConfirmModal(false);
             setShowResults(true);
 
             console.log(questions)
@@ -98,19 +100,23 @@ const MCQGenerator = ({ difficulty, category }) => {
     };
 
     const handleCancelFinish = () => {
-        setShowModal(false);
+        setShowConfirmModal(false);
     };
 
     return (
-        <div className='flex p-4 h-full w-full max-w-5xl mx-auto flex-grow overflow-auto'>
-            <div className='flex-col flex-grow overflow-auto mb-4 overflow-y-scroll scrollbar-hidden'>
-                <div className='pb-2 border-b border-[#04aaa2] max-w-xl mb-8'>
-                    <h1 className='text-2xl text-[#393E46] font-bold my-4'>
+        <div className='flex p-4 h-full w-full max-w-4xl sm:mx-auto flex-grow overflow-auto'>
+            <div className='flex-col flex-grow overflow-auto mt-16 mb-4 overflow-y-scroll scrollbar-hidden'>
+                <div className='pb-2 border-b border-primary max-w-xl mb-8'>
+                    <h1 className='text-2xl text-dark_gray font-bold my-4'>
                         {category} - {difficulty} Level
                     </h1>
                 </div>
                 
-                {loading && <p>Loading quiz...</p>}
+                {isLoading && 
+                    <div className='ml-4'>
+                        <ThinkingMessage />
+                    </div>
+                }
                 {showResults ? (
                     <QuizResult questions={questions} userAnswers={userAnswers} score={score} />
                 ) : (
@@ -118,7 +124,7 @@ const MCQGenerator = ({ difficulty, category }) => {
                         {questions.length > 0 && (
                             <div>
                                 {questions.map((question, index) => (
-                                    <div key={index} className='mb-6 mt-6'>
+                                    <div key={index} className='mb-6 mt-6 text-xs sm:text-base'>
                                         <p>{index + 1}. {question.question}</p>
                                         <div className='ml-4 mt-2'>
                                             {Object.keys(question.options).map((key, idx) => (
@@ -139,7 +145,7 @@ const MCQGenerator = ({ difficulty, category }) => {
                                 <div className='flex justify-center'>
                                     <button
                                         onClick={handleFinishQuiz}
-                                        className='px-4 py-2 mb-6 bg-[#04aaa2] text-white rounded-full justify-center'
+                                        className='px-4 py-2 mb-6 bg-primary text-light_gray rounded-full justify-center'
                                     >
                                         Finish Quiz
                                     </button>
@@ -148,7 +154,16 @@ const MCQGenerator = ({ difficulty, category }) => {
                         )}
                     </>
                 )}
-                <ConformationModal show={showModal} onConfirm={handleConfirmFinish} onCancel={handleCancelFinish} />
+                {showConfirmModal && (
+                    <ConfimationModal
+                        isOpen={showConfirmModal}
+                        onClose={handleCancelFinish}
+                        onConfirm={handleConfirmFinish}
+                        message="Are you sure you want to finish the quiz?"
+                        confirmText="Yes"
+                        cancelText="No"
+                    />
+                )}
             </div>
         </div>
     );
