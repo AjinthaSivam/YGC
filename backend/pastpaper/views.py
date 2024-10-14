@@ -4,7 +4,7 @@ import PyPDF2
 import openai
 import numpy as np
 import faiss
-import json
+import json 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
@@ -46,13 +46,15 @@ def truncate_conversation(history, max_tokens=3000):
     return truncated_history
 
 # Directory paths
-input_directory = 'pdfs'  # Directory where your PDFs are stored
+#input_directory = 'PastpaperFiles'  # Directory where your PDFs are stored
 
 # Ensure the directory exists
-if not os.path.exists(input_directory):
-    os.makedirs(input_directory)
+#if not os.path.exists(input_directory):
+   # os.makedirs(input_directory)
+
 
 # Function to convert PDF to text using PyPDF2
+"""
 def convert_pdf_to_text(file_path):
     try:
         text = ''
@@ -72,30 +74,39 @@ def convert_pdf_to_text(file_path):
         print(f"Error processing {file_path}: {e}")
         return ''
 
+"""
+
 # Function to get embeddings
 def get_embedding(text):
     return openai.Embedding.create(input=text, model="text-embedding-ada-002")['data'][0]['embedding']
 
 # Function to process text files and convert PDFs to text if needed
-def process_text_file(file_name):
+def process_test_file(selected_year, selected_test):
     try:
+        # Ensure selected_test is a valid test number
+        if not selected_test:
+            print("Error: No test selected.")
+            return ''
+        
+        # Construct the directory and file path
+        input_directory = os.path.join('PastpaperFiles', selected_year)
+        file_name = f"Test {selected_test}.txt"
         file_path = os.path.join(input_directory, file_name)
+
+        # Check if the file exists
         if not os.path.exists(file_path):
-            pdf_path = file_path.replace('.txt', '.pdf')
-            if os.path.exists(pdf_path):
-                text = convert_pdf_to_text(pdf_path)
-                with open(file_path, 'w', encoding='utf-8') as file:
-                    file.write(text)
-            else:
-                print(f"Error: PDF file {pdf_path} not found.")
-                return ''
-        else:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                text = file.read()
+            print(f"Error: Test file {file_path} not found.")
+            return ''
+
+        # Read and return the content of the text file
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+
         return text
     except Exception as e:
         print(f"Error processing file {file_name}: {e}")
         return ''
+
 
 # Function to find relevant chunks based on the user query
 def find_relevant_chunks(query, chunks_and_embeddings, index, top_k=5):
@@ -165,6 +176,9 @@ def chat_view(request):
     try:
         data = json.loads(request.body)
         user_input = data.get('user_input', '')
+        selected_year = data.get('selected_year', '')   #Year selection
+        selected_test = data.get('selected_test', '')   #Test selection
+                                 
         
         numberof_input_tokens = count_tokens(user_input)
         
@@ -185,6 +199,7 @@ def chat_view(request):
             return JsonResponse({'response': "Error: No year selected."}, status=400)
 
         # Process the text files and create the FAISS index
+        """
         all_texts = ''
         input_directory = 'pdfs'  # Replace with your directory path
         for file_name in os.listdir(input_directory):
@@ -195,8 +210,15 @@ def chat_view(request):
         
         if not all_texts:
             return JsonResponse({'response': "Error: Unable to load any text files."}, status=500)
+         """
+        
+        test_text = process_test_file(selected_year, selected_test)
 
-        chunks_and_embeddings, index = create_faiss_index(all_texts)
+        if not test_text:
+            return JsonResponse({'response':f"Error:Unable to load Test {selected_test} for year {selected_year}."}, status=500)
+        
+        #Create FAISS index for the selected test
+        chunks_and_embeddings, index = create_faiss_index(test_text)
 
         # Find relevant chunks from the dataset
         relevant_chunks = find_relevant_chunks(user_input, chunks_and_embeddings, index)
@@ -205,7 +227,7 @@ def chat_view(request):
         # Build the message history to provide context
         messages = [
             {"role": "system", "content": "You are an English Teaching Assistant for Grade 11 students."},
-            {"role": "system", "content": f"This is a past paper from the year {selected_year}, covering various topics in English."},
+            {"role": "system", "content": f"This is a past paper from the year {selected_year}, Test {selected_test} covering various topics in English."},
             {"role": "system", "content": "Guide them step by step to reach the answer."},
             {"role": "system", "content": "Use emojis to make it engaging, but keep responses short."},
             {"role": "system", "content": "Guide the student on questions related to a specific test of this paper. Give the answers with explanation"},

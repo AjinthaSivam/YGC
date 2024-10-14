@@ -1,0 +1,20 @@
+Read the introduction given by a zoo keeper to a group of children. Complete the table given 
+below with the information of the bird. The first one is done for you. 
+ 
+“Hello, Good Morning children! Welcome to the ‘Bird Paradise’. I'm going to give you 
+an introduction about Hyacinth Macaw. 
+ 
+It is the largest flying species in the world. It is a parrot native to Central and Eastern-
+South America. The bird is one-metre-long from the top of its head to the tip of its long-pointed tail. Its feathers are entirely blue. Its diet consists of nuts from specific palm species. Hyacinth Macaw has a very strong beak for eating nuts and seeds. It can live for 30-50 years. Macaws nest in hollows in trees high up from the ground from July to December. Hyacinth Macaw is one of the most colourful and attractive birds in the world. If you are interested in finding more information about the bird, visit our information center near the exit gate.”
+
+1. Native place: ............................
+
+2. Colour of the feathers: .........................
+
+3. Food: ...........................
+
+4. Life span: .........................
+
+5. Nesting place: ...........................
+
+6. Nesting period: .............................

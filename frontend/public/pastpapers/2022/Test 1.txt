@@ -1,0 +1,23 @@
+Test 1
+
+The instructions below are to be displayed at each place given. Write the correct letter of the place in the cage given against ach instruction. The first one is done for you. 
+
+Places
+(a) Picture of a Science laboratory featuring a table with counter.
+(b) Three children sitting with computer in a computer lab.
+(c) A library with kids reading books.
+(d) A set of people standing at a counter in a place.
+(e) A family having fun in the pool.
+(f) A classroom with students at desks, learning and listening to the teacher.
+
+Instructions
+
+(1) Borrow two books at a time: .......
+(2) Wait in the queue for your turn: ......
+(3) Keep the classroom neat and tidy: ......
+(4) Do not smell or taste chemicals: .......
+(5) Do not bring pen drives into the computer room: ..........
+(6) Do not run - the area is slippery: .........
+
+
+

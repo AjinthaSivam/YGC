@@ -31,4 +31,6 @@ urlpatterns = [
     
     # Historical chat related
     path('api/historical/chat/', historical_chat_view, name='historical_chat_view'),
+
+    path('pastpaper/',include(pastpaper.urls))
 ]
