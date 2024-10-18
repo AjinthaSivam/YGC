@@ -23,7 +23,8 @@ export default {
         'light_gray': '#fbfafb',
         'dark_gray': '#2d3137',
         'soft_cyan': '#b4f2ef',
-        'bright_blue': '#382fed'
+        'bright_blue': '#382fed',
+        'light_red': '#fae8e8',
       },
     },
   },
