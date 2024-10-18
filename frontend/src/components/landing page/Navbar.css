@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0 5%;
   background-color: #107067;
   width: 100%;
   box-sizing: border-box;
@@ -39,7 +39,7 @@
 .register-button,
 .theme-toggle-button,
 .mobile-menu-toggle {
-  margin-left: 5px; /* Use margin instead of gap for better browser support */
+  margin-left: 10px; /* Use margin instead of gap for better browser support */
 }
 
 .navbar-menu a {
@@ -55,7 +55,7 @@
 .register-button {
   background-color: #ffffff;
   color: #107067;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -71,7 +71,7 @@
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .navbar-menu a:hover,
@@ -80,13 +80,19 @@
 }
 
 .register-button:hover {
-  background-color: #e0e0e0;
+  background-color: transparent;
+  color: #fff;
   transform: translateY(-2px);
+  border: 1px solid #fff;
 }
 
 .theme-toggle-button:hover,
 .mobile-menu-toggle:hover {
-  opacity: 0.8;
+  color:#1a1a1a;
+}
+.dark-mode .theme-toggle-button:hover,
+.dark-mode .mobile-menu-toggle:hover{
+  color: var(--primary-color);
 }
 
 .mobile-menu-toggle {
@@ -109,30 +115,41 @@ body.dark-mode .register-button:hover {
   color: #ffffff;
   box-shadow: 0.5px 0.5px 12px 0.5px rgb(255, 254, 254);
 }
+.side-info{
+  display: none;
+}
 
 /* Responsive styles */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 1rem 3%;
+    padding: 0 3%;
   }
 
   .navbar-menu a {
     padding: 0.5rem 0.75rem;
     margin: 0 0.25rem;
   }
+  .register-button{
+    padding: 0.25rem 0.5rem;
+  }
+  
+  
 }
 
-@media (max-width: 768px) {
+@media (max-width: 816px) {
+  .navbar{
+    padding: 0.5rem 2%;
+  }
   .navbar-menu {
     flex-direction: column;
     position: fixed;
     top: 0;
     right: -100%;
-    width: 50%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 816px;
     height: 100%;
     background-color: #107067;
-    padding: 1rem 0;
+    padding: 2rem;
     box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -145,8 +162,8 @@ body.dark-mode .register-button:hover {
   .navbar-menu a,
   .register-button {
     margin-left: 0;
-    margin-bottom: 2px; /* Reduced gap for mobile view */
-    padding: 0.5rem 1.5rem;
+    margin-bottom: 10px; /* Reduced gap for mobile view */
+    padding: 0.5rem 0.75rem;
     width: 100%;
     text-align: left;
   }
@@ -183,6 +200,58 @@ body.dark-mode .register-button:hover {
     opacity: 1;
     visibility: visible;
   }
+  .hero-cta {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .social-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    color: #fff;
+  } 
+  .regbtn {
+    color: #107067;
+    background-color: #ffffff;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%; /* Full width of the sidebar */
+    padding: 0.75rem 1rem; /* Add some padding for better appearance */
+  }
+  
+  .regbtn:hover {
+    transform: scale(1.03);
+  }
+  
+  .dark-mode .regbtn {
+    background-color: var(--primary-color);
+    color: #000;
+  }
+  
+  .dark-mode .social-icons{
+    color: var(--primary-color);
+  }
+
+  .hr{
+    width:75%;
+    color: #fff;
+  }
+  .side-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%; /* Full width of the sidebar */
+    padding: 1rem 0; /* Add some vertical padding */
+  }
+  
 }
 
 @media (max-width: 480px) {
@@ -192,6 +261,12 @@ body.dark-mode .register-button:hover {
 
   .theme-toggle-button,
   .mobile-menu-toggle {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin-left: 5px;
+    padding-right: 5px;
+  }
+  .register-button{
+    padding: 0.25rem 0.5rem;
+    margin-left: 10px;
   }
 }

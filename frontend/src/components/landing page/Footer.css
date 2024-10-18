@@ -15,7 +15,7 @@ html, body {
 .footer {
   padding: 20px 5%;
   width: 100%;
-  background: linear-gradient(to top, #000, #141414, #292929);
+  background: #292929;
   color: #f8f9fa;
   border-top: 1px solid #444444;
   box-sizing: border-box;
@@ -71,6 +71,7 @@ html, body {
   width: 80px;
   height: auto;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .footer p {

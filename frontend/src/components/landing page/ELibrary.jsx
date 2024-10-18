@@ -76,7 +76,7 @@ const Elibrary = () => {
             <p>Access to online resources</p>
           </div>
           <div className="library-container">
-            <div className="filters" data-aos="fade-up" data-aos-delay="200">
+            <div className="filtery" data-aos="fade-up" data-aos-delay="200">
               {['All', 'Science', 'ICT', 'English', 'Mathematics'].map(category => (
                 <button key={category} onClick={() => {
                   setSelectedCategory(category);
@@ -84,7 +84,7 @@ const Elibrary = () => {
                 }} className={selectedCategory === category ? 'active' : ''}>{category}</button>
               ))}
             </div>
-            <div className="filters" data-aos="fade-up" data-aos-delay="400">
+            <div className="filtery" data-aos="fade-up" data-aos-delay="400">
               <select onChange={(e) => setSelectedAuthor(e.target.value)} value={selectedAuthor}>
                 <option value="All">All Authors</option>
                 {authors.map(author => (

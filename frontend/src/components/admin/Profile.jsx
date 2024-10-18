@@ -60,6 +60,11 @@ const Profile = () => {
           <div className="profile-header">
             <div className="avatar-section">
               <img src={user.avatar} alt="User Avatar" className="avatar" />
+              
+            </div>
+            <div className="user-info">
+              <h3>{user.name}</h3>
+              <p>{user.role}</p>
               {isEditing && (
                 <div className="avatar-upload">
                   <label htmlFor="avatar-input" className="avatar-upload-label">
@@ -75,11 +80,9 @@ const Profile = () => {
                 </div>
               )}
             </div>
-            <div className="user-info">
-              <h3>{user.name}</h3>
-              <p>{user.role}</p>
-            </div>
+            
           </div>
+          
           <div className="profile-details">
             <div className="detail-section">
               <h4>Personal Information</h4>

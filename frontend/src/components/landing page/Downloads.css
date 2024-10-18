@@ -36,11 +36,11 @@
   text-align: center;
 }
 
-.filters {
+.filtery {
   margin: 20px 0;
 }
 
-.filters button, .download-button {
+.filtery button, .download-button {
   padding: 10px 20px;
   font-size: 1em;
   border: none;
@@ -52,16 +52,16 @@
   border: 0.1px solid #789;
 }
 
-.filters button:hover, .download-button:hover {
+.filtery button:hover, .download-button:hover {
   background-color: #3aa99e;
 }
 
-.filters button.active {
+.filtery button.active {
   background-color: #02524d;
   color: white;
 }
 
-.dark-mode .filters button.active {
+.dark-mode .filtery button.active {
   background-color: #3aa99e;
   color: #292929;
 }
@@ -109,11 +109,11 @@
   color: #f8f9fa;
 }
 
-.dark-mode .filters button {
+.dark-mode .filtery button {
   background-color: #107067;
 }
 
-.dark-mode .filters button:hover {
+.dark-mode .filtery button:hover {
   background-color: #3aa99e;
 }
 

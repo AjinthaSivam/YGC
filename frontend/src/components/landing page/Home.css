@@ -81,7 +81,8 @@ body.dark-mode .circles li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5%;
+    padding: 30px;
+    /* padding:5%; */
     margin: 0 auto;
     max-width: 1200px;
     text-align: center;
@@ -113,9 +114,6 @@ body.dark-mode .home {
     }
 }
 
-.home:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
 
 /* Responsive styles */
 @media (max-width: 1200px) {

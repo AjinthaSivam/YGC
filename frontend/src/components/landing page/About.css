@@ -5,13 +5,21 @@
   border-radius: 12px;
   text-align: center;
 }
-
+:root {
+  --primary-color: #3aa99e;
+  --secondary-color: #107067;
+  --text-color: #333;
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 /* About container styles */
 .about-container {
   padding: 20px;
   margin: 40px auto;
   max-width: 1200px; /* Set a max-width for better responsiveness */
   text-align: center;
+  padding: 10px 20px;
 }
 
 /* Title styles */
@@ -27,6 +35,13 @@
   color: #3aa99e;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
+.about-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
 /* Paragraph styles */
 .about p, .about-container p {
@@ -35,7 +50,7 @@
   line-height: 2;
 }
 .about p{
-  font-size: 1.05em;
+  font-size: 1em;
   font-weight:500;
 }
 .dark-mode .about p, .dark-mode .about-container p {
@@ -46,11 +61,11 @@
 .about-card {
   background-color: transparent;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
-  padding: 20px;
-  text-align: left;
+  padding: 20px;  
+  align-items: center;
   border: 1px solid #888;
+  display: flex;
 }
 
 .dark-mode .about-card {
@@ -60,18 +75,19 @@
 /* Card subtitle styles */
 .about-card h3 {
   font-size: 2em;
-  color: #107067;
+  color: #02524d;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .dark-mode .about-card h3 {
-  color: #3aa99e;
+  color: #3aa99e; 
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* Team section styles */
 .team-section {
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin: 20px auto;
 }
@@ -80,76 +96,306 @@
   color: #f8f9fa;
 }
 
-/* Team member styles */
-.team-member {
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 250px;
-  margin: 10px;
-  border: 1px solid #777;
-  
-  display: flex;
-  flex-direction: column; /* Change to column for vertical alignment */
-  align-items: center; /* Center align items */
-  text-align: center; /* Center align text */
-}
+
 
 .dark-mode .team-member {
-  background-color: #555;
+  background-color: #333;
   border: 1px solid #888;
 }
 
 /* Team member image styles */
-.team-member img {
+.team-member img{
   width: 120px; /* Adjust size for better appearance */
   height: 120px;
   border-radius: 50%;
   margin-bottom: 10px;
   border: 3px solid #107067; /* Add a border for a more polished look */
+  display: block; /* Ensure the image is treated as a block element */
+  margin-left: auto; /* Center align horizontally */
+  margin-right: auto; /* Center align horizontally */
+}
+
+
+
+@media (max-width: 768px) {
+  .about h2, .about-container h2 {
+    font-size: 2.5em;
+  }
+  .about p, .about-container p {
+    font-size: 1em;
+  }
+  .about-card {
+    max-width: 100%;
+  }
+  .team-member {
+    max-width: 100%; /* Allow full width on smaller screens */
+    margin: 10px 0; /* Adjust margin for better spacing */
+    
+    align-items: center;
+    justify-content:center;
+  }
+}
+
+.about-page {
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-card {
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+}
+
+.about-icon {
+  font-size: 3rem;
+  color:#02524d;
+  margin-bottom: 1rem;
+}
+.dark-mode .about-icon{
+  color: #3aa99e;
+}
+.team-member h4{
+  color: var(--primary-color);
+  font-weight:bolder;
+}
+.about-card h2 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.about-card p {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.team-section, .values-section, .contact-section {
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.team-grid, .values-grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.team-member, .value-card {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  
+  align-items: center;
+  justify-content:center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex: 0 1 200px; /* Set a base width of 200px, but allow shrinking */
+}
+
+.team-member:hover, .value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.team-member img {
+  align-self: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid var(--primary-color);
+}
+
+.team-member h4, .value-card h3 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.team-member p, .value-card p {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+
+
+.contact-section p {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-subtitle {
+    font-size: 1rem;
+  }
+
+  .about-card h3, .team-section h3, .values-section h3, .contact-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .about-content, .team-grid, .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card, .team-member, .value-card {
+    padding: 1rem;
+  }
+
+  .team-grid, .values-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-member, .value-card {
+    width: 100%;
+    max-width: 300px; /* Limit maximum width on small screens */
+  }
 }
 
 /* Values section styles */
 .values-section {
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  margin: 20px auto;
+  padding: 4rem 2rem;
+  margin: 60px auto;
 }
 
-.dark-mode .values-section {
-  color: #f8f9fa;
-}
-
-/* Values styles */
-.values, .team-members {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.value {
+.values-section h2 {
+  color: var(--primary-color);
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
   text-align: center;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 250px;
-  margin: 10px;
-  border: 1px solid #777;
+  font-weight: bold;
+  position: relative;
 }
 
-.dark-mode .value {
-  background-color: #555;
-  border: 1px solid #888;
+.values-section h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--primary-color);
+  margin: 15px auto 0;
 }
 
-/* Value icon styles */
-.value img {
+.values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.value-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  flex: 0 1 calc(33.333% - 2.5rem);
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: var(--primary-color);
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.value-card img {
   width: 80px;
   height: 80px;
-  margin-bottom: 10px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+  align-self: center;
+}
+
+.value-card:hover img {
+  transform: scale(1.1);
+}
+
+.value-card h3 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.value-card p {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .values-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .value-card {
+    flex: 0 1 100%;
+    max-width: 300px;
+  }
+}
+
+/* Dark mode adjustments */
+.dark-mode .values-section {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .value-card {
+  background-color: #333;
+}
+
+.dark-mode .value-card h3 {
+  color: var(--primary-color);
+}
+
+.dark-mode .value-card p {
+  color: #ddd;
 }

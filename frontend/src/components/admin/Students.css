@@ -425,7 +425,7 @@
 
 @media (max-width: 480px) {
   .students-container {
-    padding: 0.5rem;
+    padding: 1.5rem;
   }
 
   .heading {
@@ -502,7 +502,7 @@
 
   .students-table tr {
     border: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .students-table td {

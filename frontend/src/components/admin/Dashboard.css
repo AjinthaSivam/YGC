@@ -22,8 +22,7 @@
 .dashboard-header h1 {
   font-size: 2rem;
   font-weight: 600;
-  color: #107067;
-  
+  color: #107067;  
   padding-bottom: 0.5rem;
 }
 
@@ -257,6 +256,10 @@
 
   .demographic-legend li {
     margin: 0.5rem 0;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
   }
 }
 

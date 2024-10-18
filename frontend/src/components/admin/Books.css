@@ -429,7 +429,7 @@
 
 @media (max-width: 480px) {
   .books-container {
-    padding: 0.5rem;
+    padding: 1.5rem;
   }
 
   .heading {
@@ -507,7 +507,7 @@
 
   .books-table tr {
     border: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .books-table td {
@@ -531,4 +531,13 @@
   .books-table td:last-child {
     border-bottom: 0;
   }
+}
+
+.add-book-form select,
+.edit-book-form select {
+  width: 100%;
+  padding: 10px 10px 10px 45px; /* Added left padding for space between icon and text */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }

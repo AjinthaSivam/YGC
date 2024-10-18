@@ -72,7 +72,7 @@ const Downloads = () => {
             <p>Links to downloadable content</p>
           </div>
           <div className="downloads-container">
-            <div className="filters" data-aos="fade-up" data-aos-delay="200">
+            <div className="filtery" data-aos="fade-up" data-aos-delay="200">
               {['All', 'Science', 'ICT', 'English', 'Mathematics'].map(category => (
                 <button
                   key={category}

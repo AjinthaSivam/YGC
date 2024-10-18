@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
-import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
@@ -8,9 +7,8 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useChat } from '../components/chat/ChatContext';
 import ErrorMessage from '../components/messages/ErrorMessage';
 import SuccessMessage from '../components/messages/SuccessMessage';
-import SubmitButton from '../components/buttons/SubmitButton';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const Signin = () => {
     const { setMessages, setChatId } = useChat();
@@ -24,12 +22,23 @@ const Signin = () => {
     });
 
     const [error, setError] = useState('');
-
     const [success, setSuccess] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const SubmitButton = ({ text, onClick, className = '' }) => {
+        return (
+            <button
+                type="submit"
+                onClick={onClick}
+                className={`py-2 px-5 text-white bg-primary/50 backdrop-blur-md rounded-full hover:bg-primary/90 duration-300 ${className}`}
+            >
+                {text}
+            </button>
+        );
     };
 
     const handleSubmit = async (e) => {
@@ -47,7 +56,7 @@ const Signin = () => {
             setSuccess('Successfully signed in');
             setTimeout(() => {
                 navigate('/generalchat');
-            }, 1500)
+            }, 1500);
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setError('Incorrect username or password');
@@ -69,31 +78,31 @@ const Signin = () => {
     };
 
     const handleClose = (e) => {
-        e.preventDefault()
-        navigate('/land')
-    }
+        e.preventDefault();
+        navigate('/land');
+    };
 
     return (
-        <div>
-            <div className='flex justify-center items-center mt-4'>
-                {error && <ErrorMessage message={error} isPersistent={false} />}
-                {success && <SuccessMessage message={success} />}
-            </div>
-            <section className="min-h-screen flex items-center justify-center">
-                <div className="relative bg-white rounded-2xl shadow-lg max-w-3xl p-5 px-16">
-                    <button onClick={handleClose} className='absolute top-4 right-4 p-1 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
+        <>
+            <div className="relative z-10 min-h-screen flex items-end justify-center bg-cover bg-center" style={{ backgroundImage: "url('src/assets/images/bg2.png')" }} aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div className="bg-white/30 backdrop-blur-md p-4 rounded-xl shadow-lg max-w-xs w-full space-y-2 glassmorphic-card mb-6 px-8 py-6 border-2 border-gray-200">
+                    <button onClick={handleClose} className='absolute top-4 right-4 text-gray-500 hover:rounded-full hover:bg-soft_cyan duration-300'>
                         <IoCloseOutline size={24} />
                     </button>
                     
-                    <p className="text-sm text-primary mt-8">If you're already a member, easily sign in</p>
-                    
+                    <h2 className="text-2xl font-bold text-center text-black">Sign In</h2> {/* Make Sign In text bolder */}
+
+                    <div className="flex justify-center items-center">
+                        {error && <ErrorMessage message={error} isPersistent={false} />}
+                        {success && <SuccessMessage message={success} />}
+                    </div>
 
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                         <input
                             type="text"
                             name="username"
                             placeholder="Username/Email"
-                            className="mt-8 p-2 rounded-full w-full border"
+                            className="p-2 rounded-full w-full border-none bg-white/40 backdrop-blur-md text-black placeholder-black"
                             value={formData.username}
                             onChange={handleChange}
                         />
@@ -102,43 +111,33 @@ const Signin = () => {
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 placeholder="Password"
-                                className="p-2 rounded-full w-full border"
+                                className="p-2 rounded-full w-full border-none bg-white/40 backdrop-blur-md text-black placeholder-black"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
-                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-black">
                                 {showPassword ? (
-                                    <IoEyeOutline size={16} className="text-gray-400" onClick={togglePasswordVisibility} />
+                                    <IoEyeOutline size={20} onClick={togglePasswordVisibility} />
                                 ) : (
-                                    <IoEyeOffOutline size={16} className="text-gray-400" onClick={togglePasswordVisibility} />
+                                    <IoEyeOffOutline size={20} onClick={togglePasswordVisibility} />
                                 )}
                             </div>
                         </div>
-                        <SubmitButton text={isLoading ? 'Signing In...' : 'Sign In'}  onClick={handleSubmit} />
+                        <SubmitButton text={isLoading ? 'Signing In...' : 'Sign In'} onClick={handleSubmit} />
+
                     </form>
 
-                    {/* <div className="mt-10 grid grid-cols-3 items-center text-gray-400">
-                        <hr className="border-gray-400" />
-                        <p className="text-center">OR</p>
-                        <hr className="border-gray-400" />
-                    </div> */}
-
-                    {/* <button className="bg-white text-sm text-[#04bdb4] border border-[#04aaa2] py-2 w-full rounded-xl mt-5 flex gap-3 items-center justify-center hover:bg-[#b4ebe9] duration-300">
-                        <FaGoogle className="text-[#04aaa2]" size={24} />
-                        <p>Continue with Google</p>
-                    </button> */}
-
-                    {/* <p className="mt-5 text-[#04bdb4] text-xs border-b py-4">Forgot password?</p> */}
-
-                    <div className="mt-6 text-primary text-xs flex justify-between items-center">
-                        <p>Don't have an account?</p>
-                        <button onClick={handleSignup} className="py-2 px-5 bg-white border border-primary rounded-full hover:bg-secondary duration-300">
-                            Sign Up
+                    <div className="mt-6 text-black text-sm flex justify-between items-center">
+                        <p className="p-0.5S text-black"> {/* Adjust size and styling to match input */}
+                            Don't have an account?
+                        </p>
+                        <button onClick={handleSignup} className="py-2 px-3 p-1 bg-white/30 backdrop-blur-md border border-white rounded-full hover:bg-white/50 duration-300 ">
+                            Sign Up {/* Bold Sign Up button text */}
                         </button>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </>
     );
 };
 

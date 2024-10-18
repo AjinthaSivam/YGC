@@ -5,7 +5,7 @@
 
 .profile-container {
   flex: 1;
-  padding: 30px;
+  padding: 1.5rem;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -39,8 +39,7 @@
 }
 
 .user-info h3 {
-  font-size: 1.8rem;
-  margin: 0 0 5px 0;
+  font-size: 2rem;
 }
 
 .user-info p {
@@ -49,7 +48,10 @@
 }
 
 .profile-details {
-  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .detail-section {
@@ -67,7 +69,10 @@
 .detail-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #fff;
 }
 
 .icon {
@@ -141,24 +146,24 @@
 }
 
 .save-btn {
-  background-color: #28a745;
+  background-color: #107067;
   color: white;
 }
 
 .cancel-btn {
-  background-color: #dc3545;
-  color: white;
+  background-color: #fff;
+  color: black;
   margin-left: 10px;
 }
 
 .edit-btn:hover,
 .save-btn:hover,
 .cancel-btn:hover {
-  opacity: 0.9;
+  transform: scale(1.03);;
 }
 
 .avatar-upload {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 }
 

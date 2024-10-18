@@ -105,7 +105,7 @@
 
 .cta-button {
   display: inline-block;
-  padding: 15px 20px;
+  padding: 10px 20px;
   font-size: 1em;
   color: #fff;
   background-color: #02524d; /* Adjust color for buttons */
@@ -114,7 +114,7 @@
   transition: background-color 0.3s ease;
   font-weight: 600;
   border: #50747280 1px solid;
-  letter-spacing: 0.5px;
+  letter-spacing: 0px;
 }
 
 
@@ -213,14 +213,14 @@
 .book-image {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .see-more-button {
   background-color: #02524d;
   color: white;
   padding: 12px 25px;
-  border-radius: 25px;
+  border-radius:8px;
   text-decoration: none;
   display: inline-block;
   margin-top: 20px;
@@ -245,12 +245,12 @@
   align-items: center;
   margin-bottom: 25px;
   margin-left: 40px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .bookcard {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 250px;
@@ -261,7 +261,7 @@
 .book-image {
   width: 100%;
   height: 150px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 15px;
   object-fit: cover;
 }
@@ -280,9 +280,9 @@
 .input-group input,
 .input-group textarea {
   flex: 1;
-  padding: 12px 15px;
+  padding: 10px 15px;
   border: 1px solid #ccc;
-  border-radius: 25px;
+  border-radius: 8px;
   margin-left: 10px;
 }
 
@@ -290,11 +290,11 @@
   background-color: #02524d;
   color: white;
   padding: 12px 50px;
-  border-radius: 25px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  font-weight: 500;
+  font-weight: 600;
   margin-left: 40px;
 }
 .see-more-button:hover,
@@ -378,6 +378,7 @@
   .cta-button {
     margin-bottom: 10px;
     width: 100%;
+    border-radius: 12px;
   }
 
   .about-us-content {
@@ -410,7 +411,7 @@
 .dark-mode .contact-form{
   background-color: #292929;
   padding: 30px 20px 40px 10px;
-  border-radius: 20px;
+  border-radius: 12px;
 }
 
 .stories-container {

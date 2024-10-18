@@ -430,7 +430,7 @@
 
 @media (max-width: 480px) {
   .courses-container {
-    padding: 0.5rem;
+    padding: 1.5rem;
   }
 
   .heading {
@@ -508,7 +508,7 @@
 
   .courses-table tr {
     border: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .courses-table td {
@@ -537,4 +537,15 @@
 /* Add this new rule to create space between icon and text */
 .input-group select option {
   padding-left: 10px;
+}
+
+
+
+.add-course-form select,
+.edit-course-form select {
+  width: 100%;
+  padding: 10px 10px 10px 45px; /* Added left padding for space between icon and text */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }

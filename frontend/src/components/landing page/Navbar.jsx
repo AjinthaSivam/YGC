@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars, FaYoutube, FaFacebook, FaLinkedinIn } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,19 +41,39 @@ const Navbar = () => {
       </div>
       
       <div className={`navbar-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+        <br/><br/><br/>
         <a href="/land">Home</a>
         <a href="/services">Services</a>
         <a href="/downloads">Downloads</a>
         <a href="/about">About Us</a>
-        <a href="/elibrary">E-Library</a>
+        <a href="/elibrary">E-Library</a><br/>
+        <div className="side-info">
+          <button className='regbtn' rel='/signup'>Sign Up Now</button>
+          <br/><br/>
+          <hr className="hr"  />
+          <br/><br/>
+          <h4 className="hero-cta" >Connect with us</h4>        
+          <div className="social-icons">
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+              <FaYoutube className="social-icons"/>
+              </a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                <FaFacebook className="social-icons"/>
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                  <FaLinkedinIn className="social-icons"/>
+              </a>
+          </div>
+        </div>
       </div>
+      
 
       
 
       <div className="navbar-menu-container">
         {/* Register Now Button */}
         <a href="/signup" className="register-button">
-          SignUp
+          Sign Up
         </a>
         <button onClick={toggleDarkMode} className="theme-toggle-button">
           {isDarkMode ? <FaMoon size={20} /> : <FaSun size={20} />}
