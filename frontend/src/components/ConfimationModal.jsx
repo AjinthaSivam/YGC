@@ -3,7 +3,7 @@ import React from 'react'
 const ConfimationModal = ({ isOpen, onClose, onConfirm, message, confirmText, cancelText }) => {
     if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 flex justify-center items-center z-50">
+    <div className="fixed bg-black bg-opacity-20 inset-0 flex justify-center items-center z-50">
       <div className="bg-secondary text-xs sm:text-sm p-6 rounded-lg shadow-lg">
         <p className="mb-4 text-dark_gray">{message}</p>
         <div className="flex justify-end space-x-2">

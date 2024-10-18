@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import ConfimationModal from '../ConfimationModal';
+import HistotyButton from '../buttons/HistotyButton';
+import Heading2 from '../Heading2';
+import SubmitButton from '../buttons/SubmitButton';
 
 const QuizIntro = ({ onStartQuiz }) => {
   const [quizDifficulty, setQuizDifficulty] = useState('Difficulty');
@@ -63,12 +66,18 @@ const QuizIntro = ({ onStartQuiz }) => {
     setIsConfirmModalOpen(false);
   };
 
+  const handleHistory = (e) => {
+    e.preventDefault()
+    navigate('/quiz/history/table')
+  }
+
   return (
-    <div className="flex flex-col justify-between justify-center mx-auto">
-      <div className="text-center mt-16 p-6">
-        <h2 className="text-2xl font-semibold mb-4">
-          Welcome to the EduTech Quiz! 📘📝
-        </h2>
+    <div className="flex flex-col max-w-4xl p-4 justify-between justify-center mx-auto">
+      {/* <div className='flex justify-end mt-16 p-6'>
+        <HistotyButton onClick={handleHistory} />
+      </div> */}
+      <div className='mt-16'>
+        <Heading2 text='Welcome to EduTech Quiz' />
       </div>
 
       <div className="flex-grow flex items-center justify-center">
@@ -78,7 +87,7 @@ const QuizIntro = ({ onStartQuiz }) => {
             <div className="relative">
               <button
                 onClick={handleDiffDropdown}
-                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-lg hover:bg-secondary transition duration-300"
+                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-full hover:bg-secondary transition duration-300"
               >
                 {quizDifficulty}
                 <FaAngleDown className="justify-end" />
@@ -102,7 +111,7 @@ const QuizIntro = ({ onStartQuiz }) => {
             <div className="relative">
               <button
                 onClick={handleCategoryDropdown}
-                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-lg hover:bg-secondary transition duration-300"
+                className="flex items-center justify-between w-52 h-12 px-4 py-2 text-primary font-semibold border border-primary rounded-full hover:bg-secondary transition duration-300"
               >
                 {quizCategory}
                 <FaAngleDown className="justify-end" />
@@ -132,12 +141,14 @@ const QuizIntro = ({ onStartQuiz }) => {
 
           {/* Start Button */}
           <div className="flex justify-center">
-            <button
+            {/* <button
               onClick={handleStartQuiz}
               className="px-6 py-2 bg-primary h-12 text-light_gray rounded-lg hover:bg-strong_cyan transition duration-300"
             >
               Let's Start
-            </button>
+            </button> */}
+
+            <SubmitButton onClick={handleStartQuiz} text="Let's Start" />
           </div>
         </div>
       </div>

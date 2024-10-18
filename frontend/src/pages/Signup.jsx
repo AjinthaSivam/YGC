@@ -96,10 +96,12 @@ const Signup = () => {
 
   return (
     <div>
-      <div className='flex justify-center items-center mt-2'>
-        {errors.general && <ErrorMessage message={errors.general} isPersistent={false} />}
-        {success && <SuccessMessage message={success} />}
-      </div>
+      <div className='flex justify-center items-center'>
+        <div className='mt-2'>
+          {errors.general && <ErrorMessage message={errors.general} isPersistent={true} onReload={true} />}
+          {success && <SuccessMessage message={success} />}
+        </div>
+        </div>
     <div className='min-h-screen flex items-center justify-center'>
       
         <div className='relative rounded-2xl shadow-lg max-w-3xl p-5 px-16 py-6'>
@@ -211,7 +213,7 @@ const Signup = () => {
               </div>
               {errors.password && <span className='text-xs text-red-500'>{errors.password}</span>}
               {/* <button type='submit' className='bg-primary rounded-full text-light_gray py-2 mt-4 mb-4 hover:scale-105 duration-300'>Sign Up</button> */}
-              <SubmitButton text={isLoading ? 'Signing Up...' : 'Sign Up'} onClick={handleSubmit} />
+              <SubmitButton type='submit' text={isLoading ? 'Signing Up...' : 'Sign Up'} onClick={handleSubmit} />
             </form>
             <div className='mt-3 text-[#04aaa2] text-xs flex justify-between border-t pt-2 items-center gap-2'>
               <p>Already have an account?</p>

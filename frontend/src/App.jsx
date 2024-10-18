@@ -17,6 +17,9 @@ import QuizStart from './pages/QuizStart';
 import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
 import PastpaperChat from './pages/PastpaperChat';
+import QuizHistoryTablePage from './pages/QuizHistoryTablePage';
+import QuizReviewPage from './pages/QuizReviewPage';
+import QuizCardPage from './pages/QuizCardPage';
 
 function App() {
     return (
@@ -30,8 +33,11 @@ function App() {
                     <Route path='/pastpapercard' element= {<PastpaperCard />} />
                     <Route path="/pastpaper/:year" element={<PastpaperContent />} />
                     <Route path='/togglebot' element= {<PastpaperChat />} />
-                    <Route path='/quizstart' element= {<QuizStart />} />
+                    <Route path='/quiz/start' element= {<QuizStart />} />
                     <Route path='/quiz' element= {<QuizContent />} />
+                    <Route path='/quiz/history/table' element={<QuizHistoryTablePage/>} />
+                    <Route path='/quiz/review/:quizId' element={<QuizReviewPage />} />
+                    <Route path='/quiz/card' element={<QuizCardPage />} />
                     <Route path='/legend' element= {<Legend />} />
                     <Route path="/home/historical" element={<Historical />} />
                 </Route>

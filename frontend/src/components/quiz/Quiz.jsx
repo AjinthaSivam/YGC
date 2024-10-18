@@ -4,6 +4,7 @@ import ConformationModal from './ConformationModal';
 import QuizResult from './QuizResult';
 import ThinkingMessage from '../messages/thinkingMessage/ThinkingMessage';
 import ConfimationModal from '../ConfimationModal';
+import { useNavigate } from 'react-router-dom';
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
@@ -17,6 +18,8 @@ const MCQGenerator = ({ difficulty, category }) => {
     const [isLoading, setIsLoading] = useState(false); // Loading state for fetching quiz
 
     const isQuizFetched = useRef(false)
+
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -86,7 +89,8 @@ const MCQGenerator = ({ difficulty, category }) => {
             const score = response.data.quiz.score
             setScore(score)
             setShowConfirmModal(false);
-            setShowResults(true);
+            // setShowResults(true);
+            navigate(`/quiz/review/${quizId}`, { state: { score } })
 
             console.log(questions)
             console.log(userAnswers)

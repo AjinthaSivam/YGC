@@ -265,9 +265,9 @@ const Chat = () => {
             <div className='flex justify-between mt-16 sm:mt-16 pt-2 items-center mb-4'>
                 <NewChatButton handleNewChat={handleNewChat} />
                 {error && (
-                    <div className="flex-grow flex justify-center mx-2">
+                    // <div className="flex-grow flex justify-center mx-2">
                         <ErrorMessage message={error} isPersistent={false} />
-                    </div>
+                    // </div>
                 )}
                 {!isPremium && remainingQuota !== null && (
                     <div className='flex items-center text-transparent bg-clip-text bg-gradient-to-r from-strong_cyan to-primary font-semibold'>

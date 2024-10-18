@@ -8,6 +8,7 @@ class Quiz(models.Model):
     feedback = models.TextField(null=True, blank=True)
     input_tokens = models.IntegerField(default=0)
     output_tokens = models.IntegerField(default=0)
+    is_deleted = models.BooleanField(default=False)
     
     def __str__(self):
         return f"Quiz {self.id}"
@@ -15,7 +16,7 @@ class Quiz(models.Model):
 class Questions(models.Model):
     quiz = models.ForeignKey(Quiz, related_name='questions', on_delete=models.CASCADE)
     question = models.TextField()
-    options = models.TextField()
+    options = models.JSONField()
     correct_answer = models.TextField()
     user_answer = models.TextField(null=True, blank=True)
     explanation = models.TextField()

@@ -24,9 +24,14 @@ def generate_quiz(request):
     # Generate questions using OpenAI API
     openai.api_key = settings.OPENAI_API_KEY
     prompt = (
-        f"Generate 5 English MCQ questions with category '{category}' and difficulty '{difficulty}' "
-        f"with 4 options each. Format the response as a JSON array of objects with fields 'question', "
-        f"'options' (an array of 4 strings), 'answer' (the correct option as a string), and 'explanation' (as a string)"
+        f"Generate 5 multiple-choice English grammar questions for Grade 11 Sri Lankan students. The category is '{category}', and the difficulty is '{difficulty}'. "
+        f"Each question should test grammar, usage, or vocabulary suitable for intermediate learners. Provide exactly 4 answer options for each question, "
+        f"and ensure that the correct answer is one of the provided options. "
+        f"The correct answer must follow proper English grammar rules, and the explanation must accurately explain why the selected answer is correct. "
+        f"Format the output as a JSON array where each object has the fields: "
+        f"'question' (the question as a string), 'options' (an array of 4 strings, each representing an answer choice), 'answer' (the correct option as a string), "
+        f"and 'explanation' (a clear and concise explanation of the correct answer). "
+        f"Double-check the consistency between the correct answer and its explanation, ensuring no contradictions."
         
     )
 
@@ -51,6 +56,16 @@ def generate_quiz(request):
             print(questions)
         except json.JSONDecodeError:
             return Response({"error": "Failed to parse questions. Invalid JSON format."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            questions = json.loads(response_text)
+            # Ensure options are correctly formatted as lists of strings
+            for question in questions:
+                question['options'] = [option.strip() for option in question['options']]
+            print(questions)
+        except json.JSONDecodeError:
+            return Response({"error": "Failed to parse questions. Invalid JSON format."}, status=status.HTTP_400_BAD_REQUEST)
+
         
     except (json.JSONDecodeError, KeyError) as e:
         return Response({"error": "Failed to generate or parse questions."}, status=status.HTTP_400_BAD_REQUEST)
@@ -128,7 +143,7 @@ def submit_quiz(request, quiz_id):
         question.save()
         
         # Compare user answer with the correct answer
-        if user_answer == question.correct_answer:
+        if user_answer.lower() == question.correct_answer.lower():
             correct_answers += 1
             
         response_data.append({
@@ -154,3 +169,45 @@ def submit_quiz(request, quiz_id):
         'questions': response_data,
         'message': 'Quiz submitted successfully'
     }, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])    
+def get_quiz_history(request):
+    learner = request.user
+    
+    if learner.is_anonymous:
+        return Response({ "error": "User must be authenticated" }, status=status.HTTP_400_BAD_REQUEST)
+    
+    quizzes = Quiz.objects.filter(learner=learner, is_deleted=False).order_by('-id')
+    
+    serializer = QuizSerializer(quizzes, many=True)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_quiz_questions(request, quiz_id):
+    learner = request.user
+    
+    if learner.is_anonymous:
+        return Response({ "error": "User must be authenticated" }, status=status.HTTP_400_BAD_REQUEST)
+    
+    quiz = get_object_or_404(Quiz, id=quiz_id, learner=learner)
+    
+    questions = quiz.questions.all()
+    
+    serializer = QuestionsSerializer(questions, many=True)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def soft_delete_quiz(request, quiz_id):
+    try:
+        quiz = get_object_or_404(Quiz, id=quiz_id, learner=request.user)
+        quiz.is_deleted = True
+        quiz.save()
+        
+        return Response({'success': 'Quiz marked as deleted successfully.', 'quiz_id': quiz.id}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

@@ -56,6 +56,7 @@ const Signin = () => {
             }
         } finally {
             setIsLoading(false);
+            
         }
     };
 
@@ -76,7 +77,7 @@ const Signin = () => {
     return (
         <div>
             <div className='flex justify-center items-center mt-4'>
-                {error && <ErrorMessage message={error} isPersistent={false} />}
+                {error && <ErrorMessage message={error} isPersistent={false} onReload={true} />}
                 {success && <SuccessMessage message={success} />}
             </div>
             <section className="min-h-screen flex items-center justify-center">
@@ -114,7 +115,7 @@ const Signin = () => {
                                 )}
                             </div>
                         </div>
-                        <SubmitButton text={isLoading ? 'Signing In...' : 'Sign In'}  onClick={handleSubmit} />
+                        <SubmitButton type='submit' text={isLoading ? 'Signing In...' : 'Sign In'}  onClick={handleSubmit} />
                     </form>
 
                     {/* <div className="mt-10 grid grid-cols-3 items-center text-gray-400">
