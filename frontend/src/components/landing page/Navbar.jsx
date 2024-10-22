@@ -21,6 +21,7 @@ const Navbar = ({ toggleDarkMode }) => {
         <a href="/downloads">Downloads</a>
         <a href="/about">About Us</a>
         <a href="/elibrary">E-Library</a>
+        <a href="/blog">Blog</a>
       </div>
 
       {/* Register Now Button */}

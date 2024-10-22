@@ -17,6 +17,7 @@ import QuizStart from './pages/QuizStart';
 import QuizContent from './pages/QuizContent';
 import Legend from './pages/Legend';
 import PastpaperChat from './pages/PastpaperChat';
+import Blog from './components/landing page/Blog';
 
 function App() {
     return (
@@ -46,6 +47,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/eLibrary" element={<ELibrary />} />
                 <Route path="/navbar" element={<Navbar />} />
+                {/*Blog*/}
+                <Route path="/blog" element={<Blog/>}/>
 
                 {/* <Route path="/admin" element={<Admin />} /> */}
             </Routes>
