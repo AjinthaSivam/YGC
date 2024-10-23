@@ -1,31 +1,31 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.middleware.csrf import get_token
+#views.py
 from django.http import JsonResponse
 import openai
-import re
 import random
+import re
+import os
+from dotenv import load_dotenv
+from django.views.decorators.http import require_GET
+from django.shortcuts import get_object_or_404
 
-# Ensure you have your OpenAI API key set up in your environment or settings
-openai.api_key = 'YOUR_OPENAI_API_KEY'
-def get_csrf_token(request):
-    return JsonResponse({'csrfToken': get_token(request)})
+load_dotenv()  # Load environment variables from .env
 
+
+openai.api_key = os.getenv('OPENAI_API_KEY')  # Assuming you have it in the .env file.
+
+
+# Function to choose a category
 def choose_category(request):
-    categories = ["animals", "fruits", "countries", "colors", "sports", "vegetables", "clothing", "parts of the body", "jobs", "weather", "transportations", "flowers"]
-    if request.method == "POST":
-        category_choice = int(request.POST.get("category_choice", 1)) - 1
-        if 0 <= category_choice < len(categories):
-            return JsonResponse({"category": categories[category_choice]})
-        return JsonResponse({"error": "Invalid choice"}, status=400)
+    categories = ["Animals", "Fruits", "Countries", "Colors", "Sports", "Vegetables", "Clothing", "Parts of the body", "Jobs", "Weather", "Transportations", "Flowers"]
     return JsonResponse({"categories": categories})
 
+# Updated function to get a word from GPT-3.5 based on the chosen category
 def get_word_from_gpt(category=None):
     while True:
         if category:
-            prompt = f"Give me a single word related to '{category}' for a hangman game. The word should have no symbols and should be between 5-8 letters long."
+            prompt = f"Give me a single word related to '{category}' for a hangman game. The word should have no symbols and should be between 4-12 letters long."
         else:
-            prompt = "Give me a single word for a hangman game. The word should have no symbols and should be between 5-8 letters long."
+            prompt = "Give me a single word for a hangman game. The word should have no symbols and should be between 4-12 letters long."
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
@@ -35,116 +35,107 @@ def get_word_from_gpt(category=None):
             ]
         )
 
-        word = response.choices[0].message['content'].strip()
-        word = re.sub(r'[^a-zA-Z]', '', word)
-        if len(word.split()) == 1 and 5 <= len(word) <= 8:
-            return word.lower()
+        # Log the response for debugging purposes
+        print("GPT response:", response)
 
-@csrf_exempt
-def play_hangman(request):
-    if request.method == "POST":
-        category = request.POST.get("category", None)
-        if category:
-            word = get_word_from_gpt(category)
-        else:
-            word = get_word_from_gpt()  # Default word if no category is selected
-
-        guessed_letters = set()
-        attempts = 6
-        revealed_letter = random.choice(word)
-        guessed_letters.add(revealed_letter)
-
-        if 'guess' in request.POST:
-            guess = request.POST.get('guess').lower()
-            if len(guess) != 1 or not guess.isalpha():
-                return JsonResponse({"error": "Invalid guess"}, status=400)
-            if guess in guessed_letters:
-                return JsonResponse({"message": "Already guessed"}, status=400)
-            guessed_letters.add(guess)
-            if guess in word:
-                message = f"Good job! {guess} is in the word."
+        try:
+            message_content = response['choices'][0]['message']['content'].strip()
+            match = re.search(r'\b[a-zA-Z]{4,12}\b', message_content)
+            if match:
+                word = match.group(0).lower()  # Ensure it's in lowercase
+                print(f"Valid word found: {word}")
+                return word
             else:
-                attempts -= 1
-                message = f"Sorry, {guess} is not in the word."
-            
-            if set(word) == guessed_letters:
-                return JsonResponse({"message": f"Congratulations! You've guessed the word: {word}"})
-            if attempts <= 0:
-                return JsonResponse({"message": f"Game over! The word was: {word}"})
-            return JsonResponse({
-                "display_word": " ".join([letter if letter in guessed_letters else "_" for letter in word]),
-                "hangman_stage": display_hangman(attempts),
-                "attempts": attempts,
-                "guessed_letters": list(guessed_letters),
-                "message": message
-            })
-        return JsonResponse({"error": "No guess provided"}, status=400)
-    return JsonResponse({"error": "Invalid request method"}, status=405)
+                print(f"No valid word found in response: {message_content}")
+                continue
 
-def display_hangman(attempts):
-    stages = [
-        """
-           -----
-           |   |
-               |
-               |
-               |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-               |
-               |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-           |   |
-               |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-          /|   |
-               |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-          /|\\  |
-               |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-          /|\\  |
-          /    |
-               |
-        ---------
-        """,
-        """
-           -----
-           |   |
-           O   |
-          /|\\  |
-          / \\  |
-               |
-        ---------
-        """
-    ]
-    return stages[6 - attempts]
+        except (KeyError, IndexError) as e:
+            print("Error fetching word from GPT response:", e)
+            continue
+
+
+# Function to handle playing the hangman game
+# Function to handle playing the hangman game
+def play_hangman(request):
+    category = request.GET.get('category')
+    word = get_word_from_gpt(category)  # Get word from GPT
+    
+    if not word:
+        return JsonResponse({"error": "No word found"}, status=400)
+    
+    # Store the word in session
+    request.session['word'] = word  # Store as-is, already in lowercase
+    request.session['guessed_letters'] = []
+    request.session['attempts'] = 6
+    print(f"Game started with word: {word}")  # Log the word
+
+    # Mark session as modified
+    request.session.modified = True
+
+    # Choose a letter as a clue from the word
+    clue_index = random.randint(0, len(word) - 1)  # Random index in the range of the word
+    clue_letter = word[clue_index].lower()  # Get the letter at that index
+    
+    # Create the masked word, revealing the clue letter
+    masked_word = ''.join([letter if letter == clue_letter else '_' for letter in word])
+
+    return JsonResponse({"word": word, "masked_word": masked_word, "clue_letter": clue_letter, "attempts": 6})
+
+
+# Function to handle guessing a letter
+@require_GET
+def guess_letter(request):
+    letter = request.GET.get('letter', '').lower()
+    print(f"Received guess: {letter}")  # Log the guessed letter
+
+    # Get the word and other session data
+    word = request.session.get('word')
+    
+    if word is None:  # Check if the word is None
+        return JsonResponse({"error": "Game has not been started or word not found"}, status=400)
+
+    guessed_letters = request.session.get('guessed_letters', [])
+    attempts = request.session.get('attempts', 6)
+
+    # Validate the guessed letter
+    if not letter.isalpha() or len(letter) != 1:
+        return JsonResponse({"error": "Invalid letter"}, status=400)
+
+    # Check if the letter has already been guessed
+    if letter in guessed_letters:
+        return JsonResponse({"error": "Letter already guessed"}, status=400)
+
+    # Add guessed letter to the list
+    guessed_letters.append(letter)
+    request.session['guessed_letters'] = guessed_letters
+
+    # Check if the guessed letter is in the word
+    if letter not in word:
+        attempts -= 1  # Decrement attempts if the guess is wrong
+
+    # Update the session with new attempts
+    request.session['attempts'] = attempts
+
+    # Create the updated masked word
+    masked_word = ''.join([letter if letter in guessed_letters else '_' for letter in word])
+
+    # Check for game-over conditions
+    wrong_guesses = [g for g in guessed_letters if g not in word]
+
+    # End the game if attempts run out or the word is fully guessed
+    if attempts == 0 or masked_word == word:
+        return JsonResponse({
+            "masked_word": masked_word,
+            "guessed_letters": guessed_letters,
+            "wrong_guesses": wrong_guesses,
+            "attempts": attempts,
+            "game_over": True
+        })
+
+    # Return the updated masked word and game state
+    return JsonResponse({
+        "masked_word": masked_word,
+        "guessed_letters": guessed_letters,
+        "wrong_guesses": wrong_guesses,
+        "attempts": attempts
+    })

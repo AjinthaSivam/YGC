@@ -19,6 +19,12 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
+BOT_QUOTAS = {
+    'general_bot': 15,
+    'pastpaper_bot': 2,
+    'historical_bot': 2
+}
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,7 +40,7 @@ SECRET_KEY = "django-insecure-+ju9bid=p$2_)1=e3e=cgq(h1-ue5%-7%ijti(0e)2a$+7&8gv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,6 +55,8 @@ INSTALLED_APPS = [
     'chat',
     'learner',
     'historical',
+    'pastpaper',
+    'quiz',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -100,10 +108,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER', 'root'),
+        'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),  # Set to 'localhost' if running locally
-        'PORT': os.getenv('DB_PORT', '3306'),  # Usually '3306'
+        'HOST': os.getenv('DB_HOST'),  # Set to 'localhost' if running locally
+        'PORT': os.getenv('DB_PORT'),  # Usually '3306'
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
@@ -146,8 +154,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365*100),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365*100),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -177,12 +185,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+# Base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+# settings.py
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -194,3 +206,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
+
+CSRF_COOKIE_HTTPONLY = False  # Ensure that JavaScript can access the CSRF cookie
+CSRF_COOKIE_SECURE = False  # Set to True in production, but False for local development

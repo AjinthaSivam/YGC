@@ -1,9 +1,8 @@
 from django.urls import path
-from . import views
+from .views import choose_category, play_hangman, guess_letter
 
 urlpatterns = [
-    path('choose-category/', views.choose_category, name='choose_category'),
-    path('play-hangman/', views.play_hangman, name='play_hangman'),
-    path('get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
+    path('choose-category/', choose_category, name='choose_category'),
+    path('play-hangman/', play_hangman, name='play_hangman'),
+    path('guess-letter/', guess_letter, name='guess_letter'),
 ]
-

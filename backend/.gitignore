@@ -1,4 +1,16 @@
 .env
 
+<<<<<<< HEAD
 venv
 *.pyc
+=======
+venv2
+
+*.pyc
+
+staticfiles
+
+static
+
+Dockerfile.dev
+>>>>>>> 9ab49cf154c28eae76cd6d11b61ca5df20fcd746

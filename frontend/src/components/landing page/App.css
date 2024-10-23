@@ -1,0 +1,79 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the app takes at least the full viewport height */
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
+}
+
+/* Main content area */
+.main-content {
+  flex: 1; /* Allows the main content to grow and take available space */
+  padding: 20px;
+  background-color: #ffffff; /* Light theme background for content area */
+  color: #343a40; /* Light theme text color */
+}
+
+/* Light theme styles */
+body {
+  background-color: #f8f9fa; /* Light theme body background */
+  color: #343a40; /* Light theme text color */
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #292929; /* Dark theme body background */
+  color: #f8f9fa; /* Light text color for dark mode */
+}
+
+body.dark-mode .main-content {
+  background-color: #292929; /* Dark theme background for content area */
+  color: #f8f9fa; /* Light text color for content */
+}
+
+/* Footer styling */
+.footer {
+  padding: 15px;
+  background-color: #000; /* Black background for footer */
+  color: #f8f9fa; /* Light text color for contrast */
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Dark mode heading colors */
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #4fc4be; /* Primary color for headings in dark mode */
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 15px; /* Reduce padding for medium-sized screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px; /* Further reduce padding for smaller screens */
+  }
+
+  .footer {
+    font-size: 14px; /* Adjust font size for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 8px; /* Minimal padding for very small screens */
+    font-size: 14px; /* Adjust font size for better readability */
+  }
+
+  .footer {
+    font-size: 12px; /* Further adjust font size for very small screens */
+    padding: 10px; /* Reduce padding for very small screens */
+  }
+}

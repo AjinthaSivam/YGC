@@ -1,0 +1,196 @@
+/* General container styles */
+.library {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.library h2 {
+  margin-top: 60px;
+  font-size: 3.5em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .library h2 {
+  color: #3aa99e;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.library p {
+  font-size: 1.05em;
+  font-weight:500;
+  color: #333;
+  line-height: 1.6;
+}
+
+.dark-mode .library p {
+  color: #ccc;
+}
+
+.library-container {
+  margin: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.filters {
+  margin: 20px 0;
+}
+
+.filters button, .filters select, .view-button {
+  padding: 10px 25px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  border: 0.1px solid #789;
+}
+
+.filters button:hover, .view-button:hover {
+  background-color: #3aa99e;
+}
+
+/* Book cards styles */
+.book-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeIn 0.5s forwards;
+}
+
+.book-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  border: #8383832c 0.1px solid;
+}
+
+.book-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.book-card h3 {
+  font-size: 1.3em;
+  color: #107067;
+  margin-bottom: 10px;
+}
+
+.book-card p {
+  font-size: 1em;
+  color: #424141;
+  line-height: 2.4;
+}
+
+.book-card .author, .book-card .rating {
+  font-size: 1em;
+  color: #777;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+}
+
+.star {
+  font-size: 1.2em;
+  color: #f8df00;
+}
+
+/* Dark theme styles */
+.dark-mode .library-container {
+  background-color: transparent;
+  color: #f8f9fa;
+}
+
+.dark-mode .library-container h2 {
+  color: #4fc4be;
+}
+
+.dark-mode .filters button, .dark-mode .filters select {
+  background-color: #107067;
+}
+
+.dark-mode .book-card {
+  background-color: #292929;
+}
+
+.dark-mode .book-card h3 {
+  color: #4fc4be;
+}
+
+.dark-mode .book-card p, .dark-mode .book-card .author {
+  color: #b5b5b5;
+}
+
+.dark-mode .view-button {
+  background-color: transparent;
+}
+
+.dark-mode .view-button:hover {
+  background-color: #107067;
+}
+/* Pagination styles */
+.pagination {
+  margin: 20px 0;
+  text-align: right;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #107067;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #3aa99e;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1em;
+  color: #333;
+  margin: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dark-mode .pagination button {
+  background-color: #3aa99e;
+}
+
+.dark-mode .pagination button:hover {
+  background-color: #107067;
+}
+
+.dark-mode .pagination button:disabled {
+  background-color: #666;
+}
+
+.dark-mode .pagination span {
+  color: #ccc;
+}

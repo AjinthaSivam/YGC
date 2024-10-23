@@ -1,0 +1,155 @@
+/* General container styles */
+.about {
+  padding: 20px 0;
+  margin: 20px auto;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* About container styles */
+.about-container {
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 1200px; /* Set a max-width for better responsiveness */
+  text-align: center;
+}
+
+/* Title styles */
+.about h2, .about-container h2 {
+  margin-top: 60px;
+  font-size: 3.5em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .about h2, .dark-mode .about-container h2 {
+  color: #3aa99e;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Paragraph styles */
+.about p, .about-container p {
+  font-size: 1em;
+  color: #333;
+  line-height: 2;
+}
+.about p{
+  font-size: 1.05em;
+  font-weight:500;
+}
+.dark-mode .about p, .dark-mode .about-container p {
+  color: #ddd;
+}
+
+/* Card styles */
+.about-card {
+  background-color: transparent;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid #888;
+}
+
+.dark-mode .about-card {
+  border: 1px solid #555;
+}
+
+/* Card subtitle styles */
+.about-card h3 {
+  font-size: 2em;
+  color: #107067;
+  margin-bottom: 20px;
+}
+
+.dark-mode .about-card h3 {
+  color: #3aa99e;
+}
+
+/* Team section styles */
+.team-section {
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  margin: 20px auto;
+}
+
+.dark-mode .team-section {
+  color: #f8f9fa;
+}
+
+/* Team member styles */
+.team-member {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 250px;
+  margin: 10px;
+  border: 1px solid #777;
+  
+  display: flex;
+  flex-direction: column; /* Change to column for vertical alignment */
+  align-items: center; /* Center align items */
+  text-align: center; /* Center align text */
+}
+
+.dark-mode .team-member {
+  background-color: #555;
+  border: 1px solid #888;
+}
+
+/* Team member image styles */
+.team-member img {
+  width: 120px; /* Adjust size for better appearance */
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid #107067; /* Add a border for a more polished look */
+}
+
+/* Values section styles */
+.values-section {
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  margin: 20px auto;
+}
+
+.dark-mode .values-section {
+  color: #f8f9fa;
+}
+
+/* Values styles */
+.values, .team-members {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.value {
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 250px;
+  margin: 10px;
+  border: 1px solid #777;
+}
+
+.dark-mode .value {
+  background-color: #555;
+  border: 1px solid #888;
+}
+
+/* Value icon styles */
+.value img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
