@@ -1,57 +1,198 @@
-.hangman-container {
-    text-align: center;
-    margin-top: 2rem;
+/* Hangman.css */
+
+/* Global styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #E6FEFD; /* Lightest shade from your palette */
+    margin: 0;
+    padding: 0;
 }
 
-.category-selection button {
-    margin: 10px;
+.hangman-title {
+    font-size: 36px;  /* Large font size */
+    font-weight: bold; /* Bold font */
+    color: #023D3B;    /* Dark color */
+}
+
+.hangman-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #E6FEFD;
+    border-radius: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #023D3B; /* Dark color */
+}
+
+/* Category Selection */
+.category-selection {
+    margin-bottom: 20px;
+}
+
+.category-dropdown {
     padding: 10px;
-    background-color: #4CAF50;
+    font-size: 16px;
+    background-color: #AFE9E7; /* Lighter color */
+    border: 2px solid #04AAA2; /* Base color */
+    border-radius: 5px;
+    outline: none;
+}
+
+.start-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #048581;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.category-selection button:hover {
-    background-color: #45a049;
+.start-button:disabled {
+    background-color: #76D4D0; /* Lighter gray when disabled */
+    cursor: not-allowed;
 }
 
-.game-play {
+/* Game Area */
+.game-area {
     margin-top: 20px;
-}
-
-.hangman-stage {
-    font-family: monospace;
-    font-size: 20px;
 }
 
 .word-display {
     font-size: 24px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin: 20px 0;
+    color: #023D3B;
+    letter-spacing: 5px;
 }
 
-.attempts, .guessed-letters, .message {
-    margin: 10px 0;
+.word-letter {
+    border-bottom: 2px solid #04AAA2;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    font-size: 20px;
-    padding: 10px;
-    margin: 10px;
+/* Hangman Image */
+.hangman-image {
+    width: 150px;
+    height: auto;  /* Maintain aspect ratio */
+    margin: 20px 0;
 }
 
-button {
-    padding: 10px 20px;
+/* Guessed Letters */
+.guessed-letters {
+    margin-top: 20px;
     font-size: 18px;
-    background-color: #007bff;
+    color: #023D3B;
+}
+
+.wrong-guesses {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #E74C3C;
+}
+
+.wrong-guess-box {
+    display: inline-block;
+    border: 2px solid #E74C3C;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.wrong-letter {
+    margin: 0 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #E74C3C;
+}
+
+/* Virtual Keyboard */
+.virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align the keyboard buttons */
+    margin-top: 20px; /* Space above the keyboard */
+}
+
+.key {
+    padding: 10px;
+    margin: 5px;
+    font-size: 18px;
+    background-color: #04AAA2;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+.key:hover {
+    background-color: #03615E; /* Darker shade on hover */
+}
+
+/* Game Over Section */
+.game-over-message {
+    margin-top: 20px;
+    color: #023D3B;
+    font-size: 24px;
+}
+
+.restart-button {
+    padding: 10px 20px;
+    background-color: #04AAA2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.restart-button:hover {
+    background-color: #03615E; /* Darker shade */
+}
+
+/* Loading Screen */
+.loading-screen {
+    text-align: center;
+    margin-top: 50px;
+    color: #023D3B;
+}
+
+.loading-screen img {
+    width: 100px;  /* Adjust as needed */
+    height: 100px;
+}
+
+/* Attempts left */
+.attempts-left {
+    font-size: 18px;
+    color: #023D3B;
+    margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .hangman-container {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .word-display {
+        font-size: 20px; /* Adjust word size for smaller screens */
+    }
+
+    .start-button,
+    .restart-button {
+        width: 100%; /* Make buttons full width on small screens */
+    }
+
+    .key {
+        flex: 1 0 18%; /* Make keyboard keys responsive */
+        min-width: 40px; /* Minimum width for keys */
+        margin: 2px; /* Reduce margins */
+    }
 }
